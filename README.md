@@ -19,5 +19,5 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 **Pour les développeur :**
 - voire la documentation doxygen generée.
 - attention a bien positionner "#define GNU_VARIO_GRIS" dans BertheVario/src/BertheVario.h avant compilation pour un écran "standard".
-- verifier les #define de debugage et en partitculier le #define SIMU_VOL qui simul un vol pour validation.
+- verifier les #define de debugage et en partitculier le #define SIMU_VOL qui simule un vol pour validation.
 - fichier version.txt pour modification apportées aux differentes versions.
