@@ -1,0 +1,213 @@
+version 20240412bg :
+ - changement de format github sources.
+
+version 20240412b :
+ - modification de documentation (pas beaucoup de test en vol de 20240412a)
+   (mais toujours pas de plantage depuis pres de 4h de vol)
+ - plus de reboot possible par les touches GD apres vol certains (+-300m xy et +-3m baro).
+ 
+version 20240412a :
+ - modification calcul et frequence de detection "mode ascendance".
+ - [360_sec] devient [droit_sec].
+ - ajout de [droit_deg].
+ - valeurs par defaut de config.txt.
+
+version 20240410b :
+ - modification calcul de detection "mode ascendance".
+ - [360_sec] a 35 secondes par defaut.
+ 
+version 20240410a :
+ - optimization calcul zone aerienne avec geometrie 2d.
+ - correction gros bug de calcul de finesse rajoute sans doute en 20240408b.
+ 
+version 20240409a :
+ - correction code mineur fuite memoire et commentaire.
+
+version 20240408b :
+ - modification affichage finesse negative ^.
+
+version 20240408a :
+ - modification commentaire code et documentation.
+ - petit doute sur la version firmware associeé a la version precedente (mauvais nom de fichier sans doute)
+ 
+version 20240407d :
+ - modification filtrage finesse sol.
+ 
+version 20240407c :
+ - Modification symbolique page 0 Vz.
+ - ajout du calcul de la finesse sol en page 0 Vz quand on est pas en ascendance (tourne en rond).
+ 
+version 20240405b :
+ - plus de reboot pour faux depart de vol. Passage directement en mode "V" attente vitesse.
+ 
+version 20240404b :
+ - coefficient filtrage alti-baro a 0.75 par defaut.
+ 
+version 20240404a :
+ - optimization lecture fichier zone.
+
+version 20240403d :
+ - remplacement du filemanager wifi plus performant.
+ 
+version 20240403c :
+ - correction affichage gris.
+ - re-correction bug non reboot.
+ - reboot si moins de 0.5m altibaro en 1min et verrouillage non reboot si depassement +-3m du decollage.
+  ex 1 : on decolle a 15kmh, on prend 6m => plus de reboot.
+  ex 2 : on decolle a 14kmh, on prend 2m , on re-atteri => reboot au bout de 1min.
+  ex 3 : erreur gps faux decollage, reboot au bout de 1min si on a pas pris 0.5m (erreur du au vent).
+
+version 20240403b :
+ - declenchement du vol par bouton droit en mode V.
+ - correction bug non reboot.
+
+version 20240403a :
+ - stabilisation gps par attente petite dispersion des mesures.
+ 
+version 20240402g :
+ - recalage altitude pression par altitude sol.
+ - modification condition faux vol 1min , position +-30m et altipression +- 0.6m.
+
+version 20240402d :
+ - validation des zones proteges 300 sol.
+ - validation corent 822m ou 300m sol le moins restrictif.
+
+version 20240402a :
+ - nouvelle platform https://github.com/tasmota/platform-espressif32/releases/download/2024.01.01/platform-espressif32.zip
+   pour eviter le bug du telechargement en wifi.
+
+version 20240401c :
+ - ajout de fichiers hgt dans /config/hgtdata pour hauteur sol.
+ 
+version 20240401b :
+ - meilleur gestion des zones protege.
+ 
+version 20240401a :
+ - ajout mini editeur pour fichier de configuration.
+ - variable [termic] dans fichier configuration pour affichage terrain/termic.
+
+version 20240331c :
+ - abaissement du scan pression et cap magnetique a 5hz.
+ 
+version 20240331c :
+ - correction bug zone activable
+ 
+version 20240331b :
+ - modification algorithme zone aerienne.
+ - correction bug voisinage thermique.
+ 
+version 20240331a :
+ - ajout de simulation de vol pour validation.
+ - elimination des cases isolées en thermique.
+ - tache son core 0
+ 
+version 20240330b :
+ - basculement des taches sur core 1 car FreeRtOs utilise le core 0 a 70%.
+ - changement accet wifi : http://bv.local
+ - documentation utilisateur plus conséquente.
+
+version 20240330a :
+ - meilleur % utilisation core 0 1.
+ - correction bug frontiere zone droite.
+ - fichier de validation zone en wifi.
+
+version 20240329b validation :
+ - validation logicielle : vichy, 512, corent, anzat-le-luguet, murol, pdd, etr..., 
+   job, champeix. Certains avec marge xy 1500m pour R368B, TMA1 ou CTR CFD.
+ - suivit de 59min de velo sur 10.9km, 2/3 ascendance +0.5.
+ - correction doc
+ 
+version 20240329b :
+ - validation differents site auvergne pour zones.
+
+version 20240329a :
+ - creation tache screen calul
+ - refonte calcul zone aeriennes penetration et en limite.
+ 
+version 20240328c :
+ - correction bug critique, ajout mutex pour CThermicMap
+ - teste a velo 54min, 8.9km.
+ 
+version 20240328b :
+ - calcul reparti dans le temps pour affichage page Vz
+ - modif taille caractere numerique cap.
+ 
+version 20240328a :
+ - ajout de pre-alarm zone TMA/CTR avec marge altitude et xy dans fichier config.
+ 
+version 20240326d :
+ - ajout section "developpeur" dans la doc.
+ 
+version 20240326c :
+ - menu de lecture/activation/desactivation des zones aerienne
+ 
+version 20240326a :
+ - fichier /config/zonesper.txt pour les periodes des zones avec leur plafonds relevé.
+ - fichier /config/zonesact.txt pour les periodes des zones actives ou non.
+
+version 20240325e :
+ - ecran 1 : zone aerienne au dessus avec le plafond.
+
+version 20240325d :
+ - validation a velo Vz termic ~ 0.5/3., 80min 16km
+ - bug mineur fausse alti decollage (ex:cas de reboot en vol)
+ - clear TermicMap a -0.5m/s 
+  
+version 20240325b :
+ - validation gnu plot des zones protegees acceptable.
+ - alarme sonore ZoneAerienne traversée.
+ 
+version 20240325a :
+ - zone arerienne : suppression des points 2 a 2 le plus proche du barycentre.
+ - CThermicMap::CleanMap() modiier pour taille memoire libre minimum
+ 
+version 20240324e :
+ - correction TermicMap::CleanMap()
+
+version 20240324c :
+ - correction erreur thermique proche mal calculé.
+ - distancemetre thermique proche en 100m 
+
+version 20240324a :
+ - comme la version precedente a libere de la memoire, inclusion des zones PROTECT a 300 points maximum. 
+   Suppression recursive d'un point sur 2.
+ - correction erreur % utilisation core 0 / 1
+   
+version 20240323e :
+ - grosse amelioration de la memorisation de thermique. qui est maintenant illimite dans le temps 
+   et l'espace avec une resolution x25*y25*z10m. L'ecran renseigne sur le thermique le plus proche
+   en distance 3D.
+
+version 20240323c :
+ - prise en compte des zones aeriennes (mais pas les zones proteges)
+ - thermique sur +-3000m resolution 75m (manque de memoire pour les zones aeriennes)
+ 
+version 20240323a :
+ - modification priorité tache temps de vol / thermique et ecriture Igc ainsi que taille de pile
+ - modif CTrame::TraiteBuffer() pour heure negative si gps non accroché
+ 
+version 20240322c :
+ - CTrame::TraiteBuffer() prise en compte du 10000ieme de seconde en lat et lon (non conforme doc trame nmea.pdf/GGA)
+ - CIgc::PushLoc2Igc() minimisation du temps sans le mutex sprintf.
+ 
+version 20240322b :
+ - ajout de [dtu] dans le fichier de configuration.
+ - ajout de VzMin dans l'histo vol.
+
+version 20240322a :
+ - 2 ecrans d'info systeme et historique vol depuis fichier sd card pour relecture apres reboot.
+ - nouveau systeme de scan des boutons
+ - calcul de distance parcourue
+ - % utilisation core 0 / 1
+ - histo thermique sur +-2300m 50m de resolution
+
+version 20240321a : 
+ - modification de la priorite des taches pour que les bip trop bloquant ne genere pas de faux calcul de Vz.
+ - capteur de pression scanné a 10 hz maintenant apres modification d'un header de librairie.
+ - deplacement des fichiers de configuration dans le repertoire /configuration.
+ - valeur d'attente de gps a 90 par defaut.
+ - bips de signalement etat G/V avant vol (bouton central active/desactive le son).
+ - nouveau calcul de la derive sol par produit vectoriel/scalaire.
+ - modification de l'accet http:// par le nom varioberthe.local
+ - modification du son "grosse degeulente" (a tester en vol)
+ - #define GNU_VARIO_GRIS dans BertheVario.h pour modification d'ecran et de tension batterie.
