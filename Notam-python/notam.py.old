@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-# script python du 2024-04-13 modifie par christophe.joyez@ektro.fr
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -18,14 +16,14 @@ driver = webdriver.Firefox()
 driver.get("https://sofia-briefing.aviation-civile.gouv.fr/sofia/pages/prepavol.html/")
 
 # clic type de vol lcal
-type_de_vol = driver.find_element(By.ID, 'labelVolLocal')
+type_de_vol = driver.find_element_by_id('labelVolLocal')
 #type_de_vol = driver.find_element(By.XPATH("//span[contains(@class,'v-menubar-menuitem-caption') and contains(text(), 'Local')]"));
 
 #type_de_vol.send_keys('L')
 type_de_vol.click()
 
 # clic date de depart
-date_de_depart = driver.find_element(By.ID,'cal_btn')
+date_de_depart = driver.find_element_by_id('cal_btn')
 date_de_depart.click()
 date_de_depart.click()
 
@@ -34,18 +32,18 @@ date_de_depart.click()
 #aujourdhui.click()
 
 # heure de depart
-heure_depart = driver.find_element(By.ID,'id_departureTime_val')
+heure_depart = driver.find_element_by_id('id_departureTime_val')
 heure_depart.click() # send_keys('2300')
 heure_depart.click()
 
 # aeroport de depart
-aeroport_de_depart = driver.find_element(By.ID,'id_aerodeplocal_val')
-aeroport_de_depart.send_keys('LFLC') #LFLW
-type_de_vol.click()
-
+aeroport_de_depart = driver.find_element_by_id('id_aerodeplocal_val')
+aeroport_de_depart.send_keys('LFLW')
+aeroport_de_depart.click()
+aeroport_de_depart.click()
 
 #selection NOTAM
-notam = driver.find_element(By.LINK_TEXT,'Trajet' )
+notam = driver.find_element( By.LINK_TEXT, 'Trajet' )
 notam.click()
 
 
@@ -87,7 +85,7 @@ driver.save_screenshot('screenshot.png')
 # ecriture resultat
 fichier = open("result.html", "w")
 fichier.write( driver.page_source )
-fichier.close()
+fichier.close() ;
 
 driver.quit()
 
