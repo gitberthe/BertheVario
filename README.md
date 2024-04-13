@@ -5,14 +5,14 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 
 <img src="./GnuVario-Fin.jpg" width="250"/>
 
-- utilisation / description :
- . documentation utilisateur dans /doc
- . projet PlateformIO dans /BertheVario
- . editer/modifier avec codeblocs dans /BertheVarioCdb
- . documentation developpeur dans ../../DoxyBertheVario avec le commande "doxygen Doxyfile.BertheVario" depuis /BertheVarioCdb
- . generation de fichier reduit de zones aériennes avec /BVZoneAerienne depuis codeblocks/linux
- . generation de fichier reduit de zones aériennes avec /BVZoneAerienneW10.exe executable binaire compilé pour Winwows 10
- . firmware compilé pour une version "standard écran 1.54 Pcb2 de GnuVario" dans /firmware
+* utilisation / description :
+- documentation utilisateur dans /doc
+- projet PlateformIO dans /BertheVario
+- editer/modifier avec codeblocs dans /BertheVarioCdb
+- documentation developpeur dans ../../DoxyBertheVario avec le commande "doxygen Doxyfile.BertheVario" depuis /BertheVarioCdb
+- generation de fichier reduit de zones aériennes avec /BVZoneAerienne depuis codeblocks/linux
+- generation de fichier reduit de zones aériennes avec /BVZoneAerienneW10.exe executable binaire compilé pour Winwows 10
+- firmware compilé pour une version "standard écran 1.54 Pcb2 de GnuVario" dans /firmware
  
 - pour les developpeur :
  . voire la documentation doxygen generée.
