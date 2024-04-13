@@ -5,7 +5,7 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 
 <img src="./GnuVario-Fin.jpg" width="250"/>
 
-* utilisation / description :
+**Utilisation / description :**
 - documentation utilisateur dans /doc
 - projet PlateformIO dans /BertheVario
 - editer/modifier avec codeblocs dans /BertheVarioCdb
@@ -13,9 +13,11 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - generation de fichier reduit de zones aériennes avec /BVZoneAerienne depuis codeblocks/linux
 - generation de fichier reduit de zones aériennes avec /BVZoneAerienneW10.exe executable binaire compilé pour Winwows 10
 - firmware compilé pour une version "standard écran 1.54 Pcb2 de GnuVario" dans /firmware
- 
-- pour les developpeur :
- . voire la documentation doxygen generée.
- . attention a bien positionner "#define GNU_VARIO_GRIS" dans BertheVario/src/BertheVario.h avant compilation pour un écran "standard".
- . verifier les #define de debbugage et en partitculier le #define SIMU_VOL qui simul un vol pour validation.
- . fichier version.txt pour modification apportées aux differentes versions.
+
+   
+
+**Pour les développeur :**
+- voire la documentation doxygen generée.
+- attention a bien positionner "#define GNU_VARIO_GRIS" dans BertheVario/src/BertheVario.h avant compilation pour un écran "standard".
+- verifier les #define de debbugage et en partitculier le #define SIMU_VOL qui simul un vol pour validation.
+- fichier version.txt pour modification apportées aux differentes versions.
