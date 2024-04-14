@@ -1,3 +1,4 @@
+# ce fichier est un fichier d'exemple car il est auto genere par le firmware en cas d'absence.
 [termic]                  1       # termic ou terrain
 [coef_filtre_alti_baro]   0.75     # plus grand => plus filtré
 [periode_integration_sec] 3       # temps d'integration de la VZ
@@ -10,7 +11,7 @@
 [marge_xy]               280      # marge pre alarm zone xy
 [ssid_ru]       Galaxy_XCover6_Pro_B80B  # _ => ' '
 [passwd_ru]     mot-de-passe   # _ => ' '
-[droit_sec]     10
+[droit_sec]     18
 [droit_deg]     110
 
 [pilote_ru]     Spin_Berthe # _ => ' '
