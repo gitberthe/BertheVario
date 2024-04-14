@@ -1,3 +1,9 @@
+version 20240414a :
+ - modification mineur fichier de config par defaut et derive <<G D>>
+  [droit_sec] 18sec et GD 41deg.
+ - modification mineur frequence scan mode G/V.
+ - correction bug blocage mode gps V (gps stable,petite vitesse, gps non stable => blocage).
+
 version 20240412bg2 :
  - modification doc et readme.md
 

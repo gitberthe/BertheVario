@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 09/04/2024
+/// \date modification : 14/04/2024
 ///
 
 #include "../BertheVario.h"
@@ -282,7 +282,7 @@ char TmpCharAlt[15] ;
 sprintf( TmpCharAlt , "%4d", (int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
 
 // derive
-const float DeriveMilieu = 31. ;
+const float DeriveMilieu = 41. ;
 float DeriveAngle = g_GlobalVar.GetDeriveDeg() ;
 char TmpCharAngleDerive[15] ;
 if ( fabsf(DeriveAngle) >= 90. )

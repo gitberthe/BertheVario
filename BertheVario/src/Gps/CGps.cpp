@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 11/04/2024
+/// \date modification : 14/04/2024
 ///
 
 #include "../BertheVario.h"
@@ -71,17 +71,17 @@ g_GlobalVar.m_DureeVolMin = ATTENTE_GPS ;
 
 #ifndef TERMIC_DEBUG
 // boucle d'attente premier GGA et vitesse minimale
-int iboucleGGA = 1 ;
-int iboucleAltiSol = 1 ;
+int iboucle = 0 ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
-    // toutes les 0.1 secondes
-    delay( 100 ) ;
+    // toutes les 0.2 secondes a 5hz
+    delay( 200 ) ;
+    iboucle++ ;
 
     // toutes les 7s beep d'attente
-    bool beep = !((iboucleGGA++)%(10*7)) ;
+    bool beep = !(iboucle%(5*7)) ;
 
-    // beep attente gps
+    // beep attente gps 'G'
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         CGlobalVar::beeper( 1500 , 100 ) ;
 
@@ -94,7 +94,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         continue ;
 
     // recalage alti pression 1 fois par secondes
-    if ( !((iboucleAltiSol++)%10) )
+    if ( !(iboucle%5) )
         {
         g_GlobalVar.m_MutexVariable.PrendreMutex() ;
          g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltiSolHgt ) ;
@@ -108,9 +108,9 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         g_GlobalVar.PushGpPos() ;
         }
 
-    // si le gps nest pas stable
+    // si le gps nest pas stable au moins une fois
     #ifndef SIMU_VOL
-     if ( ! g_GlobalVar.IsGpsStable() )
+     if ( ! g_GlobalVar.IsGpsStable() && g_GlobalVar.m_DureeVolMin == ATTENTE_GPS )
          continue ;
     #endif
 
