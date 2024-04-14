@@ -1,3 +1,6 @@
+version 20240412bg2 :
+ - modification doc et readme.md
+
 version 20240412bg :
  - changement de format github sources.
 
