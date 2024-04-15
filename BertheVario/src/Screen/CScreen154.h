@@ -1,22 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// \file CScreen.h
+/// \file CScreen154.h
 ///
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 05/04/2024
+/// \date modification : 15/04/2024
 ///
 
-#ifndef _SCREEN_
-#define _SCREEN_
-
-#define ATTENTE_GPS     -2
-#define ATTENTE_VITESSE -1
+#ifndef _SCREEN154_
+#define _SCREEN154_
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Permet l'affichage de differentes pages d'ecrans et messages.
 /// Les includes dans CSreen.cpp permetent de selectionner les differents ecrans materiel.
-class CScreen : public CGestEcrans
+class CScreen154 : public CGestEcrans
 {
 public :
     void InitScreen() ;
@@ -36,10 +33,8 @@ public :
     EtatsAuto Ecran3Sys() ;
     EtatsAuto Ecran4CfgFch() ;
 
-    void LancerTacheCalcul() ;
 
 private :
-    static void TacheScreenCalcul(void * param) ;
 } ;
 
 #endif

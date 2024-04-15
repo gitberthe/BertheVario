@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 14/04/2024
+/// \date modification : 15/04/2024
 ///
 
 //////////////////
@@ -27,8 +27,14 @@
 #include <vector>
 #include <algorithm>
 
+//////////////////////////
+// definitions materielles
 
-#define GNU_VARIO_GRIS    ///< decommenter pour ecran original 1.54
+#define GNU_VARIO_GRIS        ///< decommenter pour ecran original 1.54
+#define TYPE_SCREEN 154         ///< si ecran 154
+//#define TYPE_SCREEN 290       ///< si ecran 290 a implementer
+#define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
+
 
 ////////////////
 // si mode debug
@@ -110,7 +116,8 @@
 #include "Gps/CHgt2Agl.h"
 #include "Screen/CBoutons.h"
 #include "Screen/CGestEcrans.h"
-#include "Screen/CScreen.h"
+#include "Screen/CScreen154.h"
+#include "Screen/CScreen290.h"
 #include "Screen/CLocTermic.h"
 #include "VarioBeep/CVarioBeep.h"
 #include "SDCard/CSDCard.h"

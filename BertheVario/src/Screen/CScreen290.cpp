@@ -1,13 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// \file CScreen.cpp
+/// \file CScreen290.cpp
 ///
 /// \brief
 ///
-/// \date creation     : 03/03/2024
-/// \date modification : 14/04/2024
+/// \date creation     : 15/03/2024
+/// \date modification : 15/04/2024
 ///
 
 #include "../BertheVario.h"
+
+#if ( TYPE_SCREEN == 290 )
 
 // comment out unused bitmaps to reduce code space used
 //#include <bitmaps/Bitmaps200x200.h> // 1.54" b/w
@@ -47,7 +49,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Initialise l'ecran.
-void CScreen::InitScreen()
+void CScreen290::InitScreen()
 {
 // init ecran
 display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
@@ -84,7 +86,7 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Raz de l'ecran.
-void CScreen::ScreenRaz()
+void CScreen290::ScreenRaz()
 {
 display.powerOff();
 /*display.setFullWindow() ;
@@ -100,7 +102,7 @@ while (display.nextPage());*/
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief
-void CScreen::ScreenOff()
+void CScreen290::ScreenOff()
 {
 // mise hors tension ecran
 display.powerOff();
@@ -109,7 +111,7 @@ display.powerOff();
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Affichage de "Connect to Wifi".
-void CScreen::AfficheConnectWifi()
+void CScreen290::AfficheConnectWifi()
 {
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -125,7 +127,7 @@ while (display.nextPage());
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Affichage de la calibration magnetique.
-void CScreen::AfficheCalibreMag()
+void CScreen290::AfficheCalibreMag()
 {
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -141,7 +143,7 @@ while (display.nextPage());
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Affichage de l'adresse ip.
-void CScreen::AfficheWifi(char * IpAdress)
+void CScreen290::AfficheWifi(char * IpAdress)
 {
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -159,7 +161,7 @@ while (display.nextPage());
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche le voltage batterie.
-void CScreen::AfficheVoltage()
+void CScreen290::AfficheVoltage()
 {
 float Voltage = g_GlobalVar.GetVoltage() ;
 
@@ -186,7 +188,7 @@ while (display.nextPage());
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche un rectangle plein
-void CScreen::DoRect(int x, int y, int w, int h, bool Black )
+void CScreen290::DoRect(int x, int y, int w, int h, bool Black )
 {
 auto Color = (Black) ? GxEPD_BLACK : GxEPD_WHITE ;
 display.fillRect(x, y, w, h, Color ); // x y w h
@@ -194,7 +196,7 @@ display.fillRect(x, y, w, h, Color ); // x y w h
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche un rectangle plein
-void CScreen::DoChar(int x, int y, const char * pChar )
+void CScreen290::DoChar(int x, int y, const char * pChar )
 {
 //auto Color = (Black) ? GxEPD_BLACK : GxEPD_WHITE ;
 //display.fillRect(x, y, w, h, Color ); // x y w h
@@ -204,46 +206,9 @@ display.print( pChar );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief Lance les taches de calcul arriere plan basse priorité
-void CScreen::LancerTacheCalcul()
-{
-xTaskCreatePinnedToCore( TacheScreenCalcul, "ScreenCalc", CALCUL_STACK_SIZE, this  , CALCUL_PRIORITY , NULL, CALCUL_CORE );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// \brief Fonction static de calcul d'arrier plan basse priorite 2hz.
-void CScreen::TacheScreenCalcul(void * param)
-{
-int iboucle = 0 ;
-while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
-    {
-    delay( 500 ) ;
-
-    // si on n'est pas en ecran 0
-    if ( g_GlobalVar.m_EtatAuto != ECRAN_0_Vz )
-        continue ;
-
-    // calcul du termic
-    g_TermicMap.CalcTermicProche() ;
-
-    // 1hz
-    if ( (iboucle%2) )
-        continue ;
-
-    // calcul du terrain le plus proche en finesses
-    g_GlobalVar.m_TerrainArr.CalcTerrainPlusProche() ;
-
-    // calcul de la zone aerienne courante / proche
-    g_GlobalVar.m_ZonesAerAll.CalcZone() ;
-    }
-
-g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Stopped = true ;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 0.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen::Ecran0Vz()
+CGestEcrans::EtatsAuto CScreen290::Ecran0Vz()
 {
 CLocTermic LocTermic ;
 
@@ -566,7 +531,7 @@ return ECRAN_0_Vz ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 1. Historique de vol.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen::Ecran1Histo()
+CGestEcrans::EtatsAuto CScreen290::Ecran1Histo()
 {
 char TmpCharAltiDeco[20] ;
 sprintf( TmpCharAltiDeco , "%4dm", (int)g_GlobalVar.m_HistoVol.m_ZDeco ) ;
@@ -684,7 +649,7 @@ return ECRAN_1_Histo ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 3, orienté systeme.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen::Ecran3Sys()
+CGestEcrans::EtatsAuto CScreen290::Ecran3Sys()
 {
 // date
 char TmpCharDate[35] ;
@@ -796,7 +761,7 @@ return ECRAN_3_Sys ;
 /// \brief Cette fonction affiche/modifie les [variables] du fichier de
 /// configuration.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen::Ecran4CfgFch()
+CGestEcrans::EtatsAuto CScreen290::Ecran4CfgFch()
 {
 static char TmpMod[100] = {0} ;
 std::string Name ;
@@ -926,7 +891,7 @@ return ECRAN_4_CfgFch ;
 /// \brief Cette fonction affiche les informations de l'ecran 2b, TAM/CTR
 /// modification activation.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen::Ecran2bTmaMod()
+CGestEcrans::EtatsAuto CScreen290::Ecran2bTmaMod()
 {
 static int NumTmaCtr = -1 ;
 
@@ -1066,7 +1031,7 @@ return ECRAN_2b_TmaMod ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 2a, TAM/CTR titre
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen::Ecran2aTmaAll()
+CGestEcrans::EtatsAuto CScreen290::Ecran2aTmaAll()
 {
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
@@ -1145,3 +1110,5 @@ if ( BoutonCentre() )
 
 return ECRAN_2a_TmaAll ;
 }
+
+#endif

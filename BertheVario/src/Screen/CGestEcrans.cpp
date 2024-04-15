@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 01/04/2024
+/// \date modification : 15/04/2024
 ///
 
 #include "../BertheVario.h"
@@ -46,4 +46,41 @@ void CGestEcrans::AfficheAll()
 // appel de la fonction de l'automate vers l'etat suivant
 CGestEcrans::EtatsAuto (CGestEcrans::*pFunction)() = m_Automate[m_EtatAuto].m_pFunction ;
 m_EtatAuto = (this->*pFunction)() ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Lance les taches de calcul arriere plan basse priorité
+void CGestEcrans::LancerTacheCalcul()
+{
+xTaskCreatePinnedToCore( TacheScreenCalcul, "ScreenCalc", CALCUL_STACK_SIZE, this  , CALCUL_PRIORITY , NULL, CALCUL_CORE );
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Fonction static de calcul d'arrier plan basse priorite 2hz.
+void CGestEcrans::TacheScreenCalcul(void * param)
+{
+int iboucle = 0 ;
+while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
+    {
+    delay( 500 ) ;
+
+    // si on n'est pas en ecran 0
+    if ( g_GlobalVar.m_EtatAuto != ECRAN_0_Vz )
+        continue ;
+
+    // calcul du termic
+    g_TermicMap.CalcTermicProche() ;
+
+    // 1hz
+    if ( (iboucle%2) )
+        continue ;
+
+    // calcul du terrain le plus proche en finesses
+    g_GlobalVar.m_TerrainArr.CalcTerrainPlusProche() ;
+
+    // calcul de la zone aerienne courante / proche
+    g_GlobalVar.m_ZonesAerAll.CalcZone() ;
+    }
+
+g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Stopped = true ;
 }

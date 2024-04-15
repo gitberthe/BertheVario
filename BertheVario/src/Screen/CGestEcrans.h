@@ -4,11 +4,14 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 01/04/2024
+/// \date modification : 15/04/2024
 ///
 
 #ifndef _GESTECRANS_
 #define _GESTECRANS_
+
+#define ATTENTE_GPS     -2
+#define ATTENTE_VITESSE -1
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Gestion des differentes pages d'ecran.
@@ -31,6 +34,7 @@ public :
         } ;
 
     void AfficheAll() ;
+    void LancerTacheCalcul() ;
 
 protected :
     virtual EtatsAuto Ecran0Vz()      = 0 ;
@@ -40,6 +44,8 @@ protected :
     virtual EtatsAuto Ecran3Sys() = 0 ;
     virtual EtatsAuto Ecran4CfgFch() = 0 ;
     EtatsAuto Erreur() ;
+
+    static void TacheScreenCalcul(void * param) ;
 
     const int       m_SecRetourEcran0 = 15 ; ///< auto retour ecran 0
     unsigned long   m_MillisEcran0 ; ///< time out de retour ecran 1 vers 0
