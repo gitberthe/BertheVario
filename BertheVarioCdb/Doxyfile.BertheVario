@@ -2228,7 +2228,9 @@ PREDEFINED             = HAVE_SCREEN \
                          HAVE_VOLTAGE_DIVISOR \
                          HAVE_POWER_ALIM \
                          HAVE_BUTTON \
-                         SIMU_VOL
+                         SIMU_VOL \
+                         TYPE_SCREEN=154 \
+                         VARIO_CAP_MAG_A_PLAT=1
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
