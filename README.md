@@ -20,6 +20,7 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - voire la documentation doxygen generée.
 - attention a bien positionner "#define GNU_VARIO_GRIS" dans BertheVario/src/BertheVario.h avant compilation pour un écran "standard".
 - verifier les #define de debugage et en partitculier le #define SIMU_VOL qui simule un vol pour validation.
+- modifier le #define de configuration du capteur magnetique pour position a plat, suspente droite ou gauche.
 - fichier version.txt pour modification apportées aux differentes versions.
 - modifier "BertheVario/.pio/libdeps/esp32dev/ESP32 File Manager for Generation Klick ESPFMfGK/src/ESPFMfGKGa.cpp" ligne 6 : crc32.h => CRC32.h
 - modifier "BertheVario/.pio/libdeps/esp32dev/MPU9250/MPU9250.h" ligne 85 : 0x06 => 0x02

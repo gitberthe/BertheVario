@@ -1,3 +1,7 @@
+version 20240415a :
+ - mise en place carcan pour ecran 290 a ecrire.
+ - configuration capteur magnetique pour 3 positions (a plat, suspente gauche ou droite)
+
 version 20240414a :
  - modification mineur fichier de config par defaut et derive <<G D>>
   [droit_sec] 18sec et GD 41deg.

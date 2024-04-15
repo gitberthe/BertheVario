@@ -15,7 +15,12 @@ class CSimuVol ;
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Variable globale du projet. Contient CConfigFile m_Config, CMS5611 m_MS5611
 /// , CMpu9250 m_Mpu9250, CZonesAerAll m_ZonesAer et CHgt2Agl m_Hgt2Agl.
-class CGlobalVar : public CGps, public CScreen, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol
+#if ( TYPE_SCREEN == 154 )
+ class CGlobalVar : public CGps, public CScreen154, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol
+#endif
+#if ( TYPE_SCREEN == 290 )
+ class CGlobalVar : public CGps, public CScreen290, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol
+#endif
 {
 public :
     CGlobalVar() ;

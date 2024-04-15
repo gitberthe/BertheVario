@@ -95,8 +95,10 @@
 		<Unit filename="../BertheVario/src/Screen/CGestEcrans.h" />
 		<Unit filename="../BertheVario/src/Screen/CLocTermic.cpp" />
 		<Unit filename="../BertheVario/src/Screen/CLocTermic.h" />
-		<Unit filename="../BertheVario/src/Screen/CScreen.cpp" />
-		<Unit filename="../BertheVario/src/Screen/CScreen.h" />
+		<Unit filename="../BertheVario/src/Screen/CScreen154.cpp" />
+		<Unit filename="../BertheVario/src/Screen/CScreen154.h" />
+		<Unit filename="../BertheVario/src/Screen/CScreen290.cpp" />
+		<Unit filename="../BertheVario/src/Screen/CScreen290.h" />
 		<Unit filename="../BertheVario/src/Screen/GxEPD2_display_selection.h" />
 		<Unit filename="../BertheVario/src/Screen/GxEPD2_display_selection_added.h" />
 		<Unit filename="../BertheVario/src/Screen/GxEPD2_display_selection_new_style.h" />
