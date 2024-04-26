@@ -4,15 +4,16 @@
 /// \brief
 ///
 /// \date creation     : 18/03/2024
-/// \date modification : 09/04/2024
+/// \date modification : 26/04/2024
 ///
 
 #include "../BertheVario.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction chargée de detecter un faux depart de vol.
-/// Si moins de +-30m et 60cm pendant 1min alors faux depart sauf si deja allé a plus de 300m
-/// du deco ou a plus de +-8m alti baro.
+/// Si moins de +-30m et 50cm pendant 1min alors faux depart sauf si deja allé a plus de 300m
+/// du deco ou a plus de +-3m alti baro.
+/// Vitesse petite necessaire pour reboot.
 /// \return true si l'on considere que c'est un faux vol.
 bool CFauxDepart::IsBadFlightBegin()
 {
@@ -59,7 +60,7 @@ TempsLatLon /= 1000 * 60 ;
 float TempsAlti = millis() - m_TempsStationnaireAlti ;
 TempsAlti /= 1000 * 60 ;
 
-// si un des temps est depassé
+// si un des temps est depassé laors reboot
 float TempsMaxMin = 1. ;
 #ifdef REBOOT_DEBUG
  TempsMaxMin = 0.1 ;
@@ -68,7 +69,11 @@ float TempsMaxMin = 1. ;
  TempsMaxMin = 0.1 ;
 #endif
 if ( TempsLatLon >= TempsMaxMin || TempsAlti >= TempsMaxMin )
-    return true ;
+    {
+    // si la vitesse est faible
+    if ( g_GlobalVar.m_VitesseKmh < g_GlobalVar.m_Config.m_vitesse_igc_kmh )
+        return true ;
+    }
 
 return false ;
 }

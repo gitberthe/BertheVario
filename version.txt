@@ -1,3 +1,6 @@
+version 20240426a :
+ - ajout d'une condition de reboot vitesse assez petite
+ 
 version 20240415a :
  - mise en place carcan pour ecran 290 a ecrire.
  - configuration capteur magnetique pour 3 positions (a plat, suspente gauche ou droite)
