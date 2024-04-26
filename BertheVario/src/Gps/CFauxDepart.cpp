@@ -68,7 +68,7 @@ float TempsMaxMin = 1. ;
 #ifdef TERMIC_DEBUG
  TempsMaxMin = 0.1 ;
 #endif
-if ( TempsLatLon >= TempsMaxMin || TempsAlti >= TempsMaxMin )
+if ( TempsLatLon >= TempsMaxMin && TempsAlti >= TempsMaxMin )
     {
     // si la vitesse est faible
     if ( g_GlobalVar.m_VitesseKmh < g_GlobalVar.m_Config.m_vitesse_igc_kmh )

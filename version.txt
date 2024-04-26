@@ -1,3 +1,6 @@
+version 20240426b :
+ - correction condition de reboot position < +-30m et altitude < +-0.5m (et pas ou).
+
 version 20240426a :
  - ajout d'une condition de reboot vitesse assez petite
  
