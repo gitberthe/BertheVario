@@ -11,8 +11,6 @@
 [marge_xy]               280      # marge pre alarm zone xy
 [ssid_ru]       Galaxy_XCover6_Pro_B80B  # _ => ' '
 [passwd_ru]     mot-de-passe   # _ => ' '
-[droit_sec]     18
-[droit_deg]     110
 
 [pilote_ru]     Spin_Berthe # _ => ' '
 [voile_ru]      Nova_Aonic  # _ => ' '

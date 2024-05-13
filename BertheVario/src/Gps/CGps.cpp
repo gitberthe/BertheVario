@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 14/04/2024
+/// \date modification : 13/05/2024
 ///
 
 #include "../BertheVario.h"
@@ -174,19 +174,11 @@ CGlobalVar::BeepOk() ;
 g_GlobalVar.InitFauxDepart( g_GlobalVar.m_TerrainPosDeco.m_Lat , g_GlobalVar.m_TerrainPosDeco.m_Lon , millis() ) ;
 
 // mise a jour du temps de vol toutes les secondes
-int iboucleAscendance = 0 ;
 int iboucleHistoVol = 0 ;
 while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
     {
-    // a 2 hz
-    delay( 500 ) ;
-
-    // pour la transition/ascendance
-    g_GlobalVar.m_DetTrans.PushCap() ;
-
-    iboucleAscendance++ ;
-    if ( !(iboucleAscendance%2) )
-        continue ;
+    // a 1 hz
+    delay( 1000 ) ;
 
     // toutes les secondes
 

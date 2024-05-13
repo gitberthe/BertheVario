@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 18/03/2024
-/// \date modification : 26/04/2024
+/// \date modification : 13/05/2024
 ///
 
 #include "../BertheVario.h"
@@ -27,7 +27,7 @@ float HauteurAltiBaroMetres = fabsf( g_GlobalVar.m_TerrainPosCur.m_AltiBaro - g_
 
 // si deja aller loint ou haut on verrouille
 // erreur de 200m constate sur fichier IGC
-if ( DistanceDecoMetres > 300 || HauteurAltiBaroMetres > 3 )
+if ( DistanceDecoMetres > 400 || HauteurAltiBaroMetres > 3 )
     {
     m_ADejaEteLointOuHaut = true ;
     return false ;

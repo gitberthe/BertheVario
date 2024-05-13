@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 14/04/2024
+/// \date modification : 13/05/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -45,8 +45,6 @@ public :
     int   m_AltiMargin   = 65 ;             ///< marge en altitude de zone TMA CTR en metres
     int   m_XYMargin     = 100 ;            ///< marge en xy de zone TMA CTR en metres
     bool  m_Termic       = true ;           ///< affichage termic ou terrain
-    int   m_droit_sec    = 18 ;             ///< temps pour aller tout droit et sortir du mode ascendance
-    int   m_droit_deg    = 110 ;            ///< degres pour aller tout droit et sortir du mode ascendance
 
     std::string m_Ssid ;     ///< identifiant wifi
     std::string m_Passwd ;   ///< mot de passe wifi

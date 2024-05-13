@@ -36,8 +36,6 @@
 		</Compiler>
 		<Unit filename="../BertheVario/src/BertheVario.cpp" />
 		<Unit filename="../BertheVario/src/BertheVario.h" />
-		<Unit filename="../BertheVario/src/Calculateur/CDetTrans.cpp" />
-		<Unit filename="../BertheVario/src/Calculateur/CDetTrans.h" />
 		<Unit filename="../BertheVario/src/Calculateur/CFinSol.cpp" />
 		<Unit filename="../BertheVario/src/Calculateur/CFinSol.h" />
 		<Unit filename="../BertheVario/src/Calculateur/CSortArray.h" />
