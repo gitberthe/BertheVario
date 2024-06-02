@@ -1,3 +1,19 @@
+version 20240530a :
+ - declenchement debut du vol apres 5 secondes consecutives de vitesse minimale du fichier de configuration. 
+
+version 20240513a :
+ - condition verrouillage faux depart 400m.
+ - ajout time out ecran 2b modification activation zone => ecran 0 Vz.
+ - affichage Vz grosse taille si vz > 0 depuis moins de 10 secondes.
+ - retour a cap et derive affichage permanent.
+ - supression [droit_sec] et [droit_deg] dans fichier de configuration.
+
+version 20240426b :
+ - correction condition de reboot position < +-30m et altitude < +-0.5m (et pas ou).
+
+version 20240426a :
+ - ajout d'une condition de reboot vitesse assez petite
+ 
 version 20240415a :
  - mise en place carcan pour ecran 290 a ecrire.
  - configuration capteur magnetique pour 3 positions (a plat, suspente gauche ou droite)

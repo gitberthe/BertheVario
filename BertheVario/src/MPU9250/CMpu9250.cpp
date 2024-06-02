@@ -112,13 +112,13 @@ if ( g_mpu.update() )
     #endif // MPU9250_DEBUG
 
     float Angle = 0 ;
-    #if (VARIO_CAP_MAG_A_PLAT == 1 ) // a plat devant
+    #if VARIO_CAP_MAG_A_PLAT == 1 // a plat devant
      Angle = +270 - 180. / T_PI * atan2f ( m_y ,  m_x ) ;
     #endif
-    #if (VARIO_CAP_MAG_A_PLAT == 2 ) // sur suspente droite
+    #if VARIO_CAP_MAG_A_PLAT == 2 // sur suspente droite
      Angle = +270 - 180. / T_PI * atan2f ( m_x ,  m_z ) ;
     #endif
-    #if (VARIO_CAP_MAG_A_PLAT == 3 ) // sur suspente gauche
+    #if VARIO_CAP_MAG_A_PLAT == 3 // sur suspente gauche
      Angle = +90 - 180. / T_PI * atan2f ( m_x ,  m_z ) ;
     #endif
 

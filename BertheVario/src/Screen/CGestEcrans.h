@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 13/05/2024
 ///
 
 #ifndef _GESTECRANS_
@@ -49,6 +49,7 @@ protected :
 
     const int       m_SecRetourEcran0 = 15 ; ///< auto retour ecran 0
     unsigned long   m_MillisEcran0 ; ///< time out de retour ecran 1 vers 0
+    unsigned long   m_MillisVzPositive ; ///< time out de retour affichage finesse
 
     /// \brief etat de l'automate avec son pointeur de fonction
     class CEtatAutoFunc

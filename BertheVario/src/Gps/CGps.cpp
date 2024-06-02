@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 14/04/2024
+/// \date modification : 30/05/2024
 ///
 
 #include "../BertheVario.h"
@@ -72,14 +72,15 @@ g_GlobalVar.m_DureeVolMin = ATTENTE_GPS ;
 #ifndef TERMIC_DEBUG
 // boucle d'attente premier GGA et vitesse minimale
 int iboucle = 0 ;
+int ivitesse = 0 ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
-    // toutes les 0.2 secondes a 5hz
-    delay( 200 ) ;
+    // toutes les 1 secondes a 1hz
+    delay( 1000 ) ;
     iboucle++ ;
 
     // toutes les 7s beep d'attente
-    bool beep = !(iboucle%(5*7)) ;
+    bool beep = !(iboucle%7) ;
 
     // beep attente gps 'G'
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
@@ -94,7 +95,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         continue ;
 
     // recalage alti pression 1 fois par secondes
-    if ( !(iboucle%5) )
+    //if ( !(iboucle%5) )
         {
         g_GlobalVar.m_MutexVariable.PrendreMutex() ;
          g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltiSolHgt ) ;
@@ -130,6 +131,12 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // si vitesse superieur a 12 kmh
     if ( g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh )
+        ivitesse++;
+    else 
+        ivitesse = 0 ;
+
+    // au bout de 5 vitesses/5 secondes depassée
+    if ( ivitesse >= 5 )
         break ;
 
     #ifdef SOUND_DEBUG
@@ -174,19 +181,11 @@ CGlobalVar::BeepOk() ;
 g_GlobalVar.InitFauxDepart( g_GlobalVar.m_TerrainPosDeco.m_Lat , g_GlobalVar.m_TerrainPosDeco.m_Lon , millis() ) ;
 
 // mise a jour du temps de vol toutes les secondes
-int iboucleAscendance = 0 ;
 int iboucleHistoVol = 0 ;
 while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
     {
-    // a 2 hz
-    delay( 500 ) ;
-
-    // pour la transition/ascendance
-    g_GlobalVar.m_DetTrans.PushCap() ;
-
-    iboucleAscendance++ ;
-    if ( !(iboucleAscendance%2) )
-        continue ;
+    // a 1 hz
+    delay( 1000 ) ;
 
     // toutes les secondes
 

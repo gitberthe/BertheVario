@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 12/04/2024
+/// \date modification : 13/05/2024
 ///
 
 #include "../BertheVario.h"
@@ -73,18 +73,6 @@ m_LinesVect.push_back( pLine ) ;
 pLine = new st_line ;
 pLine->m_NomVar = "[marge_xy]" ;
 pLine->m_pVar = (void*) & m_XYMargin  ;
-pLine->m_Type = TYPE_VAR_INT ;
-m_LinesVect.push_back( pLine ) ;
-
-pLine = new st_line ;
-pLine->m_NomVar = "[droit_sec]" ;
-pLine->m_pVar = (void*) & m_droit_sec  ;
-pLine->m_Type = TYPE_VAR_INT ;
-m_LinesVect.push_back( pLine ) ;
-
-pLine = new st_line ;
-pLine->m_NomVar = "[droit_deg]" ;
-pLine->m_pVar = (void*) & m_droit_deg  ;
 pLine->m_Type = TYPE_VAR_INT ;
 m_LinesVect.push_back( pLine ) ;
 

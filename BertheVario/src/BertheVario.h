@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 23/05/2024
 ///
 
 //////////////////
@@ -133,7 +133,6 @@
 #include "Calculateur/CSortArray.h"
 #include "Calculateur/CTerrainsConnu.h"
 #include "GlobalVar/CFileHistoVol.h"
-#include "Calculateur/CDetTrans.h"
 #include "Calculateur/CFinSol.h"
 #include "Geometrie/CVecteur2D.h"
 #include "Geometrie/CDroite2D.h"

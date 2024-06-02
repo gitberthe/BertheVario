@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 13/05/2024
 ///
 
 #include "../BertheVario.h"
@@ -223,8 +223,17 @@ bool SigneNeg = VitVert < 0. ;
 // VZ ou VZ/finesse sol
 char TmpCharVz[15] ;
 char TmpCharFin[15] ;
-bool Transition = g_GlobalVar.m_DetTrans.IsInTrans() ;
-if ( Transition )
+if ( VitVert >= 0. )
+    m_MillisVzPositive = millis() ;
+bool GrosseVz = ((millis() - m_MillisVzPositive)/1000.) < 10;
+if ( GrosseVz )
+    {
+    if ( SigneNeg )
+        sprintf( TmpCharVz , "%2.1f-" , VitVert ) ;
+    else
+        sprintf( TmpCharVz , " %2.1f " , VitVert ) ;
+    }
+else
     {
     float FinesseSol = g_GlobalVar.m_FinesseSol ;
     FinesseSol = (FinesseSol>99) ? 99 : FinesseSol ;
@@ -232,15 +241,9 @@ if ( Transition )
     if ( FinesseSol >= 0. )
         sprintf( TmpCharFin , "%4.1f", FinesseSol ) ;
     else
-        sprintf( TmpCharFin , "  ^" ) ;
+        sprintf( TmpCharFin , "  -" ) ;
     }
-else
-    {
-    if ( SigneNeg )
-        sprintf( TmpCharVz , "%2.1f-" , VitVert ) ;
-    else
-        sprintf( TmpCharVz , " %2.1f " , VitVert ) ;
-    }
+
 
 // altitude barometrique
 char TmpCharAlt[15] ;
@@ -430,24 +433,42 @@ do
     display.drawLine( 90 , 85 , 200 -70, 85 , GxEPD_BLACK ) ; // -
 
     // derive
-    if ( Transition )
-        {
-        display.setFont(&FreeMonoBold18pt7b);
-        display.setCursor(59, y2);
-        display.print(TmpCharAngleDerive);
+    display.setFont(&FreeMonoBold18pt7b);
+    display.setCursor(59, y2);
+    display.print(TmpCharAngleDerive);
 
-        // cap
-        display.setFont(&FreeMonoBold9pt7b);
-        display.setCursor(135, y2+21);
-        display.print(TmpCharCap);
-        display.setFont(&FreeMonoBold18pt7b);
-        display.print(TmpCharNomCap);
-        }
+    // cap
+    display.setFont(&FreeMonoBold9pt7b);
+    display.setCursor(135, y2+21);
+    display.print(TmpCharCap);
+    display.setFont(&FreeMonoBold18pt7b);
+    display.print(TmpCharNomCap);
 
     /////////////
     // bandeaux 3
     // VZ / Finesse sol
-    if ( Transition )
+    if ( GrosseVz )
+    // ascendance
+        {
+        // align with centered HelloWorld
+        display.getTextBounds( TmpCharVz, 0, 0, &tbx, &tby, &tbw, &tbh);
+        uint16_t xv ;
+        if ( SigneNeg )
+            xv = (display.width() - tbw) / 2 - 20 ;
+        else
+            xv = (display.width() - tbw) / 2 - 30 ;
+
+        display.setFont(&FreeMonoBold24pt7b);
+        display.setCursor(xv, 152);
+        display.print(TmpCharVz);
+
+        auto Color = (SigneNeg) ? GxEPD_BLACK : GxEPD_WHITE ;
+        display.fillRect(0, 108, 200, 8, Color ); // x y w h
+        display.fillRect(0, 160, 200, 8, Color );
+        display.fillRect(0, 116, 20, 44, Color );
+        display.fillRect(180,116, 20, 44, Color );
+        }
+    else
         {
         display.setFont(&FreeMonoBold18pt7b);
         display.setCursor(0 , 147);
@@ -464,24 +485,6 @@ do
         display.fillRect(0, 157, 105, 7, Color );
         display.fillRect(0, 108, 7, 49, Color );
         display.fillRect(98,108, 7, 49, Color );
-
-        }
-    // ascendance
-    else
-        {
-        // align with centered HelloWorld
-        display.getTextBounds( TmpCharVz, 0, 0, &tbx, &tby, &tbw, &tbh);
-        uint16_t xv = (display.width() - tbw) / 2 - 35 ;
-
-        display.setFont(&FreeMonoBold24pt7b);
-        display.setCursor(xv, 152);
-        display.print(TmpCharVz);
-
-        auto Color = (SigneNeg) ? GxEPD_BLACK : GxEPD_WHITE ;
-        display.fillRect(0, 108, 200, 8, Color ); // x y w h
-        display.fillRect(0, 160, 200, 8, Color );
-        display.fillRect(0, 116, 20, 44, Color );
-        display.fillRect(180,116, 20, 44, Color );
         }
 
     /////////////
@@ -988,6 +991,11 @@ do
     }
 while (display.nextPage());
 
+// si time out ecran
+unsigned long Temps = millis() - m_MillisEcran0 ;
+if ( (Temps/1000) > m_SecRetourEcran0 )
+    return ECRAN_0_Vz ;
+
 // si changement d'ecran
 bool BCentre = BoutonCentre() ;
 if ( BCentre && pZone == NULL )
@@ -1011,6 +1019,7 @@ if ( BCentre && pZone != NULL )
 // decrementation numero de zone
 if ( BoutonGauche() )
     {
+    m_MillisEcran0 = millis() ;
     NumTmaCtr-- ;
     if ( NumTmaCtr < -1 )
         NumTmaCtr = NbZones - 1 ;
@@ -1019,6 +1028,7 @@ if ( BoutonGauche() )
 // incrementation numero de zone
 if ( BoutonDroit() )
     {
+    m_MillisEcran0 = millis() ;
     int Size = VecZonesMod.size()+VecZonesConst.size()-1 ;
     NumTmaCtr++ ;
     if ( NumTmaCtr > Size )
