@@ -1,8 +1,8 @@
 # ce fichier est un fichier d'exemple car il est auto genere par le firmware en cas d'absence.
 [termic]                  1       # termic ou terrain
-[coef_filtre_alti_baro]   0.75     # plus grand => plus filtré
+[coef_filtre_alti_baro]   0.65     # plus grand => plus filtré
 [periode_integration_sec] 3       # temps d'integration de la VZ
-[vitesse_igc_kmh]         12      # vitesse de declenchement de l'enregistrement
+[vitesse_igc_kmh]         16      # vitesse de declenchement de l'enregistrement
 [stab_gps_m]              30      # rayon dispersion gps
 [vz_seuil_haut]           0.5   # vz m/s declenchement bip
 [vz_seuil_bas]           -2.5     # vz m/s declenchement bip

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 13/05/2024
+/// \date modification : 06/06/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -37,7 +37,7 @@ public :
 
     float m_coef_filtre_alti_baro = 0.65 ;   ///< coefficient de filtrage [0,1[ , 0.99 tres fort filtrage
     int   m_periode_integration_sec = 3 ;   ///< pour le calcul de la Vz
-    int   m_vitesse_igc_kmh = 12 ;          ///< vitesse de declenchement enregistrement
+    int   m_vitesse_igc_kmh = 16 ;          ///< vitesse de declenchement enregistrement
     int   m_stab_gps = 30 ;                 ///< rayon dispersion gps pour stabilite
     float m_vz_seuil_haut = 0.5 ;           ///< seuils de beep
     float m_vz_seuil_bas = -2.4 ;           ///< seuils de beep

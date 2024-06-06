@@ -1,3 +1,8 @@
+version 20240606a :
+ - declenchement du vol par bouton droit uniquement en page ecran 0_Vz et prioritaire sur stabilite gps.
+ - vitesse de debut de vol 16 kmh par defaut.
+ - taille pile gps stable a 40 (secondes).
+
 version 20240530a :
  - declenchement debut du vol apres 5 secondes consecutives de vitesse minimale du fichier de configuration. 
 

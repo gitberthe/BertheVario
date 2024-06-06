@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 30/05/2024
+/// \date modification : 06/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -92,47 +92,49 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // si pas de GGA attente
     if ( m_MillisPremierGGA == 0 )
-        continue ;
-
-    // recalage alti pression 1 fois par secondes
-    //if ( !(iboucle%5) )
         {
-        g_GlobalVar.m_MutexVariable.PrendreMutex() ;
-         g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltiSolHgt ) ;
-        g_GlobalVar.m_MutexVariable.RelacherMutex() ;
-
-        #ifndef TMA_DEBUG
-        // temps pour zones periode aeriennes
-         g_GlobalVar.m_ZonesAerAll.SetDatePeriode() ;
-        #endif // TMA_DEBUG
-
-        g_GlobalVar.PushGpPos() ;
+        ivitesse = 0 ;
+        continue ;
         }
 
-    // si le gps nest pas stable au moins une fois
+    // recalage alti pression 1 fois par secondes
+    g_GlobalVar.m_MutexVariable.PrendreMutex() ;
+     g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltiSolHgt ) ;
+    g_GlobalVar.m_MutexVariable.RelacherMutex() ;
+
+    #ifndef TMA_DEBUG
+    // temps pour zones periode aeriennes
+     g_GlobalVar.m_ZonesAerAll.SetDatePeriode() ;
+    #endif // TMA_DEBUG
+
+    // declenchement du vol par bouton droit si ecran 0
+    if ( g_GlobalVar.BoutonDroit() && g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz )
+        break ;
+
+    // si le gps nest pas stable au moins une fois (40 secondes)
     #ifndef SIMU_VOL
-     if ( ! g_GlobalVar.IsGpsStable() && g_GlobalVar.m_DureeVolMin == ATTENTE_GPS )
+     g_GlobalVar.PushGpPos() ;
+     if ( g_GlobalVar.m_DureeVolMin == ATTENTE_GPS && (! g_GlobalVar.IsGpsStable()) )
+         {
+         ivitesse = 0 ;
          continue ;
+         }
     #endif
 
     // beep attente vitesse
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         {
-        delay( 100 ) ;
+        delay( 200 ) ;
         CGlobalVar::beeper( 2000 , 100 ) ;
         }
 
     // affichage gps pret
     g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE ;
 
-    // declenchement du vol par bouton droit
-    if ( g_GlobalVar.BoutonDroit() )
-        break ;
-
-    // si vitesse superieur a 12 kmh
+    // si vitesse superieur a 16 kmh
     if ( g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh )
         ivitesse++;
-    else 
+    else
         ivitesse = 0 ;
 
     // au bout de 5 vitesses/5 secondes depassée

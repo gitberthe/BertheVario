@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 13/05/2024
+/// \date modification : 06/06/2024
 ///
 
 #ifndef _GESTECRANS_
@@ -35,6 +35,8 @@ public :
 
     void AfficheAll() ;
     void LancerTacheCalcul() ;
+    EtatsAuto GetEtatAuto() const   ///< renvoi l'etat de l'automate d'affichage
+                { return m_EtatAuto ; } ;
 
 protected :
     virtual EtatsAuto Ecran0Vz()      = 0 ;

@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 23/05/2024
+/// \date modification : 06/06/2024
 ///
 
 //////////////////
@@ -34,6 +34,7 @@
 #define TYPE_SCREEN 154         ///< si ecran 154
 //#define TYPE_SCREEN 290       ///< si ecran 290 a implementer
 #define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
+//#define VARIO_CAP_MAG_A_PLAT  1
 
 
 ////////////////
