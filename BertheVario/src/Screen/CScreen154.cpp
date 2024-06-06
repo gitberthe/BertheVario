@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/05/2024
+/// \date modification : 06/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -507,8 +507,10 @@ do
     }
 while (display.nextPage());
 
-// si changement d'ecran si pas en mode V
-if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE && BoutonDroit() )
+// si changement d'ecran si pas en mode V ou G
+if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE &&
+     g_GlobalVar.m_DureeVolMin != ATTENTE_GPS &&
+     BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
     return ECRAN_1_Histo ;

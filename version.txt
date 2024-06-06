@@ -1,3 +1,6 @@
+version 20240606b :
+ - pas de changement de page avec bouton droit en page 0_Vz si mode G ou V.
+
 version 20240606a :
  - declenchement du vol par bouton droit uniquement en page ecran 0_Vz et prioritaire sur stabilite gps.
  - vitesse de debut de vol 16 kmh par defaut.
