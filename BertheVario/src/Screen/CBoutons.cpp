@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 11/04/2024
+/// \date modification : 07/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -66,7 +66,15 @@ if ( m_BoutonDroit )
     return true ;
     }
 return false ;
+}
 
+///////////////////////////////////////////////////////////////////////////////
+/// \brief reset des boutons.
+void CBoutons::RazBoutons()
+{
+m_BoutonGauche =
+m_BoutonCentre =
+m_BoutonDroit  = false ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -90,24 +98,28 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         CGlobalVar::Reboot() ;
         }
 
+    // memorisation bouton gauche
     if ( !pThis->m_BoutonGauche && !digitalRead(BUTTON_A_PIN) )
         {
         pThis->m_BoutonGauche = true ;
         beep = true ;
         }
 
+    // memorisation bouton centre
     if ( !pThis->m_BoutonCentre && !digitalRead(BUTTON_B_PIN) )
         {
         pThis->m_BoutonCentre = true ;
         beep = true ;
         }
 
+    // memorisation bouton droit
     if ( !pThis->m_BoutonDroit && !digitalRead(BUTTON_C_PIN) )
         {
         pThis->m_BoutonDroit = true ;
         beep = true ;
         }
 
+    // beep d'appui
     if ( beep )
         {
         beep = false ;

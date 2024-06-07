@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 06/06/2024
+/// \date modification : 07/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -67,12 +67,11 @@ CTrame::m_MillisPremierGGA = 0 ;
 g_GlobalVar.m_VitesseKmh = 0 ;
 
 // affichage gps non pret
-g_GlobalVar.m_DureeVolMin = ATTENTE_GPS ;
+g_GlobalVar.m_DureeVolMin = ATTENTE_MESSAGE_GPS ;
 
 #ifndef TERMIC_DEBUG
-// boucle d'attente premier GGA et vitesse minimale
+// boucle d'attente premier GGA
 int iboucle = 0 ;
-int ivitesse = 0 ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
     // toutes les 1 secondes a 1hz
@@ -82,7 +81,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // toutes les 7s beep d'attente
     bool beep = !(iboucle%7) ;
 
-    // beep attente gps 'G'
+    // beep attente gps 'S G'
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         CGlobalVar::beeper( 1500 , 100 ) ;
 
@@ -93,9 +92,34 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // si pas de GGA attente
     if ( m_MillisPremierGGA == 0 )
         {
-        ivitesse = 0 ;
+        // pas de memorisation du depart de vol par bouton droit
+        if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz )
+            {
+            g_GlobalVar.RazBoutons() ;
+            }
         continue ;
         }
+    else
+        break ;
+    }
+
+// etat du GPS
+g_GlobalVar.m_DureeVolMin = ATTENTE_STABILITE_GPS ;
+
+// boucle d'attente vitesse minimale
+int ivitesse = 0 ;
+while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
+    {
+    // toutes les 1 secondes a 1hz
+    delay( 1000 ) ;
+    iboucle++ ;
+
+    // toutes les 7s beep d'attente
+    bool beep = !(iboucle%7) ;
+
+    #ifdef REBOOT_DEBUG
+     break ;
+    #endif
 
     // recalage alti pression 1 fois par secondes
     g_GlobalVar.m_MutexVariable.PrendreMutex() ;
@@ -107,14 +131,15 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
      g_GlobalVar.m_ZonesAerAll.SetDatePeriode() ;
     #endif // TMA_DEBUG
 
-    // declenchement du vol par bouton droit si ecran 0
-    if ( g_GlobalVar.BoutonDroit() && g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz )
+    // declenchement du vol par bouton droit si ecran 0_Vz
+    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit() )
         break ;
 
-    // si le gps nest pas stable au moins une fois (40 secondes)
+    // si le gps nest pas stable au moins une fois (30 secondes)
     #ifndef SIMU_VOL
      g_GlobalVar.PushGpPos() ;
-     if ( g_GlobalVar.m_DureeVolMin == ATTENTE_GPS && (! g_GlobalVar.IsGpsStable()) )
+     // si pas attente vitesse
+     if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS && (! g_GlobalVar.IsGpsStable()) )
          {
          ivitesse = 0 ;
          continue ;
@@ -124,12 +149,13 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // beep attente vitesse
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         {
+        CGlobalVar::beeper( 1500 , 100 ) ;
         delay( 200 ) ;
         CGlobalVar::beeper( 2000 , 100 ) ;
         }
 
     // affichage gps pret
-    g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE ;
+    g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE_VOL ;
 
     // si vitesse superieur a 16 kmh
     if ( g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh )
