@@ -1,6 +1,10 @@
+version 20240607b :
+ - modification sons accrochage gps.
+ 
 version 20240607a :
  - affichage mode S stabilite gps.
  - plus de memorisation depart de vol mode G/S.
+ - stabilisation gps sur 30 secondes
  
 version 20240606b :
  - pas de changement de page avec bouton droit en page 0_Vz si mode G ou V.

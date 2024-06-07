@@ -81,9 +81,9 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // toutes les 7s beep d'attente
     bool beep = !(iboucle%7) ;
 
-    // beep attente gps 'S G'
+    // beep attente gps 'G'
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
-        CGlobalVar::beeper( 1500 , 100 ) ;
+        CGlobalVar::beeper( 1100 , 100 ) ;
 
     #ifdef REBOOT_DEBUG
      break ;
@@ -141,6 +141,9 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
      // si pas attente vitesse
      if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS && (! g_GlobalVar.IsGpsStable()) )
          {
+         // beep attente gps 'S'
+         if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
+             CGlobalVar::beeper( 1500 , 100 ) ;
          ivitesse = 0 ;
          continue ;
          }
