@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 02/04/2024
+/// \date modification : 07/06/2024
 ///
 
 #ifndef _BOUTONS_
@@ -21,6 +21,7 @@ public :
     bool BoutonGauche() ;
     bool BoutonCentre() ;
     bool BoutonDroit() ;
+    void RazBoutons() ;
 
 private :
     bool m_BoutonGauche = false ;

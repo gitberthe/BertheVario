@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 06/06/2024
+/// \date modification : 07/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -268,9 +268,11 @@ sprintf( TmpCharVitSol , "%3.0f", g_GlobalVar.m_VitesseKmh ) ;
 
 // duree du vol
 char TmpCharDV[15] ;
-if ( g_GlobalVar.m_DureeVolMin == ATTENTE_GPS )
+if ( g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS )
     sprintf( TmpCharDV , "  G" ) ;
-else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE )
+else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS )
+    sprintf( TmpCharDV , "  S" ) ;
+else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL )
     sprintf( TmpCharDV , "  V" ) ;
 else
     sprintf( TmpCharDV , "%3d", g_GlobalVar.m_DureeVolMin ) ;
@@ -507,9 +509,10 @@ do
     }
 while (display.nextPage());
 
-// si changement d'ecran si pas en mode V ou G
-if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE &&
-     g_GlobalVar.m_DureeVolMin != ATTENTE_GPS &&
+// si changement d'ecran si pas en mode V ou G/S
+if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&
+     g_GlobalVar.m_DureeVolMin != ATTENTE_STABILITE_GPS &&
+     g_GlobalVar.m_DureeVolMin != ATTENTE_MESSAGE_GPS &&
      BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;

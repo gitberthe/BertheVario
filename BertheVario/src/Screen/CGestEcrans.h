@@ -4,14 +4,15 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 06/06/2024
+/// \date modification : 07/06/2024
 ///
 
 #ifndef _GESTECRANS_
 #define _GESTECRANS_
 
-#define ATTENTE_GPS     -2
-#define ATTENTE_VITESSE -1
+#define ATTENTE_MESSAGE_GPS     -3
+#define ATTENTE_STABILITE_GPS   -2
+#define ATTENTE_VITESSE_VOL     -1
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Gestion des differentes pages d'ecran.
