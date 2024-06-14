@@ -1,5 +1,5 @@
 version 20240614a :
- - beep et bud arret son toutes les 5  secondes mode G S V.
+ - beep et bug arret son toutes les 5 secondes mode G S V.
 
 version 20240607b :
  - modification sons accrochage gps.
