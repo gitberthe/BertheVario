@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 07/06/2024
+/// \date modification : 14/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -74,6 +74,13 @@ void CBoutons::RazBoutons()
 {
 m_BoutonGauche =
 m_BoutonCentre =
+m_BoutonDroit  = false ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief reset bouton droit.
+void CBoutons::RazBoutonDroit()
+{
 m_BoutonDroit  = false ;
 }
 

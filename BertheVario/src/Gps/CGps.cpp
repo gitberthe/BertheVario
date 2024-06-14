@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 07/06/2024
+/// \date modification : 14/06/2024
 ///
 
 #include "../BertheVario.h"
@@ -79,7 +79,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     iboucle++ ;
 
     // toutes les 7s beep d'attente
-    bool beep = !(iboucle%7) ;
+    bool beep = !(iboucle%m_BeepSecondes) ;
 
     // beep attente gps 'G'
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
@@ -95,7 +95,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         // pas de memorisation du depart de vol par bouton droit
         if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz )
             {
-            g_GlobalVar.RazBoutons() ;
+            g_GlobalVar.RazBoutonDroit() ;
             }
         continue ;
         }
@@ -115,7 +115,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     iboucle++ ;
 
     // toutes les 7s beep d'attente
-    bool beep = !(iboucle%7) ;
+    bool beep = !(iboucle%m_BeepSecondes) ;
 
     #ifdef REBOOT_DEBUG
      break ;

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 03/04/2024
+/// \date modification : 14/04/2024
 ///
 
 #ifndef _CGPS_
@@ -20,6 +20,7 @@ public :
     void LanceTacheGps( bool AvecPortSerie ) ;
 
 private :
+    static const int m_BeepSecondes = 5 ;  ///< secondes de beep
     unsigned long m_MillisDebutVol = 0 ;   ///< millisecondes de debut de vol
 
     static void TacheGpsSerial(void *param);
