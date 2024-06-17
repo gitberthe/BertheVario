@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 06/06/2024
+/// \date modification : 17/06/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -35,16 +35,16 @@ public :
 
     void GetChar( int iVec , std::string & Name , std::string & Value ) const ;
 
-    float m_coef_filtre_alti_baro = 0.65 ;   ///< coefficient de filtrage [0,1[ , 0.99 tres fort filtrage
-    int   m_periode_integration_sec = 3 ;   ///< pour le calcul de la Vz
+    float m_coef_filtre_alti_baro = 0.5 ;   ///< coefficient de filtrage [0,1[ , 0.99 tres fort filtrage
+    int   m_periode_integration_sec = 2 ;   ///< pour le calcul de la Vz
     int   m_vitesse_igc_kmh = 16 ;          ///< vitesse de declenchement enregistrement
-    int   m_stab_gps = 30 ;                 ///< rayon dispersion gps pour stabilite
-    float m_vz_seuil_haut = 0.5 ;           ///< seuils de beep
-    float m_vz_seuil_bas = -2.4 ;           ///< seuils de beep
-    int   m_dtu          = 1 ;              ///< diff heure TU
-    int   m_AltiMargin   = 65 ;             ///< marge en altitude de zone TMA CTR en metres
-    int   m_XYMargin     = 100 ;            ///< marge en xy de zone TMA CTR en metres
-    bool  m_Termic       = true ;           ///< affichage termic ou terrain
+    int   m_stab_gps = 20 ;                 ///< rayon dispersion gps pour stabilite
+    float m_vz_seuil_haut = 0.35 ;           ///< seuils de beep
+    float m_vz_seuil_bas = -2.5 ;           ///< seuils de beep
+    int   m_dtu          = 2 ;              ///< diff heure TU
+    int   m_AltiMargin   = 50 ;             ///< marge en altitude de zone TMA CTR en metres
+    int   m_XYMargin     = 50 ;            ///< marge en xy de zone TMA CTR en metres
+    bool  m_Termic       = false ;           ///< affichage termic ou terrain
 
     std::string m_Ssid ;     ///< identifiant wifi
     std::string m_Passwd ;   ///< mot de passe wifi

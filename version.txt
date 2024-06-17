@@ -1,3 +1,6 @@
+version 20240617a :
+ - modification des valeurs par defaut du fichier de configuration.
+
 version 20240614a :
  - beep et bug arret son toutes les 5 secondes mode G S V.
 
