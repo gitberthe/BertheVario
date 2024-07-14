@@ -1,6 +1,6 @@
 version 20240714a :
  - modification son vario
- - ajout d'un ligne [vz_seuil_max] pour beep maximum
+ - ajout d'un ligne [vz_seuil_max] pour beep maximum fichier de config
 
 version 20240617a :
  - modification des valeurs par defaut du fichier de configuration.
