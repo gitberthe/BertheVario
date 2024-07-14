@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 17/06/2024
+/// \date modification : 14/07/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -39,7 +39,8 @@ public :
     int   m_periode_integration_sec = 2 ;   ///< pour le calcul de la Vz
     int   m_vitesse_igc_kmh = 16 ;          ///< vitesse de declenchement enregistrement
     int   m_stab_gps = 20 ;                 ///< rayon dispersion gps pour stabilite
-    float m_vz_seuil_haut = 0.35 ;           ///< seuils de beep
+    float m_vz_seuil_max  = 3. ;           ///< seuils de beep
+    float m_vz_seuil_haut = 0.35 ;          ///< seuils de beep
     float m_vz_seuil_bas = -2.5 ;           ///< seuils de beep
     int   m_dtu          = 2 ;              ///< diff heure TU
     int   m_AltiMargin   = 50 ;             ///< marge en altitude de zone TMA CTR en metres

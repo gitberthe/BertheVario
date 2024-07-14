@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 31/03/2024
+/// \date modification : 14/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -39,10 +39,9 @@ xTaskCreatePinnedToCore(TacheVarioBeep, "TaskBeep", VARIOBEEP_STACK_SIZE, this, 
 /// \brief Fonction static core 0 qui calcul la Vz et gere les beep.
 void CVarioBeep::TacheVarioBeep(void *param)
 {
-const float VzMax = 5. ;
 delay(5000) ;
-const float MinFreq = 1700 ;
-const float MaxFreq = 6000 ;
+const float MinFreq = 1400 ;
+const float MaxFreq = 8000 ;
 const float SeuilVzMin = g_GlobalVar.m_Config.m_vz_seuil_haut ;
 while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     {
@@ -55,12 +54,14 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
         NotActive = false ;
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
+    //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_max ;
+    //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
     #endif
 
     // coefficient de Vz
-    float Coef01 = (LocalVitVertMS-SeuilVzMin) / VzMax ;
+    float Coef01 = (LocalVitVertMS-SeuilVzMin) / g_GlobalVar.m_Config.m_vz_seuil_max ;
     if ( Coef01 > 1 )
         Coef01 = 1. ;
     if ( Coef01 < 0 )
@@ -84,7 +85,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     float Freq = MinFreq + Coef01 * ( MaxFreq - MinFreq ) ;
 
     // calcul de la recurrence
-    float RecurrenceMs = 500 - Coef01 * 300 ;
+    float RecurrenceMs = 500 - Coef01 * 400 ;
 
     // calcul de la largeur du beep
     float LargeurBeepMs = 100 ;

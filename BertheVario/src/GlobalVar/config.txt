@@ -6,6 +6,7 @@
 [stab_gps_m]              20      # rayon dispersion gps
 [vz_seuil_haut]           0.35  # vz m/s declenchement bip
 [vz_seuil_bas]           -2.5     # vz m/s declenchement bip
+[vz_seuil_max]            3.      # vz m/s max des bip
 [dtu]                     2       # difference d'heure TU
 [marge_alti]              50      # marge pre alarm zone altitude
 [marge_xy]                50      # marge pre alarm zone xy
