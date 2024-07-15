@@ -427,11 +427,36 @@ if (!Fch)
 // debut de fichier
 Fch.seek(0) ;
 
+std::vector<std::string> VecNomDejaEcrit ;
+
+// ecriture des zone
 for ( int iz = 0 ; iz < m_NbZones ; iz++ )
     {
+    // zone en memoire
     const CZoneAer * pZone = m_ZonesArr[iz] ;
     if ( !pZone->m_DansFchActivation )
         continue ;
+
+    // verif si pas deja fait
+    bool DejaFait = false ;
+    for ( long iv = 0 ; iv < VecNomDejaEcrit.size() ; iv++ )
+        {
+        if ( VecNomDejaEcrit[iv] == pZone->m_NomAff )
+            {
+            DejaFait = true ;
+            break ;
+            }
+        }
+
+
+    // si deja ecrit dans le fichier
+    if ( DejaFait )
+        continue ;
+
+    // empilement pour suivit deja fait
+    VecNomDejaEcrit.push_back( pZone->m_NomAff ) ;
+
+    // ecriture fichier
     Fch.print( pZone->m_NomAff.c_str() ) ;
     Fch.print( ";" ) ;
     if ( pZone->m_Activee )

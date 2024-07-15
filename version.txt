@@ -1,3 +1,6 @@
+version 20240715b :
+ - suppression doublons dans fichier zone activable
+
 version 20240715a :
  - modification nom de zone.
  - zone protegee en fichier zone activable
