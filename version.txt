@@ -1,3 +1,7 @@
+version 20240715a :
+ - modification nom de zone.
+ - zone protegee en fichier zone activable
+
 version 20240714a :
  - modification son vario
  - ajout d'un ligne [vz_seuil_max] pour beep maximum fichier de config

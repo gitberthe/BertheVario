@@ -4,13 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 03/04/2024
+/// \date modification : 15/07/2024
 ///
 
 #ifndef _ZONE_AR_
 #define _ZONE_AR_
 
-#define LONG_MAX_NOM    27
+//#define LONG_MAX_NOM    27
 #define MAX_PTS_4_ZONE  300
 
 #define ALTI_BASSE           0
@@ -48,6 +48,7 @@ public :
     bool    HavePeriod() const
                 { return m_PeriodeDebutJour != -1 ; } ;
     std::string  m_NomAff ;             ///< nom court de la zone a afficher
+    std::string  m_NomOri ;             ///< nom entier de la zone dans fichier origine
     bool    m_Activee = true ;          ///< zone activee
     bool    m_DansFchActivation = false;///< si dans fichier d'activation de zones pour reecriture apres configuration menu
     int     m_AltiBasse=-1 ;            ///< altitude basse de la zone par defaut
@@ -65,7 +66,6 @@ public :
 
 private :
 
-    std::string     m_NomOri ;          ///< nom court de la zone dans fichier origine
     int             m_AltiAPrendreEnCompte = ALTI_BASSE ;   ///< altitude a prendre en compte fonction de la date
     st_coord_poly **m_PolygoneArr=NULL; ///< tableau des points de la zone
     int             m_NbPts = 0 ;       ///< nombre de points de la zone

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 04/04/2024
+/// \date modification : 15/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -175,25 +175,45 @@ m_ZonesArr[m_NbZones-1] = pZone ;
 
 // recopie nom de zone
 pZone->m_NomOri = pChar ;
-pZone->m_NomOri.resize( LONG_MAX_NOM ) ;
+pZone->m_NomAff = pChar ;
 
-// formattage nom de zone
-int iespace = 0 ;
-for ( int ic = 0 ; ic < LONG_MAX_NOM ; ic++ )
+// zone protegee on enleve "reserve naturelle nationale de la vallee de"
+int iespacemax = 3 ;
+char NomRND[]  = "Reserve naturelle nationale de " ;
+char NomRNDV[] = "Reserve naturelle nationale de la Vallee de " ;
+char NomProtect[] = "PROTECT " ;
+if ( strstr( pChar , NomProtect ) )
     {
-    if ( pZone->m_NomOri[ic] == '(' )
+    iespacemax = 1 ;
+    pChar += strlen( NomProtect ) ;
+    char * pTmpChar = strstr( pChar , NomRNDV ) ;
+    if ( pTmpChar != NULL )
+       pChar += strlen( NomRNDV ) ;
+    else
         {
-        pZone->m_NomOri.resize( ic ) ;
+        pTmpChar = strstr( pChar , NomRND ) ;
+        if ( pTmpChar != NULL )
+            pChar += strlen( NomRND ) ;
+        }
+    pZone->m_NomAff = pChar ;
+    }
+
+// formattage nom de zone 3 champs
+int iespace = 0 ;
+for ( int ic = 0 ; ic < pZone->m_NomAff.size() ; ic++ )
+    {
+    if ( pZone->m_NomAff[ic] == '(' )   // premier (
+        {
+        pZone->m_NomAff.resize( ic ) ;
         break ;
         }
-    else if ( pZone->m_NomOri[ic] == ' ' && ++iespace >= 3 )
+    else if ( (pZone->m_NomAff[ic] == ' ' || pZone->m_NomAff[ic] == '-') && ++iespace >= iespacemax ) // trois champs max
         {
-        pZone->m_NomOri.resize( ic ) ;
+        pZone->m_NomAff.resize( ic ) ;
         break ;
         }
     }
-pZone->m_NomOri.shrink_to_fit();
-pZone->m_NomAff = pZone->m_NomOri ;
+pZone->m_NomAff.shrink_to_fit();
 
 // altitude de basse zone
 pChar = strtok( NULL , ";" ) ;
@@ -327,6 +347,7 @@ if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' )
     }
 
 std::string NomOri = pChar ;
+NomOri += ' ' ;     // caractere de fin de champ pour recherche sans bug
 std::string NomAff = strtok( NULL ,";");
 std::string PeriodeDeb = strtok( NULL ,";");
 std::string PeriodeFin = strtok( NULL ,";");
@@ -468,7 +489,7 @@ delete [] TmpChar ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Traite ligne activation zone
+/// \brief Traite ligne activation zone.
 void CZonesAerAll::TraiteBufferZoneActive( char * buff )
 {
 // test fin de ligne ou commentaire
@@ -476,25 +497,32 @@ char * pChar = strtok( buff , ";" ) ;
 if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' )
     return ;
 
+// nom de zone
 std::string NomOri = pChar ;
-std::string Activation = strtok( NULL ,";");
 
-CZoneAer * pZone = Find( NomOri.c_str() ) ;
-
-// si pas de zone
-if ( pZone == NULL )
-    {
-    Serial.println("zone aerienne non trouvée activation") ;
+// activation de zone
+char * pActivation = strtok( NULL ,";") ;
+if ( pActivation == NULL )
     return ;
+std::string Activation = pActivation ;
+
+// pour toutes les zones
+for ( long iz = 0 ; iz < m_NbZones ; iz++ )
+    {
+    const CZoneAer & Zone = *m_ZonesArr[iz] ;
+    if ( strstr( Zone.m_NomOri.c_str() , NomOri.c_str() ) )
+        {
+        CZoneAer * pZone = m_ZonesArr[iz] ;
+
+        // activation
+        if ( Activation == "0" )
+            pZone->m_Activee = false ;
+        else
+            pZone->m_Activee = true ;
+
+        pZone->m_DansFchActivation = true ;
+        }
     }
-
-// activation
-if ( Activation == "0" )
-    pZone->m_Activee = false ;
-else
-    pZone->m_Activee = true ;
-
-pZone->m_DansFchActivation = true ;
 
 *buff = 0 ;
 }
@@ -506,7 +534,7 @@ CZoneAer * CZonesAerAll::Find( const char * NomOri )
 for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     {
     const CZoneAer & Zone = *m_ZonesArr[iz] ;
-    if ( ! strcmp( NomOri , Zone.m_NomOri.c_str() ) )
+    if ( strstr( Zone.m_NomOri.c_str() , NomOri ) )
         return m_ZonesArr[iz] ;
     }
 
@@ -603,7 +631,7 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
         {
         m_Plafond4Valid   = Zone.GetAltiBasse() ;
         bool Corent = m_Plafond4Valid == 822 ;
-        bool ZoneProtegee = strstr( Zone.m_NomAff.c_str() , "PROTECT" ) != NULL ;
+        bool ZoneProtegee = strstr( Zone.m_NomOri.c_str() , "PROTECT" ) != NULL ;
 
         char TmpChar[50] ;
         // si corent
@@ -702,6 +730,7 @@ for ( long iz = 0 ; iz < m_NbZones && RetNbrIn != ZONE_DEDANS ; iz++ )
     // dans le du rayon
     float DistBaryMetres = sqrtf( powf(Zone.m_Barycentre.m_Lat-PtsEnCours.m_Lat,2) + powf(Zone.m_Barycentre.m_Lon-PtsEnCours.m_Lon,2) )  * 60. * UnMileEnMetres ;
     bool DansLeRayon = DistBaryMetres < Zone.m_RayonMetre ;
+    bool ZoneProtegee = strstr( Zone.m_NomOri.c_str() , "PROTECT" ) != NULL ;
 
     // dedans la surface
     bool IsInArea = DansLeRayon && CPolygone::IsIn( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
@@ -711,12 +740,18 @@ for ( long iz = 0 ; iz < m_NbZones && RetNbrIn != ZONE_DEDANS ; iz++ )
     // si dans zone
     if ( IsInZone  )
         {
-        RetNbrIn = ZONE_DEDANS ;
-        // construction nom + altitude
-        char TmpChar[50] ;
-        m_Plafond4Valid=Zone.GetAltiBasse() ;
-        sprintf( TmpChar , "In %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
-        RetStrIn = TmpChar ;
+        if ( ZoneProtegee )
+            {
+            }
+        else
+            {
+            RetNbrIn = ZONE_DEDANS ;
+            // construction nom + altitude
+            char TmpChar[50] ;
+            m_Plafond4Valid=Zone.GetAltiBasse() ;
+            sprintf( TmpChar , "In %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
+            RetStrIn = TmpChar ;
+            }
         break ;
         }
     }

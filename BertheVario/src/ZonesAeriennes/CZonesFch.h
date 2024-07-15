@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 30/03/2024
-/// \date modification : 30/03/2024
+/// \date modification : 15/07/2024
 ///
 
 #ifndef _ZONESFCH_
@@ -25,7 +25,7 @@ private :
     int   m_Ligne ;     ///< ligne fichier in
     File  m_FileOut ;   ///< fichier se sortie
 
-    void TraiteBufferZoneIn( char * buff ) ;
+    void TraiteBufferValidZoneIn( char * buff ) ;
 } ;
 
 #endif

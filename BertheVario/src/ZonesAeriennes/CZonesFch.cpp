@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 30/03/2024
-/// \date modification : 09/04/2024
+/// \date modification : 15/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -52,14 +52,14 @@ while(m_File.available())
         {
         // si fin de ligne on traite le buffer
         TmpChar[ic++] = 0 ;
-        TraiteBufferZoneIn( TmpChar ) ;
+        TraiteBufferValidZoneIn( TmpChar ) ;
         m_Ligne++ ;
         ic = 0 ;
         }
     }
 
 // pour la derniere zone
-TraiteBufferZoneIn( TmpChar ) ;
+TraiteBufferValidZoneIn( TmpChar ) ;
 
 m_File.close();
 m_FileOut.close();
@@ -69,7 +69,7 @@ delete [] TmpChar ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Procedure de validation de zone fichier txt in/out.
-void CZonesFch::TraiteBufferZoneIn( char * buff )
+void CZonesFch::TraiteBufferValidZoneIn( char * buff )
 {
 if ( buff == NULL || *buff == 0 || *buff == '#' || *buff == '\n' )
     {
@@ -124,19 +124,22 @@ pChar = strtok( NULL , "," ) ;
 if ( pChar != NULL )
     g_GlobalVar.m_Config.m_AltiMargin = atoi( pChar ) ;
 
-// zones actives
+// positionnement zones actives
 pChar = strtok( &ZonesActive[0] , "-,;" ) ;
 while ( pChar != NULL )
     {
-    CZoneAer * pZone = Find( pChar ) ;
-    if ( pZone == NULL )
+    // pour toutes les zones
+    for ( long iz = 0 ; iz < m_NbZones ; iz++ )
         {
-        m_FileOut.println("") ;
-        m_FileOut.print("zone non trouvée:") ;
-        m_FileOut.println( pChar ) ;
-        return ;
+        const CZoneAer & Zone = *m_ZonesArr[iz] ;
+        if ( strstr( Zone.m_NomOri.c_str() , pChar ) )
+            {
+            CZoneAer * pZone = m_ZonesArr[iz] ;
+
+            pZone->m_Activee = true ;
+            }
         }
-    pZone->m_Activee = true ;
+    // prochaine zone active
     pChar = strtok( NULL , "-,;" ) ;
     }
 

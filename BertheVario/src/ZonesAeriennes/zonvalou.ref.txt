@@ -23,9 +23,12 @@
 35;corent;2024,3,31;822;Be TMA CLERMONT 1.20 al: 822m;DessousUneZone;
 36;corent;2024,3,31;822;Al TMA CLERMONT 1.20 al: 822m;LimiteAltitude;
 37;corent;2024,3,31;822;In TMA CLERMONT 1.20 al: 822m;DedansUneZone;
-39;sancy-zp;2024,3,31;0;Zp PROTECT Reserve naturelle al:   0m;DedansUneZone;
-40;sancy-zp;2024,3,31;0;Zp PROTECT Reserve naturelle al:   0m;DedansUneZone;
-41;sancy-zp;2024,3,31;2590;Al PROTECT Reserve naturelle al:   0m;LimiteAltitude;
+39;sancy-zp;2024,3,31;0;Zp Chastreix al:   0m;DedansUneZone;
+40;sancy-zp;2024,3,31;0;Zp Chastreix al:   0m;DedansUneZone;
+41;sancy-zp;2024,3,31;2590;Al Chastreix al:   0m;LimiteAltitude;
 42;sancy-zp;2024,3,31;2590;Be TMA CFD 5 al:2590m;DessousUneZone;
 43;sancy-zp;2024,3,31;2590;Al TMA CFD 5 al:2590m;LimiteAltitude;
 44;sancy-zp;2024,3,31;2590;In TMA CFD 5 al:2590m;DedansUneZone;
+46;sancy-chastreix-pail;2024,07,14;2590;Be TMA CFD 5 al:2590m;DessousUneZone;
+47;sancy-chastreix-pail;2024,07,14;0;Zp Chastreix al:   0m;DedansUneZone;
+48;sancy-chaudefour;2024,07,14;0;Zp Chaudefour al:   0m;DedansUneZone;
