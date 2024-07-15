@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 07/06/2024
+/// \date modification : 15/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -912,14 +912,34 @@ std::vector<CZoneAer*> VecZonesConst ;
 const int NbZones = g_GlobalVar.m_ZonesAerAll.GetNbZones() ;
 CZoneAer ** pZoneArr = g_GlobalVar.m_ZonesAerAll.GetZoneArr() ;
 
-// vecteur des zones
+// vecteur des zones a afficher
 for ( long iz = 0 ; iz < NbZones ; iz++ )
     {
     CZoneAer * pZone = pZoneArr[iz] ;
+
+    // selection modifible / constante
+    std::vector<CZoneAer*> * pVect ;
     if ( pZone->m_DansFchActivation )
-        VecZonesMod.push_back( pZone ) ;
+        pVect = & VecZonesMod ;
     else
-        VecZonesConst.push_back( pZone ) ;
+        pVect = & VecZonesConst ;
+
+    // test si deja affiché
+    long DejaFait = false ;
+    for ( int iv = 0 ; iv < pVect->size() ; iv++ )
+        {
+        if ( (*pVect)[iv]->m_NomAff == pZone->m_NomAff )
+            {
+            DejaFait = true ;
+            break ;
+            }
+        }
+
+    // ajout du nom de zone
+    if ( DejaFait )
+        continue ;
+
+    pVect->push_back( pZone ) ;
     }
 
 // selection zone

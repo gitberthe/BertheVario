@@ -1,3 +1,6 @@
+version 20240715c :
+ - suppression doublons affichage zone activable
+
 version 20240715b :
  - suppression doublons dans fichier zone activable
 

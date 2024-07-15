@@ -78,7 +78,7 @@ if ( buff == NULL || *buff == 0 || *buff == '#' || *buff == '\n' )
     }
 
 // desactivation de toutes les zone activable
-for ( long iz = 0 ; iz < m_NbZones ; iz++ )
+for ( int iz = 0 ; iz < m_NbZones ; iz++ )
     {
     CZoneAer * pZone = m_ZonesArr[iz] ;
     if ( pZone->m_DansFchActivation )
@@ -129,7 +129,7 @@ pChar = strtok( &ZonesActive[0] , "-,;" ) ;
 while ( pChar != NULL )
     {
     // pour toutes les zones
-    for ( long iz = 0 ; iz < m_NbZones ; iz++ )
+    for ( int iz = 0 ; iz < m_NbZones ; iz++ )
         {
         const CZoneAer & Zone = *m_ZonesArr[iz] ;
         if ( strstr( Zone.m_NomOri.c_str() , pChar ) )
