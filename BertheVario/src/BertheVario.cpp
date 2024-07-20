@@ -7,7 +7,7 @@
 /// \date modification : 20/07/2024
 ///
 
-char NumVer[] = "20240720a" ;
+char NumVer[] = "20240721a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -112,6 +112,9 @@ if ( g_GlobalVar.BoutonCentre() )
     sprintf(buf, "%d.%d.%d.%d", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3] );
     g_GlobalVar.AfficheWifi( buf ) ;
 
+    // creation init file manager
+    pfilemgr = new ESPFMfGK( 8080 ) ;
+
     addFileSystems();
     setupFilemanager();
 
@@ -215,7 +218,7 @@ return ; // */
 // si mode ftp
 if ( g_GlobalVar.m_ModeHttp )
     {
-    filemgr.handleClient();
+    pfilemgr->handleClient();
     return ;
     }
 

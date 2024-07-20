@@ -1,3 +1,8 @@
+version 20240721a :
+ - reduction memoire file manager.
+ - changement algorithme reduction zone base sur la distance entre points.
+ - ajout vitesse maxi pour debut de vol.
+
 version 20240720a :
  - modification rayon 120km pour BVZoneAerienne et fichier 20240615_ffvl-cfd.geojson
  - Suppression de Calculateur/CThermicMap.h

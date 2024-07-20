@@ -26,9 +26,9 @@ if ( m_PolygoneArr != NULL )
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Reduit le vecteur a MaxPts. Prends les points 2 a 2 et supprime le
-/// plus proche du barycentre.
-void CVecReduce::ReduceTo( long MaxPts )
+/// \brief Reduit le vecteur en nombre de points. Prends les points 2 a 2 et supprime le
+/// plus proche du barycentre qui sont distant de moins de DistanceMetresEntrePoints
+void CVecReduce::ReduceTo( int DistanceMetresEntrePoints )
 {
 // calcul du barycentre
 CZoneAer::st_coord_poly PtsBarycentre ;
@@ -44,30 +44,43 @@ PtsBarycentre.m_Lat /= m_pVecOrigine->size() ;
 PtsBarycentre.m_Lon /= m_pVecOrigine->size() ;
 
 // destruction des points
-while ( m_pVecOrigine->size() >= MaxPts )
+bool EncoreDesDestructions = true ;
+while ( EncoreDesDestructions )
     {
-    // distance du barycentre
-    std::vector<float> VecDist ;
-    VecDist.reserve( m_pVecOrigine->size() ) ;
+    EncoreDesDestructions = false ;
+
+    // distance du barycentre de chaque point
+    std::vector<float> VecDistBary ;
+    VecDistBary.reserve( m_pVecOrigine->size() ) ;
     for ( int ip = 0 ; ip < m_pVecOrigine->size() ; ip++ )
         {
         float Dist = sqrtf( powf( (*m_pVecOrigine)[ip]->m_Lat - PtsBarycentre.m_Lat , 2.) +
                             powf( (*m_pVecOrigine)[ip]->m_Lon - PtsBarycentre.m_Lon , 2.) ) ;
-        VecDist.push_back( Dist ) ;
+        VecDistBary.push_back( Dist ) ;
         }
 
     // supression des points 2 a 2
     for ( int ip = 0 ; ip+1 < m_pVecOrigine->size() ; ip+=2 )
         {
-        if ( VecDist[ip] < VecDist[ip+1] )
+        // calcul distance entre les 2 points
+        float DistAnguDeg = sqrtf( powf( (*m_pVecOrigine)[ip]->m_Lat - (*m_pVecOrigine)[ip+1]->m_Lat , 2.) +
+                            powf( (*m_pVecOrigine)[ip]->m_Lon - (*m_pVecOrigine)[ip+1]->m_Lon , 2.) ) ;
+
+        // si distance trop petite alors supression
+        if ( (DistAnguDeg * UnMileEnMetres * 60) < DistanceMetresEntrePoints )
             {
-            delete (*m_pVecOrigine)[ ip ] ;
-            (*m_pVecOrigine)[ ip ] = NULL ;
-            }
-        else
-            {
-            delete (*m_pVecOrigine)[ ip+1 ] ;
-            (*m_pVecOrigine)[ ip+1 ] = NULL ;
+            EncoreDesDestructions = true ;
+            // points le plus proche du barycentre
+            if ( VecDistBary[ip] < VecDistBary[ip+1] )
+                {
+                delete (*m_pVecOrigine)[ ip ] ;
+                (*m_pVecOrigine)[ ip ] = NULL ;
+                }
+            else
+                {
+                delete (*m_pVecOrigine)[ ip+1 ] ;
+                (*m_pVecOrigine)[ ip+1 ] = NULL ;
+                }
             }
         }
 
@@ -77,7 +90,7 @@ while ( m_pVecOrigine->size() >= MaxPts )
     for ( long ip = 0 ; ip < m_pVecOrigine->size() ; ip++ )
         {
         if ( (*m_pVecOrigine)[ip] != NULL )
-        VecReduce.push_back( (*m_pVecOrigine)[ip] ) ;
+            VecReduce.push_back( (*m_pVecOrigine)[ip] ) ;
         }
 
     // recopie du vecteur reduit

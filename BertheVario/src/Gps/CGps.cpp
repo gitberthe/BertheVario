@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 14/06/2024
+/// \date modification : 21/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -160,8 +160,9 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // affichage gps pret
     g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE_VOL ;
 
-    // si vitesse superieur a 16 kmh
-    if ( g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh )
+    // si vitesse superieur a 16 kmh et inferieur a 80kmh
+    if ( (g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh) &&
+         (g_GlobalVar.m_VitesseKmh < 80.) )
         ivitesse++;
     else
         ivitesse = 0 ;

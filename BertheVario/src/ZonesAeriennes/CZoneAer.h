@@ -4,13 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 20/07/2024
+/// \date modification : 21/07/2024
 ///
 
 #ifndef _ZONE_AR_
 #define _ZONE_AR_
 
-#define MAX_PTS_4_ZONE  300
+#define DIST_METRE_4_ZONE  100
 
 #define ALTI_BASSE           0
 #define ALTI_PERIODE_SEMAINE 1
@@ -25,8 +25,8 @@
 // SFC	sol
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Une zone aerienne, avec un maximum de points limité. (suppression
-/// barycentrique des points 2 a 2).
+/// \brief Une zone aerienne, avec un nombre de points diminué (distance minimale
+/// entre 2 points).
 /// Periode semaine/week end, Active ou non. sous forme de tableau de pointeur
 /// dans CZonesAerAll.
 class CZoneAer
@@ -84,7 +84,7 @@ class CVecReduce
 public :
     void Set( std::vector<CZoneAer::st_coord_poly*> & VecToReduce )
         { m_pVecOrigine = & VecToReduce ; } ;
-    void ReduceTo( long MaxPts ) ;
+    void ReduceTo( int DistanceMetresEntrePoints ) ;
 
 private :
     std::vector<CZoneAer::st_coord_poly*> * m_pVecOrigine ;

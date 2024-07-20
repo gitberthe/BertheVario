@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 20/07/2024
+/// \date modification : 21/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -213,6 +213,7 @@ for ( int ic = 0 ; ic < pZone->m_NomAff.size() ; ic++ )
         break ;
         }
     }
+pZone->m_NomOri.shrink_to_fit();
 pZone->m_NomAff.shrink_to_fit();
 
 // altitude de basse zone
@@ -245,31 +246,31 @@ while ( pChar != NULL )
     }
 
 
-// reduction du nombre de points : ceux plus proche du barycentre enlevé
-// par groupe de 2
-if ( VecPoly.size() > MAX_PTS_4_ZONE )
+// reduction du nombre de points : ceux plus proche du barycentre enlevés
+// distance minimale de DIST_METRE_4_ZONE entyre les points
+/*// pour gnuplot
+Serial.println( "--------------------------"  ) ;
+for ( long iv = 0 ; iv < VecPoly.size() ; iv ++ )
     {
-    /*
-    // pour gnuplot
-    Serial.println( "--------------------------"  ) ;
-    for ( long iv = 0 ; iv < VecPoly.size() ; iv ++ )
-        { Serial.print(VecPoly[iv]->m_Lon, 5) ;
-          Serial.print( " " ) ;
-          Serial.println(VecPoly[iv]->m_Lat, 5) ; }
-    Serial.println( "--------------------------"   ) ; */
-
-    CVecReduce VecReduce ;
-    VecReduce.Set( VecPoly ) ;
-    VecReduce.ReduceTo( MAX_PTS_4_ZONE ) ;
-
-    /*// pour gnuplot
-    Serial.println( "********************" ) ;
-    for ( long iv = 0 ; iv < VecPoly.size() ; iv ++ )
-        { Serial.print(VecPoly[iv]->m_Lon , 5 ) ;
-          Serial.print( " " ) ;
-          Serial.println(VecPoly[iv]->m_Lat , 5 ) ; }
-    Serial.println( "********************" ) ; */
+    Serial.print(VecPoly[iv]->m_Lon, 5) ;
+    Serial.print( " " ) ;
+    Serial.println(VecPoly[iv]->m_Lat, 5) ;
     }
+Serial.println( "--------------------------"   ) ; //*/
+
+CVecReduce VecReduce ;
+VecReduce.Set( VecPoly ) ;
+VecReduce.ReduceTo( DIST_METRE_4_ZONE ) ;
+
+/*// pour gnuplot
+Serial.println( "********************" ) ;
+for ( long iv = 0 ; iv < VecPoly.size() ; iv ++ )
+    {
+    Serial.print(VecPoly[iv]->m_Lon , 5 ) ;
+    Serial.print( " " ) ;
+    Serial.println(VecPoly[iv]->m_Lat , 5 ) ;
+    }
+Serial.println( "********************" ) ; //*/
 
 // recopie du vecteur de points vers le tableau de points
 pZone->m_PolygoneArr = new CZoneAer::st_coord_poly * [ VecPoly.size() ] ;
@@ -370,9 +371,9 @@ if ( pZone == NULL )
 // recopie nom pour affiche
 if ( NomAff != "-" && NomAff != "" )
     pZone->m_NomAff = NomAff ;
-Serial.print(pZone->m_NomOri.c_str()) ;
+/*Serial.print(pZone->m_NomOri.c_str()) ;
 Serial.print("|") ;
-Serial.println(pZone->m_NomAff.c_str()) ;
+Serial.println(pZone->m_NomAff.c_str()) ;*/
 
 // periode debut
 if ( PeriodeDeb != "-" && PeriodeDeb != "" )

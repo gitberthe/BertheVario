@@ -4,14 +4,14 @@
 /// \brief Fonction du file manager
 ///
 /// \date creation     : 04/04/2024
-/// \date modification : 04/04/2024
+/// \date modification : 21/07/2024
 ///
 
 #include "../BertheVario.h"
 
 const word filemanagerport = 8080;
 // we want a different port than the webserver
-ESPFMfGK filemgr(filemanagerport);
+ESPFMfGK * pfilemgr = NULL ; // (filemanagerport);
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction du serveur de fichier
@@ -44,7 +44,7 @@ void addFileSystems()
   //const byte SS = 5;  // D8
   //if (SD.begin(SS))
   //{ */
-    if (!filemgr.AddFS(SD, "SD-Card", false)) {
+    if (! pfilemgr->AddFS(SD, "SD-Card", false)) {
       Serial.println(F("Adding SD failed."));
     } /*
   //} else {
@@ -104,13 +104,13 @@ uint32_t checkFileFlags(fs::FS &fs, String filename, uint32_t flags) {
 void setupFilemanager()
 {
   // See above.
-  filemgr.checkFileFlags = checkFileFlags;
+  pfilemgr->checkFileFlags = checkFileFlags;
 
-  filemgr.WebPageTitle = "FileManager";
-  filemgr.BackgroundColor = "white";
-  filemgr.textareaCharset = "accept-charset=\"utf-8\"";
+  pfilemgr->WebPageTitle = "FileManager";
+  pfilemgr->BackgroundColor = "white";
+  pfilemgr->textareaCharset = "accept-charset=\"utf-8\"";
 
-  if ((WiFi.status() == WL_CONNECTED) && (filemgr.begin())) {
+  if ((WiFi.status() == WL_CONNECTED) && (pfilemgr->begin())) {
     Serial.print(F("Open Filemanager with http://"));
     Serial.print(WiFi.localIP());
     Serial.print(F(":"));
