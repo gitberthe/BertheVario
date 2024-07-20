@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 15/07/2024
+/// \date modification : 20/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -239,10 +239,13 @@ while ( pChar != NULL )
 
     // ajout au vecteur
     VecPoly.push_back( ppts ) ;
+
+    //Serial.println( m_NbZones ) ;
+    //Serial.println( esp_get_free_heap_size() ) ;
     }
 
 
-// reduction du nombre de points : ceux plus proche du baricentre enlevé
+// reduction du nombre de points : ceux plus proche du barycentre enlevé
 // par groupe de 2
 if ( VecPoly.size() > MAX_PTS_4_ZONE )
     {
@@ -595,6 +598,7 @@ TriSchellMetzner(true) ;
 /// \param m_NomZoneEnLimite [out] : nom de la zone en limite
 void CZonesAerAll::CalcZone()
 {
+m_Plafond4Valid = 100000 ;
 std::string RetStrIn = "" ;
 int         RetNbrIn = ZONE_EN_DEHORS ;
 std::string RetStrLimite = "" ;
@@ -635,7 +639,7 @@ if ( g_GlobalVar.m_ModeHttp )
     }
 
 // pour toutes les zones recherche si dessous
-bool ZoneProtectAvant = false ;
+const CZoneAer * pZonePrecedente = NULL ;
 for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     {
     const CZoneAer & Zone = *m_ZonesArr[iz] ;
@@ -654,14 +658,16 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     // positionnement retour
     if ( IsInArea )
         {
-        m_Plafond4Valid   = Zone.GetAltiBasse() ;
-        bool Corent = m_Plafond4Valid == 822 ;
+        int  PlafondZone = Zone.GetAltiBasse() ;
+        bool Corent = ( PlafondZone == 822 ) ;
         bool ZoneProtegee = strstr( Zone.m_NomOri.c_str() , "PROTECT" ) != NULL ;
 
         char TmpChar[50] ;
+        ////////////
         // si corent
         if ( Corent )
             {
+            m_Plafond4Valid = PlafondZone ;
             // si
             if ( ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) < m_Plafond4Valid) ||
                  ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) < (g_GlobalVar.m_AltiSolHgt+300) ) )
@@ -686,14 +692,18 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
                 RetStrIn = TmpChar ;
                 break ;
                 }
+            continue ;
             }
+
+        //////////////////
         // si zone protege
-        else if ( ZoneProtegee )
+        if ( ZoneProtegee )
             {
             int PlafondZoneProtegee = g_GlobalVar.m_AltiSolHgt+m_PlafondZoneProtegee ;
             // dans la zone protegee
             if ( g_GlobalVar.m_TerrainPosCur.m_AltiBaro < PlafondZoneProtegee )
                 {
+                m_Plafond4Valid = m_PlafondZoneProtegee ;
                 RetNbrIn = ZONE_DEDANS ;
                 sprintf( TmpChar , "Zp %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
                 RetStrIn = TmpChar ;
@@ -702,43 +712,48 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
             // limite alti zone protege
             else if ( g_GlobalVar.m_TerrainPosCur.m_AltiBaro < (PlafondZoneProtegee + g_GlobalVar.m_Config.m_AltiMargin) )
                 {
-                ZoneProtectAvant = true ;
+                m_Plafond4Valid = m_PlafondZoneProtegee ;
                 RetNbrIn = ZONE_LIMITE_ALTI ;
                 sprintf( TmpChar , "Al %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
                 RetStrIn = TmpChar ;
                 }
+            continue ;
             }
+
+        ////////////////////////////
         // si dans la zone du dessus
-        else if ( m_Plafond4Valid < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
+        if ( PlafondZone < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
             {
+            m_Plafond4Valid = PlafondZone ;
             sprintf( TmpChar , "In %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_DEDANS ;
             RetStrIn = TmpChar ;
             break ;
             }
+
+        /////////////////////////////////////////
         // si a la limite altitude par le dessous
-        else if ( (m_Plafond4Valid-g_GlobalVar.m_Config.m_AltiMargin) < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
+        if ( (PlafondZone-g_GlobalVar.m_Config.m_AltiMargin) < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
             {
+            m_Plafond4Valid = PlafondZone ;
             sprintf( TmpChar , "Al %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_LIMITE_ALTI ;
             RetStrIn = TmpChar ;
             break ;
             }
-        // si largement dessous la zone du dessus
-        else
+
+        /////////////////////////////////////////
+        // si en dessous la zone du dessus
+        if ( PlafondZone < m_Plafond4Valid )
             {
-            if ( ZoneProtectAvant )
-                {
-                RetNbrIn = ZONE_LIMITE_ALTI ;
-                break ;
-                }
-            else
-                {
-                sprintf( TmpChar , "Be %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
-                RetNbrIn = ZONE_DESSOUS ;
-                RetStrIn = TmpChar ;
-                break ;
-                }
+            // si zone precedente au dessus et derogation ffvl/date
+            if ( pZonePrecedente != NULL && pZonePrecedente->m_PeriodeDebutMois != -1 )
+                continue ;
+            pZonePrecedente = &Zone ;
+            m_Plafond4Valid = PlafondZone ;
+            sprintf( TmpChar , "Be %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
+            RetNbrIn = ZONE_DESSOUS ;
+            RetStrIn = TmpChar ;
             }
         }
     }

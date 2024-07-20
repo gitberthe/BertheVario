@@ -4,11 +4,10 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 14/07/2024
+/// \date modification : 20/07/2024
 ///
 
 #include "../BertheVario.h"
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -16,11 +15,11 @@ CConfigFile::CConfigFile()
 {
 st_line * pLine ;
 
-pLine = new st_line ;
+/*pLine = new st_line ;
 pLine->m_NomVar = "[termic]" ;
 pLine->m_pVar = (void*) & m_Termic  ;
 pLine->m_Type = TYPE_VAR_BOOL ;
-m_LinesVect.push_back( pLine ) ;
+m_LinesVect.push_back( pLine ) ;*/
 
 pLine = new st_line ;
 pLine->m_NomVar = "[coef_filtre_alti_baro]" ;

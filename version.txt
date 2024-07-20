@@ -1,3 +1,8 @@
+version 20240720a :
+ - modification rayon 120km pour BVZoneAerienne et fichier 20240615_ffvl-cfd.geojson
+ - Suppression de Calculateur/CThermicMap.h
+ - modification calcul des zones aeriennes (plus grand nombre)
+ 
 version 20240715c :
  - suppression doublons affichage zone activable
 

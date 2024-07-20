@@ -1,5 +1,4 @@
 # ce fichier est un fichier d'exemple car il est auto genere par le firmware en cas d'absence.
-[termic]                  0       # termic ou terrain
 [coef_filtre_alti_baro]   0.50     # plus grand => plus filtré
 [periode_integration_sec] 2       # temps d'integration de la VZ
 [vitesse_igc_kmh]         16      # vitesse de declenchement de l'enregistrement

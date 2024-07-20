@@ -41,8 +41,6 @@
 		<Unit filename="../BertheVario/src/Calculateur/CSortArray.h" />
 		<Unit filename="../BertheVario/src/Calculateur/CTerrainsConnu.cpp" />
 		<Unit filename="../BertheVario/src/Calculateur/CTerrainsConnu.h" />
-		<Unit filename="../BertheVario/src/Calculateur/CThermicMap.cpp" />
-		<Unit filename="../BertheVario/src/Calculateur/CThermicMap.h" />
 		<Unit filename="../BertheVario/src/FileMgr/FileMgr.cpp" />
 		<Unit filename="../BertheVario/src/FileMgr/FileMgr.h" />
 		<Unit filename="../BertheVario/src/Geometrie/CDroite2D.cpp" />

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/03/2024
-/// \date modification : 02/04/2024
+/// \date modification : 20/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -41,8 +41,9 @@ if ( Distance100m > 99 )
     Distance100m = 99 ;
 
 char TmpChar[15] ;
-char Char = (g_GlobalVar.m_Config.m_Termic) ? '^' : '.' ;
-sprintf(TmpChar,"%c%2d%c", Char , Distance100m, Char ) ;
+//char Char = (g_GlobalVar.m_Config.m_Termic) ? '^' : '.' ;
+//sprintf(TmpChar,"%c%2d%c", Char , Distance100m, Char ) ;
+sprintf(TmpChar," %2d ", Distance100m ) ;
 
 int x = 100 + 100*CapDeg/90. ;
 

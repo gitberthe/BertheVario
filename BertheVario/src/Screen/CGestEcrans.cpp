@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 20/007/2024
 ///
 
 #include "../BertheVario.h"
@@ -69,7 +69,7 @@ while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
         continue ;
 
     // calcul du termic
-    g_TermicMap.CalcTermicProche() ;
+    //g_TermicMap.CalcTermicProche() ;
 
     // 1hz
     if ( (iboucle%2) )

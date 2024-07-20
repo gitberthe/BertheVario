@@ -4,13 +4,12 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 15/07/2024
+/// \date modification : 20/07/2024
 ///
 
 #ifndef _ZONE_AR_
 #define _ZONE_AR_
 
-//#define LONG_MAX_NOM    27
 #define MAX_PTS_4_ZONE  300
 
 #define ALTI_BASSE           0

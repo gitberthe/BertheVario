@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 15/07/2024
+/// \date modification : 20/07/2024
 ///
 
-char NumVer[] = "20240715c" ;
+char NumVer[] = "20240720a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -16,7 +16,6 @@ char NumVer[] = "20240715c" ;
 
 // variable globale du programme
 CGlobalVar g_GlobalVar ;
-
 
 // note for partial update window and setPartialWindow() method:
 // partial update window size and position is on byte boundary in physical x direction
@@ -233,7 +232,7 @@ if ( once )
     // tache watch dog
     xTaskCreatePinnedToCore(CGlobalVar::TacheWatchDog, "WatchDogTask", WATCH_DOG_STACK_SIZE, & g_GlobalVar , WATCH_DOG_PRIORITY , NULL, WATCH_DOG_CORE);
     // tache acquisition termic
-    g_TermicMap.LancerTacheTermic() ;
+    //g_TermicMap.LancerTacheTermic() ;
     // screen tache de fond calcul
     g_GlobalVar.LancerTacheCalcul() ;
     // tache de mesure % utilisation cpu

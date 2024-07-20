@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 15/07/2024
+/// \date modification : 20/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -328,12 +328,12 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 // termic/terrain le plus proche
 float CapTermic ;
 float DistanceTermic ;
-if ( g_GlobalVar.m_Config.m_Termic )
+/*if ( g_GlobalVar.m_Config.m_Termic )
     {
     CapTermic = CGlobalVar::GetDiffAngle( g_TermicMap.m_GisementDeg , g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
     DistanceTermic = g_TermicMap.m_DistanceMetres ;
     }
-else
+else*/
     {
     if ( pTerrain == NULL )
         {

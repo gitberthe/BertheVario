@@ -118,5 +118,7 @@ if ( m_AltiAPrendreEnCompte == ALTI_BASSE )
     return m_AltiBasse ;
 else if ( m_AltiAPrendreEnCompte == ALTI_PERIODE_SEMAINE )
     return m_AltiBassePeriodeSemaine ;
-return m_AltiBassePeriodeWeekEnd ;
+else if ( m_AltiAPrendreEnCompte == ALTI_PERIODE_WEEKEND )
+    return m_AltiBassePeriodeWeekEnd ;
+return -1 ;
 }

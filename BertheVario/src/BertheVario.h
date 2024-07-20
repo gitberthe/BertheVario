@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 15/07/2024
+/// \date modification : 20/07/2024
 ///
 
 //////////////////
@@ -91,6 +91,13 @@
 #define SDCARD_MISO_PIN 2
 #define SDCARD_SCK_PIN  14
 
+////////////////
+// constantes //
+////////////////
+
+#define UnMileEnMetres         (1852.)
+#define T_PI                   (3.1415926535)
+
 ///////////////////
 // compatibilite //
 ///////////////////
@@ -130,7 +137,7 @@
 #include "Neural/SNNS_NET.h"
 }
 #include "Neural/CNeuralTermic.h"*/
-#include "Calculateur/CThermicMap.h"
+//#include "Calculateur/CThermicMap.h"
 #include "Calculateur/CSortArray.h"
 #include "Calculateur/CTerrainsConnu.h"
 #include "GlobalVar/CFileHistoVol.h"
