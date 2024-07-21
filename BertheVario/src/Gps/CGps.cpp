@@ -172,7 +172,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         break ;
 
     // si vitesse verticale depassee declenchement igc
-    if ( g_GlobalVar.m_VitVertMS >= g_GlobalVar.m_Config.m_vz_igc_ms )
+    if ( fabs(g_GlobalVar.m_VitVertMS) >= g_GlobalVar.m_Config.m_vz_igc_ms )
         break ;
 
     #ifdef SOUND_DEBUG

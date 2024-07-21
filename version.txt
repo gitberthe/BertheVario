@@ -1,3 +1,6 @@
+version 20240721d :
+ - + ou - vz_igc_ms pour declenchement du vol.
+ 
 version 20240721c :
  - modification conditions depart de vol et fichier de config.
 
