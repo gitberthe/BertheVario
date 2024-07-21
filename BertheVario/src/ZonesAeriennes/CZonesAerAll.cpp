@@ -49,31 +49,24 @@ for ( int iz = 0 ; iz < m_NbZones ; iz++ )
     CZoneAer & ZoneAer = *m_ZonesArr[iz] ;
 
     // si zone sans periode
-    ZoneAer.m_AltiAPrendreEnCompte = ALTI_BASSE ;
-    if ( ZoneAer.m_AltiBassePeriodeSemaine ==-1 ||
-         ZoneAer.m_AltiBassePeriodeWeekEnd ==-1 ||
-         ZoneAer.m_PeriodeDebutJour == -1 ||
-         ZoneAer.m_PeriodeFinJour   == -1 ||
-         ZoneAer.m_PeriodeDebutMois == -1 ||
-         ZoneAer.m_PeriodeFinMois   == -1 )
-        {
+    if ( ZoneAer.m_pDerogFfvl == NULL )
         continue ;
-        }
 
 /*Serial.print( g_GlobalVar.m_Annee ) ;
 Serial.print( g_GlobalVar.m_Mois ) ;
 Serial.println( "CZonesAerAll::SetDatePeriode()" ) ;*/
 
     // test si dans periode
-    CDate DateDebut( g_GlobalVar.m_Annee , ZoneAer.m_PeriodeDebutMois , ZoneAer.m_PeriodeDebutJour , 0. ) ;
-    CDate DateDefin( g_GlobalVar.m_Annee , ZoneAer.m_PeriodeFinMois , ZoneAer.m_PeriodeFinJour , 24. ) ;
+    ZoneAer.m_pDerogFfvl->m_AltiAPrendreEnCompte = ALTI_BASSE ;
+    CDate DateDebut( g_GlobalVar.m_Annee , ZoneAer.m_pDerogFfvl->m_PeriodeDebutMois , ZoneAer.m_pDerogFfvl->m_PeriodeDebutJour , 0. ) ;
+    CDate DateDefin( g_GlobalVar.m_Annee , ZoneAer.m_pDerogFfvl->m_PeriodeFinMois ,   ZoneAer.m_pDerogFfvl->m_PeriodeFinJour , 24. ) ;
     if ( (DateDebut.GetJD_TU() <= JDCur) && (JDCur <= DateDefin.GetJD_TU()) )
         {
         // positionnement alti fonction periode
         if ( WeekEnd )
-            ZoneAer.m_AltiAPrendreEnCompte = ALTI_PERIODE_WEEKEND ;
+            ZoneAer.m_pDerogFfvl->m_AltiAPrendreEnCompte = ALTI_PERIODE_WEEKEND ;
         else
-            ZoneAer.m_AltiAPrendreEnCompte = ALTI_PERIODE_SEMAINE ;
+            ZoneAer.m_pDerogFfvl->m_AltiAPrendreEnCompte = ALTI_PERIODE_SEMAINE ;
         }
     }
 }
@@ -370,7 +363,10 @@ if ( pZone == NULL )
 
 // recopie nom pour affiche
 if ( NomAff != "-" && NomAff != "" )
+    {
     pZone->m_NomAff = NomAff ;
+    pZone->m_NomAff.shrink_to_fit() ;
+    }
 /*Serial.print(pZone->m_NomOri.c_str()) ;
 Serial.print("|") ;
 Serial.println(pZone->m_NomAff.c_str()) ;*/
@@ -378,35 +374,41 @@ Serial.println(pZone->m_NomAff.c_str()) ;*/
 // periode debut
 if ( PeriodeDeb != "-" && PeriodeDeb != "" )
     {
+    if ( pZone->m_pDerogFfvl == NULL )
+        pZone->m_pDerogFfvl = new CZoneAerDerogFfvl ;
     std::string Jour = strtok( & PeriodeDeb[0] , "-" ) ;
     std::string Mois = strtok( NULL , "-" ) ;
-    pZone->m_PeriodeDebutJour = atoi( Jour.c_str() ) ;
-    pZone->m_PeriodeDebutMois = atoi( Mois.c_str() ) ;
-    //pZone->m_PeriodeDebut = -1. ;
+    pZone->m_pDerogFfvl->m_PeriodeDebutJour = atoi( Jour.c_str() ) ;
+    pZone->m_pDerogFfvl->m_PeriodeDebutMois = atoi( Mois.c_str() ) ;
     }
 
 // periode fin
 if ( PeriodeFin != "-" && PeriodeFin != "" )
     {
+    if ( pZone->m_pDerogFfvl == NULL )
+        pZone->m_pDerogFfvl = new CZoneAerDerogFfvl ;
     std::string Jour = strtok( & PeriodeFin[0] , "-" ) ;
     std::string Mois = strtok( NULL , "-" ) ;
-    pZone->m_PeriodeFinJour = atoi( Jour.c_str() ) ;
-    pZone->m_PeriodeFinMois = atoi( Mois.c_str() ) ;
-    //pZone->m_PeriodeFin = -1 ;
+    pZone->m_pDerogFfvl->m_PeriodeFinJour = atoi( Jour.c_str() ) ;
+    pZone->m_pDerogFfvl->m_PeriodeFinMois = atoi( Mois.c_str() ) ;
     }
 
 // alti semaine
 if ( AltiSemaine != "-" && AltiSemaine != "" )
     {
+    if ( pZone->m_pDerogFfvl == NULL )
+        pZone->m_pDerogFfvl = new CZoneAerDerogFfvl ;
     std::string Alti = strtok( & AltiSemaine[0] , "-" ) ;
-    pZone->m_AltiBassePeriodeSemaine = atoi( Alti.c_str() ) ;
+    pZone->m_pDerogFfvl->m_AltiBassePeriodeSemaine = atoi( Alti.c_str() ) ;
     }
 
 // alti week-end
 if ( AltiWeekEnd != "-" && AltiWeekEnd != "" )
     {
+    if ( pZone->m_pDerogFfvl == NULL )
+        pZone->m_pDerogFfvl = new CZoneAerDerogFfvl ;
     std::string Alti = strtok( & AltiWeekEnd[0] , "-" ) ;
-    pZone->m_AltiBassePeriodeWeekEnd = atoi( Alti.c_str() ) ;
+    pZone->m_pDerogFfvl->m_AltiBassePeriodeWeekEnd = atoi( Alti.c_str() ) ;
     }
 
 // pour prochain appel
@@ -748,7 +750,7 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
         if ( PlafondZone < m_Plafond4Valid )
             {
             // si zone precedente au dessus et derogation ffvl/date
-            if ( pZonePrecedente != NULL && pZonePrecedente->m_PeriodeDebutMois != -1 )
+            if ( pZonePrecedente != NULL && pZonePrecedente->HavePeriod() )
                 continue ;
             pZonePrecedente = &Zone ;
             m_Plafond4Valid = PlafondZone ;

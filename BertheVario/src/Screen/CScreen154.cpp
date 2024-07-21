@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 20/07/2024
+/// \date modification : 21/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -994,23 +994,23 @@ do
         // periode
         display.setCursor(0,100);
         display.print( "p.de. : ");
-        display.print( pZone->m_PeriodeDebutJour );
+        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeDebutJour : -1 );
         display.print( "-" );
-        display.print( pZone->m_PeriodeDebutMois );
+        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeDebutMois : -1 );
         display.setCursor(0,120);
         display.print( "p.fi. : ");
-        display.print( pZone->m_PeriodeFinJour );
+        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeFinJour : -1 );
         display.print( "-" );
-        display.print( pZone->m_PeriodeFinMois );
+        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeFinMois : -1 );
 
         // altisemaine
         display.setCursor(0,140);
         display.print( "A sem. : ");
-        display.print( pZone->m_AltiBassePeriodeSemaine );
+        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeSemaine : -1 );
         // altiweekend
         display.setCursor(0,160);
         display.print( "A week : ");
-        display.print( pZone->m_AltiBassePeriodeWeekEnd );
+        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeWeekEnd : -1 );
 
         }
     }

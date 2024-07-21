@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 03/04/2024
+/// \date modification : 21/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -127,11 +127,13 @@ return m_Area < Zone.m_Area ;
 /// \brief Altitude en cours fonction de la date
 int CZoneAer::GetAltiBasse() const
 {
-if ( m_AltiAPrendreEnCompte == ALTI_BASSE )
+if ( ! HavePeriod() )
     return m_AltiBasse ;
-else if ( m_AltiAPrendreEnCompte == ALTI_PERIODE_SEMAINE )
-    return m_AltiBassePeriodeSemaine ;
-else if ( m_AltiAPrendreEnCompte == ALTI_PERIODE_WEEKEND )
-    return m_AltiBassePeriodeWeekEnd ;
+else if ( m_pDerogFfvl->m_AltiAPrendreEnCompte == ALTI_BASSE )
+    return m_AltiBasse ;
+else if ( m_pDerogFfvl->m_AltiAPrendreEnCompte == ALTI_PERIODE_SEMAINE )
+    return m_pDerogFfvl->m_AltiBassePeriodeSemaine ;
+else if ( m_pDerogFfvl->m_AltiAPrendreEnCompte == ALTI_PERIODE_WEEKEND )
+    return m_pDerogFfvl->m_AltiBassePeriodeWeekEnd ;
 return -1 ;
 }

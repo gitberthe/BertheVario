@@ -25,6 +25,20 @@
 // SFC	sol
 
 ////////////////////////////////////////////////////////////////////////////////
+/// \brief Parametres de date et altitude pour une derogation ffvl de zone
+class CZoneAerDerogFfvl
+{
+public :
+    int     m_AltiBassePeriodeSemaine=-1;///< altitude basse dans la periode en semaine
+    int     m_AltiBassePeriodeWeekEnd=-1;///< altitude basse dans la periode en week-end
+    int     m_PeriodeDebutJour = -1 ;   ///< periode debut jour pour altitude
+    int     m_PeriodeFinJour   = -1 ;   ///< periode fin jour pour altitude
+    int     m_PeriodeDebutMois = -1 ;   ///< periode debut mois pour altitude
+    int     m_PeriodeFinMois   = -1 ;   ///< periode fin mois pour altitude
+    int     m_AltiAPrendreEnCompte = ALTI_BASSE ;   ///< altitude a prendre en compte fonction de la date
+} ;
+
+////////////////////////////////////////////////////////////////////////////////
 /// \brief Une zone aerienne, avec un nombre de points diminué (distance minimale
 /// entre 2 points).
 /// Periode semaine/week end, Active ou non. sous forme de tableau de pointeur
@@ -45,18 +59,13 @@ public :
                 { ms_TriParNom = Tri ; } ;
     int     GetAltiBasse() const ;
     bool    HavePeriod() const
-                { return m_PeriodeDebutJour != -1 ; } ;
+                { return m_pDerogFfvl != NULL ; } ;
     std::string  m_NomAff ;             ///< nom court de la zone a afficher
     std::string  m_NomOri ;             ///< nom entier de la zone dans fichier origine
     bool    m_Activee = true ;          ///< zone activee
     bool    m_DansFchActivation = false;///< si dans fichier d'activation de zones pour reecriture apres configuration menu
     int     m_AltiBasse=-1 ;            ///< altitude basse de la zone par defaut
-    int     m_AltiBassePeriodeSemaine=-1;///< altitude basse dans la periode en semaine
-    int     m_AltiBassePeriodeWeekEnd=-1;///< altitude basse dans la periode en week-end
-    int     m_PeriodeDebutJour = -1 ;   ///< periode debut jour pour altitude
-    int     m_PeriodeFinJour   = -1 ;   ///< periode fin jour pour altitude
-    int     m_PeriodeDebutMois = -1 ;   ///< periode debut mois pour altitude
-    int     m_PeriodeFinMois   = -1 ;   ///< periode fin mois pour altitude
+    CZoneAerDerogFfvl * m_pDerogFfvl = NULL ; ///< si zone avec derogation ffvl
 
     friend class CZonesAerAll ;
 
@@ -64,8 +73,6 @@ public :
     bool operator < ( const CZoneAer & Zone ) const ;
 
 private :
-
-    int             m_AltiAPrendreEnCompte = ALTI_BASSE ;   ///< altitude a prendre en compte fonction de la date
     st_coord_poly **m_PolygoneArr=NULL; ///< tableau des points de la zone
     int             m_NbPts = 0 ;       ///< nombre de points de la zone
     float           m_Area = 0. ;       ///< surface pour les zones imbriquee ex : TAM 2.2
