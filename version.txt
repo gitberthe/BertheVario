@@ -1,3 +1,6 @@
+version 20240721c :
+ - modification conditions depart de vol et fichier de config.
+
 version 20240721b :
  - reduction memoire zone aerienne.
  

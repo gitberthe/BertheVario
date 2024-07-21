@@ -162,13 +162,17 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // si vitesse superieur a 16 kmh et inferieur a 80kmh
     if ( (g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh) &&
-         (g_GlobalVar.m_VitesseKmh < 80.) )
+         (g_GlobalVar.m_VitesseKmh < 70.) )
         ivitesse++;
     else
         ivitesse = 0 ;
 
-    // au bout de 5 vitesses/5 secondes depassée
-    if ( ivitesse >= 5 )
+    // au bout de 7 vitesses/7 secondes depassée declenchement igc
+    if ( ivitesse >= g_GlobalVar.m_Config.m_temps_igc_sec )
+        break ;
+
+    // si vitesse verticale depassee declenchement igc
+    if ( g_GlobalVar.m_VitVertMS >= g_GlobalVar.m_Config.m_vz_igc_ms )
         break ;
 
     #ifdef SOUND_DEBUG

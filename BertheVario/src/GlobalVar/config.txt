@@ -1,7 +1,9 @@
 # ce fichier est un fichier d'exemple car il est auto genere par le firmware en cas d'absence.
 [coef_filtre_alti_baro]   0.50     # plus grand => plus filtré
 [periode_integration_sec] 2       # temps d'integration de la VZ
-[vitesse_igc_kmh]         16      # vitesse de declenchement de l'enregistrement
+[vitesse_igc_kmh]         17      # vitesse de declenchement de l'enregistrement
+[temps_igc_sec]           7       # nombre de secondes de vitesse temps_igc_sec
+[vz_igc_ms]               0.5     # vz m/s pour declenchement
 [stab_gps_m]              20      # rayon dispersion gps
 [vz_seuil_haut]           0.35  # vz m/s declenchement bip
 [vz_seuil_bas]           -2.5     # vz m/s declenchement bip

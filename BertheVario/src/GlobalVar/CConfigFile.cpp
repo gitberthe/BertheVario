@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 20/07/2024
+/// \date modification : 21/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -37,6 +37,18 @@ pLine = new st_line ;
 pLine->m_NomVar = "[vitesse_igc_kmh]" ;
 pLine->m_pVar = (void*) & m_vitesse_igc_kmh ;
 pLine->m_Type = TYPE_VAR_INT ;
+m_LinesVect.push_back( pLine ) ;
+
+pLine = new st_line ;
+pLine->m_NomVar = "[temps_igc_sec]" ;
+pLine->m_pVar = (void*) & m_temps_igc_sec ;
+pLine->m_Type = TYPE_VAR_INT ;
+m_LinesVect.push_back( pLine ) ;
+
+pLine = new st_line ;
+pLine->m_NomVar = "[vz_igc_ms]" ;
+pLine->m_pVar = (void*) & m_vz_igc_ms ;
+pLine->m_Type = TYPE_VAR_FLOAT ;
 m_LinesVect.push_back( pLine ) ;
 
 pLine = new st_line ;
