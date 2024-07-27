@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 26/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -1110,5 +1110,22 @@ if ( BoutonCentre() )
 
 return ECRAN_2a_TmaAll ;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief A implementer
+/// \return l'etat suivant de l'automate
+EtatsAuto CScreen290::Ecran5listeIgcFch()
+{
+return ECRAN_5_ConfirmDeleteIgc ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief A implementer
+/// \return l'etat suivant de l'automate
+EtatsAuto CScreen290::Ecran6ConfimeDeleteIgcFch()
+{
+return ECRAN_6_ConfirmDeleteIgc ;
+}
+
 
 #endif

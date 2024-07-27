@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/03/2024
-/// \date modification : 07/04/2024
+/// \date modification : 26/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -112,7 +112,8 @@ sprintf( CharRecord , "B%02d%02d%02d%s%c%s%cA%05d%05d" ,
     LocalLat , ((SigneLat>=0.) ? 'N' : 'S') ,  // lat
     LocalLon , ((SigneLon>=0.) ? 'E' : 'W') ,  // lon
     (int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro ,
-    (int)g_GlobalVar.m_AltiGps
+    //(int)g_GlobalVar.m_AltiGps
+    (int)0
     ) ;
 
 

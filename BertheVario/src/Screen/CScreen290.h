@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 26/07/2024
 ///
 
 #ifndef _SCREEN290_
@@ -32,7 +32,8 @@ public :
     EtatsAuto Ecran2bTmaMod() ;
     EtatsAuto Ecran3Sys() ;
     EtatsAuto Ecran4CfgFch() ;
-
+    EtatsAuto Ecran5listeIgcFch() ;
+    EtatsAuto Ecran6ConfimeDeleteIgcFch() ;
 
 private :
 } ;

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 14/03/2024
+/// \date modification : 26/07/2024
 ///
 
 #ifndef _SDCARD_
@@ -17,6 +17,9 @@ class CSDCard
 {
 public :
     void InitSDCard() ;
+
+    void ListeIgc( std::vector<std::string> & VecNomIgc , std::vector<int> & VecTempsIgc ) ;
+    void DeleteIgc() ;
 
 private :
 } ;

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 07/06/2024
+/// \date modification : 26/07/2024
 ///
 
 #ifndef _GESTECRANS_
@@ -24,14 +24,16 @@ public :
     // etats de l'automate
     enum EtatsAuto
         {
-        ECRAN_0_Vz      = 0 ,
-        ECRAN_1_Histo   = 1 ,
-        ECRAN_2a_TmaAll = 2 ,
-        ECRAN_2b_TmaMod = 3 ,
-        ECRAN_3_Sys     = 4 ,
-        ECRAN_4_CfgFch  = 5 ,
-        ERREUR          = 6 ,
-        FIN             = 7
+        ECRAN_0_Vz          = 0 ,
+        ECRAN_1_Histo       = 1 ,
+        ECRAN_2a_TmaAll     = 2 ,
+        ECRAN_2b_TmaMod     = 3 ,
+        ECRAN_3_Sys         = 4 ,
+        ECRAN_4_CfgFch      = 5 ,
+        ECRAN_5_ListeIgc    = 6 ,
+        ECRAN_6_ConfirmDeleteIgc= 7 ,
+        ERREUR          = 8 ,
+        FIN             = 9
         } ;
 
     void AfficheAll() ;
@@ -46,6 +48,9 @@ protected :
     virtual EtatsAuto Ecran2bTmaMod() = 0 ;
     virtual EtatsAuto Ecran3Sys() = 0 ;
     virtual EtatsAuto Ecran4CfgFch() = 0 ;
+    virtual EtatsAuto Ecran5listeIgcFch() = 0 ;
+    virtual EtatsAuto Ecran6ConfimeDeleteIgcFch() = 0 ;
+
     EtatsAuto Erreur() ;
 
     static void TacheScreenCalcul(void * param) ;

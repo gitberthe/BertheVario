@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 21/07/2024
+/// \date modification : 26/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -634,7 +634,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_5_ListeIgc ;
     }
 
 // si changement d'ecran
@@ -1136,7 +1136,7 @@ if ( BoutonDroit() )
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_1_Histo ;
+    return ECRAN_5_ListeIgc ;
     }
 
 // si changement modification zone
@@ -1144,6 +1144,146 @@ if ( BoutonCentre() )
     return ECRAN_2b_TmaMod ;
 
 return ECRAN_2a_TmaAll ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Cette fonction affiche les informations des fichiers IGC de la carte
+/// \return l'etat suivant de l'automate
+CGestEcrans::EtatsAuto CScreen154::Ecran5listeIgcFch()
+{
+static bool BoolListeIgc = false ;
+static std::vector<std::string> VecNomIgc ;
+static std::vector<int> VecTempsIgc ;
+
+// une seule lecture de fichier par affichage
+if ( !BoolListeIgc )
+    {
+    g_GlobalVar.ListeIgc(VecNomIgc,VecTempsIgc) ;
+    BoolListeIgc = true ;
+    }
+
+int TotalSec = 0 ;
+int y_cursor ;
+for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
+    TotalSec += VecTempsIgc[ifch] ;
+
+char TmpChar[20] ;
+display.setPartialWindow( 0, 0, 200 , 200 );
+display.firstPage();
+do
+    {
+    display.fillScreen(GxEPD_WHITE);
+
+    display.setFont(&FreeMonoBold12pt7b);
+
+    sprintf(TmpChar,"liste igc:") ;
+    y_cursor = 20 ;
+    display.setCursor( 0, y_cursor );
+    display.print( TmpChar ) ;
+
+    display.setFont(&FreeMonoBold9pt7b);
+    int ivec = 0 ;
+    y_cursor += 5 ;
+    for ( ; ivec < VecNomIgc.size() ; ivec++ )
+        {
+        sprintf( TmpChar , " %s  %03d", (const char*)VecNomIgc[ivec].c_str() , (int) (VecTempsIgc[ivec]/60) ) ;
+        y_cursor += 16 ;
+        display.setCursor( 0, y_cursor );
+        display.print( TmpChar ) ;
+        }
+
+    display.setFont(&FreeMonoBold12pt7b);
+    sprintf( TmpChar , "total %03d", (int)(TotalSec/60) ) ;
+    display.setCursor( 0, y_cursor + 25 );
+    display.print( TmpChar ) ;
+    }
+while (display.nextPage());
+
+// si time out ecran
+unsigned long Temps = millis() - m_MillisEcran0 ;
+if ( (Temps/1000) > m_SecRetourEcran0 )
+    {
+    BoolListeIgc = false ;
+    return ECRAN_0_Vz ;
+    }
+
+// si changement d'ecran
+if ( BoutonDroit() )
+    {
+    m_MillisEcran0 = millis() ;
+    BoolListeIgc = false ;
+    return ECRAN_2a_TmaAll ;
+    }
+
+// si changement d'ecran
+if ( BoutonGauche() )
+    {
+    m_MillisEcran0 = millis() ;
+    BoolListeIgc = false ;
+    return ECRAN_1_Histo ;
+    }
+
+// si changement modification zone
+if ( BoutonCentre() )
+    {
+    BoolListeIgc = false ;
+    m_MillisEcran0 = millis() ;
+    return ECRAN_6_ConfirmDeleteIgc ;
+    }
+
+return ECRAN_5_ListeIgc ;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Cette fonction permet de detruire tous les fichier IGC de la carte.
+/// \return l'etat suivant de l'automate
+CGestEcrans::EtatsAuto CScreen154::Ecran6ConfimeDeleteIgcFch()
+{
+// titre
+char TmpChar[] = "\n\n   Confirme\n    Delete\n     Igc\n Bouton Centre" ;
+
+display.setPartialWindow( 0, 0, 200 , 200 );
+display.firstPage();
+do
+    {
+    display.fillScreen(GxEPD_WHITE);
+
+    // titre
+    display.setFont(&FreeMonoBold12pt7b);
+    display.setCursor( 0, 20 );
+    display.print( TmpChar ) ;
+    }
+while (display.nextPage());
+
+// si time out ecran
+unsigned long Temps = millis() - m_MillisEcran0 ;
+if ( (Temps/1000) > m_SecRetourEcran0 )
+    return ECRAN_0_Vz ;
+
+// si changement d'ecran
+if ( BoutonDroit() )
+    {
+    m_MillisEcran0 = millis() ;
+    return ECRAN_5_ListeIgc ;
+    }
+
+// si changement d'ecran
+if ( BoutonGauche() )
+    {
+    m_MillisEcran0 = millis() ;
+    return ECRAN_5_ListeIgc ;
+    }
+
+// si confirme delete igc
+if ( BoutonCentre() )
+    {
+    m_MillisEcran0 = millis() ;
+    g_GlobalVar.DeleteIgc() ;
+    return ECRAN_5_ListeIgc ;
+    }
+
+return ECRAN_6_ConfirmDeleteIgc ;
 }
 
 #endif
