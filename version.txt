@@ -1,4 +1,4 @@
-version 20240726
+version 20240726a :
  - suppression altitude gps igc (uniquement altitude vario)
  - valeurs fichier config par defaut
  - ecran gestion igc
