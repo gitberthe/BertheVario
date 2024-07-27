@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 26/07/2024
+/// \date modification : 27/07/2024
 ///
 
 #ifndef _GESTECRANS_
@@ -30,8 +30,8 @@ public :
         ECRAN_2b_TmaMod     = 3 ,
         ECRAN_3_Sys         = 4 ,
         ECRAN_4_CfgFch      = 5 ,
-        ECRAN_5_ListeIgc    = 6 ,
-        ECRAN_6_ConfirmDeleteIgc= 7 ,
+        ECRAN_5a_ListeIgc    = 6 ,
+        ECRAN_5b_ConfirmDeleteIgc= 7 ,
         ERREUR          = 8 ,
         FIN             = 9
         } ;
@@ -48,8 +48,8 @@ protected :
     virtual EtatsAuto Ecran2bTmaMod() = 0 ;
     virtual EtatsAuto Ecran3Sys() = 0 ;
     virtual EtatsAuto Ecran4CfgFch() = 0 ;
-    virtual EtatsAuto Ecran5listeIgcFch() = 0 ;
-    virtual EtatsAuto Ecran6ConfimeDeleteIgcFch() = 0 ;
+    virtual EtatsAuto Ecran5alisteIgcFch() = 0 ;
+    virtual EtatsAuto Ecran5bConfimeDeleteIgcFch() = 0 ;
 
     EtatsAuto Erreur() ;
 

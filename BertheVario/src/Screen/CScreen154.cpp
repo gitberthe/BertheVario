@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 26/07/2024
+/// \date modification : 27/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -634,7 +634,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5_ListeIgc ;
+    return ECRAN_5a_ListeIgc ;
     }
 
 // si changement d'ecran
@@ -907,49 +907,31 @@ static int NumTmaCtr = -1 ;
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
 
 // construction du tableau des zones
-std::vector<CZoneAer*> VecZonesMod ;
-std::vector<CZoneAer*> VecZonesConst ;
+std::vector<CZoneAer*> VecAffZones ;
 const int NbZones = g_GlobalVar.m_ZonesAerAll.GetNbZones() ;
 CZoneAer ** pZoneArr = g_GlobalVar.m_ZonesAerAll.GetZoneArr() ;
 
-// vecteur des zones a afficher
+// construction vecteur des zones a afficher
 for ( long iz = 0 ; iz < NbZones ; iz++ )
     {
-    CZoneAer * pZone = pZoneArr[iz] ;
-
-    // selection modifible / constante
-    std::vector<CZoneAer*> * pVect ;
-    if ( pZone->m_DansFchActivation )
-        pVect = & VecZonesMod ;
-    else
-        pVect = & VecZonesConst ;
-
-    // test si deja affiché
-    long DejaFait = false ;
-    for ( int iv = 0 ; iv < pVect->size() ; iv++ )
-        {
-        if ( (*pVect)[iv]->m_NomAff == pZone->m_NomAff )
-            {
-            DejaFait = true ;
-            break ;
-            }
-        }
-
-    // ajout du nom de zone
-    if ( DejaFait )
-        continue ;
-
-    pVect->push_back( pZone ) ;
+    if ( pZoneArr[iz]->m_DansFchActivation )
+        VecAffZones.push_back( pZoneArr[iz] ) ;
+    }
+for ( long iz = 0 ; iz < NbZones ; iz++ )
+    {
+    if ( !pZoneArr[iz]->m_DansFchActivation )
+        VecAffZones.push_back( pZoneArr[iz] ) ;
     }
 
-// selection zone
-CZoneAer * pZone = NULL ;
-if ( NumTmaCtr >= 0 && NumTmaCtr < VecZonesMod.size() )
-    pZone = VecZonesMod[NumTmaCtr] ;
-
-int NumTmaCtrConst = NumTmaCtr - VecZonesMod.size() ;
-if ( NumTmaCtrConst >= 0 && NumTmaCtrConst < VecZonesConst.size() )
-    pZone = VecZonesConst[NumTmaCtrConst] ;
+// selection des zones de meme nom que selectionnee
+std::vector<CZoneAer *> VecZone2Mod ;
+if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
+    {
+    CZoneAer * pZone = VecAffZones[NumTmaCtr] ;
+    for ( long iz = 0 ; iz < VecAffZones.size() ; iz++ )
+        if ( VecAffZones[iz]->m_NomAff == pZone->m_NomAff )
+            VecZone2Mod.push_back( VecAffZones[iz] ) ;
+    }
 
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -959,7 +941,7 @@ do
     display.fillScreen(GxEPD_WHITE);
 
     // titre
-    if ( pZone == NULL )
+    if ( VecZone2Mod.size() == 0 )
         {
         display.setCursor(10, 70);
         display.print("Ret  ^^^ Cent.");
@@ -974,6 +956,7 @@ do
         display.print(":");
         // nom
         //display.setCursor(0, 35);
+        CZoneAer * pZone = VecAffZones[NumTmaCtr] ;
         display.print(pZone->m_NomAff.c_str());
         // activation
         display.setCursor(0, 60);
@@ -1023,20 +1006,24 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 
 // si changement d'ecran
 bool BCentre = BoutonCentre() ;
-if ( BCentre && pZone == NULL )
+if ( BCentre && VecZone2Mod.size() == 0 )
     {
     m_MillisEcran0 = millis() ;
     return ECRAN_2a_TmaAll ;
     }
 
 // si modification activation
-if ( BCentre && pZone != NULL )
+if ( BCentre && VecZone2Mod.size() != 0 )
     {
     m_MillisEcran0 = millis() ;
-    if ( pZone->m_DansFchActivation )
+    for ( long iz = 0 ; iz < VecZone2Mod.size() ; iz++ )
         {
-        pZone->m_Activee = !pZone->m_Activee ;
-        g_GlobalVar.m_ZonesAerAll.EcritureFichierZonesActive() ;
+        CZoneAer * pZone = VecZone2Mod[iz] ;
+        if ( pZone->m_DansFchActivation )
+            {
+            pZone->m_Activee = !pZone->m_Activee ;
+            g_GlobalVar.m_ZonesAerAll.EcritureFichierZonesActive() ;
+            }
         }
     return ECRAN_2a_TmaAll ;
     }
@@ -1054,7 +1041,7 @@ if ( BoutonGauche() )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    int Size = VecZonesMod.size()+VecZonesConst.size()-1 ;
+    int Size = VecAffZones.size()-1 ;
     NumTmaCtr++ ;
     if ( NumTmaCtr > Size )
         NumTmaCtr = 0 ;
@@ -1076,11 +1063,18 @@ std::vector<CZoneAer*> VecZonesMod ;
 const int NbZones = g_GlobalVar.m_ZonesAerAll.GetNbZones() ;
 CZoneAer ** pZoneArr = g_GlobalVar.m_ZonesAerAll.GetZoneArr() ;
 
-// vecteur des zones activables
+// ajout vecteur des zones activables
 for ( long iz = 0 ; iz < NbZones ; iz++ )
     {
     CZoneAer * pZone = pZoneArr[iz] ;
     if ( pZone->m_DansFchActivation )
+        VecZonesMod.push_back( pZone ) ;
+    }
+// ajout vecteur des zones activables
+for ( long iz = 0 ; iz < NbZones ; iz++ )
+    {
+    CZoneAer * pZone = pZoneArr[iz] ;
+    if ( !pZone->m_DansFchActivation )
         VecZonesMod.push_back( pZone ) ;
     }
 
@@ -1105,15 +1099,23 @@ do
     display.setFont(&FreeMonoBold9pt7b);
     for ( int iz = 0 ; iz < VecZonesMod.size() ; iz++ )
         {
+        if ( !VecZonesMod[iz]->m_DansFchActivation )
+            continue ;
         display.setCursor(0+xcol, 40 + yligne );
+
         if ( VecZonesMod[iz]->m_Activee )
             display.print( VecZonesMod[iz]->m_NomAff.c_str() ) ;
         else
-            display.print( "-" ) ;
+            {
+            char TmpChar[25] ;
+            sprintf( TmpChar , "-%s" ,  VecZonesMod[iz]->m_NomAff.c_str() ) ;
+            TmpChar[9] = 0 ;
+            display.print( TmpChar  ) ;
+            }
         yligne += 17 ;
         if ( iz == 8 )
             {
-            xcol = 105 ;
+            xcol = 110 ;
             yligne = 15 ;
             }
         }
@@ -1136,7 +1138,7 @@ if ( BoutonDroit() )
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5_ListeIgc ;
+    return ECRAN_5a_ListeIgc ;
     }
 
 // si changement modification zone
@@ -1149,7 +1151,7 @@ return ECRAN_2a_TmaAll ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations des fichiers IGC de la carte
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran5listeIgcFch()
+CGestEcrans::EtatsAuto CScreen154::Ecran5alisteIgcFch()
 {
 static bool BoolListeIgc = false ;
 static std::vector<std::string> VecNomIgc ;
@@ -1167,7 +1169,7 @@ int y_cursor ;
 for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
     TotalSec += VecTempsIgc[ifch] ;
 
-char TmpChar[20] ;
+char TmpChar[25] ;
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
@@ -1176,24 +1178,19 @@ do
 
     display.setFont(&FreeMonoBold12pt7b);
 
-    sprintf(TmpChar,"liste igc:") ;
-    y_cursor = 20 ;
-    display.setCursor( 0, y_cursor );
-    display.print( TmpChar ) ;
-
     display.setFont(&FreeMonoBold9pt7b);
     int ivec = 0 ;
-    y_cursor += 5 ;
+    y_cursor = 10 ;
     for ( ; ivec < VecNomIgc.size() ; ivec++ )
         {
-        sprintf( TmpChar , " %s  %03d", (const char*)VecNomIgc[ivec].c_str() , (int) (VecTempsIgc[ivec]/60) ) ;
+        sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , (int) (VecTempsIgc[ivec]/60) ) ;
         y_cursor += 16 ;
         display.setCursor( 0, y_cursor );
         display.print( TmpChar ) ;
         }
 
     display.setFont(&FreeMonoBold12pt7b);
-    sprintf( TmpChar , "total %03d", (int)(TotalSec/60) ) ;
+    sprintf( TmpChar , "tot. igc:%03dm", (int)(TotalSec/60) ) ;
     display.setCursor( 0, y_cursor + 25 );
     display.print( TmpChar ) ;
     }
@@ -1228,17 +1225,17 @@ if ( BoutonCentre() )
     {
     BoolListeIgc = false ;
     m_MillisEcran0 = millis() ;
-    return ECRAN_6_ConfirmDeleteIgc ;
+    return ECRAN_5b_ConfirmDeleteIgc ;
     }
 
-return ECRAN_5_ListeIgc ;
+return ECRAN_5a_ListeIgc ;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction permet de detruire tous les fichier IGC de la carte.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran6ConfimeDeleteIgcFch()
+CGestEcrans::EtatsAuto CScreen154::Ecran5bConfimeDeleteIgcFch()
 {
 // titre
 char TmpChar[] = "\n\n   Confirme\n    Delete\n     Igc\n Bouton Centre" ;
@@ -1265,14 +1262,14 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5_ListeIgc ;
+    return ECRAN_5a_ListeIgc ;
     }
 
 // si changement d'ecran
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5_ListeIgc ;
+    return ECRAN_5a_ListeIgc ;
     }
 
 // si confirme delete igc
@@ -1280,10 +1277,10 @@ if ( BoutonCentre() )
     {
     m_MillisEcran0 = millis() ;
     g_GlobalVar.DeleteIgc() ;
-    return ECRAN_5_ListeIgc ;
+    return ECRAN_5a_ListeIgc ;
     }
 
-return ECRAN_6_ConfirmDeleteIgc ;
+return ECRAN_5b_ConfirmDeleteIgc ;
 }
 
 #endif

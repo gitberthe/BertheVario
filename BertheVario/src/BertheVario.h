@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 21/07/2024
+/// \date modification : 27/07/2024
 ///
 
 //////////////////
@@ -65,7 +65,7 @@
 //#define VARIOMETER_POWER_ON_DELAY   2000
 
 // Sound
-#define PIN_AUDIO_AMP_ENA     12                        //Enabled ampli class D
+//#define PIN_AUDIO_AMP_ENA     12                        //Enabled ampli class D
 
 // GPS
 #define pinGpsRXD  (33)

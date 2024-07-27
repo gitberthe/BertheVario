@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 26/07/2024
+/// \date modification : 27/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -23,8 +23,8 @@ m_Automate[ECRAN_2a_TmaAll].m_pFunction = & CGestEcrans::Ecran2aTmaAll ;
 m_Automate[ECRAN_2b_TmaMod].m_pFunction = & CGestEcrans::Ecran2bTmaMod ;
 m_Automate[ECRAN_3_Sys].m_pFunction     = & CGestEcrans::Ecran3Sys ;
 m_Automate[ECRAN_4_CfgFch].m_pFunction  = & CGestEcrans::Ecran4CfgFch ;
-m_Automate[ECRAN_5_ListeIgc].m_pFunction= & CGestEcrans::Ecran5listeIgcFch ;
-m_Automate[ECRAN_6_ConfirmDeleteIgc].m_pFunction= & CGestEcrans::Ecran6ConfimeDeleteIgcFch ;
+m_Automate[ECRAN_5a_ListeIgc].m_pFunction= & CGestEcrans::Ecran5alisteIgcFch ;
+m_Automate[ECRAN_5b_ConfirmDeleteIgc].m_pFunction= & CGestEcrans::Ecran5bConfimeDeleteIgcFch ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,3 +1,7 @@
+version 20240727a :
+ - modification nom de pages 5/6 vers 5a/5b.
+ - modification affichage/menu zones activable.
+
 version 20240726b :
  - correction de documentation
 
