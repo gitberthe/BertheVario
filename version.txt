@@ -1,5 +1,5 @@
 version 20240728a :
- - corretion de doc openoffice/pdf
+ - correction de doc openoffice/pdf
 
 version 20240727a :
  - modification nom de pages 5/6 vers 5a/5b.
