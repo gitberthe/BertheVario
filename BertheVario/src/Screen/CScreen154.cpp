@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 27/07/2024
+/// \date modification : 28/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -264,7 +264,26 @@ else
 
 // vitesse sol
 char TmpCharVitSol[15] ;
-sprintf( TmpCharVitSol , "%3.0f", g_GlobalVar.m_VitesseKmh ) ;
+sprintf( TmpCharVitSol , "%4.1f", g_GlobalVar.m_VitesseKmh ) ;
+
+// hauteur sol
+char TmpCharHauteurSol[15] ;
+sprintf( TmpCharHauteurSol , "%4d", (int)(g_GlobalVar.m_TerrainPosCur.m_AltiBaro-g_GlobalVar.m_AltitudeSolHgt) ) ;
+
+// variables pour affichage vitesse/hauteur sol
+static bool AffichageHauteurSol = false ;
+static unsigned long TempsHauteurSol = millis() ;
+// si 6 secondes depassée
+if ( AffichageHauteurSol && ((millis()-TempsHauteurSol)/1000) >= 6 )
+    {
+    AffichageHauteurSol = !AffichageHauteurSol ;
+    TempsHauteurSol = millis() ;
+    }
+else if ( !AffichageHauteurSol && ((millis()-TempsHauteurSol)/1000) >= 1 )
+    {
+    AffichageHauteurSol = !AffichageHauteurSol ;
+    TempsHauteurSol = millis() ;
+    }
 
 // duree du vol
 char TmpCharDV[15] ;
@@ -354,7 +373,6 @@ display.setFont(&FreeMonoBold24pt7b);
 // affichage valeur de VZ
 int16_t tbx, tby;
 uint16_t tbw, tbh;
-
 
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -499,13 +517,22 @@ do
     display.setFont(&FreeMonoBold9pt7b);
     display.print("m");
 
-    // vitesse sol
+    // vitesse sol/hauteur sol
     display.setFont(&FreeMonoBold18pt7b);
-    display.setCursor(120, 195);
-    display.print(TmpCharVitSol);
-    display.setFont(&FreeMonoBold9pt7b);
-    display.print("k");
-    display.drawLine( 115 ,200 ,115 , 163 , GxEPD_BLACK ) ;
+    display.setCursor(102, 195);
+    display.drawLine( 100 ,200 ,100 , 163 , GxEPD_BLACK ) ;
+    if ( AffichageHauteurSol )
+        {
+        display.print(TmpCharVitSol);
+        display.setFont(&FreeMonoBold9pt7b);
+        display.print("k");
+        }
+    else
+        {
+        display.print(TmpCharHauteurSol);
+        display.setFont(&FreeMonoBold9pt7b);
+        display.print("m");
+        }
     }
 while (display.nextPage());
 

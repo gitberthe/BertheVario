@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 21/07/2024
+/// \date modification : 28/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -123,7 +123,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // recalage alti pression 1 fois par secondes
     g_GlobalVar.m_MutexVariable.PrendreMutex() ;
-     g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltiSolHgt ) ;
+     g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltitudeSolHgt ) ;
     g_GlobalVar.m_MutexVariable.RelacherMutex() ;
 
     #ifndef TMA_DEBUG

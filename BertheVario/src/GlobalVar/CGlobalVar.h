@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 13/05/2024
+/// \date modification : 28/07/2024
 ///
 
 #ifndef _GLOBALVAR_
@@ -51,7 +51,7 @@ public :
 
     // parametres Gps
     float m_AltiGps = 0. ;      ///< alti gps en metres
-    int   m_AltiSolHgt = 0 ;    ///< altitude sol hgt
+    int   m_AltitudeSolHgt = 0 ;    ///< altitude sol hgt
     int   m_CapGpsDeg = 0 ;     ///< cap gps en degres
     float m_VitesseKmh = 0. ;   ///< vitesse gps en km/h
     int   m_Annee = 1 ;         ///< Annee gps

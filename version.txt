@@ -1,3 +1,6 @@
+version 20240728c :
+ - affichage hauteur sol 1/6sec à la place de la vitesse sol.
+
 version 20240728b :
 version 20240728a :
  - correction de doc openoffice/pdf

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 21/07/2024
+/// \date modification : 28/07/2024
 ///
 
 #include "../BertheVario.h"
@@ -636,9 +636,9 @@ TriZonesSurface() ;
 // si test wifi positionnement altitude sol
 if ( g_GlobalVar.m_ModeHttp )
     {
-    g_GlobalVar.m_AltiSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
-    //Serial.print( "g_GlobalVar.m_AltiSolHgt:" ) ;
-    //Serial.println( g_GlobalVar.m_AltiSolHgt ) ;
+    g_GlobalVar.m_AltitudeSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
+    //Serial.print( "g_GlobalVar.m_AltitudeSolHgt:" ) ;
+    //Serial.println( g_GlobalVar.m_AltitudeSolHgt ) ;
     }
 
 // pour toutes les zones recherche si dessous
@@ -673,7 +673,7 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
             m_Plafond4Valid = PlafondZone ;
             // si
             if ( ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) < m_Plafond4Valid) ||
-                 ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) < (g_GlobalVar.m_AltiSolHgt+300) ) )
+                 ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) < (g_GlobalVar.m_AltitudeSolHgt+300) ) )
                 {
                 sprintf( TmpChar , "Be %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
                 RetNbrIn = ZONE_DESSOUS ;
@@ -681,7 +681,7 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
                 break ;
                 }
             else if ( ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro) < m_Plafond4Valid) ||
-                      ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro) < (g_GlobalVar.m_AltiSolHgt+300) ) )
+                      ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro) < (g_GlobalVar.m_AltitudeSolHgt+300) ) )
                 {
                 sprintf( TmpChar , "Al %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
                 RetNbrIn = ZONE_LIMITE_ALTI ;
@@ -702,7 +702,7 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
         // si zone protege
         if ( ZoneProtegee )
             {
-            int PlafondZoneProtegee = g_GlobalVar.m_AltiSolHgt+m_PlafondZoneProtegee ;
+            int PlafondZoneProtegee = g_GlobalVar.m_AltitudeSolHgt+m_PlafondZoneProtegee ;
             // dans la zone protegee
             if ( g_GlobalVar.m_TerrainPosCur.m_AltiBaro < PlafondZoneProtegee )
                 {
