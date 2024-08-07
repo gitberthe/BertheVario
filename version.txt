@@ -1,5 +1,5 @@
 version 20240807a :
- - modification valeur par defaut fichuier config.txt
+ - modification valeur par defaut fichier config.txt
 
 version 20240728c :
  - affichage hauteur sol 1/6sec à la place de la vitesse sol.
