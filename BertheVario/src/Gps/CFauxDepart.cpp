@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 18/03/2024
-/// \date modification : 13/05/2024
+/// \date modification : 08/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -60,8 +60,8 @@ TempsLatLon /= 1000 * 60 ;
 float TempsAlti = millis() - m_TempsStationnaireAlti ;
 TempsAlti /= 1000 * 60 ;
 
-// si un des temps est depassé laors reboot
-float TempsMaxMin = 1. ;
+// si un des temps est depassé alors reboot
+float TempsMaxMin = 0.5 ;
 #ifdef REBOOT_DEBUG
  TempsMaxMin = 0.1 ;
 #endif

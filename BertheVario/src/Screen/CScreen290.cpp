@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 26/07/2024
+/// \date modification : 08/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -1122,9 +1122,9 @@ return ECRAN_5_ConfirmDeleteIgc ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief A implementer
 /// \return l'etat suivant de l'automate
-EtatsAuto CScreen290::Ecran6ConfimeDeleteIgcFch()
+EtatsAuto CScreen290::Ecran6ConfimeArchIgcFch()
 {
-return ECRAN_6_ConfirmDeleteIgc ;
+return ECRAN_6_ConfirmArchIgc ;
 }
 
 

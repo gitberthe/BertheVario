@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 28/07/2024
+/// \date modification : 08/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -249,7 +249,7 @@ while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
 
     // historique du vol toutes les 5 sec
     if ( !((iboucleHistoVol++)%5) )
-        g_GlobalVar.m_HistoVol.EcritureFichier() ;
+        g_GlobalVar.m_HistoVol.EcritureFichier( g_GlobalVar.GetIgcFileName() ) ;
     }
 
 g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Stopped = true ;

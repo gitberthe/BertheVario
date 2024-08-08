@@ -31,7 +31,7 @@ public :
     CConfigFile m_Config ;  ///< variables issues du fichier de config
     CMS5611     m_MS5611 ;  ///< capteur de pression
     CMpu9250    m_Mpu9250 ; ///< capteur accelerometrique
-    CFileHistoVol m_HistoVol ; ///< historique du vol precedent
+    CFilesHistoVols m_HistoVol ; ///< historique du vol precedent
     CZonesFch   m_ZonesAerAll ;///< tableau des zones aeriennes pris en compte
     CHgt2Agl    m_Hgt2Agl ; ///< pour determiner la hauteur sol
 

@@ -1,3 +1,9 @@
+version 20240808a :
+ - correction calcul total igc en minutes.
+ - historique de vol pour chaque vol sur la racine de la sdcard.
+ - faux depart de vol determiné au bout de 30s et plus 1min.
+ - archivage fichier par année à la place de destruction.
+
 version 20240807a :
  - modification valeur par defaut fichier config.txt
 

@@ -273,8 +273,8 @@ sprintf( TmpCharHauteurSol , "%4d", (int)(g_GlobalVar.m_TerrainPosCur.m_AltiBaro
 // variables pour affichage vitesse/hauteur sol
 static bool AffichageHauteurSol = false ;
 static unsigned long TempsHauteurSol = millis() ;
-// si 6 secondes depassée
-if ( AffichageHauteurSol && ((millis()-TempsHauteurSol)/1000) >= 6 )
+// si 5 secondes depassée
+if ( AffichageHauteurSol && ((millis()-TempsHauteurSol)/1000) >= 5 )
     {
     AffichageHauteurSol = !AffichageHauteurSol ;
     TempsHauteurSol = millis() ;
@@ -568,34 +568,61 @@ return ECRAN_0_Vz ;
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::Ecran1Histo()
 {
-char TmpCharAltiDeco[20] ;
-sprintf( TmpCharAltiDeco , "%4dm", (int)g_GlobalVar.m_HistoVol.m_ZDeco ) ;
-
-char TmpCharAltiMax[20] ;
-sprintf( TmpCharAltiMax , "%4dm", g_GlobalVar.m_HistoVol.m_ZMax ) ;
-
-char TmpCharVzMax[20] ;
-sprintf( TmpCharVzMax , "%5.1f", g_GlobalVar.m_HistoVol.m_VzMax ) ;
-
-char TmpCharVzMin[20] ;
-sprintf( TmpCharVzMin , "%5.1f", g_GlobalVar.m_HistoVol.m_VzMin ) ;
-
-char TmpCharVsMax[20] ;
-sprintf( TmpCharVsMax , "%5.1f", g_GlobalVar.m_HistoVol.m_VsMax ) ;
-
-char TmpCharDistMax[20] ;
-sprintf( TmpCharDistMax , "%5.1f", g_GlobalVar.m_HistoVol.m_DistanceKm ) ;
-
-// temps de vol
-char TmpCharTV[20] ;
-sprintf( TmpCharTV , " %3d'", g_GlobalVar.m_HistoVol.m_TempsDeVol ) ;
+std::string NomZone = "" ;
+static int ivol = 0 ;
 
 // zone au dessus
-std::string NomZone = "" ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
  if ( g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone )
     NomZone = g_GlobalVar.m_ZonesAerAll.m_NomZoneDansDessous ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
+
+// si pas de fichiers histo
+if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
+    {
+    display.setPartialWindow( 0, 0, 200 , 200 );
+    display.firstPage();
+    display.setFont(&FreeMonoBold9pt7b);
+    do  {
+        display.fillScreen(GxEPD_WHITE);
+        // message
+        display.setCursor(0, 20);
+        display.print("0 histo");
+
+        // nom zone
+        display.setFont(&FreeMonoBold12pt7b);
+        display.setCursor(0,160);
+        display.print( NomZone.c_str() );
+        }
+    while (display.nextPage());
+
+    goto fin_histo ;
+    }
+
+char TmpCharNomFchIgc[20] ;
+sprintf( TmpCharNomFchIgc , "%s", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_NomIgc ) ;
+
+char TmpCharAltiDeco[20] ;
+sprintf( TmpCharAltiDeco , "%4dm", (int)g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_ZDeco ) ;
+
+char TmpCharAltiMax[20] ;
+sprintf( TmpCharAltiMax , "%4dm", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_ZMax ) ;
+
+char TmpCharVzMax[20] ;
+sprintf( TmpCharVzMax , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_VzMax ) ;
+
+char TmpCharVzMin[20] ;
+sprintf( TmpCharVzMin , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_VzMin ) ;
+
+char TmpCharVsMax[20] ;
+sprintf( TmpCharVsMax , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_VsMax ) ;
+
+char TmpCharDistMax[20] ;
+sprintf( TmpCharDistMax , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_DistanceKm ) ;
+
+// temps de vol
+char TmpCharTV[20] ;
+sprintf( TmpCharTV , " %3d'", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_TempsDeVol ) ;
 
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -604,22 +631,28 @@ do
     {
     display.fillScreen(GxEPD_WHITE);
 
-    // alti decollage
+    display.setFont(&FreeMonoBold9pt7b);
+
+    // nom fch igc
     display.setCursor(0, 20);
+    display.print(TmpCharNomFchIgc);
+
+    // alti decollage
+    display.setCursor(0, 35);
     display.print("Z deco:");
-    display.setCursor(110, 20);
+    display.setCursor(110, 35);
     display.print(TmpCharAltiDeco);
 
     // alti max
-    display.setCursor(0, 40);
+    display.setCursor(0, 50);
     display.print("Z max :");
-    display.setCursor(110, 40);
+    display.setCursor(110, 50);
     display.print(TmpCharAltiMax);
 
     // Vz max
-    display.setCursor(0, 60);
+    display.setCursor(0, 65);
     display.print("Vz max:");
-    display.setCursor(110, 60);
+    display.setCursor(110, 65);
     display.print(TmpCharVzMax);
 
     // Vz min
@@ -629,39 +662,46 @@ do
     display.print(TmpCharVzMin);
 
     // distance max
-    display.setCursor(0, 100);
+    display.setCursor(0, 95);
     display.print("Dist. :");
-    display.setCursor(110, 100);
+    display.setCursor(110, 95);
     display.print(TmpCharDistMax);
 
     // Vs max
-    display.setCursor(0, 120);
+    display.setCursor(0, 110);
     display.print("Vs max:");
-    display.setCursor(110, 120);
+    display.setCursor(110, 110);
     display.print(TmpCharVsMax);
 
     // Dure vol
-    display.setCursor(0,140);
+    display.setCursor(0,125);
     display.print("t vol :");
-    display.setCursor(110, 140);
+    display.setCursor(110, 125);
     display.print(TmpCharTV);
 
     // nom zone
+    display.setFont(&FreeMonoBold12pt7b);
     display.setCursor(0,160);
     display.print( NomZone.c_str() );
     }
 while (display.nextPage());
+
+// fin de la fonction
+fin_histo :
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
     return ECRAN_0_Vz ;
 
-// si changement d'ecran
+// si changement de numero histo vol
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5a_ListeIgc ;
+    ivol++ ;
+    if ( ivol >=  g_GlobalVar.m_HistoVol.m_HistoDir.size() )
+        ivol = 0 ;
+    return ECRAN_1_Histo ;
     }
 
 // si changement d'ecran
@@ -1252,7 +1292,7 @@ if ( BoutonCentre() )
     {
     BoolListeIgc = false ;
     m_MillisEcran0 = millis() ;
-    return ECRAN_5b_ConfirmDeleteIgc ;
+    return ECRAN_5b_ConfirmArchIgc ;
     }
 
 return ECRAN_5a_ListeIgc ;
@@ -1260,12 +1300,13 @@ return ECRAN_5a_ListeIgc ;
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief Cette fonction permet de detruire tous les fichier IGC de la carte.
+/// \brief Cette fonction permet d'archiver tous les fichier IGC de la carte qui
+/// sont à la racine.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran5bConfimeDeleteIgcFch()
+CGestEcrans::EtatsAuto CScreen154::Ecran5bConfimeArchIgcFch()
 {
 // titre
-char TmpChar[] = "\n\n   Confirme\n    Delete\n     Igc\n Bouton Centre" ;
+char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n Bouton Centre" ;
 
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -1303,11 +1344,12 @@ if ( BoutonGauche() )
 if ( BoutonCentre() )
     {
     m_MillisEcran0 = millis() ;
-    g_GlobalVar.DeleteIgc() ;
+    g_GlobalVar.ArchiveIgc() ;
+    g_GlobalVar.m_HistoVol.DeleteHisto() ;
     return ECRAN_5a_ListeIgc ;
     }
 
-return ECRAN_5b_ConfirmDeleteIgc ;
+return ECRAN_5b_ConfirmArchIgc ;
 }
 
 #endif

@@ -24,7 +24,7 @@ m_Automate[ECRAN_2b_TmaMod].m_pFunction = & CGestEcrans::Ecran2bTmaMod ;
 m_Automate[ECRAN_3_Sys].m_pFunction     = & CGestEcrans::Ecran3Sys ;
 m_Automate[ECRAN_4_CfgFch].m_pFunction  = & CGestEcrans::Ecran4CfgFch ;
 m_Automate[ECRAN_5a_ListeIgc].m_pFunction= & CGestEcrans::Ecran5alisteIgcFch ;
-m_Automate[ECRAN_5b_ConfirmDeleteIgc].m_pFunction= & CGestEcrans::Ecran5bConfimeDeleteIgcFch ;
+m_Automate[ECRAN_5b_ConfirmArchIgc].m_pFunction= & CGestEcrans::Ecran5bConfimeArchIgcFch ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

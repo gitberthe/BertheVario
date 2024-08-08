@@ -33,7 +33,7 @@ public :
     EtatsAuto Ecran3Sys() ;
     EtatsAuto Ecran4CfgFch() ;
     EtatsAuto Ecran5alisteIgcFch() ;
-    EtatsAuto Ecran5bConfimeDeleteIgcFch() ;
+    EtatsAuto Ecran5bConfimeArchIgcFch() ;
 
 private :
 } ;

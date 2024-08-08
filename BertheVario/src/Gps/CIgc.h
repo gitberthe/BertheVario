@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/03/2024
-/// \date modification : 23/03/2024
+/// \date modification : 08/08/2024
 ///
 
 #ifndef _IGC_CLASS_
@@ -20,9 +20,11 @@ public :
 
     void InitCurentIgc() ;
     void PushLoc2Igc() ;
+    const char * GetIgcFileName() const
+        { return m_NomFchCourant ; } ;
 
 private :
-    char m_NomFchCourant[50] ;  ///< nom du fichier courante igc
+    char m_NomFchCourant[50] ;  ///< nom du fichier courant igc
     File m_File ;               ///< fichier igc
 } ;
 

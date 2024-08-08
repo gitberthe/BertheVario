@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 26/07/2024
+/// \date modification : 08/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -74,17 +74,45 @@ while(file)
         Serial.println(file.size());*/
         // nom et taille
         VecNomIgc.push_back(file.name()) ;
-        VecTempsIgc.push_back(file.size()/36) ;
+        VecTempsIgc.push_back(file.size()/37) ;
         }
     file = root.openNextFile();
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Detruit tous les fichiers IGC
-void CSDCard::DeleteIgc()
+/// \brief Archuve tous les fichiers IGC à la racine de la carte ayant un historique
+void CSDCard::ArchiveIgc()
 {
+// lecture des fichiers historiques
+g_GlobalVar.m_HistoVol.LectureFichiers() ;
+
+const std::vector<CHistoVol> & VecHisto = g_GlobalVar.m_HistoVol.m_HistoDir ;
+
+for ( int iv = 0 ; iv < VecHisto.size() ; iv++ )
+    {
+    const CHistoVol & HistoVol =  VecHisto[iv] ;
+
+    // nouveau nom de fichier
+    char NomFchArch[50] = "/arch" ;
+    sprintf( NomFchArch ,"/arch/%04d/%s", (int)HistoVol.m_AnneeDuVol, HistoVol.m_NomIgc ) ;
+
+    // creation nouvelle directorie annee
+    char NomDirArch[50] ;
+    sprintf( NomDirArch , "/arch/%04d" , (int)HistoVol.m_AnneeDuVol ) ;
+    SD.mkdir( "/arch" ) ;
+    SD.mkdir( NomDirArch ) ;
+
+    // deplacement fichier
+    SD.rename( HistoVol.m_NomIgc , NomFchArch ) ;
+    }
+
+
+// destruction historique
+g_GlobalVar.m_HistoVol.DeleteHisto() ;
+
 // ouverture carte
+/*
 File root = SD.open("/");
 File file = root.openNextFile();
 
@@ -109,4 +137,5 @@ while(file)
         }
     file = root.openNextFile();
     }
+*/
 }
