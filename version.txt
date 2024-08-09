@@ -1,6 +1,6 @@
 version 20240809b :
  - non archivage des vol < 1min.
- - correction bug non reboot second apres vol lointain.
+ - correction bug non reboot second vol apres vol lointain.
 
 version 20240809a :
  - modification ihm, bouton centre pour changer d'ecran.
