@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 08/08/2024
+/// \date modification : 09/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -81,7 +81,8 @@ while(file)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Archuve tous les fichiers IGC à la racine de la carte ayant un historique
+/// \brief Archive tous les fichiers IGC à la racine de la carte ayant un historique
+/// d'au moins une minute.
 void CSDCard::ArchiveIgc()
 {
 // lecture des fichiers historiques
@@ -103,8 +104,11 @@ for ( int iv = 0 ; iv < VecHisto.size() ; iv++ )
     SD.mkdir( "/arch" ) ;
     SD.mkdir( NomDirArch ) ;
 
-    // deplacement fichier
-    SD.rename( HistoVol.m_NomIgc , NomFchArch ) ;
+    // deplacement/destruction fichier
+    if ( HistoVol.m_TempsDeVol < 1 )
+        SD.remove( HistoVol.m_NomIgc ) ;
+    else
+        SD.rename( HistoVol.m_NomIgc , NomFchArch ) ;
     }
 
 

@@ -1,3 +1,6 @@
+version 20240809b :
+ - non archivage des vol < 1min.
+
 version 20240809a :
  - modification ihm, bouton centre pour changer d'ecran.
  - stabilisation Gps sur 20s et non 30s.
