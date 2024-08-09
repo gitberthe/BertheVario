@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 14/06/2024
+/// \date modification : 09/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -90,7 +90,7 @@ void CBoutons::TacheScanButton(void* param)
 {
 CBoutons * pThis = (CBoutons*) param ;
 
-// a 5 hz
+// a 10 hz
 while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     {
     bool beep = false ;
@@ -133,7 +133,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         CGlobalVar::BeepOk() ;
         }
 
-    delay( 200 ) ;
+    delay( 100 ) ;
     }
 
 g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Stopped = true ;

@@ -26,14 +26,15 @@ public :
     void DoRect( int x , int y , int w , int h , bool Black ) ;
     void DoChar( int x , int y , const char * pChar ) ;
 
-    EtatsAuto Ecran0Vz() ;
-    EtatsAuto Ecran1Histo() ;
-    EtatsAuto Ecran2aTmaAll() ;
-    EtatsAuto Ecran2bTmaMod() ;
-    EtatsAuto Ecran3Sys() ;
-    EtatsAuto Ecran4CfgFch() ;
-    EtatsAuto Ecran5alisteIgcFch() ;
-    EtatsAuto Ecran5bConfimeArchIgcFch() ;
+    EtatsAuto EcranVz() ;
+    EtatsAuto EcranHisto() ;
+    EtatsAuto EcranTmaAll() ;
+    EtatsAuto EcranTmaMod() ;
+    EtatsAuto EcranSys() ;
+    EtatsAuto EcranCfgFch() ;
+    EtatsAuto EcranListeIgcFch() ;
+    EtatsAuto EcranConfimeArchIgcFch() ;
+    EtatsAuto EcranTmaDessous() ;
 
 private :
 } ;

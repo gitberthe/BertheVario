@@ -277,6 +277,14 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
 
     // toutes les secondes
     delay( 1000 ) ;
+
+    // arret du vol par bouton droit
+    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit()
+         && g_GlobalVar.m_VitesseKmh < 5. && g_GlobalVar.m_VitVertMS < 0.4 )
+        {
+        CGlobalVar::RelancerEnregistrementFichier() ;
+        break ;
+        }
     }
 
 g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Stopped = true ;

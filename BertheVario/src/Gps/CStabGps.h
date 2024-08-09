@@ -4,13 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 03/04/2024
-/// \date modification : 07/06/2024
+/// \date modification : 09/08/2024
 ///
 
 #ifndef _STABGPS_
 #define _STABGPS_
 
-#define TAILLE_PILE 30
+#define TAILLE_PILE 20
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Permet de savoir si les points gps ne sont pas trop dispersés.

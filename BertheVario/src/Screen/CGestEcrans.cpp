@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 27/07/2024
+/// \date modification : 09/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -17,14 +17,15 @@ CGestEcrans::CGestEcrans()
 for ( int ie = 0 ; ie < FIN ; ie++ )
     m_Automate[ie].m_pFunction = & CGestEcrans::Erreur ;
 
-m_Automate[ECRAN_0_Vz].m_pFunction      = & CGestEcrans::Ecran0Vz ;
-m_Automate[ECRAN_1_Histo].m_pFunction   = & CGestEcrans::Ecran1Histo ;
-m_Automate[ECRAN_2a_TmaAll].m_pFunction = & CGestEcrans::Ecran2aTmaAll ;
-m_Automate[ECRAN_2b_TmaMod].m_pFunction = & CGestEcrans::Ecran2bTmaMod ;
-m_Automate[ECRAN_3_Sys].m_pFunction     = & CGestEcrans::Ecran3Sys ;
-m_Automate[ECRAN_4_CfgFch].m_pFunction  = & CGestEcrans::Ecran4CfgFch ;
-m_Automate[ECRAN_5a_ListeIgc].m_pFunction= & CGestEcrans::Ecran5alisteIgcFch ;
-m_Automate[ECRAN_5b_ConfirmArchIgc].m_pFunction= & CGestEcrans::Ecran5bConfimeArchIgcFch ;
+m_Automate[ECRAN_0_Vz].m_pFunction      = & CGestEcrans::EcranVz ;
+m_Automate[ECRAN_1_Histo].m_pFunction   = & CGestEcrans::EcranHisto ;
+m_Automate[ECRAN_2a_ListeIgc].m_pFunction= & CGestEcrans::EcranListeIgcFch ;
+m_Automate[ECRAN_2b_ConfirmArchIgc].m_pFunction= & CGestEcrans::EcranConfimeArchIgcFch ;
+m_Automate[ECRAN_3a_TmaAll].m_pFunction = & CGestEcrans::EcranTmaAll ;
+m_Automate[ECRAN_3b_TmaMod].m_pFunction = & CGestEcrans::EcranTmaMod ;
+m_Automate[ECRAN_4_CfgFch].m_pFunction  = & CGestEcrans::EcranCfgFch ;
+m_Automate[ECRAN_5_TmaDessous].m_pFunction= & CGestEcrans::EcranTmaDessous ;
+m_Automate[ECRAN_6_Sys].m_pFunction     = & CGestEcrans::EcranSys ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

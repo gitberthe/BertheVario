@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 08/08/2024
+/// \date modification : 09/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -208,7 +208,7 @@ display.print( pChar );
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 0.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen290::Ecran0Vz()
+CGestEcrans::EtatsAuto CScreen290::EcranVz()
 {
 CLocTermic LocTermic ;
 
@@ -515,7 +515,7 @@ if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE && BoutonDroit() )
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_3_Sys ;
+    return ECRAN_5_Sys ;
     }
 
 // si activation / desactivation beep attente Gps / Vitesse
@@ -531,7 +531,7 @@ return ECRAN_0_Vz ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 1. Historique de vol.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen290::Ecran1Histo()
+CGestEcrans::EtatsAuto CScreen290::EcranHisto()
 {
 char TmpCharAltiDeco[20] ;
 sprintf( TmpCharAltiDeco , "%4dm", (int)g_GlobalVar.m_HistoVol.m_ZDeco ) ;
@@ -626,7 +626,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_3a_TmaAll ;
     }
 
 // si changement d'ecran
@@ -649,7 +649,7 @@ return ECRAN_1_Histo ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 3, orienté systeme.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen290::Ecran3Sys()
+CGestEcrans::EtatsAuto CScreen290::EcranSys()
 {
 // date
 char TmpCharDate[35] ;
@@ -751,17 +751,17 @@ if ( BoutonDroit() )
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_3a_TmaAll ;
     }
 
-return ECRAN_3_Sys ;
+return ECRAN_5_Sys ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche/modifie les [variables] du fichier de
 /// configuration.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen290::Ecran4CfgFch()
+CGestEcrans::EtatsAuto CScreen290::EcranCfgFch()
 {
 static char TmpMod[100] = {0} ;
 std::string Name ;
@@ -891,7 +891,7 @@ return ECRAN_4_CfgFch ;
 /// \brief Cette fonction affiche les informations de l'ecran 2b, TAM/CTR
 /// modification activation.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen290::Ecran2bTmaMod()
+CGestEcrans::EtatsAuto CScreen290::EcranTmaMod()
 {
 static int NumTmaCtr = -1 ;
 
@@ -993,7 +993,7 @@ bool BCentre = BoutonCentre() ;
 if ( BCentre && pZone == NULL )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_3a_TmaAll ;
     }
 
 // si modification activation
@@ -1005,7 +1005,7 @@ if ( BCentre && pZone != NULL )
         pZone->m_Activee = !pZone->m_Activee ;
         g_GlobalVar.m_ZonesAerAll.EcritureFichierZonesActive() ;
         }
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_3a_TmaAll ;
     }
 
 // decrementation numero de zone
@@ -1025,13 +1025,13 @@ if ( BoutonDroit() )
         NumTmaCtr = 0 ;
     }
 
-return ECRAN_2b_TmaMod ;
+return ECRAN_3b_TmaMod ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 2a, TAM/CTR titre
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen290::Ecran2aTmaAll()
+CGestEcrans::EtatsAuto CScreen290::EcranTmaAll()
 {
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
@@ -1094,7 +1094,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_3_Sys ;
+    return ECRAN_5_Sys ;
     }
 
 // si changement d'ecran
@@ -1106,15 +1106,15 @@ if ( BoutonGauche() )
 
 // si changement modification zone
 if ( BoutonCentre() )
-    return ECRAN_2b_TmaMod ;
+    return ECRAN_3b_TmaMod ;
 
-return ECRAN_2a_TmaAll ;
+return ECRAN_3a_TmaAll ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief A implementer
 /// \return l'etat suivant de l'automate
-EtatsAuto CScreen290::Ecran5listeIgcFch()
+EtatsAuto CScreen290::EcranlisteIgcFch()
 {
 return ECRAN_5_ConfirmDeleteIgc ;
 }
@@ -1122,10 +1122,17 @@ return ECRAN_5_ConfirmDeleteIgc ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief A implementer
 /// \return l'etat suivant de l'automate
-EtatsAuto CScreen290::Ecran6ConfimeArchIgcFch()
+EtatsAuto CScreen290::EcranConfimeArchIgcFch()
 {
 return ECRAN_6_ConfirmArchIgc ;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+/// \brief A implementer
+/// \return l'etat suivant de l'automate
+EtatsAuto CScreen290::EcranTmaDessous()
+{
+return ECRAN_6_ConfirmArchIgc ;
+}
 
 #endif

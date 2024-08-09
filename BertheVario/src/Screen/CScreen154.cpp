@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 28/07/2024
+/// \date modification : 09/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -208,7 +208,7 @@ display.print( pChar );
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 0.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran0Vz()
+CGestEcrans::EtatsAuto CScreen154::EcranVz()
 {
 CLocTermic LocTermic ;
 
@@ -536,7 +536,7 @@ do
     }
 while (display.nextPage());
 
-// si changement d'ecran si pas en mode V ou G/S
+/*// si changement d'ecran si pas en mode V ou G/S
 if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&
      g_GlobalVar.m_DureeVolMin != ATTENTE_STABILITE_GPS &&
      g_GlobalVar.m_DureeVolMin != ATTENTE_MESSAGE_GPS &&
@@ -544,17 +544,20 @@ if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&
     {
     m_MillisEcran0 = millis() ;
     return ECRAN_1_Histo ;
-    }
+    }*/
 
 // si changement d'ecran
-if ( BoutonGauche() )
+if ( BoutonCentre() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_3_Sys ;
+    return ECRAN_1_Histo ;
     }
 
 // si activation / desactivation beep attente Gps / Vitesse
-if ( BoutonCentre() )
+if ( (g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
+      g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS ||
+      g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ) &&
+      BoutonGauche() )
     g_GlobalVar.m_BeepAttenteGVZone = ! g_GlobalVar.m_BeepAttenteGVZone ;
 
 return ECRAN_0_Vz ;
@@ -566,33 +569,22 @@ return ECRAN_0_Vz ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 1. Historique de vol.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran1Histo()
+CGestEcrans::EtatsAuto CScreen154::EcranHisto()
 {
-std::string NomZone = "" ;
-static int ivol = 0 ;
-
-// zone au dessus
-g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
- if ( g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone )
-    NomZone = g_GlobalVar.m_ZonesAerAll.m_NomZoneDansDessous ;
-g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
+static int ivol = g_GlobalVar.m_HistoVol.m_HistoDir.size() - 1 ;
+int y = 20 ;
 
 // si pas de fichiers histo
 if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
     {
     display.setPartialWindow( 0, 0, 200 , 200 );
     display.firstPage();
-    display.setFont(&FreeMonoBold9pt7b);
+    display.setFont(&FreeMonoBold12pt7b);
     do  {
         display.fillScreen(GxEPD_WHITE);
         // message
         display.setCursor(0, 20);
         display.print("0 histo");
-
-        // nom zone
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0,160);
-        display.print( NomZone.c_str() );
         }
     while (display.nextPage());
 
@@ -631,58 +623,58 @@ do
     {
     display.fillScreen(GxEPD_WHITE);
 
-    display.setFont(&FreeMonoBold9pt7b);
-
     // nom fch igc
-    display.setCursor(0, 20);
+    display.setCursor(0, y);
     display.print(TmpCharNomFchIgc);
 
     // alti decollage
-    display.setCursor(0, 35);
+    y += 40 ;
+    display.setCursor(0, y);
     display.print("Z deco:");
-    display.setCursor(110, 35);
+    display.setCursor(110, y);
     display.print(TmpCharAltiDeco);
 
     // alti max
-    display.setCursor(0, 50);
+    y += 20 ;
+    display.setCursor(0, y);
     display.print("Z max :");
-    display.setCursor(110, 50);
+    display.setCursor(110, y);
     display.print(TmpCharAltiMax);
 
     // Vz max
-    display.setCursor(0, 65);
+    y += 20 ;
+    display.setCursor(0, y);
     display.print("Vz max:");
-    display.setCursor(110, 65);
+    display.setCursor(110, y);
     display.print(TmpCharVzMax);
 
     // Vz min
-    display.setCursor(0, 80);
+    y += 20 ;
+    display.setCursor(0, y);
     display.print("Vz min:");
-    display.setCursor(110, 80);
+    display.setCursor(110, y);
     display.print(TmpCharVzMin);
 
     // distance max
-    display.setCursor(0, 95);
+    y += 20 ;
+    display.setCursor(0, y);
     display.print("Dist. :");
-    display.setCursor(110, 95);
+    display.setCursor(110, y);
     display.print(TmpCharDistMax);
 
     // Vs max
-    display.setCursor(0, 110);
+    y += 20 ;
+    display.setCursor(0, y);
     display.print("Vs max:");
-    display.setCursor(110, 110);
+    display.setCursor(110, y);
     display.print(TmpCharVsMax);
 
     // Dure vol
-    display.setCursor(0,125);
+    y += 20 ;
+    display.setCursor(0,y);
     display.print("t vol :");
-    display.setCursor(110, 125);
+    display.setCursor(110, y);
     display.print(TmpCharTV);
-
-    // nom zone
-    display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor(0,160);
-    display.print( NomZone.c_str() );
     }
 while (display.nextPage());
 
@@ -699,8 +691,8 @@ if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
     ivol++ ;
-    if ( ivol >=  g_GlobalVar.m_HistoVol.m_HistoDir.size() )
-        ivol = 0 ;
+    if ( ivol >= g_GlobalVar.m_HistoVol.m_HistoDir.size() )
+        ivol = g_GlobalVar.m_HistoVol.m_HistoDir.size() - 1 ;
     return ECRAN_1_Histo ;
     }
 
@@ -708,14 +700,17 @@ if ( BoutonDroit() )
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_0_Vz ;
+    ivol-- ;
+    if ( ivol < 0 )
+        ivol = 0 ;
+    return ECRAN_1_Histo ;
     }
 
 // si changement d'ecran
 if ( BoutonCentre() )
     {
     g_GlobalVar.m_Config.LectureFichier() ;
-    return ECRAN_4_CfgFch ;
+    return ECRAN_2a_ListeIgc ;
     }
 
 return ECRAN_1_Histo ;
@@ -724,7 +719,7 @@ return ECRAN_1_Histo ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 3, orienté systeme.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran3Sys()
+CGestEcrans::EtatsAuto CScreen154::EcranSys()
 {
 // date
 char TmpCharDate[35] ;
@@ -816,27 +811,20 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
     return ECRAN_0_Vz ;
 
 // si changement d'ecran
-if ( BoutonDroit() )
+if ( BoutonCentre() )
     {
     m_MillisEcran0 = millis() ;
     return ECRAN_0_Vz ;
     }
 
-// si changement d'ecran
-if ( BoutonGauche() )
-    {
-    m_MillisEcran0 = millis() ;
-    return ECRAN_2a_TmaAll ;
-    }
-
-return ECRAN_3_Sys ;
+return ECRAN_6_Sys ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche/modifie les [variables] du fichier de
 /// configuration.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran4CfgFch()
+CGestEcrans::EtatsAuto CScreen154::EcranCfgFch()
 {
 static char TmpMod[100] = {0} ;
 std::string Name ;
@@ -849,7 +837,7 @@ static int iChamps = -1 ;
 if ( iChamps == -1 )
     {
     strcpy( TmpMod , "" ) ;
-    Name = "Boutons <GCD>" ;
+    Name = " Editeur Cfg\nBoutons <GCD>" ;
     }
 else
     g_GlobalVar.m_Config.GetChar( iChamps , Name , Value ) ;
@@ -882,7 +870,7 @@ if ( BoutonCent && !Modif && iChamps == -1 )
     m_MillisEcran0 = millis() ;
     g_GlobalVar.m_Config.EcritureFichier() ;
     g_GlobalVar.m_Config.LectureFichier() ;
-    return ECRAN_1_Histo ;
+    return ECRAN_5_TmaDessous ;
     }
 
 // modif
@@ -966,7 +954,7 @@ return ECRAN_4_CfgFch ;
 /// \brief Cette fonction affiche les informations de l'ecran 2b, TAM/CTR
 /// modification activation.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran2bTmaMod()
+CGestEcrans::EtatsAuto CScreen154::EcranTmaMod()
 {
 static int NumTmaCtr = -1 ;
 
@@ -1076,7 +1064,7 @@ bool BCentre = BoutonCentre() ;
 if ( BCentre && VecZone2Mod.size() == 0 )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_3a_TmaAll ;
     }
 
 // si modification activation
@@ -1092,7 +1080,7 @@ if ( BCentre && VecZone2Mod.size() != 0 )
             g_GlobalVar.m_ZonesAerAll.EcritureFichierZonesActive() ;
             }
         }
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_3a_TmaAll ;
     }
 
 // decrementation numero de zone
@@ -1114,13 +1102,13 @@ if ( BoutonDroit() )
         NumTmaCtr = 0 ;
     }
 
-return ECRAN_2b_TmaMod ;
+return ECRAN_3b_TmaMod ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations de l'ecran 2a, TAM/CTR titre
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran2aTmaAll()
+CGestEcrans::EtatsAuto CScreen154::EcranTmaAll()
 {
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
@@ -1198,27 +1186,27 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_3_Sys ;
+    return ECRAN_3b_TmaMod ;
     }
 
 // si changement d'ecran
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5a_ListeIgc ;
+    return ECRAN_3b_TmaMod ;
     }
 
 // si changement modification zone
 if ( BoutonCentre() )
-    return ECRAN_2b_TmaMod ;
+    return ECRAN_4_CfgFch ;
 
-return ECRAN_2a_TmaAll ;
+return ECRAN_3a_TmaAll ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche les informations des fichiers IGC de la carte
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran5alisteIgcFch()
+CGestEcrans::EtatsAuto CScreen154::EcranListeIgcFch()
 {
 static bool BoolListeIgc = false ;
 static std::vector<std::string> VecNomIgc ;
@@ -1276,7 +1264,7 @@ if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
     BoolListeIgc = false ;
-    return ECRAN_2a_TmaAll ;
+    return ECRAN_2b_ConfirmArchIgc ;
     }
 
 // si changement d'ecran
@@ -1284,7 +1272,7 @@ if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
     BoolListeIgc = false ;
-    return ECRAN_1_Histo ;
+    return ECRAN_2b_ConfirmArchIgc ;
     }
 
 // si changement modification zone
@@ -1292,10 +1280,10 @@ if ( BoutonCentre() )
     {
     BoolListeIgc = false ;
     m_MillisEcran0 = millis() ;
-    return ECRAN_5b_ConfirmArchIgc ;
+    return ECRAN_3a_TmaAll ;
     }
 
-return ECRAN_5a_ListeIgc ;
+return ECRAN_2a_ListeIgc ;
 }
 
 
@@ -1303,10 +1291,10 @@ return ECRAN_5a_ListeIgc ;
 /// \brief Cette fonction permet d'archiver tous les fichier IGC de la carte qui
 /// sont à la racine.
 /// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::Ecran5bConfimeArchIgcFch()
+CGestEcrans::EtatsAuto CScreen154::EcranConfimeArchIgcFch()
 {
 // titre
-char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n Bouton Centre" ;
+char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n  Bouton GD" ;
 
 display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
@@ -1327,29 +1315,73 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
     return ECRAN_0_Vz ;
 
 // si changement d'ecran
-if ( BoutonDroit() )
+if ( BoutonCentre() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5a_ListeIgc ;
+    return ECRAN_2a_ListeIgc ;
     }
 
 // si changement d'ecran
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    return ECRAN_5a_ListeIgc ;
+    g_GlobalVar.ArchiveIgc() ;
+    g_GlobalVar.m_HistoVol.DeleteHisto() ;
+    return ECRAN_2a_ListeIgc ;
     }
 
 // si confirme delete igc
-if ( BoutonCentre() )
+if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
     g_GlobalVar.ArchiveIgc() ;
     g_GlobalVar.m_HistoVol.DeleteHisto() ;
-    return ECRAN_5a_ListeIgc ;
+    return ECRAN_2a_ListeIgc ;
     }
 
-return ECRAN_5b_ConfirmArchIgc ;
+return ECRAN_2b_ConfirmArchIgc ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Cette fonction permet de connaitre la TMA dessus.
+/// \return l'etat suivant de l'automate
+CGestEcrans::EtatsAuto CScreen154::EcranTmaDessous()
+{
+std::string NomZone = "" ;
+
+// zone au dessus
+g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
+ if ( g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone )
+    NomZone = g_GlobalVar.m_ZonesAerAll.m_NomZoneDansDessous ;
+g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
+
+display.setPartialWindow( 0, 0, 200 , 200 );
+display.firstPage();
+display.setFont(&FreeMonoBold12pt7b);
+do
+    {
+    display.fillScreen(GxEPD_WHITE);
+
+    // nom zone
+    display.setCursor(0,90);
+    display.print( "Tma Dessus:\n" );
+    display.print( NomZone.c_str() );
+    }
+while (display.nextPage());
+
+// si time out ecran
+unsigned long Temps = millis() - m_MillisEcran0 ;
+if ( (Temps/1000) > m_SecRetourEcran0 )
+    return ECRAN_0_Vz ;
+
+// si changement d'ecran
+if ( BoutonCentre() )
+    {
+    m_MillisEcran0 = millis() ;
+    return ECRAN_6_Sys ;
+    }
+
+return ECRAN_5_TmaDessous ;
 }
 
 #endif

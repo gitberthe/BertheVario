@@ -1,3 +1,9 @@
+version 20240809a :
+ - modification ihm, bouton centre pour changer d'ecran.
+ - stabilisation Gps sur 20s et non 30s.
+ - temps igc pour depart de vol a 20s par defaut.
+ - arret du vol en page Vz bouton droit (si vitesses <5kmh et 0.4m/s)
+
 version 20240808a :
  - correction calcul total igc en minutes.
  - historique de vol pour chaque vol sur la racine de la sdcard.

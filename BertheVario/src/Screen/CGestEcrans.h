@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 08/08/2024
+/// \date modification : 09/08/2024
 ///
 
 #ifndef _GESTECRANS_
@@ -24,16 +24,17 @@ public :
     // etats de l'automate
     enum EtatsAuto
         {
-        ECRAN_0_Vz          = 0 ,
-        ECRAN_1_Histo       = 1 ,
-        ECRAN_2a_TmaAll     = 2 ,
-        ECRAN_2b_TmaMod     = 3 ,
-        ECRAN_3_Sys         = 4 ,
-        ECRAN_4_CfgFch      = 5 ,
-        ECRAN_5a_ListeIgc    = 6 ,
-        ECRAN_5b_ConfirmArchIgc= 7 ,
-        ERREUR          = 8 ,
-        FIN             = 9
+        ECRAN_0_Vz ,
+        ECRAN_1_Histo ,
+        ECRAN_2a_ListeIgc ,
+        ECRAN_2b_ConfirmArchIgc ,
+        ECRAN_3a_TmaAll ,
+        ECRAN_3b_TmaMod ,
+        ECRAN_4_CfgFch ,
+        ECRAN_5_TmaDessous ,
+        ECRAN_6_Sys ,
+        ERREUR ,
+        FIN
         } ;
 
     void AfficheAll() ;
@@ -42,14 +43,15 @@ public :
                 { return m_EtatAuto ; } ;
 
 protected :
-    virtual EtatsAuto Ecran0Vz()      = 0 ;
-    virtual EtatsAuto Ecran1Histo()   = 0 ;
-    virtual EtatsAuto Ecran2aTmaAll() = 0 ;
-    virtual EtatsAuto Ecran2bTmaMod() = 0 ;
-    virtual EtatsAuto Ecran3Sys() = 0 ;
-    virtual EtatsAuto Ecran4CfgFch() = 0 ;
-    virtual EtatsAuto Ecran5alisteIgcFch() = 0 ;
-    virtual EtatsAuto Ecran5bConfimeArchIgcFch() = 0 ;
+    virtual EtatsAuto EcranVz()      = 0 ;
+    virtual EtatsAuto EcranHisto()   = 0 ;
+    virtual EtatsAuto EcranTmaAll() = 0 ;
+    virtual EtatsAuto EcranTmaMod() = 0 ;
+    virtual EtatsAuto EcranSys() = 0 ;
+    virtual EtatsAuto EcranCfgFch() = 0 ;
+    virtual EtatsAuto EcranListeIgcFch() = 0 ;
+    virtual EtatsAuto EcranConfimeArchIgcFch() = 0 ;
+    virtual EtatsAuto EcranTmaDessous() = 0 ;
 
     EtatsAuto Erreur() ;
 
