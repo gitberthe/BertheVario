@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 05/04/2024
+/// \date modification : 09/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -34,6 +34,9 @@ xTaskCreatePinnedToCore( TacheRelanceIgc, "RelanceIgc", RELANCE_IGC_STACK_SIZE, 
 /// \brief Fonction static qui relance un nouveau fichier igc
 void CGlobalVar::TacheRelanceIgc( void * param )
 {
+// reset pour reboot avec boutons G/D.
+g_GlobalVar.ResetIsFlightLocked() ;
+
 // demande d'arret des taches
 g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run = false ;
 g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run = false ;

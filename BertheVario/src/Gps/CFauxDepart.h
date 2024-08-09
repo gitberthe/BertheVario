@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 18/03/2024
-/// \date modification : 11/04/2024
+/// \date modification : 09/09/2024
 ///
 
 #ifndef _FAUXDEPART_
@@ -20,6 +20,8 @@ public :
     bool IsBadFlightBegin() ;
     bool IsFlightLocked() const
         { return m_ADejaEteLointOuHaut ; }
+    void ResetIsFlightLocked()
+        { m_ADejaEteLointOuHaut = false ; } ;
 
     void InitFauxDepart( float Lat, float Lon, unsigned long Temps) ;     ///< temps de stationnarite
 
