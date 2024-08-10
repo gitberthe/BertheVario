@@ -24,6 +24,8 @@ public :
 
     void  LancerTacheCalculVz() ;
     void  SetAltiSolMetres( float AltiGps ) ;
+    void  SetAltiSolUndef() 
+            { m_DiffAltiFchAgl = 0. ; } ;
 
     friend CTrame ;
 

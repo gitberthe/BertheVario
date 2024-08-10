@@ -155,6 +155,7 @@ float Alti = m_AltiPressionFiltree + m_DiffAltiFchAgl ;
 if ( Alti > 9999. || isnan(Alti) || Alti < -100. )
     {
     Alti = 9999. ;
+    m_DiffAltiFchAgl = 0. ;
     /*CGlobalVar::BeepError() ;
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_MS5611.reset() ;

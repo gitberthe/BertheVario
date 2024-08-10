@@ -108,6 +108,7 @@ g_GlobalVar.m_DureeVolMin = ATTENTE_STABILITE_GPS ;
 
 // boucle d'attente vitesse minimale
 int ivitesse = 0 ;
+bool LastGpsStable = false ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
     // toutes les 1 secondes a 1hz
@@ -121,10 +122,6 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
      break ;
     #endif
 
-    // recalage alti pression 1 fois par secondes
-    g_GlobalVar.m_MutexVariable.PrendreMutex() ;
-     g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltitudeSolHgt ) ;
-    g_GlobalVar.m_MutexVariable.RelacherMutex() ;
 
     #ifndef TMA_DEBUG
     // temps pour zones periode aeriennes
@@ -133,7 +130,10 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // declenchement du vol par bouton droit si ecran 0_Vz
     if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit() )
+        {
+        g_GlobalVar.m_MS5611.SetAltiSolUndef() ;
         break ;
+        }
 
     // si le gps nest pas stable au moins une fois (30 secondes)
     #ifndef SIMU_VOL
@@ -148,6 +148,15 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
          continue ;
          }
     #endif
+
+    // recalage alti au passage gps stable
+    if ( LastGpsStable == false && g_GlobalVar.IsGpsStable() )
+        {
+        LastGpsStable = true ;
+        g_GlobalVar.m_MutexVariable.PrendreMutex() ;
+         g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltitudeSolHgt ) ;
+        g_GlobalVar.m_MutexVariable.RelacherMutex() ;
+        }
 
     // beep attente vitesse
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
