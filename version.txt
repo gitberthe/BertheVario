@@ -1,3 +1,6 @@
+version 20240812a :
+ - reprise correction bug Vz bloquée à 0 et mise à jour de la doc.
+
 version 20240810a :
  - correction temporaire sur site bug Vz bloquée a 0.
 

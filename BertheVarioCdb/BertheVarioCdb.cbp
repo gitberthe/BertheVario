@@ -63,6 +63,8 @@
 		<Unit filename="../BertheVario/src/GlobalVar/CMutex.h" />
 		<Unit filename="../BertheVario/src/GlobalVar/CNumTaskArr.cpp" />
 		<Unit filename="../BertheVario/src/GlobalVar/CNumTaskArr.h" />
+		<Unit filename="../BertheVario/src/Gps/CDisPoints.cpp" />
+		<Unit filename="../BertheVario/src/Gps/CDisPoints.h" />
 		<Unit filename="../BertheVario/src/Gps/CFauxDepart.cpp" />
 		<Unit filename="../BertheVario/src/Gps/CFauxDepart.h" />
 		<Unit filename="../BertheVario/src/Gps/CGps.cpp" />
