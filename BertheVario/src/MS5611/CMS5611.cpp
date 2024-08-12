@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 02/04/2024
+/// \date modification : 12/04/2024
 ///
 
 #include "../BertheVario.h"
@@ -146,7 +146,7 @@ g_GlobalVar.m_TaskArr[MS5611_NUM_TASK].m_Stopped = true ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Renvoie l'alti pression filtree recalee alti sol en debut de vol
+/// \brief Renvoie l'alti pression filtree recalee alti sol en debut de stabilisation gps
 float CMS5611::GetAltiMetres()
 {
 float Alti = m_AltiPressionFiltree + m_DiffAltiFchAgl ;
@@ -155,7 +155,7 @@ float Alti = m_AltiPressionFiltree + m_DiffAltiFchAgl ;
 if ( Alti > 9999. || isnan(Alti) || Alti < -100. )
     {
     Alti = 9999. ;
-    m_DiffAltiFchAgl = 0. ;
+    m_DiffAltiFchAgl = 0. ; // si probleme de diff alti comme reboot en vol
     /*CGlobalVar::BeepError() ;
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_MS5611.reset() ;
