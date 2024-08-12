@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 02/04/2024
+/// \date modification : 12/08/2024
 ///
 
 #ifndef _CMS5611_
@@ -24,7 +24,7 @@ public :
 
     void  LancerTacheCalculVz() ;
     void  SetAltiSolMetres( float AltiGps ) ;
-    void  SetAltiSolUndef() 
+    void  SetAltiSolUndef()                 ///< pour demmarrage en vol alti = alti baro pure
             { m_DiffAltiFchAgl = 0. ; } ;
 
     friend CTrame ;
