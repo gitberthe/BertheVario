@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/04/2024
-/// \date modification : 05/04/2024
+/// \date modification : 13/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -19,7 +19,7 @@ m_pile_full = false ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief On empile une position Gps.
-void CStabGps::PushGpPos()
+void CStabGps::PushGpPos4Stab()
 {
 struct st_pos pos ;
 pos.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat ;

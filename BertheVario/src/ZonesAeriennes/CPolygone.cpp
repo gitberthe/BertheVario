@@ -4,15 +4,62 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 10/04/2024
+/// \date modification : 13/08/2024
 ///
 
 #include "../BertheVario.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Test si on est dans le polygone de la zone. Methode somme des angles.
+/// \brief Test si on est dans le polygone de la zone. Methode par droites secantes.
 /// \return true si points dans polygone
 bool CPolygone::IsIn( CZoneAer::st_coord_poly ** PtsArr , int NbPts , const CZoneAer::st_coord_poly & PtsToTest )
+{
+// test si le point est un des sommets du polygone
+for ( int ip = 0 ; ip < NbPts ; ip++ )
+    if ( PtsArr[ip]->m_Lat == PtsToTest.m_Lat &&
+         PtsArr[ip]->m_Lon == PtsToTest.m_Lon )
+        return true ;
+
+// comptage du nombre d'intersections avec le polygone
+int NbInter = 0 ;
+struct Point ptA1 ;
+struct Point ptB1 ;
+// un point tres loin
+static struct Point ptLoin = { 0. , 170. } ;
+struct Point ptTest = {PtsToTest.m_Lat,PtsToTest.m_Lon} ;
+for ( int ip = 0 ; ip < NbPts ; ip++ )
+    {
+    // points du segmant de zone
+    if ( ip < (NbPts-1) )
+        {
+        ptA1.x = PtsArr[ip]->m_Lat ;
+        ptA1.y = PtsArr[ip]->m_Lon ;
+        ptB1.x = PtsArr[ip+1]->m_Lat ;
+        ptB1.y = PtsArr[ip+1]->m_Lon ;
+        }
+    else
+        {
+        ptA1.x = PtsArr[ip]->m_Lat ;
+        ptA1.y = PtsArr[ip]->m_Lon ;
+        ptB1.x = PtsArr[0]->m_Lat ;
+        ptB1.y = PtsArr[0]->m_Lon ;
+        }
+
+    if ( doIntersect( ptA1 , ptB1 , ptTest , ptLoin ) )
+        NbInter++ ;
+    }
+
+// si nombre d'intersection impair, alors on est dedans le polygone
+if ( NbInter%2 )
+    return true ;
+
+return false ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Test si on est dans le polygone de la zone. Methode somme des angles.
+/// \return true si points dans polygone
+bool CPolygone::IsInOld( CZoneAer::st_coord_poly ** PtsArr , int NbPts , const CZoneAer::st_coord_poly & PtsToTest )
 {
 //Serial.print( "nb pts:" ) ;
 //Serial.println( NbPts ) ;

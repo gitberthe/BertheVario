@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/04/2024
-/// \date modification : 09/08/2024
+/// \date modification : 13/08/2024
 ///
 
 #ifndef _STABGPS_
@@ -17,7 +17,7 @@
 class CStabGps
 {
 public :
-    void PushGpPos() ;
+    void PushGpPos4Stab() ;
 
     bool IsGpsStable() const ;
     void RazGpsPos() ;

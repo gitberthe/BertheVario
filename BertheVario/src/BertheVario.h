@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/08/2024
+/// \date modification : 13/08/2024
 ///
 
 //////////////////
@@ -130,6 +130,7 @@
 #include "VarioBeep/CVarioBeep.h"
 #include "SDCard/CSDCard.h"
 #include "GlobalVar/CConfigFile.h"
+#include "Gps/CDisPoints.h"
 #include "MS5611/CMS5611.h"
 #include "MPU9250/CMpu9250.h"
 //#include "WebBrowser/CWebBrowser.h"
@@ -147,6 +148,7 @@
 #include "Geometrie/CVecteur3D.h"
 #include "Geometrie/CDroite3D.h"
 #include "Geometrie/CMatrice3D.h"
+#include "Geometrie/Segments.h"
 #include "ZonesAeriennes/CDate.h"
 #include "ZonesAeriennes/CZoneAer.h"
 #include "ZonesAeriennes/CDistFront.h"

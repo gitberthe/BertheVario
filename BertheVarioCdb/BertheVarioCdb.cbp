@@ -53,6 +53,8 @@
 		<Unit filename="../BertheVario/src/Geometrie/CVecteur2D.h" />
 		<Unit filename="../BertheVario/src/Geometrie/CVecteur3D.cpp" />
 		<Unit filename="../BertheVario/src/Geometrie/CVecteur3D.h" />
+		<Unit filename="../BertheVario/src/Geometrie/Segments.cpp" />
+		<Unit filename="../BertheVario/src/Geometrie/Segments.h" />
 		<Unit filename="../BertheVario/src/GlobalVar/CConfigFile.cpp" />
 		<Unit filename="../BertheVario/src/GlobalVar/CConfigFile.h" />
 		<Unit filename="../BertheVario/src/GlobalVar/CFileHistoVol.cpp" />

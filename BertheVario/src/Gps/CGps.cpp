@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/08/2024
+/// \date modification : 13/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -107,7 +107,6 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 g_GlobalVar.m_DureeVolMin = ATTENTE_STABILITE_GPS ;
 
 // boucle d'attente vitesse minimale
-int ivitesse = 0 ;
 bool LastGpsStable = false ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
@@ -138,14 +137,13 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // si le gps nest pas stable au moins une fois (30 secondes)
     #ifndef SIMU_VOL
-     g_GlobalVar.PushGpPos() ;
+     g_GlobalVar.PushGpPos4Stab() ;
      // si pas attente vitesse
      if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS && (! g_GlobalVar.IsGpsStable()) )
          {
          // beep attente gps 'S'
          if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
              CGlobalVar::beeper( 1500 , 100 ) ;
-         ivitesse = 0 ;
          continue ;
          }
     #endif
@@ -160,6 +158,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         }
 
     // beep attente vitesse
+    g_GlobalVar.m_DisPts.PusGpsPos4Disp() ;
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         {
         CGlobalVar::beeper( 1500 , 100 ) ;
@@ -170,15 +169,8 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // affichage gps pret
     g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE_VOL ;
 
-    // si vitesse superieur a 16 kmh et inferieur a 80kmh
-    if ( (g_GlobalVar.m_VitesseKmh >= g_GlobalVar.m_Config.m_vitesse_igc_kmh) &&
-         (g_GlobalVar.m_VitesseKmh < 70.) )
-        ivitesse++;
-    else
-        ivitesse = 0 ;
-
-    // au bout de 7 vitesses/7 secondes depassée declenchement igc
-    if ( ivitesse >= g_GlobalVar.m_Config.m_temps_igc_sec )
+    // si debut de vol cause XY
+    if ( g_GlobalVar.m_DisPts.IsInFlight() )
         break ;
 
     // si vitesse verticale depassee declenchement igc

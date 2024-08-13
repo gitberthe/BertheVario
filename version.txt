@@ -1,3 +1,8 @@
+version 20240813a :
+ - modification algorithme calcul dans un polygone par droites secantes.
+ - modification calcul depart de vol en vitesse xy par moyenne de dispersion.
+ - ajout d'un parametre dans fichier de configuration pour distance dispersion depart de vol xy.
+
 version 20240812a :
  - reprise correction bug Vz bloquée à 0 et mise à jour de la doc.
 

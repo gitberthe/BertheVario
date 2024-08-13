@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 28/07/2024
+/// \date modification : 13/08/2024
 ///
 
 #ifndef _GLOBALVAR_
@@ -34,6 +34,7 @@ public :
     CFilesHistoVols m_HistoVol ; ///< historique du vol precedent
     CZonesFch   m_ZonesAerAll ;///< tableau des zones aeriennes pris en compte
     CHgt2Agl    m_Hgt2Agl ; ///< pour determiner la hauteur sol
+    CDisPoints  m_DisPts ; ///< pour lancement vol XY
 
     bool m_ModeHttp ;                  ///< si mode http
     bool m_BeepAttenteGVZone = true ;  ///< beep d'attente Gps/Vitesse/Zone

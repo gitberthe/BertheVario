@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 12/08/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -37,12 +37,13 @@ public :
 
     float m_coef_filtre_alti_baro = 0.4 ;   ///< coefficient de filtrage [0,1[ , 0.99 tres fort filtrage
     int   m_periode_integration_sec = 2 ;   ///< pour le calcul de la Vz
-    int   m_vitesse_igc_kmh = 19 ;          ///< vitesse de declenchement enregistrement
-    int   m_temps_igc_sec = 20 ;             ///< nombre de secondes de vitesse pour declenchement
+    int   m_vitesse_igc_kmh = 16 ;          ///< vitesse de declenchement enregistrement
+    int   m_temps_igc_sec = 5 ;             ///< nombre de secondes de vitesse pour declenchement
+    int   m_dispersion_igc_metres = 10 ;    ///< dispersion des points igc en metres
     float m_vz_igc_ms = 0.6 ;               ///< vz de vitesse pour declenchement
     int   m_stab_gps = 30 ;                 ///< rayon dispersion gps pour stabilite
     float m_vz_seuil_max  = 4. ;            ///< seuils de beep
-    float m_vz_seuil_haut = 0.2 ;          ///< seuils de beep
+    float m_vz_seuil_haut = 0.2 ;           ///< seuils de beep
     float m_vz_seuil_bas = -2.5 ;           ///< seuils de beep
     int   m_dtu          = 2 ;              ///< diff heure TU
     int   m_AltiMargin   = 40 ;             ///< marge en altitude de zone TMA CTR en metres

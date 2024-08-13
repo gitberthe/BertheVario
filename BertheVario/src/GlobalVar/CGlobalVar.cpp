@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 09/09/2024
+/// \date modification : 13/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -36,6 +36,9 @@ void CGlobalVar::TacheRelanceIgc( void * param )
 {
 // reset pour reboot avec boutons G/D.
 g_GlobalVar.ResetIsFlightLocked() ;
+
+// reset debut de vol XY
+g_GlobalVar.m_DisPts.ResetXY() ;
 
 // demande d'arret des taches
 g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run = false ;
