@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 13/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -88,16 +88,17 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 /// \brief Raz de l'ecran.
 void CScreen154::ScreenRaz()
 {
-display.powerOff();
-/*display.setFullWindow() ;
-display.setFont(&FreeMonoBold18pt7b);
+//display.powerOff();
+display.setFullWindow() ;
+//display.setPartialWindow( 0, 0, 200 , 200 );
+//display.setFont(&FreeMonoBold18pt7b);
 display.firstPage();
 do  {
     display.fillScreen(GxEPD_WHITE);
-    display.setCursor(0, 0);
-    display.printf("RAZ") ;
+    //display.setCursor(0, 0);
+    //display.printf("RAZ") ;
     }
-while (display.nextPage());*/
+while (display.nextPage());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

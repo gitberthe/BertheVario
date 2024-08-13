@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 13/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -48,7 +48,22 @@ void CGestEcrans::AfficheAll()
 
 // appel de la fonction de l'automate vers l'etat suivant
 CGestEcrans::EtatsAuto (CGestEcrans::*pFunction)() = m_Automate[m_EtatAuto].m_pFunction ;
-m_EtatAuto = (this->*pFunction)() ;
+EtatsAuto NextStep = (this->*pFunction)() ;
+
+//ScreenOff() ;
+
+
+if ( m_EtatAuto != NextStep )
+    {
+    // pour retour automatique vers Vz_0
+    m_MillisEcran0 = millis() ;
+
+    // raz screen si changement ecran
+    if ( NextStep == ECRAN_0_Vz )
+        ScreenRaz() ;
+    }
+
+m_EtatAuto = NextStep ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

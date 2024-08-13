@@ -1,3 +1,6 @@
+version 20240813b :
+ - raz ecran au retour vers ecran Vz_0
+
 version 20240813a :
  - modification algorithme calcul dans un polygone par droites secantes.
  - modification calcul depart de vol en vitesse xy par moyenne de dispersion.
