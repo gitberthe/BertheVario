@@ -1,3 +1,6 @@
+version 20240816a :
+ - modification valeur par defaut fichier de configuration (depart vol xy).
+
 version 20240813b :
  - raz ecran au retour vers ecran Vz_0
 

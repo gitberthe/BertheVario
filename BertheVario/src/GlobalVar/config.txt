@@ -1,9 +1,9 @@
 # ce fichier est un fichier d'exemple car il est auto genere par le firmware en cas d'absence.
 [coef_filtre_alti_baro]   0.40    # plus grand => plus filtré
 [periode_integration_sec] 2       # temps d'integration de la VZ
-[vitesse_igc_kmh]         16      # vitesse de declenchement de l'enregistrement
-[temps_igc_sec]            5      # nombre de secondes de vitesse temps_igc_sec
-[dispersion_igc_metres]   10      # dispersion des points gps maximum pour declenchementdu vol
+[vitesse_igc_kmh]         18      # vitesse de declenchement de l'enregistrement
+[temps_igc_sec]            6      # nombre de secondes de vitesse temps_igc_sec
+[dispersion_igc_metres]   20      # dispersion des points gps maximum pour declenchementdu vol
 [vz_igc_ms]               0.6     # vz m/s pour declenchement
 [stab_gps_m]              30      # rayon dispersion gps pour stabilisation
 [vz_seuil_haut]           0.2     # vz m/s declenchement bip
