@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 14/07/2024
+/// \date modification : 22/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -40,25 +40,58 @@ xTaskCreatePinnedToCore(TacheVarioBeep, "TaskBeep", VARIOBEEP_STACK_SIZE, this, 
 void CVarioBeep::TacheVarioBeep(void *param)
 {
 delay(5000) ;
-const float MinFreq = 1400 ;
+const float MinFreq = 1200 ;
 const float MaxFreq = 8000 ;
 const float SeuilVzMin = g_GlobalVar.m_Config.m_vz_seuil_haut ;
 while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     {
-    // desactivation du son
+    // desactivation du son cause TMA
     bool NotActive = g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone == ZONE_DEDANS ||
                      g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone == ZONE_LIMITE_ALTI ||
                      g_GlobalVar.m_ZonesAerAll.m_LimiteZone != ZONE_EN_DEHORS ;
 
+    // si alarme zone desactivé => son vario active
     if ( !g_GlobalVar.m_BeepAttenteGVZone )
         NotActive = false ;
 
+    // si son vario desactive
+    if ( NotActive )
+        {
+        delay( 500 ) ;
+        continue ;
+        }
+
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_max ;
+    //float LocalVitVertMS =  ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
     #endif
+
+    // si degueulante
+    if ( LocalVitVertMS <= g_GlobalVar.m_Config.m_vz_seuil_bas )
+        {
+        g_GlobalVar.beeper( MinFreq , 400 ) ;
+        delay( 400 ) ;
+        continue ;
+        }
+    // descente normale
+    else if ( LocalVitVertMS > g_GlobalVar.m_Config.m_vz_seuil_bas && LocalVitVertMS < 0. )
+        {
+        delay( 500 ) ;
+        continue ;
+        }
+    // zerotage en vol (pas au sol)
+    else if ( LocalVitVertMS >= 0. && LocalVitVertMS < SeuilVzMin )
+        {
+        for ( int ib = 0 ; ib < 4 && g_GlobalVar.IsFlightLocked() ; ib++ )
+            {
+            g_GlobalVar.beeper( MinFreq , 90 ) ;
+            delay( 100 ) ;
+            }
+        delay( 900 ) ;
+        continue ;
+        }
 
     // coefficient de Vz
     float Coef01 = (LocalVitVertMS-SeuilVzMin) / g_GlobalVar.m_Config.m_vz_seuil_max ;
@@ -67,25 +100,11 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     if ( Coef01 < 0 )
         Coef01 = 0. ;
 
-    // si pas de taux de montee suffisante
-    if ( LocalVitVertMS < SeuilVzMin )
-        {
-        // si degueulante
-        if ( LocalVitVertMS < g_GlobalVar.m_Config.m_vz_seuil_bas && !NotActive )
-            {
-            g_GlobalVar.beeper( MinFreq - 700 , 300 ) ;
-            delay( 300 ) ;
-            }
-        else
-            delay( 500 ) ;
-        continue ;
-        }
-
     // calcul frequence son
     float Freq = MinFreq + Coef01 * ( MaxFreq - MinFreq ) ;
 
     // calcul de la recurrence
-    float RecurrenceMs = 500 - Coef01 * 400 ;
+    float RecurrenceMs = 700 - Coef01 * 550 ;
 
     // calcul de la largeur du beep
     float LargeurBeepMs = 100 ;
@@ -93,9 +112,6 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     // attente
     delay(RecurrenceMs) ;
 
-    // si alarme zone
-    if ( NotActive )
-        continue ;
 
     // emmission son
     g_GlobalVar.beeper( Freq, LargeurBeepMs ) ;

@@ -1,3 +1,6 @@
+version 20240822a :
+ - modification du son pour zerotage.
+
 version 20240816a :
  - modification valeur par defaut fichier de configuration (depart vol xy).
 
