@@ -1,3 +1,9 @@
+version 20240823a :
+ - modification valeur par defaut fichier de configuration (depart vol xy 200m).
+ - modification son zerotage.
+ - modification condition recalage alti baro gps stable.
+ - priorite tache vario beep augmente.
+ 
 version 20240822b :
  - modification valeur par defaut fichier de configuration (depart vol xy).
 

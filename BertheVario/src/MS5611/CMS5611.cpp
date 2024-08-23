@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 12/04/2024
+/// \date modification : 23/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -152,7 +152,7 @@ float CMS5611::GetAltiMetres()
 float Alti = m_AltiPressionFiltree + m_DiffAltiFchAgl ;
 
 // pour parer a un probleme
-if ( Alti > 9999. || isnan(Alti) || Alti < -100. )
+if ( Alti > 9999. || isnan(Alti) || Alti < -500. )
     {
     Alti = 9999. ;
     m_DiffAltiFchAgl = 0. ; // si probleme de diff alti comme reboot en vol

@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 16/08/2024
+/// \date modification : 23/08/2024
 ///
 
 //////////////////
@@ -165,10 +165,10 @@
 // taches plus affichage //
 ///////////////////////////
 
-// son priorite assez haute (bloque/bug les capteurs sans mutex)
+// son priorite tres haute non interruptible (bloque/bug les capteurs sans mutex)
 #define VARIOBEEP_NUM_TASK   0
 #define VARIOBEEP_STACK_SIZE 1000
-#define VARIOBEEP_PRIORITY   18
+#define VARIOBEEP_PRIORITY   20
 #define VARIOBEEP_CORE       0
 
 // termic basse priorite

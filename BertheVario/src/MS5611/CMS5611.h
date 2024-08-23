@@ -23,7 +23,7 @@ public :
     void InitMs5611() ;
 
     void  LancerTacheCalculVz() ;
-    void  SetAltiSolMetres( float AltiGps ) ;
+    void  SetAltiSolMetres( float AltiSol ) ;
     void  SetAltiSolUndef()                 ///< pour demmarrage en vol alti = alti baro pure
             { m_DiffAltiFchAgl = 0. ; } ;
 

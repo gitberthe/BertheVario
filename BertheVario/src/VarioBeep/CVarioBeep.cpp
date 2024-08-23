@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 22/08/2024
+/// \date modification : 23/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -39,7 +39,8 @@ xTaskCreatePinnedToCore(TacheVarioBeep, "TaskBeep", VARIOBEEP_STACK_SIZE, this, 
 /// \brief Fonction static core 0 qui calcul la Vz et gere les beep.
 void CVarioBeep::TacheVarioBeep(void *param)
 {
-delay(5000) ;
+delay(3000) ;
+const float LowFreq = 1100 ;
 const float MinFreq = 1200 ;
 const float MaxFreq = 8000 ;
 const float SeuilVzMin = g_GlobalVar.m_Config.m_vz_seuil_haut ;
@@ -62,7 +63,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
         }
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //float LocalVitVertMS =  ;
+    //float LocalVitVertMS = 0.3 ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
@@ -71,7 +72,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     // si degueulante
     if ( LocalVitVertMS <= g_GlobalVar.m_Config.m_vz_seuil_bas )
         {
-        g_GlobalVar.beeper( MinFreq , 400 ) ;
+        g_GlobalVar.beeper( LowFreq , 400 ) ;
         delay( 400 ) ;
         continue ;
         }
@@ -84,12 +85,16 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     // zerotage en vol (pas au sol)
     else if ( LocalVitVertMS >= 0. && LocalVitVertMS < SeuilVzMin )
         {
-        for ( int ib = 0 ; ib < 4 && g_GlobalVar.IsFlightLocked() ; ib++ )
+        static bool BeepZerotage = false ;
+        if ( g_GlobalVar.IsFlightLocked() )
             {
-            g_GlobalVar.beeper( MinFreq , 90 ) ;
-            delay( 100 ) ;
+            if ( BeepZerotage )
+                g_GlobalVar.beeper( LowFreq , 150 ) ;
+            else
+                g_GlobalVar.beeper( MinFreq , 150 ) ;
+            BeepZerotage = ! BeepZerotage ;
             }
-        delay( 900 ) ;
+        delay( 800 ) ;
         continue ;
         }
 

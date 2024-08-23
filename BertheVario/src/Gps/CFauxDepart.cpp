@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 18/03/2024
-/// \date modification : 08/08/2024
+/// \date modification : 23/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -86,6 +86,7 @@ m_LastLat = Lat ;
 m_LastLon = Lon ;
 m_TempsStationnaireLatLon = Temps ;
 m_TempsStationnaireAlti = Temps ;
+m_ADejaEteLointOuHaut = false ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

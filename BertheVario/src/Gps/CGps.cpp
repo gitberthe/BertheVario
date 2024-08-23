@@ -107,7 +107,6 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 g_GlobalVar.m_DureeVolMin = ATTENTE_STABILITE_GPS ;
 
 // boucle d'attente vitesse minimale
-bool LastGpsStable = false ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
     // toutes les 1 secondes a 1hz
@@ -144,18 +143,14 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
          // beep attente gps 'S'
          if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
              CGlobalVar::beeper( 1500 , 100 ) ;
+
+         // recalage altibaro
+         g_GlobalVar.m_MutexVariable.PrendreMutex() ;
+          g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltitudeSolHgt ) ;
+         g_GlobalVar.m_MutexVariable.RelacherMutex() ;
          continue ;
          }
     #endif
-
-    // recalage altibaro au passage gps stable (et pas dans le vide d'une falaise en vol...)
-    if ( LastGpsStable == false && g_GlobalVar.IsGpsStable() )
-        {
-        LastGpsStable = true ;
-        g_GlobalVar.m_MutexVariable.PrendreMutex() ;
-         g_GlobalVar.m_MS5611.SetAltiSolMetres( g_GlobalVar.m_AltitudeSolHgt ) ;
-        g_GlobalVar.m_MutexVariable.RelacherMutex() ;
-        }
 
     // beep attente vitesse
     g_GlobalVar.m_DisPts.PusGpsPos4Disp() ;

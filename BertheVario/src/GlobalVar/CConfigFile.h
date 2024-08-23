@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 22/08/2024
+/// \date modification : 23/08/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -39,7 +39,7 @@ public :
     int   m_periode_integration_sec = 2 ;   ///< pour le calcul de la Vz
     int   m_vitesse_igc_kmh = 18 ;          ///< vitesse de declenchement enregistrement
     int   m_temps_igc_sec = 10 ;            ///< nombre de secondes de vitesse pour declenchement
-    int   m_dispersion_igc_metres = 30 ;    ///< dispersion des points igc en metres
+    int   m_dispersion_igc_metres = 200 ;    ///< dispersion des points igc en metres
     float m_vz_igc_ms = 0.6 ;               ///< vz de vitesse pour declenchement
     int   m_stab_gps = 30 ;                 ///< rayon dispersion gps pour stabilite
     float m_vz_seuil_max  = 4. ;            ///< seuils de beep
