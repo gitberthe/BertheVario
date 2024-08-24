@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 23/08/2024
+/// \date modification : 24/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -86,7 +86,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     else if ( LocalVitVertMS >= 0. && LocalVitVertMS < SeuilVzMin )
         {
         static bool BeepZerotage = false ;
-        if ( g_GlobalVar.IsFlightLocked() )
+        if ( g_GlobalVar.m_FinDeVol.IsFlightLocked() )
             {
             if ( BeepZerotage )
                 g_GlobalVar.beeper( LowFreq , 150 ) ;

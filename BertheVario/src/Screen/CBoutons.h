@@ -4,13 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 14/06/2024
+/// \date modification : 24/08/2024
 ///
 
 #ifndef _BOUTONS_
 #define _BOUTONS_
 
-#define DELAY_TRUE 10
+#define DELAY_TRUE 100
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Permet l'utilisation des boutons. Scan 10hz avec beep.

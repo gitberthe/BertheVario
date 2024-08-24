@@ -1,3 +1,7 @@
+version 20240824a :
+ - appuy bouton 100ms minimum pour prise en compte.
+ - remplacement CFauxDepart par CFinDeVol automatique.
+
 version 20240823a :
  - modification valeur par defaut fichier de configuration (depart vol xy 200m).
  - modification son zerotage.

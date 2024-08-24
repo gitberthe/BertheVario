@@ -35,7 +35,7 @@ xTaskCreatePinnedToCore( TacheRelanceIgc, "RelanceIgc", RELANCE_IGC_STACK_SIZE, 
 void CGlobalVar::TacheRelanceIgc( void * param )
 {
 // reset pour reboot avec boutons G/D.
-g_GlobalVar.ResetIsFlightLocked() ;
+g_GlobalVar.m_FinDeVol.InitFinDeVol() ;
 
 // reset debut de vol XY
 g_GlobalVar.m_DisPts.ResetXY() ;

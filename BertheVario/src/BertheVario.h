@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 23/08/2024
+/// \date modification : 24/08/2024
 ///
 
 //////////////////
@@ -118,8 +118,8 @@
 #include "GlobalVar/CMutex.h"
 #include "Gps/CTrame.h"
 #include "Gps/CIgc.h"
-#include "Gps/CFauxDepart.h"
 #include "Gps/CStabGps.h"
+#include "Gps/CFinDeVol.h"
 #include "Gps/CGps.h"
 #include "Gps/CHgt2Agl.h"
 #include "Screen/CBoutons.h"

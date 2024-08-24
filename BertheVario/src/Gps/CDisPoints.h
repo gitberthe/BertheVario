@@ -14,7 +14,7 @@
 /// \brief Classe qui permet de calculer la dispersion moyenne des points
 /// (ayant une vitesse gps minimale sur x secondes) autour de leur barycentre.
 /// Permet ainsi de detecter un depart de vol avec une erreure de positionnemnt
-/// XY gps habituelle de 50m au lancement.
+/// XY gps habituelle de 150m au lancement.
 class CDisPoints
 {
 public :

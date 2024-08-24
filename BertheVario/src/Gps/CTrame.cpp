@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 28/07/2024
+/// \date modification : 24/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -201,6 +201,7 @@ if ( !strcmp(pChar,"--GGA" ) )
         // longitude signe
         else if ( ipar == 4 )
             {
+            g_GlobalVar.m_AltitudeSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
             #ifndef SIMU_VOL
              if ( *pChar == 'W' )
                  g_GlobalVar.m_TerrainPosCur.m_Lon *= -1 ;
@@ -208,7 +209,6 @@ if ( !strcmp(pChar,"--GGA" ) )
             // mise a jour des altitudes
             g_GlobalVar.m_TerrainPosCur.m_AltiBaro = g_GlobalVar.m_MS5611.GetAltiMetres() ;
             #endif
-            g_GlobalVar.m_AltitudeSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
             }
         // altitude
         else if ( ipar == 8 )

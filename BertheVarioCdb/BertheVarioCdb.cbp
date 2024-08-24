@@ -67,8 +67,8 @@
 		<Unit filename="../BertheVario/src/GlobalVar/CNumTaskArr.h" />
 		<Unit filename="../BertheVario/src/Gps/CDisPoints.cpp" />
 		<Unit filename="../BertheVario/src/Gps/CDisPoints.h" />
-		<Unit filename="../BertheVario/src/Gps/CFauxDepart.cpp" />
-		<Unit filename="../BertheVario/src/Gps/CFauxDepart.h" />
+		<Unit filename="../BertheVario/src/Gps/CFinDeVol.cpp" />
+		<Unit filename="../BertheVario/src/Gps/CFinDeVol.h" />
 		<Unit filename="../BertheVario/src/Gps/CGps.cpp" />
 		<Unit filename="../BertheVario/src/Gps/CGps.h" />
 		<Unit filename="../BertheVario/src/Gps/CHgt2Agl.cpp" />

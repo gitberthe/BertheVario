@@ -130,7 +130,8 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit() )
         {
         // raz difference altitude presion/wgs84 = altitude affichée est barometrique pure
-        g_GlobalVar.m_MS5611.SetAltiSolUndef() ;
+        if ( ! g_GlobalVar.IsGpsStable() )
+            g_GlobalVar.m_MS5611.SetAltiSolUndef() ;
         break ;
         }
 
@@ -211,7 +212,7 @@ delay(200);
 CGlobalVar::BeepOk() ;
 
 // pos et temps debut de stationnarite
-g_GlobalVar.InitFauxDepart( g_GlobalVar.m_TerrainPosDeco.m_Lat , g_GlobalVar.m_TerrainPosDeco.m_Lon , millis() ) ;
+g_GlobalVar.m_FinDeVol.InitFinDeVol() ;
 
 // mise a jour du temps de vol toutes les secondes
 int iboucleHistoVol = 0 ;
@@ -234,15 +235,6 @@ while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
 
     // pour la finesse sol
     g_GlobalVar.PushDistAlti( Distance , g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
-
-    // si faux depart de vol
-    #ifndef SOUND_DEBUG
-    if ( g_GlobalVar.IsBadFlightBegin() )
-        {
-        CGlobalVar::RelancerEnregistrementFichier() ;
-        break ;
-        }
-    #endif
 
     // historique du vol toutes les 5 sec
     if ( !((iboucleHistoVol++)%5) )
@@ -271,6 +263,7 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
     {
     // enregistrement position dans igc
     g_GlobalVar.PushLoc2Igc() ;
+    g_GlobalVar.m_FinDeVol.PushPos4FlihgtEnd() ;
 
     // toutes les secondes
     delay( 1000 ) ;
@@ -278,6 +271,13 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
     // arret du vol par bouton droit
     if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit()
          && g_GlobalVar.m_VitesseKmh < 5. && g_GlobalVar.m_VitVertMS < 0.4 )
+        {
+        CGlobalVar::RelancerEnregistrementFichier() ;
+        break ;
+        }
+
+    // si fin de vol
+    if ( g_GlobalVar.m_FinDeVol.IsFlightEnd() )
         {
         CGlobalVar::RelancerEnregistrementFichier() ;
         break ;

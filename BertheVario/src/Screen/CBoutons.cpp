@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// \file CBoutons.h
+/// \file CBoutons.cpp
 ///
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 24/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -35,7 +35,6 @@ bool CBoutons::BoutonGauche()
 {
 if ( m_BoutonGauche )
     {
-    delay( DELAY_TRUE ) ;
     m_BoutonGauche = false ;
     return true ;
     }
@@ -48,7 +47,6 @@ bool CBoutons::BoutonCentre()
 {
 if ( m_BoutonCentre )
     {
-    delay( DELAY_TRUE ) ;
     m_BoutonCentre = false ;
     return true ;
     }
@@ -61,7 +59,6 @@ bool CBoutons::BoutonDroit()
 {
 if ( m_BoutonDroit )
     {
-    delay( DELAY_TRUE ) ;
     m_BoutonDroit = false ;
     return true ;
     }
@@ -99,31 +96,59 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     if ( !digitalRead(BUTTON_A_PIN) && digitalRead(BUTTON_B_PIN) && !digitalRead(BUTTON_C_PIN) )
         {
         // pas de reboot en vol certain
-        if ( g_GlobalVar.IsFlightLocked() )
+        if ( g_GlobalVar.m_FinDeVol.IsFlightLocked() )
             continue ;
         Serial.println( "reboot button") ;
         CGlobalVar::Reboot() ;
         }
 
     // memorisation bouton gauche
-    if ( !pThis->m_BoutonGauche && !digitalRead(BUTTON_A_PIN) )
+    if( !pThis->m_BoutonGauche )
         {
-        pThis->m_BoutonGauche = true ;
-        beep = true ;
+        unsigned long time = millis() ;
+        while ( !digitalRead(BUTTON_A_PIN) )
+            {
+            if( (millis()-time) >= DELAY_TRUE )
+                {
+                pThis->m_BoutonGauche = true ;
+                beep = true ;
+                break ;
+                }
+            delay( 1 ) ;
+            }
         }
 
     // memorisation bouton centre
-    if ( !pThis->m_BoutonCentre && !digitalRead(BUTTON_B_PIN) )
+    if ( !pThis->m_BoutonCentre )
         {
-        pThis->m_BoutonCentre = true ;
-        beep = true ;
+        unsigned long time = millis() ;
+        while ( !digitalRead(BUTTON_B_PIN) )
+            {
+            if( (millis()-time) >= DELAY_TRUE )
+                {
+                pThis->m_BoutonCentre = true ;
+                beep = true ;
+                break ;
+                }
+            delay( 1 ) ;
+            }
+
         }
 
     // memorisation bouton droit
-    if ( !pThis->m_BoutonDroit && !digitalRead(BUTTON_C_PIN) )
+    if ( !pThis->m_BoutonDroit )
         {
-        pThis->m_BoutonDroit = true ;
-        beep = true ;
+        unsigned long time = millis() ;
+        while ( !digitalRead(BUTTON_C_PIN) )
+            {
+            if( (millis()-time) >= DELAY_TRUE )
+                {
+                pThis->m_BoutonDroit = true ;
+                beep = true ;
+                break ;
+                }
+            delay( 1 ) ;
+            }
         }
 
     // beep d'appui
@@ -132,8 +157,6 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         beep = false ;
         CGlobalVar::BeepOk() ;
         }
-
-    delay( 100 ) ;
     }
 
 g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Stopped = true ;
