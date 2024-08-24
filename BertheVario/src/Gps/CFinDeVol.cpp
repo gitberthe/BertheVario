@@ -56,17 +56,26 @@ for ( int ip = 0 ; ip < TAILLE_PILE_FE ; ip++ )
 DistAlti /= TAILLE_PILE_FE ;
 DistXY   /= TAILLE_PILE_FE ;
 
-// calcul petite vitesse
-bool VitessePetite = true ;
+// calcul petite vitesse horizontale
+bool VitesseHorPetite = true ;
 for ( int ip = 0 ; ip < TAILLE_PILE_FE ; ip++ )
-    if ( m_PosArr[ip].m_Vit > VITESSE_FAIBLE )
+    if ( m_PosArr[ip].m_VitHor > VITESSE_FAIBLE )
         {
-        VitessePetite = false ;
+        VitesseHorPetite = false ;
+        break ;
+        }
+
+// calcul petite vitesse verticale
+bool VitesseVerPetite = true ;
+for ( int ip = 0 ; ip < TAILLE_PILE_FE ; ip++ )
+    if ( fabsf(m_PosArr[ip].m_VitVer) > 0.4 )
+        {
+        VitesseVerPetite = false ;
         break ;
         }
 
 // si petite distance, altitude, vitesse
-if ( DistXY < 30. && DistAlti < 3. && VitessePetite )
+if ( DistXY < 30. && DistAlti < 3. && VitesseHorPetite && VitesseVerPetite )
     {
     // bip fin de vol
     CGlobalVar::BeepOk() ;
@@ -98,7 +107,8 @@ struct st_pos pos ;
 pos.m_Lat  = g_GlobalVar.m_TerrainPosCur.m_Lat ;
 pos.m_Lon  = g_GlobalVar.m_TerrainPosCur.m_Lon ;
 pos.m_Alti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
-pos.m_Vit  = g_GlobalVar.m_VitesseKmh ;
+pos.m_VitHor = g_GlobalVar.m_VitesseKmh ;
+pos.m_VitVer = g_GlobalVar.m_VitVertMS ;
 
 m_PosArr[ m_ipile++ ] = pos ;
 

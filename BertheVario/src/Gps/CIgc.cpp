@@ -98,11 +98,11 @@ g_GlobalVar.m_MutexVariable.RelacherMutex() ;
     Serial.println( g_GlobalVar.m_LonFloat ) ;
 #endif
 
-/*// si lat ou lon negatif
+// si lat ou lon negatif
 char * pLat = LocalLat ;
 char * pLon = LocalLon ;
 if ( SigneLat < 0. ) pLat++ ;
-if ( SigneLon < 0. ) pLon++ ;*/
+if ( SigneLon < 0. ) pLon++ ;
 
 // champ                 hh   mm   ss  LLlllll
 sprintf( CharRecord , "B%02d%02d%02d%s%c%s%cA%05d%05d" ,

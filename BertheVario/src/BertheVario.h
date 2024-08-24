@@ -171,11 +171,11 @@
 #define VARIOBEEP_PRIORITY   20
 #define VARIOBEEP_CORE       0
 
-// termic basse priorite
+/* // termic basse priorite
 #define TERMIC_NUM_TASK     1
 #define TERMIC_STACK_SIZE   4000
 #define TERMIC_PRIORITY     0
-#define TERMIC_CORE         1
+#define TERMIC_CORE         1 */
 
 // calcul general basse priorite
 #define CALCUL_NUM_TASK     2

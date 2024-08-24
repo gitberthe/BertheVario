@@ -33,7 +33,8 @@ private :
         float m_Lat  = 0. ;
         float m_Lon  = 0. ;
         float m_Alti = 0. ;
-        float m_Vit  = 0. ;
+        float m_VitHor  = 0. ;
+        float m_VitVer  = 0. ;
         } ;
 
     struct st_pos m_PosArr[TAILLE_PILE_FE] ;  ///< tableau des derneires mesures

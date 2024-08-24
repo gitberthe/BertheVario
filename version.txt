@@ -1,3 +1,7 @@
+version 20240824b :
+ - ajout vitesse verticale pour CFinDeVol.
+ - modification son zerotage.
+ 
 version 20240824a :
  - appuy bouton 100ms minimum pour prise en compte.
  - remplacement CFauxDepart par CFinDeVol automatique.

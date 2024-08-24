@@ -263,10 +263,10 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
     {
     // enregistrement position dans igc
     g_GlobalVar.PushLoc2Igc() ;
-    g_GlobalVar.m_FinDeVol.PushPos4FlihgtEnd() ;
+    delay( 500 ) ;
 
-    // toutes les secondes
-    delay( 1000 ) ;
+    g_GlobalVar.m_FinDeVol.PushPos4FlihgtEnd() ;
+    delay( 500 ) ;
 
     // arret du vol par bouton droit
     if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit()

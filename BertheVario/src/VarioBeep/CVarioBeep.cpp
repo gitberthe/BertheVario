@@ -63,7 +63,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
         }
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //float LocalVitVertMS = 0.3 ;
+    //float LocalVitVertMS = 0.1 ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
@@ -85,16 +85,22 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     // zerotage en vol (pas au sol)
     else if ( LocalVitVertMS >= 0. && LocalVitVertMS < SeuilVzMin )
         {
-        static bool BeepZerotage = false ;
+        static int BeepZerotage = 0 ;
+        BeepZerotage++ ;
+        BeepZerotage = BeepZerotage%7 ;
         if ( g_GlobalVar.m_FinDeVol.IsFlightLocked() )
             {
-            if ( BeepZerotage )
+            int MidFreq = (LowFreq + MinFreq) / 2 ;
+            if ( BeepZerotage == 0 || BeepZerotage == 3 )
                 g_GlobalVar.beeper( LowFreq , 150 ) ;
-            else
+            else if ( BeepZerotage == 1 || BeepZerotage == 4 )
                 g_GlobalVar.beeper( MinFreq , 150 ) ;
-            BeepZerotage = ! BeepZerotage ;
+            else if ( BeepZerotage == 2 || BeepZerotage == 5 )
+                g_GlobalVar.beeper( MidFreq , 150 ) ;
+            else
+                delay( 1000 ) ;
             }
-        delay( 800 ) ;
+        delay( 150 ) ;
         continue ;
         }
 
