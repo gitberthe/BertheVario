@@ -156,12 +156,12 @@ if ( Alti > 9999. || isnan(Alti) || Alti < -500. )
     {
     Alti = 9999. ;
     m_DiffAltiFchAgl = 0. ; // si probleme de diff alti comme reboot en vol
-    /*CGlobalVar::BeepError() ;
+    //CGlobalVar::BeepError() ;
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_MS5611.reset() ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
     InitMs5611() ;
-    delay( 500 ) ;*/
+    //delay( 500 ) ;
     }
 return Alti ;
 }
