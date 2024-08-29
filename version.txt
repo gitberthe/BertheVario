@@ -1,3 +1,8 @@
+version 20240830a :
+ - reset capteur pression MS5611 si valeur altibaro hors norme.
+ - valeur par defaut fichier de configuration 
+ - correction calcul de la somme des temps igc en secondes
+
 version 20240827a :
  - correction temporaire altibaro reset capteur pression MS5611.
 

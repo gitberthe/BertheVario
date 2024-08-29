@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 30/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -743,7 +743,7 @@ sprintf( TmpCharCM , " %3dd", (int)g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
 
 // alti baro
 char TmpAltiBaro[20] ;
-sprintf( TmpAltiBaro , "%4.1fm", g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
+sprintf( TmpAltiBaro , "%4.0fm", g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
 
 // memoire
 char TmpCharMem[20] ;

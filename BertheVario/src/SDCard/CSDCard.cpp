@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 30/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -33,7 +33,7 @@ delay( 100 ) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief liste des fichiers IGC
+/// \brief liste des fichiers IGC avec leur temps respectif en secondes
 void CSDCard::ListeIgc( std::vector<std::string> & VecNomIgc , std::vector<int> & VecTempsIgc )
 {
 // raz vecteur in out
@@ -74,7 +74,7 @@ while(file)
         Serial.println(file.size());*/
         // nom et taille
         VecNomIgc.push_back(file.name()) ;
-        VecTempsIgc.push_back(file.size()/37) ;
+        VecTempsIgc.push_back(((float)file.size()/36)) ;
         }
     file = root.openNextFile();
     }

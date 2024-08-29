@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 24/08/2024
+/// \date modification : 30/08/2024
 ///
 
 #include "../BertheVario.h"
@@ -158,7 +158,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         CGlobalVar::BeepOk() ;
         }
 
-    delay( DELAY_TRUE ) ;
+    //delay( DELAY_TRUE ) ;
     }
 
 g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Stopped = true ;
