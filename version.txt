@@ -1,5 +1,5 @@
 version 20240902a :
- - correction calcul de la somme des temps igc en secondes
+ - valeur par defaut fichier de configuration 
  - plus de CDisPoints pour le debut de vol XY mais CPileVit et nombre de satellites en cours.
 
 version 20240830a :
