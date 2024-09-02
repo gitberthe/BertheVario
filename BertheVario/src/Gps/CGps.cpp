@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 02/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -154,7 +154,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     #endif
 
     // beep attente vitesse
-    g_GlobalVar.m_DisPts.PusGpsPos4Disp() ;
+    g_GlobalVar.m_PileVit.PusGpsVit() ;
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         {
         CGlobalVar::beeper( 1500 , 100 ) ;
@@ -165,8 +165,8 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     // affichage gps pret
     g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE_VOL ;
 
-    // si debut de vol cause XY
-    if ( g_GlobalVar.m_DisPts.IsInFlight() )
+    // si debut de vol cause vitesse
+    if ( g_GlobalVar.m_PileVit.IsInFlight() )
         break ;
 
     // si vitesse verticale depassee declenchement igc

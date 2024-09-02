@@ -4,12 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 24/08/2024
+/// \date modification : 02/09/2024
 ///
 
 #include "../BertheVario.h"
 
 unsigned long CTrame::m_MillisPremierGGA = 0 ;
+int           CTrame::m_NombreSatellite = -1 ;
 
 /*
 ///////////////////////////////////////////////////////////////////////////////
@@ -208,6 +209,21 @@ if ( !strcmp(pChar,"--GGA" ) )
             g_GlobalVar.m_MutexVariable.RelacherMutex() ;
             // mise a jour des altitudes
             g_GlobalVar.m_TerrainPosCur.m_AltiBaro = g_GlobalVar.m_MS5611.GetAltiMetres() ;
+            #endif
+            }
+        // nombre de satellites en poursuite
+        else if ( ipar == 6 )
+            {
+            int NbSat = atoi( pChar ) ;
+            // si nombre de satelites modifiée
+            if ( m_NombreSatellite != NbSat )
+                g_GlobalVar.m_PileVit.SatChange() ;
+
+            m_NombreSatellite = NbSat ;
+
+            #ifdef GPS_DEBUG
+             Serial.print( "NbSat:" ) ;
+             Serial.println( NbSat ) ;
             #endif
             }
         // altitude

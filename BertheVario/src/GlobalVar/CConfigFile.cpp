@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 02/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -42,12 +42,6 @@ m_LinesVect.push_back( pLine ) ;
 pLine = new st_line ;
 pLine->m_NomVar = "[temps_igc_sec]" ;
 pLine->m_pVar = (void*) & m_temps_igc_sec ;
-pLine->m_Type = TYPE_VAR_INT ;
-m_LinesVect.push_back( pLine ) ;
-
-pLine = new st_line ;
-pLine->m_NomVar = "[dispersion_igc_metres]" ;
-pLine->m_pVar = (void*) & m_dispersion_igc_metres ;
 pLine->m_Type = TYPE_VAR_INT ;
 m_LinesVect.push_back( pLine ) ;
 

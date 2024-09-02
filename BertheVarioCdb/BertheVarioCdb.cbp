@@ -65,8 +65,6 @@
 		<Unit filename="../BertheVario/src/GlobalVar/CMutex.h" />
 		<Unit filename="../BertheVario/src/GlobalVar/CNumTaskArr.cpp" />
 		<Unit filename="../BertheVario/src/GlobalVar/CNumTaskArr.h" />
-		<Unit filename="../BertheVario/src/Gps/CDisPoints.cpp" />
-		<Unit filename="../BertheVario/src/Gps/CDisPoints.h" />
 		<Unit filename="../BertheVario/src/Gps/CFinDeVol.cpp" />
 		<Unit filename="../BertheVario/src/Gps/CFinDeVol.h" />
 		<Unit filename="../BertheVario/src/Gps/CGps.cpp" />
@@ -75,6 +73,8 @@
 		<Unit filename="../BertheVario/src/Gps/CHgt2Agl.h" />
 		<Unit filename="../BertheVario/src/Gps/CIgc.cpp" />
 		<Unit filename="../BertheVario/src/Gps/CIgc.h" />
+		<Unit filename="../BertheVario/src/Gps/CPileVit.cpp" />
+		<Unit filename="../BertheVario/src/Gps/CPileVit.h" />
 		<Unit filename="../BertheVario/src/Gps/CSimuVol.cpp" />
 		<Unit filename="../BertheVario/src/Gps/CSimuVol.h" />
 		<Unit filename="../BertheVario/src/Gps/CStabGps.cpp" />
