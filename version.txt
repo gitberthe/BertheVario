@@ -1,5 +1,5 @@
 version 20240903a :
- - affichage du nombre de gps en mode G S V.
+ - affichage du nombre de satellites en mode G S V.
  - purge boutons 6s apres arret ou lancement d'un vol (evite les boucles).
  - valeur par defaut fichier de configuration (temps igc 2s).
 
