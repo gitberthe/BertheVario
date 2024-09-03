@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 30/08/2024
+/// \date modification : 03/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -92,6 +92,23 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     {
     bool beep = false ;
 
+    // si purge bouton
+    if ( g_GlobalVar.m_DelayPurgeMs != 0 )
+        {
+        pThis->m_BoutonGauche = false ;
+        pThis->m_BoutonCentre = false ;
+        pThis->m_BoutonDroit = false ;
+        unsigned long time = millis() ;
+        while( millis()-time < g_GlobalVar.m_DelayPurgeMs )
+            {
+            digitalRead(BUTTON_A_PIN) ;
+            digitalRead(BUTTON_B_PIN) ;
+            digitalRead(BUTTON_C_PIN) ;
+            delay( 1 ) ;
+            }
+        g_GlobalVar.m_DelayPurgeMs = 0 ;
+        }
+
     // reboot si pas en vol
     if ( !digitalRead(BUTTON_A_PIN) && digitalRead(BUTTON_B_PIN) && !digitalRead(BUTTON_C_PIN) )
         {
@@ -108,6 +125,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         unsigned long time = millis() ;
         while ( !digitalRead(BUTTON_A_PIN) )
             {
+            // appui 100ms minimum
             if( (millis()-time) >= DELAY_TRUE )
                 {
                 pThis->m_BoutonGauche = true ;
@@ -124,6 +142,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         unsigned long time = millis() ;
         while ( !digitalRead(BUTTON_B_PIN) )
             {
+            // appui 100ms minimum
             if( (millis()-time) >= DELAY_TRUE )
                 {
                 pThis->m_BoutonCentre = true ;
@@ -141,6 +160,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         unsigned long time = millis() ;
         while ( !digitalRead(BUTTON_C_PIN) )
             {
+            // appui 100ms minimum
             if( (millis()-time) >= DELAY_TRUE )
                 {
                 pThis->m_BoutonDroit = true ;

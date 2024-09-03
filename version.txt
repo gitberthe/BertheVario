@@ -1,3 +1,8 @@
+version 20240903a :
+ - affichage du nombre de gps en mode G S V.
+ - purge boutons 6s apres arret ou lancement d'un vol (evite les boucles).
+ - valeur par defaut fichier de configuration (temps igc 2s).
+
 version 20240902a :
  - valeur par defaut fichier de configuration 
  - plus de CDisPoints pour le debut de vol XY mais CPileVit et nombre de satellites en cours.

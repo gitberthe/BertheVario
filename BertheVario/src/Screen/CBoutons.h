@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 24/08/2024
+/// \date modification : 03/09/2024
 ///
 
 #ifndef _BOUTONS_
@@ -23,11 +23,14 @@ public :
     bool BoutonDroit() ;
     void RazBoutons() ;
     void RazBoutonDroit() ;
+    void PurgeBoutons( unsigned long DelayMs )
+            { m_DelayPurgeMs = DelayMs ; } ;
 
 private :
     bool m_BoutonGauche = false ;
     bool m_BoutonCentre = false ;
     bool m_BoutonDroit  = false ;
+    unsigned long m_DelayPurgeMs = 0 ;      ///< delay de purge des boutons en ms
 
     static void TacheScanButton( void * param) ;
 } ;

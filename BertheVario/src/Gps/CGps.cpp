@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 02/09/2024
+/// \date modification : 03/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -132,6 +132,10 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         // raz difference altitude presion/wgs84 = altitude affichée est barometrique pure
         if ( ! g_GlobalVar.IsGpsStable() )
             g_GlobalVar.m_MS5611.SetAltiSolUndef() ;
+
+        // purge boutons pour eviter un arret vol dans la fouléé
+        g_GlobalVar.PurgeBoutons( 6000 ) ;
+
         break ;
         }
 
@@ -273,6 +277,8 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
          && g_GlobalVar.m_VitesseKmh < 5. && g_GlobalVar.m_VitVertMS < 0.4 )
         {
         CGlobalVar::RelancerEnregistrementFichier() ;
+        // purge boutons pour eviter un relance vol dans la fouléé
+        g_GlobalVar.PurgeBoutons( 6000 ) ;
         break ;
         }
 

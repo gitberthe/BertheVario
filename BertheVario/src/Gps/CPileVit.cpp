@@ -18,7 +18,8 @@ if ( m_PosArr != NULL )
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief On empile une vitesse Gps .
+/// \brief On empile une vitesse Gps. Sauf si changement de satellites alors
+/// tempo de 10.
 void CPileVit::PusGpsVit()
 {
 
@@ -78,7 +79,7 @@ m_pile_full = false ;
 /// \brief Configuration non memorisation vitesse si satellites modifiés.
 void CPileVit::SatChange()
 {
-m_ipile = -10 ;
+m_ipile = -7 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,10 +87,12 @@ m_ipile = -10 ;
 /// Si la moyenne des vitesse est assez haute
 bool CPileVit::IsInFlight() const
 {
+//g_GlobalVar.m_Config.m_vitesse_igc_kmh = 1.5 ;
+
 if ( !m_pile_full )
     return false ;
 
-// calcul barycentre
+// calcul moyenne
 float moyenne = 0. ;
 for ( int ip = 0 ; ip < m_TaillePile ; ip++ )
     moyenne += m_PosArr[ip] ;

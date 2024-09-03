@@ -289,11 +289,11 @@ else if ( !AffichageHauteurSol && ((millis()-TempsHauteurSol)/1000) >= 1 )
 // duree du vol
 char TmpCharDV[15] ;
 if ( g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS )
-    sprintf( TmpCharDV , "  G" ) ;
+    sprintf( TmpCharDV , "%2dG" , g_GlobalVar.GetNbSat() ) ;
 else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS )
-    sprintf( TmpCharDV , "  S" ) ;
+    sprintf( TmpCharDV , "%2dS" , g_GlobalVar.GetNbSat()) ;
 else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL )
-    sprintf( TmpCharDV , "  V" ) ;
+    sprintf( TmpCharDV , "%2dV" , g_GlobalVar.GetNbSat()) ;
 else
     sprintf( TmpCharDV , "%3d", g_GlobalVar.m_DureeVolMin ) ;
 
