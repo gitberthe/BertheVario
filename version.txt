@@ -1,3 +1,7 @@
+version 20240904b :
+ - modification documentation.
+ - modification de l'exemple de fichier de configuration.
+ 
 version 20240904a :
  - modification archivage igc et calcul somme des temps.
  - le probleme des faux départs de vol semble résolu avec la prise en compte 
