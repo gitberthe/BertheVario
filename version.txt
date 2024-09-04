@@ -1,3 +1,6 @@
+version 20240905a :
+ - modification son zerotage
+
 version 20240904b :
  - modification documentation.
  - modification de l'exemple de fichier de configuration.

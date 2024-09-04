@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 30/08/2024
+/// \date modification : 05/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -63,7 +63,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
         }
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //float LocalVitVertMS = 0.1 ;
+    //LocalVitVertMS = 0.1 ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
@@ -87,20 +87,22 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
         {
         static int BeepZerotage = 0 ;
         BeepZerotage++ ;
-        BeepZerotage = BeepZerotage%7 ;
-        if ( g_GlobalVar.m_FinDeVol.IsFlightLocked() )
+        BeepZerotage = BeepZerotage%9 ;
+        // si le vol a debuté
+        if ( g_GlobalVar.m_DureeVolMin >= 0 )
             {
             int MidFreq = (LowFreq + MinFreq) / 2 ;
             if ( BeepZerotage == 0 || BeepZerotage == 3 )
-                g_GlobalVar.beeper( LowFreq , 150 ) ;
+                g_GlobalVar.beeper( MinFreq , 100 ) ;
             else if ( BeepZerotage == 1 || BeepZerotage == 4 )
-                g_GlobalVar.beeper( MinFreq , 150 ) ;
+                g_GlobalVar.beeper( MidFreq , 100 ) ;
             else if ( BeepZerotage == 2 || BeepZerotage == 5 )
-                g_GlobalVar.beeper( MidFreq , 150 ) ;
+                g_GlobalVar.beeper( LowFreq , 100 ) ;
             else
                 delay( 500 ) ;
             }
-        delay( 150 ) ;
+        else
+            delay( 100 ) ;
         continue ;
         }
 
