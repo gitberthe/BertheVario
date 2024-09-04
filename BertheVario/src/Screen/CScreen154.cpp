@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 30/08/2024
+/// \date modification : 04/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -447,7 +447,12 @@ do
     display.setCursor(0, y2+21);
     display.print(TmpCharDV);
     display.setFont(&FreeMonoBold12pt7b);
-    display.print("'");
+    if ( g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ||
+         g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS ||
+         g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL )
+        display.print(" ");
+    else
+        display.print("'");
     display.drawLine( 0 , 107 , 200 , 107 , GxEPD_BLACK ) ; // -
     display.drawLine( 90 , 108 , 90 , 85 , GxEPD_BLACK ) ; // |
     display.drawLine( 200 - 70 , 85 , 200 -70, 107 , GxEPD_BLACK ) ; // |
@@ -572,8 +577,11 @@ return ECRAN_0_Vz ;
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranHisto()
 {
-static int ivol = g_GlobalVar.m_HistoVol.m_HistoDir.size() - 1 ;
+static int ivol = 0 ;
 int y = 20 ;
+
+// lecture des histo
+g_GlobalVar.m_HistoVol.LectureFichiers() ;
 
 // si pas de fichiers histo
 if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
@@ -685,7 +693,10 @@ fin_histo :
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
+    {
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_0_Vz ;
+    }
 
 // si changement de numero histo vol
 if ( BoutonDroit() )
@@ -694,6 +705,7 @@ if ( BoutonDroit() )
     ivol++ ;
     if ( ivol >= g_GlobalVar.m_HistoVol.m_HistoDir.size() )
         ivol = g_GlobalVar.m_HistoVol.m_HistoDir.size() - 1 ;
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_1_Histo ;
     }
 
@@ -704,16 +716,18 @@ if ( BoutonGauche() )
     ivol-- ;
     if ( ivol < 0 )
         ivol = 0 ;
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_1_Histo ;
     }
 
 // si changement d'ecran
 if ( BoutonCentre() )
     {
-    g_GlobalVar.m_Config.LectureFichier() ;
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_2a_ListeIgc ;
     }
 
+g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
 return ECRAN_1_Histo ;
 }
 
@@ -1209,21 +1223,16 @@ return ECRAN_3a_TmaAll ;
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranListeIgcFch()
 {
-static bool BoolListeIgc = false ;
 static std::vector<std::string> VecNomIgc ;
 static std::vector<int> VecTempsIgc ;
 
-// une seule lecture de fichier par affichage
-if ( !BoolListeIgc )
-    {
-    g_GlobalVar.ListeIgc(VecNomIgc,VecTempsIgc) ;
-    BoolListeIgc = true ;
-    }
+// lecture de fichier
+g_GlobalVar.ListeIgc(VecNomIgc,VecTempsIgc) ;
 
-int TotalSec = 0 ;
+int TotalMin = 0 ;
 int y_cursor ;
 for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
-    TotalSec += VecTempsIgc[ifch] ;
+    TotalMin += VecTempsIgc[ifch] ;
 
 char TmpChar[25] ;
 display.setPartialWindow( 0, 0, 200 , 200 );
@@ -1239,14 +1248,14 @@ do
     y_cursor = 10 ;
     for ( ; ivec < VecNomIgc.size() ; ivec++ )
         {
-        sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , (int) (VecTempsIgc[ivec]/60) ) ;
+        sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , VecTempsIgc[ivec] ) ;
         y_cursor += 16 ;
         display.setCursor( 0, y_cursor );
         display.print( TmpChar ) ;
         }
 
     display.setFont(&FreeMonoBold12pt7b);
-    sprintf( TmpChar , "tot. igc:%03dm", (int)(TotalSec/60) ) ;
+    sprintf( TmpChar , "tot. igc:%03dm", TotalMin ) ;
     display.setCursor( 0, y_cursor + 25 );
     display.print( TmpChar ) ;
     }
@@ -1256,7 +1265,6 @@ while (display.nextPage());
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
     {
-    BoolListeIgc = false ;
     return ECRAN_0_Vz ;
     }
 
@@ -1264,7 +1272,6 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
-    BoolListeIgc = false ;
     return ECRAN_2b_ConfirmArchIgc ;
     }
 
@@ -1272,14 +1279,12 @@ if ( BoutonDroit() )
 if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
-    BoolListeIgc = false ;
     return ECRAN_2b_ConfirmArchIgc ;
     }
 
 // si changement modification zone
 if ( BoutonCentre() )
     {
-    BoolListeIgc = false ;
     m_MillisEcran0 = millis() ;
     return ECRAN_3a_TmaAll ;
     }
@@ -1290,7 +1295,8 @@ return ECRAN_2a_ListeIgc ;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction permet d'archiver tous les fichier IGC de la carte qui
-/// sont à la racine.
+/// sont à la racine et ayant un fichier histo.
+/// Les autres petits fichiers sont detruits.
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranConfimeArchIgcFch()
 {
@@ -1327,7 +1333,6 @@ if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
     g_GlobalVar.ArchiveIgc() ;
-    g_GlobalVar.m_HistoVol.DeleteHisto() ;
     return ECRAN_2a_ListeIgc ;
     }
 
@@ -1336,7 +1341,6 @@ if ( BoutonDroit() )
     {
     m_MillisEcran0 = millis() ;
     g_GlobalVar.ArchiveIgc() ;
-    g_GlobalVar.m_HistoVol.DeleteHisto() ;
     return ECRAN_2a_ListeIgc ;
     }
 

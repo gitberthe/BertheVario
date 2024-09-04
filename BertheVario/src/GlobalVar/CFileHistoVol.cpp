@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 22/03/2024
-/// \date modification : 08/08/2024
+/// \date modification : 04/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -36,6 +36,10 @@ while( true )
     // si fin de liste
     if ( ! m_File )
         break ;
+
+    // si directorie
+    if ( m_File.isDirectory() )
+        continue ;
 
     // lecture fichier
     int ic = 0 ;

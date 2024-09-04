@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 03/09/2024
+/// \date modification : 04/09/2024
 ///
 
-char NumVer[] = "20240903a" ;
+char NumVer[] = "20240904a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -60,9 +60,6 @@ g_GlobalVar.InitButton() ;
 
 // init sdcard
 g_GlobalVar.InitSDCard() ;
-
-// lecture histo vol
-g_GlobalVar.m_HistoVol.LectureFichiers() ;
 
 // lecture fichier de configuration
 g_GlobalVar.m_Config.LectureFichier() ;

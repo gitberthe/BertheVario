@@ -19,7 +19,8 @@ m_pile_full = false ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Determine si le vol est finit.
+/// \brief Determine si le vol est finit. Par petite vitesse verticale et
+/// horizontale et distance XY / Altitude.
 bool CFinDeVol::IsFlightEnd()
 {
 // si pile pas pleine

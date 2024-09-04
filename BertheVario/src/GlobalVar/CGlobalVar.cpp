@@ -22,9 +22,6 @@ m_TerrainPosCur.m_Nom = "pos-cur" ;
 /// \brief Relance la sequence d'enregistrement pour un nouveau fichier
 void CGlobalVar::RelancerEnregistrementFichier()
 {
-// lecture histo vol
-g_GlobalVar.m_HistoVol.LectureFichiers() ;
-
 Serial.println("CGlobalVar::RelancerEnregistrementFichier()") ;
 beeper(7000, 300) ;
 xTaskCreatePinnedToCore( TacheRelanceIgc, "RelanceIgc", RELANCE_IGC_STACK_SIZE, NULL  , RELANCE_IGC_PRIORITY , NULL, RELANCE_IGC_CORE );

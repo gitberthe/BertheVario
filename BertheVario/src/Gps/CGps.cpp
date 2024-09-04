@@ -241,8 +241,9 @@ while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
     g_GlobalVar.PushDistAlti( Distance , g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
 
     // historique du vol toutes les 5 sec
-    if ( !((iboucleHistoVol++)%5) )
+    if ( !(iboucleHistoVol%5) )
         g_GlobalVar.m_HistoVol.EcritureFichier( g_GlobalVar.GetIgcFileName() ) ;
+    iboucleHistoVol++ ;
     }
 
 g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Stopped = true ;

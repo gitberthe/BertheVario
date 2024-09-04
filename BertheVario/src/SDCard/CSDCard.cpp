@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 30/08/2024
+/// \date modification : 04/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -40,7 +40,7 @@ void CSDCard::ListeIgc( std::vector<std::string> & VecNomIgc , std::vector<int> 
 VecNomIgc.clear() ;
 VecTempsIgc.clear() ;
 
-// ouverture carte
+/*// ouverture carte
 File root = SD.open("/");
 if(!root)
     {
@@ -68,16 +68,25 @@ while(file)
         }
     else
         {
-        /*Serial.print("  FILE: ");
-        Serial.print(file.name());
-        Serial.print("  SIZE: ");
-        Serial.println(file.size());*/
         // nom et taille
         VecNomIgc.push_back(file.name()) ;
         VecTempsIgc.push_back(((float)file.size()/36)) ;
         }
     file = root.openNextFile();
+    }*/
+
+// lecture histo
+g_GlobalVar.m_HistoVol.LectureFichiers() ;
+
+// remplissage vecteurs
+for ( int ii = 0 ; ii < g_GlobalVar.m_HistoVol.m_HistoDir.size() ; ii++ )
+    {
+    VecNomIgc.push_back( g_GlobalVar.m_HistoVol.m_HistoDir[ii].m_NomIgc ) ;
+    VecTempsIgc.push_back( g_GlobalVar.m_HistoVol.m_HistoDir[ii].m_TempsDeVol ) ;
     }
+
+// delete histo dir
+g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -115,31 +124,42 @@ for ( int iv = 0 ; iv < VecHisto.size() ; iv++ )
 // destruction historique
 g_GlobalVar.m_HistoVol.DeleteHisto() ;
 
-// ouverture carte
-/*
-File root = SD.open("/");
-File file = root.openNextFile();
-
-// pour tous les fichiers
-while(file)
+// destruction des petits fichiers
+File RootDir = SD.open("/") ;
+if ( !RootDir )
     {
-    if(file.isDirectory())
-        {
-        }
-    else
-        {
-        // recherche nom de fichier igc
-        std::string filename = file.name() ;
-        const char * pChar = filename.c_str() ;
-        // destruction fichier
-        if ( strcasestr( pChar , ".igc" ) != NULL )
-            {
-            std::string filenamepath = "/" ;
-            filenamepath += filename ;
-            SD.remove( filenamepath.c_str() ) ;
-            }
-        }
-    file = root.openNextFile();
+    Serial.println("Failed to open root dir");
+    return;
     }
-*/
+
+// pour toute la directorie
+while( true )
+    {
+    // ouverture fichier
+    File Fichier = RootDir.openNextFile() ;
+
+    // si fin de liste
+    if ( ! Fichier )
+        break ;
+
+    // si directorie
+    if( Fichier.isDirectory() )
+        {
+        Fichier.close() ;
+        continue ;
+        }
+
+    // si petit fichier
+    if ( Fichier.size() < 37*30 )
+       {
+       std::string name = "/" ;
+       name += Fichier.name() ;
+       SD.remove( name.c_str() ) ;
+       }
+
+    Fichier.close() ;
+    }
+
+
+RootDir.close() ;
 }

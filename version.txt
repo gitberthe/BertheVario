@@ -1,3 +1,8 @@
+version 20240904a :
+ - modification archivage igc et calcul somme des temps.
+ - le probleme des faux départs de vol semble résolu avec la prise en compte 
+   du changement de nombre de satellites en vue.
+
 version 20240903a :
  - affichage du nombre de satellites en mode G S V.
  - purge boutons 6s apres arret ou lancement d'un vol (evite les boucles).
