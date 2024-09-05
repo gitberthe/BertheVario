@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 02/09/2024
-/// \date modification : 02/09/2024
+/// \date modification : 06/09/2024
 ///
 
 #ifndef _CPILEVIT_
@@ -19,7 +19,7 @@ class CPileVit
 public :
     ~CPileVit() ;
 
-    bool IsInFlight() const ;
+    bool IsStartFlight() const ;
     void PusGpsVit() ;
     void ResetVit() ;
     void SatChange() ;
@@ -28,7 +28,7 @@ private :
 
     float * m_PosArr = NULL ;       ///< tableau des dernieres mesures
     bool  m_pile_full = false ;     ///< si la pile est pleine
-    int   m_TaillePile ;            ///< taille de la pile voire fichier configuration
+    int   m_TaillePile = 0 ;        ///< taille de la pile voire fichier configuration
     int   m_ipile = 0 ;             ///< position dans le buffer
 } ;
 

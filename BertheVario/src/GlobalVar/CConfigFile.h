@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 03/09/2024
+/// \date modification : 06/09/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -40,7 +40,9 @@ public :
     int   m_vitesse_igc_kmh = 18 ;          ///< vitesse de declenchement enregistrement
     int   m_temps_igc_sec = 2 ;             ///< nombre de secondes de vitesse pour declenchement
     float m_vz_igc_ms = 0.7 ;               ///< vz de vitesse pour declenchement
-    int   m_stab_gps = 30 ;                 ///< rayon dispersion gps pour stabilite
+    int   m_stab_gps_metre = 30 ;           ///< rayon dispersion gps pour stabilite
+    int   m_stab_gps_sec = 10 ;             ///< taille pile en sec pour calcul rayon dispersion gps
+    int   m_sat_sec = 7 ;                   ///< secondes d'interdiction debut vol vitesse cause changement nombre satellites
     float m_vz_seuil_max  = 4. ;            ///< seuils de beep
     float m_vz_seuil_haut = 0.2 ;           ///< seuils de beep
     float m_vz_seuil_bas = -2.5 ;           ///< seuils de beep

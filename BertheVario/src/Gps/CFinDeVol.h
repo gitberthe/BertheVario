@@ -37,7 +37,7 @@ private :
         float m_VitVer  = 0. ;
         } ;
 
-    struct st_pos m_PosArr[TAILLE_PILE_FE] ;  ///< tableau des derneires mesures
+    struct st_pos m_PosArr[TAILLE_PILE_FE] ;  ///< tableau des dernieres mesures
     bool  m_pile_full = false ;         ///< si la pile est pleine
     int   m_ipile = 0 ;
 } ;

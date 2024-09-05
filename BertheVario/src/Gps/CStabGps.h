@@ -4,21 +4,20 @@
 /// \brief
 ///
 /// \date creation     : 03/04/2024
-/// \date modification : 13/08/2024
+/// \date modification : 06/09/2024
 ///
 
 #ifndef _STABGPS_
 #define _STABGPS_
-
-#define TAILLE_PILE 20
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Permet de savoir si les points gps ne sont pas trop dispersés.
 class CStabGps
 {
 public :
-    void PushGpPos4Stab() ;
+    ~CStabGps() ;
 
+    void PushGpPos4Stab() ;
     bool IsGpsStable() const ;
     void RazGpsPos() ;
 
@@ -30,9 +29,10 @@ private :
         float m_Lon = 0 ;
         } ;
 
-    struct st_pos m_PosArr[TAILLE_PILE] ;  ///< tableau des derneires mesures
+    struct st_pos * m_PosArr = NULL ;   ///< tableau des dernieres mesures
     bool  m_pile_full = false ;         ///< si la pile est pleine
     int   m_ipile = 0 ;                 ///< position dans le buffer
+    int   m_TaillePile = 0 ;            ///< taille pile stabilisation gps
 } ;
 
 #endif

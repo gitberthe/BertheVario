@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 02/09/2024
-/// \date modification : 02/09/2024
+/// \date modification : 06/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -14,7 +14,10 @@
 CPileVit::~CPileVit()
 {
 if ( m_PosArr != NULL )
+    {
     delete [] m_PosArr ;
+    m_PosArr = NULL ;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +29,6 @@ void CPileVit::PusGpsVit()
 // cas de changement de nombre de gps, vitesse fausse
 if ( m_ipile < 0 )
     {
-    m_pile_full = false ;
     m_ipile++ ;
     return ;
     }
@@ -43,7 +45,8 @@ if ( g_GlobalVar.m_VitesseKmh < g_GlobalVar.m_Config.m_vitesse_igc_kmh ||
 // si reconfig fichier config
 if ( m_TaillePile != g_GlobalVar.m_Config.m_temps_igc_sec )
     {
-    delete [] m_PosArr ;
+    if ( m_PosArr != NULL )
+        delete [] m_PosArr ;
     m_PosArr = NULL ;
     m_ipile = 0 ;
     m_pile_full = false ;
@@ -76,16 +79,18 @@ m_pile_full = false ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Configuration non memorisation vitesse si satellites modifiés.
+/// \brief Configuration non memorisation vitesse en secondes si nombre de
+/// satellites en vue modifiés (recalage position/vitesse).
 void CPileVit::SatChange()
 {
-m_ipile = -7 ;
+m_ipile = -g_GlobalVar.m_Config.m_sat_sec ;
+m_pile_full = false ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Indique si on est en vol pour declenchement debut de vol vitesse.
-/// Si la moyenne des vitesse est assez haute
-bool CPileVit::IsInFlight() const
+/// Si la moyenne des vitesse est assez haute.
+bool CPileVit::IsStartFlight() const
 {
 //g_GlobalVar.m_Config.m_vitesse_igc_kmh = 1.5 ;
 

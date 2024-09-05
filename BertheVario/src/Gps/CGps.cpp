@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 03/09/2024
+/// \date modification : 06/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -170,7 +170,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     g_GlobalVar.m_DureeVolMin = ATTENTE_VITESSE_VOL ;
 
     // si debut de vol cause vitesse
-    if ( g_GlobalVar.m_PileVit.IsInFlight() )
+    if ( g_GlobalVar.m_PileVit.IsStartFlight() )
         break ;
 
     // si vitesse verticale depassee declenchement igc

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 02/09/2024
+/// \date modification : 06/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -52,8 +52,20 @@ pLine->m_Type = TYPE_VAR_FLOAT ;
 m_LinesVect.push_back( pLine ) ;
 
 pLine = new st_line ;
-pLine->m_NomVar = "[stab_gps_m]" ;
-pLine->m_pVar = (void*) & m_stab_gps ;
+pLine->m_NomVar = "[stab_gps_metre]" ;
+pLine->m_pVar = (void*) & m_stab_gps_metre ;
+pLine->m_Type = TYPE_VAR_INT ;
+m_LinesVect.push_back( pLine ) ;
+
+pLine = new st_line ;
+pLine->m_NomVar = "[stab_gps_sec]" ;
+pLine->m_pVar = (void*) & m_stab_gps_sec ;
+pLine->m_Type = TYPE_VAR_INT ;
+m_LinesVect.push_back( pLine ) ;
+
+pLine = new st_line ;
+pLine->m_NomVar = "[sat_sec]" ;
+pLine->m_pVar = (void*) & m_sat_sec ;
 pLine->m_Type = TYPE_VAR_INT ;
 m_LinesVect.push_back( pLine ) ;
 
