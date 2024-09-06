@@ -1,3 +1,6 @@
+version 20240906b :
+ - modification documentation. Precision sur les fichier IGC.
+ 
 version 20240906a :
  - changement [stab_gps_m] en [stab_gps_metre], ajout [stab_gps_sec], 
    ajout [sat_sec] dans fichier de configuration.
