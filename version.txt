@@ -1,3 +1,8 @@
+version 20240920a :
+ - modification [temps_igc_sec] par defaut égal à 5.
+ - modification conditions de recalage altibaro/hauteur sol en mode gps S.
+ - re-attente stabilisation gps lors de relance d'un vol (bug altibaro).
+ 
 version 20240906b :
  - modification documentation. Precision sur les fichiers IGC.
  
