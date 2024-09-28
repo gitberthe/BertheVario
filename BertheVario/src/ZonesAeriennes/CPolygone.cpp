@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 28/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -98,11 +98,9 @@ return false ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Renvoi l'aire du polygone
-float CPolygone::GetAreaSize( CZoneAer::st_coord_poly ** PtsArr , int NbPts , CZoneAer::st_coord_poly & PtsBarycentre )
+/// \brief Calcul le barycentre
+void CPolygone::CalcBarycentre( CZoneAer::st_coord_poly ** PtsArr , int NbPts , CZoneAer::st_coord_poly & PtsBarycentre )
 {
-float SommeTriangle = 0 ;
-
 // calcul du baricentre
 PtsBarycentre.m_Lat = 0 ;
 PtsBarycentre.m_Lon = 0 ;
@@ -114,6 +112,16 @@ for ( int is = 0 ; is < NbPts ; is++ )
     }
 PtsBarycentre.m_Lat /= NbPts ;
 PtsBarycentre.m_Lon /= NbPts ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Renvoi l'aire du polygone
+float CPolygone::GetAreaSize( CZoneAer::st_coord_poly ** PtsArr , int NbPts , CZoneAer::st_coord_poly & PtsBarycentre )
+{
+float SommeTriangle = 0 ;
+
+// calcul du barycentre
+CalcBarycentre( PtsArr , NbPts , PtsBarycentre ) ;
 
 // pour tous les segments
 for ( int is = 0 ; is < NbPts ; is++ )

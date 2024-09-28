@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 30/03/2024
-/// \date modification : 15/07/2024
+/// \date modification : 28/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -173,9 +173,9 @@ if ( m_DansDessousUneZone == ZONE_DEDANS )
     m_FileOut.print("DedansUneZone") ;
     m_FileOut.print(";") ;
     }
-else if ( m_DansDessousUneZone == ZONE_LIMITE_ALTI )
+else if ( m_LimiteZone == ZONE_LIMITE_ALTI )
     {
-    m_FileOut.print(m_NomZoneDansDessous.c_str()) ;
+    m_FileOut.print(m_NomZoneEnLimite.c_str()) ;
     m_FileOut.print(";") ;
     m_FileOut.print("LimiteAltitude") ;
     m_FileOut.print(";") ;

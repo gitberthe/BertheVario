@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 28/09/2024
 ///
 
 #ifndef _POLYGONE_
@@ -16,6 +16,7 @@
 class CPolygone
 {
 public :
+    static void CalcBarycentre( CZoneAer::st_coord_poly ** PtsArr , int NbPts , CZoneAer::st_coord_poly & PtsBarycentre ) ;
     static float GetAreaSize( CZoneAer::st_coord_poly ** PtsArr , int NbPts , CZoneAer::st_coord_poly & PtsBarycentre ) ;
     static bool IsIn( CZoneAer::st_coord_poly ** PtsArr , int NbPts , const CZoneAer::st_coord_poly & PtsToTest ) ;
     static bool IsInOld( CZoneAer::st_coord_poly ** PtsArr , int NbPts , const CZoneAer::st_coord_poly & PtsToTest ) ;

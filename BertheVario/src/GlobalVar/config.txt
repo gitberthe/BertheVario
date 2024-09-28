@@ -1,18 +1,18 @@
-# ce fichier est un fichier d'exemple car il est auto genere par le firmware en cas d'absence.
-[coef_filtre_alti_baro]   0.40    # plus grand => plus filtré
-[periode_integration_sec] 2       # temps d'integration de la VZ
-[vitesse_igc_kmh]         18      # vitesse de declenchement de l'enregistrement
-[temps_igc_sec]            2      # nombre de secondes de vitesse temps_igc_sec
-[vz_igc_ms]               0.7     # vz m/s pour declenchement
-[stab_gps_m]              30      # rayon dispersion gps pour stabilisation
-[vz_seuil_haut]           0.2     # vz m/s declenchement bip
-[vz_seuil_bas]           -2.5     # vz m/s declenchement bip
-[vz_seuil_max]            4.      # vz m/s max des bip
-[dtu]                     2       # difference d'heure TU
-[marge_alti]              40      # marge pre alarm zone altitude
-[marge_xy]                10      # marge pre alarm zone xy
-[ssid_ru]       Galaxy_XCover6_Pro_B80B  # _ => ' '
-[passwd_ru]     mot-de-passe   # _ => ' '
-
-[pilote_ru]     Spin_Berthe # _ => ' '
-[voile_ru]      Nova_Aonic  # _ => ' '
+[coef_filtre_alti_baro] 0.40 #
+[periode_integration_sec] 2 #
+[vitesse_igc_kmh] 18 #
+[temps_igc_sec] 5 #
+[vz_igc_ms] 0.70 #
+[stab_gps_metre] 30 #
+[stab_gps_sec] 10 #
+[sat_sec] 7 #
+[vz_seuil_haut] 0.20 #
+[vz_seuil_bas] -2.50 #
+[vz_seuil_max] 3.50 #
+[dtu] 2 #
+[marge_alti] 0 #
+[marge_xy] 0 #
+[ssid_ru] Galaxy_XCover6_Pro_B80B #
+[passwd_ru] mdp #
+[pilote_ru] Spin_Berthe #
+[voile_ru] Nova_Aonic #

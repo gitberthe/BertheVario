@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 04/09/2024
+/// \date modification : 28/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -400,25 +400,25 @@ do
         if ( g_GlobalVar.m_BeepAttenteGVZone )
             {
             CGlobalVar::BeepOk() ;
-            delay( 150 ) ;
-            CGlobalVar::BeepOk() ;
+            //delay( 150 ) ;
+            //CGlobalVar::BeepOk() ;
             }
         }
-    else if ( DansUneZone == ZONE_LIMITE_ALTI )
+    else if ( LimiteZone == ZONE_LIMITE_ALTI )
         {
         display.setFont(&FreeMonoBold12pt7b);
         display.setCursor(0, 15);
         display.print(NomZoneDessous.c_str());
-        if ( g_GlobalVar.m_BeepAttenteGVZone )
-            CGlobalVar::BeepOk() ;
+        //if ( g_GlobalVar.m_BeepAttenteGVZone )
+        //    CGlobalVar::BeepOk() ;
         }
     else if ( LimiteZone == ZONE_LIMITE_FRONTIERE )
         {
         display.setFont(&FreeMonoBold12pt7b);
         display.setCursor(0, 15);
         display.print(NomZoneLimite.c_str());
-        if ( g_GlobalVar.m_BeepAttenteGVZone )
-            CGlobalVar::BeepOk() ;
+        //if ( g_GlobalVar.m_BeepAttenteGVZone )
+        //    CGlobalVar::BeepOk() ;
         }
     else
         {

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 21/07/2024
+/// \date modification : 28/09/2024
 ///
 
 #ifndef _ZONE_AR_
@@ -75,7 +75,7 @@ public :
 private :
     st_coord_poly **m_PolygoneArr=NULL; ///< tableau des points de la zone
     int             m_NbPts = 0 ;       ///< nombre de points de la zone
-    float           m_Area = 0. ;       ///< surface pour les zones imbriquee ex : TAM 2.2
+    //float           m_Area = 0. ;       ///< surface pour les zones imbriquee ex : TAM 2.2
 
     st_coord_poly   m_Barycentre ;      ///< pour une recherche rapide
     float           m_RayonMetre ;      ///< pour une recherche rapide

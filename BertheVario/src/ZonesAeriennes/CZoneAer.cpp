@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 21/07/2024
+/// \date modification : 28/09/2024
 ///
 
 #include "../BertheVario.h"
@@ -102,25 +102,25 @@ m_pVecOrigine->shrink_to_fit() ;
 /******************************************************************************/
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Tri par nom ou surface
+/// \brief Tri par nom ou alti basse
 bool CZoneAer::operator > ( const CZoneAer & Zone ) const
 {
 if ( ms_TriParNom )
     return (strcmp( m_NomAff.c_str() , Zone.m_NomAff.c_str() ) > 0 ) ;
 
-return m_Area > Zone.m_Area ;
-//return GetAlti() > Zone.GetAlti() ;
+//return m_Area > Zone.m_Area ;
+return GetAltiBasse() > Zone.GetAltiBasse() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Tri par nom ou surface
+/// \brief Tri par nom ou alti basse
 bool CZoneAer::operator < ( const CZoneAer & Zone ) const
 {
 if ( ms_TriParNom )
     return ( strcmp( m_NomAff.c_str() , Zone.m_NomAff.c_str() ) < 0 ) ;
 
-return m_Area < Zone.m_Area ;
-//return GetAlti() < Zone.GetAlti() ;
+//return m_Area < Zone.m_Area ;
+return GetAltiBasse() < Zone.GetAltiBasse() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

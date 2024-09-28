@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 20/07/2024
+/// \date modification : 28/09/2024
 ///
 
 #ifndef _ZONE_AR_ALL_
@@ -32,7 +32,7 @@ public :
     void EcritureFichierZonesActive() ;
     void CalcZone() ;
     void TriZonesNom() ;
-    void TriZonesSurface() ;
+    void TriZonesAltitude (std::vector< const CZoneAer * > &VecZones) ;
 
     void SetDatePeriode() ;
 
