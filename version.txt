@@ -1,3 +1,6 @@
+version 20241004a :
+ - bug non desactivation son vario si limite alti/XY zone.
+
 version 20240928a :
  - refonte calcul de penetration zone aerienne.
 

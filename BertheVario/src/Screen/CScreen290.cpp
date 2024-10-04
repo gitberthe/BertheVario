@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 04/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -380,7 +380,7 @@ do
             CGlobalVar::BeepOk() ;
             }
         }
-    else if ( DansUneZone == ZONE_LIMITE_ALTI )
+    else if ( LimiteZone == ZONE_LIMITE_ALTI )
         {
         display.setFont(&FreeMonoBold12pt7b);
         display.setCursor(0, 15);
