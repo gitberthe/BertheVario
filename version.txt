@@ -1,4 +1,7 @@
 version 20241004a :
+ - correction bug altitude sol ouest fausse (recalage faut aussi).
+ 
+version 20241004a :
  - bug non desactivation son vario si limite alti/XY zone.
 
 version 20240928a :
