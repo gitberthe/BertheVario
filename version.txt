@@ -1,4 +1,4 @@
-version 20241004a :
+version 20241004b :
  - correction bug altitude sol ouest fausse (recalage faut aussi).
  
 version 20241004a :
