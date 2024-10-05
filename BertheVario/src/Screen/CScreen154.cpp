@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 28/09/2024
+/// \date modification : 05/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -560,9 +560,9 @@ if ( BoutonCentre() )
     }
 
 // si activation / desactivation beep attente Gps / Vitesse
-if ( (g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
+if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
       g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS ||
-      g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ) &&
+      g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ) &&*/
       BoutonGauche() )
     g_GlobalVar.m_BeepAttenteGVZone = ! g_GlobalVar.m_BeepAttenteGVZone ;
 

@@ -1,3 +1,6 @@
+version 20241005a :
+ - bug desactivation alarme sonore penetration zone.
+
 version 20241004b :
  - correction bug altitude sol ouest fausse (recalage faut aussi).
  
