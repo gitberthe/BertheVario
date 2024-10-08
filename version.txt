@@ -1,5 +1,8 @@
+version 20241008a :
+ - [vz_igc_ms] pendant 3s pour déclenchement de vol.
+ 
 version 20241006a :
-- modification [temps_igc_sec] par defaut égal à 6.
+ - modification [temps_igc_sec] par defaut égal à 6.
 
 version 20241005a :
  - bug desactivation alarme sonore penetration zone.
