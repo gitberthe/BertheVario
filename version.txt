@@ -1,3 +1,6 @@
+version 20241012a2 :
+ - correction texte [temps_igc_ms] en [temps_igc_sec]
+
 version 20241012a :
  - [temps_igc_ms] passe à 3s par defaut.
  - Vz declenclement de vol pendant [temps_igc_ms].
