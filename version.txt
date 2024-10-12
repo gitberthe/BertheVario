@@ -1,3 +1,8 @@
+version 20241012a :
+ - [temps_igc_ms] passe à 3s par defaut.
+ - Vz declenclemnt de vol pendant [temps_igc_ms].
+ - [sat_sec] 9s par defaut pour 4 satellites (puis 0s pour 26 satellites).
+ 
 version 20241008a :
  - [vz_igc_ms] pendant 3s pour déclenchement de vol.
  

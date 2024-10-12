@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 06/10/2024
+/// \date modification : 12/10/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -19,7 +19,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fichier de configuration de variables sur la carte SD.
-class CConfigFile
+class CConfigFile : public CNbSatDelay
 {
 public :
 
@@ -38,11 +38,10 @@ public :
     float m_coef_filtre_alti_baro = 0.4 ;   ///< coefficient de filtrage [0,1[ , 0.99 tres fort filtrage
     int   m_periode_integration_sec = 2 ;   ///< pour le calcul de la Vz
     int   m_vitesse_igc_kmh = 18 ;          ///< vitesse de declenchement enregistrement
-    int   m_temps_igc_sec = 6 ;             ///< nombre de secondes de vitesse pour declenchement
     float m_vz_igc_ms = 0.7 ;               ///< vz de vitesse pour declenchement
     int   m_stab_gps_metre = 30 ;           ///< rayon dispersion gps pour stabilite
     int   m_stab_gps_sec = 10 ;             ///< taille pile en sec pour calcul rayon dispersion gps
-    int   m_sat_sec = 7 ;                   ///< secondes d'interdiction debut vol vitesse cause changement nombre satellites
+    int   m_temps_igc_sec = 3 ;             ///< nombre de secondes de vitesse pour declenchement vol
     float m_vz_seuil_max  = 4. ;            ///< seuils de beep
     float m_vz_seuil_haut = 0.2 ;           ///< seuils de beep
     float m_vz_seuil_bas = -2.5 ;           ///< seuils de beep
@@ -62,6 +61,11 @@ public :
     std::vector< st_line *>  m_LinesVect ; ///< vecteur des lignes
 
     static void ReplaceCharIn( std::string & str , char cfind , char creplace ) ;
+
+    friend CNbSatDelay ;
+
+protected :
+    int   m_sat_sec = 9 ;                   ///< secondes d'interdiction debut vol vitesse cause changement nombre satellites (pour 4 satellites)
 
 private :
     void FreeVect() ;

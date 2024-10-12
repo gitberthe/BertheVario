@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 02/09/2024
-/// \date modification : 06/09/2024
+/// \date modification : 12/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -42,8 +42,9 @@ if ( g_GlobalVar.m_VitesseKmh < g_GlobalVar.m_Config.m_vitesse_igc_kmh ||
     return ;
     }
 
-// si reconfig fichier config
-if ( m_TaillePile != g_GlobalVar.m_Config.m_temps_igc_sec )
+// si changement de nombre de satellites
+int TaillePile = g_GlobalVar.m_Config.m_temps_igc_sec ;
+if ( m_TaillePile != TaillePile )
     {
     if ( m_PosArr != NULL )
         delete [] m_PosArr ;
@@ -55,7 +56,7 @@ if ( m_TaillePile != g_GlobalVar.m_Config.m_temps_igc_sec )
 // allocation tableau
 if ( m_PosArr == NULL )
     {
-    m_TaillePile = g_GlobalVar.m_Config.m_temps_igc_sec ;
+    m_TaillePile = TaillePile ;
     m_PosArr = new float[m_TaillePile] ;
     }
 
@@ -80,10 +81,10 @@ m_pile_full = false ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Configuration non memorisation vitesse en secondes si nombre de
-/// satellites en vue modifiés (recalage position/vitesse).
+/// satellites en vue modifié (recalage position/vitesse).
 void CPileVit::SatChange()
 {
-m_ipile = -g_GlobalVar.m_Config.m_sat_sec ;
+m_ipile = -g_GlobalVar.m_Config.GetNbSatDelay( g_GlobalVar.GetNbSat() ) ;
 m_pile_full = false ;
 }
 

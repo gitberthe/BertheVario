@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 08/10/2024
+/// \date modification : 12/10/2024
 ///
 
 //////////////////
@@ -129,6 +129,7 @@
 #include "Screen/CLocTermic.h"
 #include "VarioBeep/CVarioBeep.h"
 #include "SDCard/CSDCard.h"
+#include "GlobalVar/CNbSatDelay.h"
 #include "GlobalVar/CConfigFile.h"
 #include "Gps/CPileVit.h"
 #include "MS5611/CMS5611.h"
