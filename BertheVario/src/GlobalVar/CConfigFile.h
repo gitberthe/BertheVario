@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 12/10/2024
+/// \date modification : 15/10/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -65,7 +65,7 @@ public :
     friend CNbSatDelay ;
 
 protected :
-    int   m_sat_sec = 9 ;                   ///< secondes d'interdiction debut vol vitesse cause changement nombre satellites (pour 4 satellites)
+    int   m_sat_sec = 10 ;                   ///< secondes d'interdiction debut vol vitesse cause changement nombre satellites (pour 4 satellites)
 
 private :
     void FreeVect() ;
