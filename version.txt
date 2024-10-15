@@ -1,5 +1,6 @@
-version 20241015a :
+version 20241015b :
  - [sat_sec] 10s par defaut pour 4 satellites.
+ - raz screen ecran Vz meilleur
  
 version 20241012a2 :
  - correction texte [temps_igc_ms] en [temps_igc_sec]

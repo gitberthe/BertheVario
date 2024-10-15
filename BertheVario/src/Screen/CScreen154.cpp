@@ -88,10 +88,18 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 /// \brief Raz de l'ecran.
 void CScreen154::ScreenRaz()
 {
-//display.powerOff();
+display.powerOff();
 display.setFullWindow() ;
 //display.setPartialWindow( 0, 0, 200 , 200 );
 //display.setFont(&FreeMonoBold18pt7b);
+display.firstPage();
+do  {
+    display.fillScreen(GxEPD_BLACK);
+    //display.setCursor(0, 0);
+    //display.printf("RAZ") ;
+    }
+while (display.nextPage());
+
 display.firstPage();
 do  {
     display.fillScreen(GxEPD_WHITE);
