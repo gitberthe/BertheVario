@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 19/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -59,7 +59,7 @@ if ( m_EtatAuto != NextStep )
     m_MillisEcran0 = millis() ;
 
     // raz screen si changement ecran
-    if ( NextStep == ECRAN_0_Vz )
+    //if ( NextStep == ECRAN_0_Vz )
         ScreenRaz() ;
     }
 

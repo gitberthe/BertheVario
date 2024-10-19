@@ -1,3 +1,7 @@
+version 20241019a :
+ - [sat_sec] 11s par defaut pour 4 satellites, 0 pour 28 satellites.
+ - raz screen ecran Vz mins longue
+
 version 20241015b :
  - [sat_sec] 10s par defaut pour 4 satellites.
  - raz screen ecran Vz meilleur

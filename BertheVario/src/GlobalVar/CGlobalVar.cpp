@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 20/09/2024
+/// \date modification : 19/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -55,7 +55,7 @@ g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Stopped = false ;
 g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Stopped = false ;
 
 // raz screen
-g_GlobalVar.ScreenRaz() ;
+//g_GlobalVar.ScreenRaz() ;
 
 // relance tache
 g_GlobalVar.LanceTacheGps(false) ;
