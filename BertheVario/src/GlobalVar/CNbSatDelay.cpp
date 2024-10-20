@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 12/10/2024
-/// \date modification : 19/10/2024
+/// \date modification : 20/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -16,6 +16,6 @@
 /// \return 0 : si 28 satellites.
 int CNbSatDelay::GetNbSatDelay(int NbSat) const
 {
-float SecDelay = ((float)(g_GlobalVar.m_Config.m_sat_sec))*((float)(28-NbSat))/24. ;
+float SecDelay = ((float)(g_GlobalVar.m_Config.m_sat_sec))*((float)(30-NbSat))/26. ;
 return (int)SecDelay ;
 }
