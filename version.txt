@@ -1,5 +1,5 @@
 version 20241024a :
- - [temps_igc_ms] passe à 4s par defaut.
+ - [temps_igc_sec] passe à 4s par defaut.
 
 version 20241020a :
  - [sat_sec] 0 pour 30 satellites.
