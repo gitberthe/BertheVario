@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 19/10/2024
+/// \date modification : 24/10/2024
 ///
 
 #ifndef _CCONFIGFILE_
@@ -41,7 +41,7 @@ public :
     float m_vz_igc_ms = 0.7 ;               ///< vz de vitesse pour declenchement
     int   m_stab_gps_metre = 30 ;           ///< rayon dispersion gps pour stabilite
     int   m_stab_gps_sec = 10 ;             ///< taille pile en sec pour calcul rayon dispersion gps
-    int   m_temps_igc_sec = 3 ;             ///< nombre de secondes de vitesse pour declenchement vol
+    int   m_temps_igc_sec = 4 ;             ///< nombre de secondes de vitesse pour declenchement vol
     float m_vz_seuil_max  = 4. ;            ///< seuils de beep
     float m_vz_seuil_haut = 0.2 ;           ///< seuils de beep
     float m_vz_seuil_bas = -2.5 ;           ///< seuils de beep
