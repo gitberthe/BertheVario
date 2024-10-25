@@ -1,3 +1,6 @@
+version 20241025a :
+ - memorisation du cap gps si non present.
+
 version 20241024a :
  - [temps_igc_sec] passe à 4s par defaut.
 
