@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 04/10/2024
+/// \date modification : 25/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -250,7 +250,9 @@ else if ( !strcmp(pChar,"--VTG" ) )
         // cap
         if ( ipar == 0 )
             {
-            g_GlobalVar.m_CapGpsDeg = (int)atof( pChar ) ;
+            // si cap bien present
+            if ( *pChar != ' ' )
+                g_GlobalVar.m_CapGpsDeg = (int)atof( pChar ) ;
             }
         // vitesse sol
         else if ( ipar == 6 )
