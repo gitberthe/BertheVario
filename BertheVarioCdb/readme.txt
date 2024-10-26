@@ -1,2 +1,0 @@
-- Ce repertoire est present uniquement pour editer/modifier les sources sous codeblocks
-- utilisation aussi pour generer la documentation code dans ../../DoxyBertheVario : doxygen Doxyfile.BertheVario
