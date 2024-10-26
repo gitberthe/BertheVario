@@ -1,3 +1,11 @@
+le 20241026a :
+ - reorganisation repertoires.
+ - pile CFinDeVol passe à 12 secondes.
+ - 2 beep lors de fin de vol.
+ - [sat_sec] 12s par defaut pour 4 satellites.
+ - re-modification CScreen154::ScreenRaz().
+ - display.setPartialWindow utilisee uniquement à l'init.
+
 version 20241025a :
  - memorisation du cap gps si non present.
 
