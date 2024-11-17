@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 02/09/2024
+/// \date modification : 17/11/2024
 ///
 
 #ifndef _GLOBALVAR_
@@ -68,6 +68,7 @@ public :
 
     float GetDeriveDeg() ;
     float GetVoltage() ;
+    void  GainMemoire() ;
     static void  RelancerEnregistrementFichier() ;
 
     // fonction d'initialisation

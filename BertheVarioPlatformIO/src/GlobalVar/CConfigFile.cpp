@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 12/09/2024
+/// \date modification : 17/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -13,6 +13,15 @@
 /// \brief
 CConfigFile::CConfigFile()
 {
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Contsruction des lignes champs/variable
+void CConfigFile::ConstructVect()
+{
+// destruction des lignes precedents
+FreeVect() ;
+
 st_line * pLine ;
 
 /*pLine = new st_line ;
@@ -130,7 +139,6 @@ pLine->m_Type = TYPE_VAR_STR ;
 m_LinesVect.push_back( pLine ) ;
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief lit le fichier de configuration et reparti dans les variables
 void CConfigFile::EcritureFichier()
@@ -146,6 +154,9 @@ if (!file)
 
 // debut de fichier
 file.seek(0) ;
+
+// construction des champs/variables
+ConstructVect() ;
 
 for( long iv = 0 ; iv < m_LinesVect.size() ; iv++ )
     {
@@ -194,6 +205,9 @@ for( long iv = 0 ; iv < m_LinesVect.size() ; iv++ )
     }
 
 file.close() ;
+
+// destruction des champs/variables
+FreeVect() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -267,6 +281,9 @@ if ( !file )
     delete [] TmpChar ;
     return;
     }
+
+// construction des champs/variables
+ConstructVect() ;
 
 // lecture fichier
 while(file.available())
@@ -379,6 +396,9 @@ for ( int i = 0 ; i < VecLigne.size() ; i++ )
     delete [] VecLigne[i] ;
 
 delete [] TmpChar ;
+
+// detruction des champs/variables
+FreeVect() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

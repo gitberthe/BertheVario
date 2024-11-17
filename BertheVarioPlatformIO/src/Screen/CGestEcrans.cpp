@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 26/10/2024
+/// \date modification : 17/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -52,13 +52,21 @@ EtatsAuto NextStep = (this->*pFunction)() ;
 
 if ( m_EtatAuto != NextStep )
     {
+    // changement de page
+    m_PageChanged = true ;
+
     // pour retour automatique vers Vz_0
     m_MillisEcran0 = millis() ;
 
     // raz screen si changement ecran
     //if ( NextStep == ECRAN_0_Vz )
         ScreenRaz() ;
+
+    // pour un gain memoire
+    g_GlobalVar.GainMemoire() ;
     }
+else
+    m_PageChanged = false ;
 
 m_EtatAuto = NextStep ;
 }

@@ -861,6 +861,11 @@ std::string Value ; ;
 static bool Modif = false ;
 static int iChamps = -1 ;
 
+if ( IsPageChanged() )
+    {
+    g_GlobalVar.m_Config.ConstructVect() ;
+    }
+
 // sortie
 if ( iChamps == -1 )
     {

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 13/08/2024
+/// \date modification : 17/11/2024
 ///
 
 #ifndef _GESTECRANS_
@@ -41,6 +41,8 @@ public :
     void LancerTacheCalcul() ;
     EtatsAuto GetEtatAuto() const   ///< renvoi l'etat de l'automate d'affichage
                 { return m_EtatAuto ; } ;
+    bool IsPageChanged() const      ///< renvoie si l'on vient de chabger de page
+        { return m_PageChanged ; } ;
 
 protected :
     virtual EtatsAuto EcranVz()      = 0 ;
@@ -62,6 +64,7 @@ protected :
     const int       m_SecRetourEcran0 = 15 ; ///< auto retour ecran 0
     unsigned long   m_MillisEcran0 ; ///< time out de retour ecran 1 vers 0
     unsigned long   m_MillisVzPositive ; ///< time out de retour affichage finesse
+    bool            m_PageChanged = false ;    ///< si on vient de changer de page ecran
 
     /// \brief etat de l'automate avec son pointeur de fonction
     class CEtatAutoFunc

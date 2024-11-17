@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 19/10/2024
+/// \date modification : 17/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -16,6 +16,16 @@ CGlobalVar::CGlobalVar()
 strcpy(m_LatChar, "0000000") ;
 strcpy(m_LonChar, "00000000") ;
 m_TerrainPosCur.m_Nom = "pos-cur" ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Pour un gain memoire
+void CGlobalVar::GainMemoire()
+{
+//RazGpsPos() ;
+//m_PileVit.ResetVit() ;
+m_HistoVol.m_HistoDir.clear() ;
+m_Config.FreeVect() ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

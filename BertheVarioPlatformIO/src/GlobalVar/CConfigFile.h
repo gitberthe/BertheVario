@@ -57,6 +57,8 @@ public :
 
     void LectureFichier() ;
     void EcritureFichier() ;
+    void ConstructVect() ;
+    void FreeVect() ;
 
     std::vector< st_line *>  m_LinesVect ; ///< vecteur des lignes
 
@@ -66,9 +68,6 @@ public :
 
 protected :
     int   m_sat_sec = 12 ;                   ///< secondes d'interdiction debut vol vitesse cause changement nombre satellites (pour 4 satellites)
-
-private :
-    void FreeVect() ;
 } ;
 
 #endif
