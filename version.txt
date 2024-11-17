@@ -1,3 +1,7 @@
+le 20241117a :
+ - affichage page Vz plus rapide (crucial par temps froid).
+ - [vitesse_igc_kmh] à 16 kmh par defaut.
+ 
 le 20241026a :
  - reorganisation repertoires.
  - pile CFinDeVol passe à 12 secondes.

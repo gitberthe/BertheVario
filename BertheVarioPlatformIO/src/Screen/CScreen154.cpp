@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 26/10/2024
+/// \date modification : 17/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -392,7 +392,7 @@ uint16_t tbw, tbh;
 display.firstPage();
 do
     {
-    display.fillScreen(GxEPD_WHITE);
+    //display.fillScreen(GxEPD_WHITE);
     //g_GlobalVar.DoRect( 0 , 0 , 200 , 200 , false );
 
     ///////////////////////////////////////////
