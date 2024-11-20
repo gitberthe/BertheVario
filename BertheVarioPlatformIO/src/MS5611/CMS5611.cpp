@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 30/08/2024
+/// \date modification : 20/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -82,7 +82,11 @@ return CalcAltitude( GetPressureMb() * 100. ) ;
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction static qui donne la VZ moyenne sur SECONDES_ALTI_VZ secondes.
 /// de la pression/altitude capteur filtree.
-void CMS5611::TacheMS5611Vz(void *param)
+/// Fonction static qui met a jour le cap magnetique a 5hz.
+/// Modifier le fichier ./Projects/BertheVario/.pio/libdeps/esp32dev/MPU9250/MPU9250.h,
+/// ligne 85, static constexpr uint8_t MAG_MODE {0x02}; pour une lecture basse frequence
+/// du capteur.
+void CMS5611::TacheVzCapMag(void *param)
 {
 #ifdef _LG_DEBUG_
  Serial.println("tache Vz lancee");
@@ -104,10 +108,10 @@ g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 // alti pression filtree
 float CoefFiltre = g_GlobalVar.m_Config.m_coef_filtre_alti_baro ;
 int iboucle = 0 ;
-while (g_GlobalVar.m_TaskArr[MS5611_NUM_TASK].m_Run)
+while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     {
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
-     // mesures du capteur
+     // mesures du capteur de pression
      g_GlobalVar.m_MS5611.Read() ;
      float AltiMesCapteur = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres()  ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
@@ -118,6 +122,11 @@ while (g_GlobalVar.m_TaskArr[MS5611_NUM_TASK].m_Run)
     g_GlobalVar.m_MS5611.m_AltiPressionFiltree = AltiPressionFiltree ;
     //Serial.print("altipress:") ;
     //Serial.println(g_GlobalVar.CMS5611::m_AltiPressionFiltree);
+
+    // mesure du cap magnetique
+    g_GlobalVar.m_MutexI2c.PrendreMutex() ;
+     g_GlobalVar.m_Mpu9250.Update() ;
+    g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
     // 5hz
     delay(200) ;
@@ -142,7 +151,7 @@ while (g_GlobalVar.m_TaskArr[MS5611_NUM_TASK].m_Run)
     #endif
     }
 
-g_GlobalVar.m_TaskArr[MS5611_NUM_TASK].m_Stopped = true ;
+g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Stopped = true ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -180,11 +189,11 @@ g_GlobalVar.m_TerrainPosCur.m_AltiBaro = GetAltiMetres() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Lance la tache de calcul de Vz.
-void CMS5611::LancerTacheCalculVz()
+/// \brief Lance la tache de calcul de Vz et acquisition cap magnetique.
+void CMS5611::LancerTacheCalculVzCapMag()
 {
 // tache de calcul Vz
-xTaskCreatePinnedToCore(TacheMS5611Vz, "MS5611AltiTask", MS5611_STACK_SIZE, this, MS5611_PRIORITY,NULL, MS5611_CORE);
+xTaskCreatePinnedToCore(TacheVzCapMag, "MS5611AltiTaskEtMag", VZ_MAG_STACK_SIZE, this, VZ_MAG_PRIORITY,NULL, VZ_MAG_CORE);
 //delay(100) ;
 }
 

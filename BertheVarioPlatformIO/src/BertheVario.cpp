@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 20/11/2024
 ///
 
-char NumVer[] = "20241117b" ;
+char NumVer[] = "20241120a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -143,10 +143,10 @@ if ( g_GlobalVar.BoutonGauche() )
 
 #ifndef MPU9250_DEBUG
 // lancement tache de calcul du cap magnetique
-g_GlobalVar.m_Mpu9250.LancerTacheCalculCapMag() ;
+//g_GlobalVar.m_Mpu9250.LancerTacheCalculCapMag() ;
 
-// lancement tache de calcul de la Vz
-g_GlobalVar.m_MS5611.LancerTacheCalculVz() ;
+// lancement tache de calcul de la Vz et acquisition cap magnetique
+g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 
 // lancement tache gps
 g_GlobalVar.LanceTacheGps(true) ;
@@ -166,9 +166,6 @@ bool once = true ;
 /// \brief fonction loop toujours appelée.
 void loop()
 {
-// temps de watchdog
-g_GlobalVar.m_MillisWatchDog = millis() ;
-
 /*
 // test Hgt2Agl
 // pdd
@@ -229,8 +226,6 @@ if ( once )
     CGlobalVar::BeepOk() ;
     delay(200);
 
-    // tache watch dog
-    xTaskCreatePinnedToCore(CGlobalVar::TacheWatchDog, "WatchDogTask", WATCH_DOG_STACK_SIZE, & g_GlobalVar , WATCH_DOG_PRIORITY , NULL, WATCH_DOG_CORE);
     // tache acquisition termic
     //g_TermicMap.LancerTacheTermic() ;
     // screen tache de fond calcul

@@ -1,3 +1,11 @@
+le 20241120a :
+ - suppression de la tache watchdog.
+ - modification taille des piles des taches.
+ - modification taille buffer gps.
+ - suppression tache acquisition cap magnetique et fusion avec calcul Vz.
+ 
+ => gain memoire pour plus de zones aeriennes.
+
 le 20241117b :
  - optimisation memoire.
 

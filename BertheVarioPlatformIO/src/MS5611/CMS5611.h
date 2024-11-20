@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 12/08/2024
+/// \date modification : 20/11/2024
 ///
 
 #ifndef _CMS5611_
@@ -22,7 +22,7 @@ public :
 
     void InitMs5611() ;
 
-    void  LancerTacheCalculVz() ;
+    void  LancerTacheCalculVzCapMag() ;
     void  SetAltiSolMetres( float AltiSol ) ;
     void  SetAltiSolUndef()                 ///< pour demmarrage en vol alti = alti baro pure
             { m_DiffAltiFchAgl = 0. ; } ;
@@ -42,7 +42,7 @@ private :
 
     float CalcAltitude(float pressure_mb_x100 , float seaLevelPressure = 101325 ) ;
 
-    static void TacheMS5611Vz(void *param) ;
+    static void TacheVzCapMag(void *param) ;
 } ;
 
 #endif

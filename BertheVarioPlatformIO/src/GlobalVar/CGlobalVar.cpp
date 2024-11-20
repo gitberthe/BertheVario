@@ -238,35 +238,3 @@ float CGlobalVar::GetDeriveDeg()
 {
 return GetDiffAngle( m_CapGpsDeg , m_Mpu9250.m_CapMagnetique ) ;
 }
-
-////////////////////////////////////////////////////////////////////////////////
-/// \brief Fonction static watch dog de 20s de la fonction loop().
-void CGlobalVar::TacheWatchDog(void* param)
-{
-
-while( g_GlobalVar.m_TaskArr[WATCH_DOG_NUM_TASK].m_Run )
-    {
-    delay( 2000 ) ;
-
-    // mesure du temps
-    unsigned long temps = millis() - g_GlobalVar.m_MillisWatchDog ;
-
-    // watch dog de 20s
-    if ( temps/1000 > 20 )
-        CGlobalVar::Reboot() ;
-
-    /*// verif alti
-    if ( g_GlobalVar.m_AltiGps < -100 )
-        CGlobalVar::Reboot() ;
-
-    // verif latitude
-    if ( fabs ( g_GlobalVar.m_LatFloat ) > 95.  )
-        CGlobalVar::Reboot() ;
-
-    // verif longitude
-    if ( fabs ( g_GlobalVar.m_LonFloat ) > 185.  )
-        CGlobalVar::Reboot() ;*/
-    }
-
-g_GlobalVar.m_TaskArr[WATCH_DOG_NUM_TASK].m_Stopped = true ;
-}

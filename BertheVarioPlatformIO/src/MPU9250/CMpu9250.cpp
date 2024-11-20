@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur magnetique
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 15/04/2024
+/// \date modification : 20/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -157,39 +157,5 @@ myFile.println( g_mpu.getMagScale(1) ) ;
 myFile.println( g_mpu.getMagScale(2) ) ;
 
 myFile.close() ;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-/// \brief Lance la tache d'acquisition du cap magnetique.
-void CMpu9250::LancerTacheCalculCapMag()
-{
-// tache de calcul cap magnetique
-xTaskCreatePinnedToCore(TacheMPU9250CapMag, "MPU9250CapMagTask", MPU9250_STACK_SIZE, this, MPU9250_PRIORITY,NULL, MPU9250_CORE);
-//delay(100) ;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-/// \brief Fonction static qui met a jour le cap magnetique a 5hz.
-/// Modifier le fichier ./Projects/BertheVario/.pio/libdeps/esp32dev/MPU9250/MPU9250.h,
-/// ligne 85, static constexpr uint8_t MAG_MODE {0x02}; pour une lecture basse frequence
-/// du capteur.
-void CMpu9250::TacheMPU9250CapMag(void *param)
-{
-#ifdef _LG_DEBUG_
- Serial.println("tache Cap magnetique lancee");
-#endif
-
-delay( 500 ) ;
-
-// a 5hz
-while( g_GlobalVar.m_TaskArr[MPU9250_NUM_TASK].m_Run )
-    {
-    delay( 200 ) ;
-
-    g_GlobalVar.m_MutexI2c.PrendreMutex() ;
-     g_GlobalVar.m_Mpu9250.Update() ;
-    g_GlobalVar.m_MutexI2c.RelacherMutex() ;
-    }
-g_GlobalVar.m_TaskArr[MPU9250_NUM_TASK].m_Stopped = true ;
 }
 

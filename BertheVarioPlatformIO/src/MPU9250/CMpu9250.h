@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur magnetique
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 10/04/2024
+/// \date modification : 20/11/2024
 ///
 
 #ifndef _CMYMPU9250_
@@ -24,14 +24,10 @@ public :
     void Update() ;
     void Calibration() ;
 
-    void LancerTacheCalculCapMag() ;
-
     float m_CapMagnetique = 0. ; ///< cap magnetique horizontal, lecture 5hz apres modif de .pio/libdeps/esp32dev/MPU9250/MPU9250.h
 
 private :
     float m_x , m_y , m_z ; ///< composantes du champs magnetique terrestre
-
-    static void TacheMPU9250CapMag(void *param) ;
 } ;
 
 #endif

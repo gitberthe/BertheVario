@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 20/11/2024
 ///
 
 //////////////////
@@ -180,7 +180,7 @@
 
 // calcul general basse priorite
 #define CALCUL_NUM_TASK     2
-#define CALCUL_STACK_SIZE   3000
+#define CALCUL_STACK_SIZE   2000
 #define CALCUL_PRIORITY     0
 #define CALCUL_CORE         1
 
@@ -195,56 +195,44 @@
 // FreeRtOs utilise le core 0 a 75% a vide //
 /////////////////////////////////////////////
 
-// pression calcul Vz, priorite tres haute non interruptible
-#define MS5611_NUM_TASK   4
-#define MS5611_STACK_SIZE 2000
-#define MS5611_PRIORITY   20
-#define MS5611_CORE       1
-
-// acquisition cap magnetique, priorite haute non interruptible
-#define MPU9250_NUM_TASK   5
-#define MPU9250_STACK_SIZE 2000
-#define MPU9250_PRIORITY   19
-#define MPU9250_CORE       1
+// pression calcul Vz, acquisition cap magnetique, priorite tres haute non interruptible
+#define VZ_MAG_NUM_TASK   4
+#define VZ_MAG_STACK_SIZE 2000
+#define VZ_MAG_PRIORITY   20
+#define VZ_MAG_CORE       1
 
 // acquisition gps, priorite haute non interruptible
-#define SERIAL_NUM_TASK         6
+#define SERIAL_NUM_TASK         5
 #define SERIAL_GPS_STACK_SIZE   3000
 #define SERIAL_GPS_PRIORITY     19
 #define SERIAL_GPS_CORE         1
 
 // ecriture igc, priorite moyenne
-#define IGC_NUM_TASK    7
+#define IGC_NUM_TASK    6
 #define IGC_STACK_SIZE  4000
 #define IGC_PRIORITY    10
 #define IGC_CORE        1
 
 // temps de vol / histo, basse priorite
-#define TEMPS_NUM_TASK   8
+#define TEMPS_NUM_TASK   7
 #define TEMPS_STACK_SIZE 4000
 #define TEMPS_PRIORITY   5
 #define TEMPS_CORE       1
 
 // scan des boutons, basse priorite
-#define SCAN_BUTON_NUM_TASK     9
+#define SCAN_BUTON_NUM_TASK     8
 #define SCAN_BUTTON_STACK_SIZE  1000
 #define SCAN_BUTTON_PRIORITY    0
 #define SCAN_BUTTON_CORE        1
 
-// watch dog, basse priorite
-#define WATCH_DOG_NUM_TASK   10
-#define WATCH_DOG_STACK_SIZE 1000
-#define WATCH_DOG_PRIORITY   0
-#define WATCH_DOG_CORE       1
-
 // relance pour cause faux depart de vol, tache fugitive.
-#define RELANCE_IGC_NUM_TASK   11
+#define RELANCE_IGC_NUM_TASK   9
 #define RELANCE_IGC_STACK_SIZE 3000
 #define RELANCE_IGC_PRIORITY   0
 #define RELANCE_IGC_CORE       1
 
 // nombre total de taches
-#define SIZE_TASK 12
+#define SIZE_TASK 10
 
 #include "GlobalVar/CNumTaskArr.h"
 #include "GlobalVar/CGlobalVar.h"

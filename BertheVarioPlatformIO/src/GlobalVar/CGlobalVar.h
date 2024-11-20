@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 20/11/2024
 ///
 
 #ifndef _GLOBALVAR_
@@ -48,8 +48,6 @@ public :
     CLocTerrain    m_TerrainPosCur ;  ///< position courante
     CLocTerrain    m_TerrainPosDeco ; ///< position de decollage
 
-    unsigned long m_MillisWatchDog ;    ///< temps de watch dog
-
     // parametres Gps
     float m_AltiGps = 0. ;      ///< alti gps en metres
     int   m_AltitudeSolHgt = 0 ;    ///< altitude sol hgt
@@ -81,7 +79,6 @@ public :
     static void  BeepOk() ;
     static void  BeepError(bool small = false) ;
     static void  Reboot() ;
-    static void  TacheWatchDog(void *param);
     static void  TacheRelanceIgc(void *param);
 
     friend class CSimuVol ;

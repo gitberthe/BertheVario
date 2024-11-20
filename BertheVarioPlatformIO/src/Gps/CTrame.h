@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/10/2024
+/// \date modification : 20/11/2024
 ///
 
 #ifndef _TRAME_
@@ -27,7 +27,7 @@ protected :
 private :
     void TraiteBuffer() ;
 
-    char m_BufRecep[1000] = {0} ;   ///< buffer de reception de la trame
+    char m_BufRecep[300] = {0} ;    ///< buffer de reception de la trame
     int  m_iBuf = 0 ;               ///< i position buffer reception
 } ;
 
