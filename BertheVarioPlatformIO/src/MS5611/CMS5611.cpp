@@ -80,9 +80,9 @@ return CalcAltitude( GetPressureMb() * 100. ) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Fonction static qui donne la VZ moyenne sur SECONDES_ALTI_VZ secondes.
-/// de la pression/altitude capteur filtree.
-/// Fonction static qui met a jour le cap magnetique a 5hz.
+/// \brief Fonction static qui donne la VZ de la pression/altitude capteur filtree
+/// a 5hz.
+/// Met a jour aussi le cap magnetique.
 /// Modifier le fichier ./Projects/BertheVario/.pio/libdeps/esp32dev/MPU9250/MPU9250.h,
 /// ligne 85, static constexpr uint8_t MAG_MODE {0x02}; pour une lecture basse frequence
 /// du capteur.
@@ -94,20 +94,18 @@ void CMS5611::TacheVzCapMag(void *param)
 
 delay( 1000 ) ;
 
-const int SECONDES_ALTI_VZ = g_GlobalVar.m_Config.m_periode_integration_sec ;
-float AltiPressForVzArr[SECONDES_ALTI_VZ] ;
+const int DIV_SECONDES = 3 ;
+float AltiPressForVzArr[DIV_SECONDES+1] ;
 
 // init des variables alti pression integree
 g_GlobalVar.m_MutexI2c.PrendreMutex() ;
  g_GlobalVar.m_MS5611.Read() ;
  g_GlobalVar.m_MS5611.m_AltiPressionFiltree = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres() ;
- for ( int i = 0 ; i < SECONDES_ALTI_VZ ; i++ )
+ for ( int i = 0 ; i <= DIV_SECONDES ; i++ )
     AltiPressForVzArr[i] = g_GlobalVar.m_MS5611.m_AltiPressionFiltree ;
 g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
 // alti pression filtree
-float CoefFiltre = g_GlobalVar.m_Config.m_coef_filtre_alti_baro ;
-int iboucle = 0 ;
 while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     {
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
@@ -116,7 +114,8 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
      float AltiMesCapteur = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres()  ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
-     // filtrage alti pression
+    // filtrage alti pression
+    const float CoefFiltre = g_GlobalVar.m_Config.m_coef_filtre_alti_baro ;
     float AltiPressionFiltree = g_GlobalVar.m_MS5611.m_AltiPressionFiltree ;
     AltiPressionFiltree = AltiPressionFiltree * CoefFiltre + (1.-CoefFiltre) * AltiMesCapteur ;
     g_GlobalVar.m_MS5611.m_AltiPressionFiltree = AltiPressionFiltree ;
@@ -128,24 +127,17 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
      g_GlobalVar.m_Mpu9250.Update() ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
-    // 5hz
-    delay(200) ;
-
-    // reboucle
-    if ( (iboucle++)%5 )
-        continue ;
-
-    // 1 hz
+    // 3hz
+    delay(1000/DIV_SECONDES) ;
 
     // decalage du tableau alti fifo par 0 sur x secondes
-    for ( int i = SECONDES_ALTI_VZ - 1 ; i>0 ; i-- )
+    for ( int i = DIV_SECONDES ; i>0 ; i-- )
         AltiPressForVzArr[ i ] = AltiPressForVzArr[ i - 1 ] ;
 
     AltiPressForVzArr[ 0 ] = AltiPressionFiltree ;
 
     // calcul VZ sur x secondes
-    float VitVert = AltiPressForVzArr[ 0 ] - AltiPressForVzArr[ SECONDES_ALTI_VZ - 1 ] ;
-    VitVert /= SECONDES_ALTI_VZ ;
+    float VitVert = AltiPressForVzArr[ 0 ] - AltiPressForVzArr[ DIV_SECONDES ] ;
     #ifndef SIMU_VOL
      g_GlobalVar.m_VitVertMS = VitVert ;
     #endif

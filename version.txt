@@ -1,3 +1,9 @@
+le 20241120b :
+ - calcul de la finesse sol sur les 5 dernieres secondes.
+ - suppression de [periode_integration_sec] dans fichier de configuration.
+ - calcul de la Vz a 3hz et plus a 1hz pour plus de reactivite en vol.
+ - [coef_filtre_alti_baro] à 0.5 par defaut.
+ 
 le 20241120a :
  - suppression de la tache watchdog.
  - modification taille des piles des taches.

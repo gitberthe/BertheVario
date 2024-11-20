@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 20/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -36,11 +36,11 @@ pLine->m_pVar = (void*) & m_coef_filtre_alti_baro  ;
 pLine->m_Type = TYPE_VAR_FLOAT ;
 m_LinesVect.push_back( pLine ) ;
 
-pLine = new st_line ;
+/*pLine = new st_line ;
 pLine->m_NomVar = "[periode_integration_sec]" ;
 pLine->m_pVar = (void*) & m_periode_integration_sec ;
 pLine->m_Type = TYPE_VAR_INT ;
-m_LinesVect.push_back( pLine ) ;
+m_LinesVect.push_back( pLine ) ;*/
 
 pLine = new st_line ;
 pLine->m_NomVar = "[vitesse_igc_kmh]" ;

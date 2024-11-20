@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 10/04/2024
+/// \date modification : 20/11/2024
 ///
 
 #ifndef _FINSOL_
@@ -26,7 +26,7 @@ private :
 
     float * m_pDistArr = NULL ;     ///< distance pour calcul finesse sol, tableau de Vz periode integrations cases
     float * m_pAltiArr = NULL ;     ///< altitude pour calcul finesse sol, tableau de Vz periode integrations cases
-    int     m_Size = 0 ;            ///< taille des tableaux
+    const int m_Size = 5 ;          ///< taille des tableaux en secondes
 } ;
 
 #endif
