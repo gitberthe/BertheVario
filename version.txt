@@ -1,3 +1,6 @@
+le 20241122a :
+ - [coef_filtre_alti_baro] à 0.8 par defaut.
+
 le 20241120b :
  - calcul de la finesse sol sur les 5 dernieres secondes.
  - suppression de [periode_integration_sec] dans fichier de configuration.
