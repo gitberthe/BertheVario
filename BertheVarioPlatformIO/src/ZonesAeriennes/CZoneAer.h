@@ -92,7 +92,7 @@ private :
     static bool ms_TriParNom ;  ///< pour un tri par nom
 } ;
 
-////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////////////////////////////////////////////
 /// \brief /// \brief Classe de reduction du nombre de points par suppression de ceux qui
 /// sont espacés de 50 metres ou qui sont en ligne droite de 6°.
 class CVecReduce
@@ -105,6 +105,6 @@ public :
 
 private :
     std::vector<CZoneAer::st_coord_poly*> * m_pVecOrigine ;
-} ;
+} ;*/
 
 #endif

@@ -64,7 +64,6 @@ return -1 ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Compresse la zone en tableau de int de resolution 18m et maximum +-589km.
-/// Puis compression des short en char lz4.
 void CZoneAer::CompressZone()
 {
 // si pas de points a compresser
@@ -76,7 +75,7 @@ if ( m_LowResShortArr != NULL )
     return ;
 
 // allocation du tableau de short
-m_LowResShortArr = new short [m_NbPts*sizeof(short)*2] ;
+m_LowResShortArr = new short [m_NbPts*2] ;
 
 // verification que la zone n'est pas trop grande
 if ( m_RayonMetre >= 589.*1000. )
@@ -86,12 +85,13 @@ if ( m_RayonMetre >= 589.*1000. )
     }
 
 // passage en short
-for ( int ip = 0 ; ip < m_NbPts*2 ; )
+int ipshort = 0 ;
+for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
     {
-    const st_coord_poly * pStPts = m_PolygoneArr[ip/2] ;
+    const st_coord_poly * pStPts = m_PolygoneArr[ipstruct] ;
 
-    m_LowResShortArr[ip++] = (short)(((float)(pStPts->m_Lat - m_Barycentre.m_Lat)) * MilesParDegres * UnMileEnMetres / ResolCompress) ;
-    m_LowResShortArr[ip++] = (short)(((float)(pStPts->m_Lon - m_Barycentre.m_Lon)) * MilesParDegres * UnMileEnMetres / ResolCompress) ;
+    m_LowResShortArr[ipshort++] = (short)((float)((pStPts->m_Lat - m_Barycentre.m_Lat) * MilesParDegres * UnMileEnMetres / ResolCompress)) ;
+    m_LowResShortArr[ipshort++] = (short)((float)((pStPts->m_Lon - m_Barycentre.m_Lon) * MilesParDegres * UnMileEnMetres / ResolCompress)) ;
     }
 
 // supression des float
@@ -124,36 +124,26 @@ FreeFloat() ;
 m_PolygoneArr = new st_coord_poly * [m_NbPts] ;
 
 // passage en float
-for ( int ip = 0 ; ip < m_NbPts*2 ; )
+int ipshort = 0 ;
+for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
     {
     // ajout du points
     st_coord_poly * pStPts = new st_coord_poly ;
-    m_PolygoneArr[ip/2] = pStPts ;
+    m_PolygoneArr[ipstruct] = pStPts ;
 
-    pStPts->m_Lat = ((float)m_LowResShortArr[ip++]) / (MilesParDegres * UnMileEnMetres / ResolCompress) + m_Barycentre.m_Lat ;
-    pStPts->m_Lon = ((float)m_LowResShortArr[ip++]) / (MilesParDegres * UnMileEnMetres / ResolCompress) + m_Barycentre.m_Lon ;
+    pStPts->m_Lat = ((float)m_LowResShortArr[ipshort++]) / (MilesParDegres * UnMileEnMetres / ResolCompress) + m_Barycentre.m_Lat ;
+    pStPts->m_Lon = ((float)m_LowResShortArr[ipshort++]) / (MilesParDegres * UnMileEnMetres / ResolCompress) + m_Barycentre.m_Lon ;
     }
 }
 
 /******************************************************************************/
 
+/*
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Reduit le vecteur en nombre de points. Prends les points 3 a 3 et
 /// supprime le milieux s'ils sont distant de moins de DistanceMetresEntrePoints
 void CVecReduce::ReduceToDistance( int DistanceMetresEntrePoints )
 {
-/*// calcul du barycentre
-st_coord_poly PtsBarycentre ;
-PtsBarycentre.m_Lat = 0 ;
-PtsBarycentre.m_Lon = 0 ;
-for ( int is = 0 ; is < (int)m_pVecOrigine->size() ; is++ )
-    {
-    const st_coord_poly & PtsCour = *(*m_pVecOrigine)[is] ;
-    PtsBarycentre.m_Lat += PtsCour.m_Lat ;
-    PtsBarycentre.m_Lon += PtsCour.m_Lon ;
-    }
-PtsBarycentre.m_Lat /= m_pVecOrigine->size() ;
-PtsBarycentre.m_Lon /= m_pVecOrigine->size() ;*/
 
 // destruction des points
 bool EncoreDesDestructions = true ;
@@ -257,7 +247,7 @@ while ( DeletePts )
             }
         }
     }
-}
+} */
 
 /*////////////////////////////////////////////////////////////////////////////////
 /// \brief Reduit le vecteur en nombre de points. Prends les points 2 a 2 et supprime le

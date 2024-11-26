@@ -1,3 +1,6 @@
+le 20241126c :
+ - correction bug fuite memoire decompression zone.
+
 le 20241126b :
  - la reduction du nombre de points de zone ce fait desormais dans BVZoneAerienne.
 
