@@ -33,6 +33,8 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="src/BVZoneAerienne.cpp" />
+		<Unit filename="src/CVecZoneReduce.cpp" />
+		<Unit filename="src/CVecZoneReduce.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

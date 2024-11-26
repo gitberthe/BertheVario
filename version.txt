@@ -1,3 +1,6 @@
+le 20241126b :
+ - la reduction du nombre de points de zone ce fait desormais dans BVZoneAerienne.
+
 le 20241126a :
  - ajout de la compression des float 32 bit en short 16 bits pour les CZoneAer.
    Resolution de 18m et zone imperativement dans le cercle de rayon 589km (sinon reboot)

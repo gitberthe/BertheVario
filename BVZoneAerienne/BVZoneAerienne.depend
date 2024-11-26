@@ -198,12 +198,13 @@
 	<any>
 	<string_view>
 
-1721448830 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BVZoneAerienne/src/BVZoneAerienne.cpp
+1732611370 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BVZoneAerienne/src/BVZoneAerienne.cpp
 	<iostream>
 	<fstream>
 	"nlohmann/json.hpp"
+	"../../BertheVarioPlatformIO/src/ZonesAeriennes/CZoneAer.h"
 
-1720991424 /home/internet/Documents/PlatformIO/Projects/BertheVario/BVZoneAerienne/src/nlohmann/json.hpp
+1723492221 /home/internet/Documents/PlatformIO/Projects/BertheVario/BVZoneAerienne/src/nlohmann/json.hpp
 	<algorithm>
 	<cstddef>
 	<functional>
@@ -396,4 +397,18 @@
 	<vector>
 	<any>
 	<string_view>
+
+1732603186 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZoneAer.h
+
+1732543366 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BVZoneAerienne/src/CVecZoneReduce.cpp
+	"CVecZoneReduce.h"
+
+1732543347 /home/internet/Documents/PlatformIO/Projects/BertheVario/BVZoneAerienne/src/CVecZoneReduce.h
+	<vector>
+	<math.h>
+	<map>
+	<vector>
+	<algorithm>
+	<limits>
+	<iostream>
 
