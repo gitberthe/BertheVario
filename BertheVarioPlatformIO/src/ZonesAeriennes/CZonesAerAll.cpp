@@ -243,10 +243,10 @@ while ( pChar != NULL )
     //Serial.println( esp_get_free_heap_size() ) ;
     }
 
-CVecReduce VecReduce ;
+/*CVecReduce VecReduce ;
 VecReduce.Set( VecPoly ) ;
 VecReduce.ReduceToDistance( DIST_METRE_4_ZONE ) ;
-VecReduce.ReduceToAngle( ANGLE_DEGRES_4_ZONE ) ;
+VecReduce.ReduceToAngle( ANGLE_DEGRES_4_ZONE ) ;*/
 
 /*// pour gnuplot
 Serial.println( "********************" ) ;
