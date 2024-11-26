@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 28/09/2024
+/// \date modification : 26/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -121,16 +121,21 @@ TraiteBufferZoneAer( TmpChar ) ;
 
 m_File.close();
 
-// tri de la plus petite surface/altitude vers la plus grande
-//TriZonesSurface() ;
-
 delete [] TmpChar ;
+
+// compression des zones
+for ( int nz = 0 ; nz < m_NbZones ; nz++ )
+    {
+    CZoneAer * pZone = m_ZonesArr[nz] ;
+    pZone->CompressZone() ;
+    pZone->FreeFloat() ;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction traite une ligne texte de zone et la met sous forme binaire
 /// dans le tableau m_ZonesArr.
-/// Reduction de zone a 300 pts MAX_PTS_4_ZONE par CVecReduce.
+/// Reduction de zone par CVecReduce.
 /// Calcul aussi le barycentre et le rayon max de la zone pour une recheche rapide.
 void CZonesAerAll::TraiteBufferZoneAer( char * buff )
 {
@@ -240,7 +245,8 @@ while ( pChar != NULL )
 
 CVecReduce VecReduce ;
 VecReduce.Set( VecPoly ) ;
-VecReduce.ReduceTo( DIST_METRE_4_ZONE ) ;
+VecReduce.ReduceToDistance( DIST_METRE_4_ZONE ) ;
+VecReduce.ReduceToAngle( ANGLE_DEGRES_4_ZONE ) ;
 
 /*// pour gnuplot
 Serial.println( "********************" ) ;
@@ -629,9 +635,6 @@ PtsEnCours.m_Lon = 3.041811;   // anzat-le-luguet
 
 #endif
 
-// tri des zones par surface croissante, rapide si deja trié
-//TriZonesSurface() ;
-
 // si test wifi positionnement altitude sol
 if ( g_GlobalVar.m_ModeHttp )
     g_GlobalVar.m_AltitudeSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
@@ -642,7 +645,7 @@ std::vector<const CZoneAer *> VecZoneInAreaActivee ;// zones activable comme R_3
 const CZoneAer * pZoneProtegee = NULL ;             // zone protege
 for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     {
-    const CZoneAer & Zone = *m_ZonesArr[iz] ;
+    CZoneAer & Zone = *m_ZonesArr[iz] ;
 
     // si la zone n'est pas active
     if ( !Zone.m_Activee )
@@ -652,8 +655,18 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     float DistBaryMetres = sqrtf( powf(Zone.m_Barycentre.m_Lat-PtsEnCours.m_Lat,2) + powf(Zone.m_Barycentre.m_Lon-PtsEnCours.m_Lon,2) )  * 60. * UnMileEnMetres ;
     bool DansLeRayon = DistBaryMetres < Zone.m_RayonMetre ;
 
+    // si pas dans le rayon
+    if ( ! DansLeRayon )
+        continue ;
+
+    // decompression de la zone
+    Zone.UnCompressZone() ;
+
     // dedans la surface
     bool IsInArea = DansLeRayon && CPolygone::IsIn( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
+
+    // liberation des float
+    Zone.FreeFloat() ;
 
     // si dedans la surface
     if ( IsInArea )
@@ -820,7 +833,7 @@ m_Mutex.RelacherMutex() ;
 // pour toutes les zones recherche frontiere XY
 for ( int iz = 0 ; iz < m_NbZones && RetNbrLimite != ZONE_LIMITE_ALTI && RetNbrIn != ZONE_DEDANS && g_GlobalVar.m_Config.m_XYMargin > 0 ; iz++ )
     {
-    const CZoneAer & Zone = *m_ZonesArr[iz] ;
+    CZoneAer & Zone = *m_ZonesArr[iz] ;
 
     // si la zone n'est pas active
     if ( !Zone.m_Activee )
@@ -828,14 +841,24 @@ for ( int iz = 0 ; iz < m_NbZones && RetNbrLimite != ZONE_LIMITE_ALTI && RetNbrI
 
     // dans le du rayon + marge
     float DistBaryMetres = sqrtf( powf(Zone.m_Barycentre.m_Lat-PtsEnCours.m_Lat,2) + powf(Zone.m_Barycentre.m_Lon-PtsEnCours.m_Lon,2) )  * 60. * UnMileEnMetres ;
-    bool DansLeRayon = DistBaryMetres < Zone.m_RayonMetre ;
+    bool DansLeRayonMarge = DistBaryMetres < (Zone.m_RayonMetre+g_GlobalVar.m_Config.m_XYMargin) ;
+
+    // si pas dans le rayon + marge
+    if ( !DansLeRayonMarge )
+        continue ;
+
+    // decompression de la zone
+    Zone.UnCompressZone() ;
 
     // dedans la surface
-    bool IsInArea = DansLeRayon && CPolygone::IsIn( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
+    bool IsInArea = CPolygone::IsIn( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
     // proche de la frontiere de zone
     bool IsNearFront = !IsInArea && CDistFront::IsNearFront( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
     // determionation zone protege
     bool ZoneProtege = IsNearFront && (strstr( Zone.m_NomOri.c_str() , "PROTECT" ) != NULL) ;
+
+    // liberation des float
+    Zone.FreeFloat() ;
 
     // prise en compte de l'altitude
     bool IsNearFrontAlti ;

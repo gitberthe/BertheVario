@@ -4,17 +4,20 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 28/09/2024
+/// \date modification : 26/11/2024
 ///
 
 #ifndef _ZONE_AR_
 #define _ZONE_AR_
 
-#define DIST_METRE_4_ZONE  100
-
 #define ALTI_BASSE           0
 #define ALTI_PERIODE_SEMAINE 1
 #define ALTI_PERIODE_WEEKEND 2
+
+#define DIST_METRE_4_ZONE       50  ///< distance en metre pour le calcul/compression entre 2 points
+#define ANGLE_DEGRES_4_ZONE     6   ///< angle pour supression/compression si points alignés
+
+#define ResolCompress        (18.)
 
 // FL 195	5800 mètres
 // FL 175	5332 mètres
@@ -29,13 +32,13 @@
 class CZoneAerDerogFfvl
 {
 public :
-    int     m_AltiBassePeriodeSemaine=-1;///< altitude basse dans la periode en semaine
-    int     m_AltiBassePeriodeWeekEnd=-1;///< altitude basse dans la periode en week-end
-    int     m_PeriodeDebutJour = -1 ;   ///< periode debut jour pour altitude
-    int     m_PeriodeFinJour   = -1 ;   ///< periode fin jour pour altitude
-    int     m_PeriodeDebutMois = -1 ;   ///< periode debut mois pour altitude
-    int     m_PeriodeFinMois   = -1 ;   ///< periode fin mois pour altitude
-    int     m_AltiAPrendreEnCompte = ALTI_BASSE ;   ///< altitude a prendre en compte fonction de la date
+    short     m_AltiBassePeriodeSemaine=-1;///< altitude basse dans la periode en semaine
+    short     m_AltiBassePeriodeWeekEnd=-1;///< altitude basse dans la periode en week-end
+    short     m_PeriodeDebutJour = -1 ;   ///< periode debut jour pour altitude
+    short     m_PeriodeFinJour   = -1 ;   ///< periode fin jour pour altitude
+    short     m_PeriodeDebutMois = -1 ;   ///< periode debut mois pour altitude
+    short     m_PeriodeFinMois   = -1 ;   ///< periode fin mois pour altitude
+    short     m_AltiAPrendreEnCompte = ALTI_BASSE ;   ///< altitude a prendre en compte fonction de la date
 } ;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,12 +63,17 @@ public :
     int     GetAltiBasse() const ;
     bool    HavePeriod() const
                 { return m_pDerogFfvl != NULL ; } ;
-    std::string  m_NomAff ;             ///< nom court de la zone a afficher
-    std::string  m_NomOri ;             ///< nom entier de la zone dans fichier origine
-    bool    m_Activee = true ;          ///< zone activee
-    bool    m_DansFchActivation = false;///< si dans fichier d'activation de zones pour reecriture apres configuration menu
-    int     m_AltiBasse=-1 ;            ///< altitude basse de la zone par defaut
+
+    std::string         m_NomAff ;             ///< nom court de la zone a afficher
+    std::string         m_NomOri ;             ///< nom entier de la zone dans fichier origine
+    bool                m_Activee = true ;          ///< zone activee
+    bool                m_DansFchActivation = false;///< si dans fichier d'activation de zones pour reecriture apres configuration menu
+    short               m_AltiBasse=-1 ;            ///< altitude basse de la zone par defaut
     CZoneAerDerogFfvl * m_pDerogFfvl = NULL ; ///< si zone avec derogation ffvl
+
+    void CompressZone() ;
+    void UnCompressZone() ;
+    void FreeFloat() ;
 
     friend class CZonesAerAll ;
 
@@ -74,8 +82,9 @@ public :
 
 private :
     st_coord_poly **m_PolygoneArr=NULL; ///< tableau des points de la zone
-    int             m_NbPts = 0 ;       ///< nombre de points de la zone
-    //float           m_Area = 0. ;       ///< surface pour les zones imbriquee ex : TAM 2.2
+    short           m_NbPts = 0 ;       ///< nombre de points de la zone
+
+    short           *m_LowResShortArr=NULL;   ///< tableau des coordonnees relatives au barycentre pour compression short
 
     st_coord_poly   m_Barycentre ;      ///< pour une recherche rapide
     float           m_RayonMetre ;      ///< pour une recherche rapide
@@ -84,28 +93,18 @@ private :
 } ;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Classe de reduction du nombre de points par suppression de ceux plus
-/// proche du barycentre.
+/// \brief /// \brief Classe de reduction du nombre de points par suppression de ceux qui
+/// sont espacés de 50 metres ou qui sont en ligne droite de 6°.
 class CVecReduce
 {
 public :
     void Set( std::vector<CZoneAer::st_coord_poly*> & VecToReduce )
         { m_pVecOrigine = & VecToReduce ; } ;
-    void ReduceTo( int DistanceMetresEntrePoints ) ;
+    void ReduceToDistance( int DistanceMetresEntrePoints ) ;
+    void ReduceToAngle( int MemeDirectionEnDegres ) ;
 
 private :
     std::vector<CZoneAer::st_coord_poly*> * m_pVecOrigine ;
-
-    /*struct st_pts_i_b
-        {
-        int   m_ipts ;          ///< position vecteur origine
-        float m_DistanceBari ;  ///< distance baricentre
-
-        bool operator > ( const st_pts_i_b & pts ) const
-            { return m_DistanceBari > pts.m_DistanceBari ; } ;
-        bool operator < ( const st_pts_i_b & pts ) const
-            { return m_DistanceBari < pts.m_DistanceBari  ; } ;
-        } ; */
 } ;
 
 #endif

@@ -4,7 +4,7 @@
 /// \brief Fonction du file manager
 ///
 /// \date creation     : 04/04/2024
-/// \date modification : 21/07/2024
+/// \date modification : 26/11/2024
 ///
 
 #include "../BertheVario.h"
@@ -58,8 +58,8 @@ void addFileSystems()
 uint32_t checkFileFlags(fs::FS &fs, String filename, uint32_t flags) {
 
   // this will hide files
-  filename.toLowerCase();
-  if ( filename.endsWith(".hgt") ) {
+  //filename.toLowerCase();
+  if ( filename.endsWith(".hgt") || filename.endsWith(".HGT") ) {
     // no other flags, file is invisible and nothing allowed
     return ESPFMfGK::flagIsNotVisible;
   }
@@ -75,17 +75,17 @@ uint32_t checkFileFlags(fs::FS &fs, String filename, uint32_t flags) {
   }
 
   // Default actions
-  uint32_t defaultflags = ESPFMfGK::flagCanDelete | ESPFMfGK::flagCanRename | // ESPFMfGK::flagCanGZip |  // ^t
+  uint32_t defaultflags = ESPFMfGK::flagCanDelete | // ESPFMfGK::flagCanRename | // ESPFMfGK::flagCanGZip |  // ^t
                           ESPFMfGK::flagCanDownload | ESPFMfGK::flagCanUpload | ESPFMfGK::flagCanEdit | // ^t
                           ESPFMfGK::flagAllowPreview;
 
   // can gzip igc
-  if ( filename.endsWith(".igc") ) {
-    defaultflags |= ESPFMfGK::flagCanGZip ;
-  }
+  //if ( filename.endsWith(".igc") ) {
+  //  defaultflags |= ESPFMfGK::flagCanGZip ;
+  //}
 
   // editable files.
-  const String extedit[] PROGMEM = { ".txt", ".igc" };
+  const String extedit[] PROGMEM = { ".txt" } ; //, ".igc" };
 
   // I simply assume, that editable files are also allowed to be previewd
   for (int i = 0; i < sizeof(extedit) / sizeof(extedit[0]); i++) {

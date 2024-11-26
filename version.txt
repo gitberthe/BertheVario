@@ -1,3 +1,10 @@
+le 20241126a :
+ - ajout de la compression des float 32 bit en short 16 bits pour les CZoneAer.
+   Resolution de 18m et zone imperativement dans le cercle de rayon 589km (sinon reboot)
+ - 2 methodes de reduction de zone au demmarrage. Par distance entre points
+   de 50 metres, et angle plat de 6 degres.
+ - format de zonesaer.txt inchangé.
+ 
 le 20241122a :
  - [coef_filtre_alti_baro] à 0.8 par defaut.
 
