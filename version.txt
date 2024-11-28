@@ -1,3 +1,8 @@
+le 20241128a :
+ - fichier zonesaer.txt recrée mieux defini. Programme de 
+   generation CompZoneAerienne en cours de reecriture
+   (voir projet BertheVarioTac)
+
 le 20241126c :
  - correction bug fuite memoire decompression zone.
 
