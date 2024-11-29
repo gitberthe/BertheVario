@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241129a" ;
+char NumVer[]="20241129b" ;
 
 // centre clermont
 float LatCentreDeg = 45.783329 ;
@@ -123,7 +123,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     ofstream ofs_znc(NomFichierGnuplotAvecChemin, std::ofstream::out);
     for ( long ip = 0 ; ip < (long)Zone.m_VecPts.size() ; ip++ )
         {
-        ofs_znc << setprecision(5)
+        ofs_znc << setprecision(8)
             << Zone.m_VecPts[ip]->m_Lon
             << " "
             << Zone.m_VecPts[ip]->m_Lat << endl ;
@@ -133,9 +133,10 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     // compression de points
     VecZoneReduce.Set( Zone.m_VecPts ) ;
     //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( DIST_METRE_DROITE , -1 , DIST_METRE_PTS ) ;
+    VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( DIST_METRE_DROITE , -1 , -1 ) ;
     //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( -1 , ANGLE_DEGRES , -1 ) ;
     //VecZoneReduce.ReduceMultiDistanceDroite( DIST_METRE_MULTI_DROITE ) ;
-    VecZoneReduce.ReduceNuageDroite( DIST_METRE_NUAGE_DROITE ) ;
+    //VecZoneReduce.ReduceNuageDroite( DIST_METRE_NUAGE_DROITE ) ;
     //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( -1 , ANGLE_DEGRES , DIST_METRE_PTS ) ;
     //VecZoneReduce.ReduceNuageBravaisPearson( DIST_METRE_NUAGE_DROITE_BP , COEF_BRAVAIS_PEARSON ) ;
 
@@ -151,7 +152,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     ofstream ofs_zc(NomFichierGnuplotAvecChemin, std::ofstream::out);
     for ( long ip = 0 ; ip < (long)Zone.m_VecPts.size() ; ip++ )
         {
-        ofs_zc << setprecision(5)
+        ofs_zc << setprecision(8)
             << Zone.m_VecPts[ip]->m_Lon
             << " "
             << Zone.m_VecPts[ip]->m_Lat << endl ;

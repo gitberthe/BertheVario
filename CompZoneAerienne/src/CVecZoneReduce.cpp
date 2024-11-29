@@ -4,100 +4,92 @@
 /// \brief
 ///
 /// \date creation     : 25/11/2024
-/// \date modification : 28/11/2024
+/// \date modification : 29/11/2024
 ///
 
 #include "CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Reduit le vecteur en nombre de points. Cumul de 3 methodes. Par distance
-/// à une droite,distance entre les points et par angle d'alignement si parametre != -1.
-void CVecZoneReduce::ReduceToDistanceDroiteAngleDistancePoint( int DistanceMetresEcartDroite , int MemeDirectionEnDegres , int DistanceMetresEntrePoints )
+/// \brief Reduit le vecteur en nombre de points de facon iteratives. Cumul de
+/// 3 methodes. Par distance à une droite, distance entre les points et par angle
+/// d'alignement si parametre != -1.
+void CVecZoneReduce::ReduceToDistanceDroiteAngleDistancePoint( double DistanceMetresEcartDroite , double MemeDirectionEnDegres , double DistanceMetresEntrePoints )
 {
-// temps que points a deleter
+// temps que un points a ete deletruit
 bool DeleteVec = true ;
 while ( DeleteVec )
     {
     DeleteVec = false ;
 
-    bool BoucleEnCours = true ;
+    const long TotalPts = 3 ;
     // supression des points 3 a 3
-    for ( int ipa = 0 ; ipa+2 < (int)m_pVecOrigine->size() && BoucleEnCours ; ipa += 1 )
+    for ( long ipa = 0 ; ipa+2 < (long)m_pVecOrigine->size() ; ipa += 1 )
         {
-        // vecteur des 3 poitns
+        // vecteur des 3 points
         std::vector< CPoint2D > Vect3pts ;
-        for ( long ipb = 0 ; ipb < 3 && ipb < (int)m_pVecOrigine->size() ; ipb++ )
-            {
-            // un point deja efface
-            if ( (*m_pVecOrigine)[ipa+ipb] == NULL )
-                {
-                BoucleEnCours = false ;
-                break ;
-                }
+        for ( long ipb = 0 ; ipb < TotalPts && (ipa+ipb) < (long)m_pVecOrigine->size() ; ipb++ )
             Vect3pts.push_back( CPoint2D( (*m_pVecOrigine)[ipa+ipb]->m_Lon , (*m_pVecOrigine)[ipa+ipb]->m_Lat) ) ;
-            }
 
         // si pas assez de points
-        if ( Vect3pts.size() < 3 || !BoucleEnCours )
+        if ( Vect3pts.size() < TotalPts )
             break;
 
-        // calcul des vecteur
+        // calcul des vecteurs des 3 points
         CVecteur2D VecDir( Vect3pts[2] , Vect3pts[0] ) ;
         CVecteur2D VecAutre( Vect3pts[1] , Vect3pts[0] ) ;
 
-        // calcul de la droite
+        // calcul de la droite des 2 extremites
         CDroite2D  Droite( VecDir , Vect3pts[0] ) ;
 
-        // vecteur perpendiculaire
+        // vecteur perpendiculaire à la droite
         CPoint2D PtProj = Droite.GetProjectionDuPoint( Vect3pts[1] ) ;
         CVecteur2D VecPerendiculaire( PtProj , Vect3pts[1] ) ;
 
-        // destruction de points si distance a la droite sufisante
+        // destruction de points si distance a la droite inferieur
         if ( DistanceMetresEcartDroite > 0 && VecPerendiculaire.GetNorm() * MilesParDegres * UnMileEnMetres < DistanceMetresEcartDroite )
             {
-            // destruction du point du milieu
-            if ( VecDir.GetNorm() > VecAutre.GetNorm() )
-                {
-                DeleteVec = true ;
-                delete (*m_pVecOrigine)[ipa+1] ;
-                (*m_pVecOrigine)[ipa+1] = NULL ;
-                continue ;
-                }
+            DeleteVec = true ;
+            delete (*m_pVecOrigine)[ipa+1] ;
+            (*m_pVecOrigine)[ipa+1] = NULL ;
+            ipa-- ;
+            break ;
             }
 
-        // destruction distance
-        float Dist1 = Vect3pts[1].GetDistanceAuPoint( Vect3pts[0] ) * MilesParDegres * UnMileEnMetres ;
-        float Dist2 = Vect3pts[1].GetDistanceAuPoint( Vect3pts[2] ) * MilesParDegres * UnMileEnMetres ;
+        // destruction si distance entre points inferieur
+        double Dist1 = Vect3pts[1].GetDistanceAuPoint( Vect3pts[0] ) * MilesParDegres * UnMileEnMetres ;
+        double Dist2 = Vect3pts[1].GetDistanceAuPoint( Vect3pts[2] ) * MilesParDegres * UnMileEnMetres ;
 
         if ( DistanceMetresEntrePoints > 0 && Dist1 < DistanceMetresEntrePoints )
             {
             DeleteVec = true ;
             delete (*m_pVecOrigine)[ipa] ;
             (*m_pVecOrigine)[ipa] = NULL ;
-            continue ;
+            ipa-- ;
+            break ;
             }
         if ( DistanceMetresEntrePoints > 0 && Dist2 < DistanceMetresEntrePoints )
             {
             DeleteVec = true ;
             delete (*m_pVecOrigine)[ipa+2] ;
             (*m_pVecOrigine)[ipa+2] = NULL ;
-            continue ;
+            ipa-- ;
+            break ;
             }
 
-        // destruction angle plat
-        float AngleDeg = VecDir.GetAngleDeg(VecAutre) ;
+        // destruction si angle plat inferieur
+        double AngleDeg = VecDir.GetAngleDeg(VecAutre) ;
         if ( MemeDirectionEnDegres > 0 &&
-             (AngleDeg < MemeDirectionEnDegres || AngleDeg > (180-MemeDirectionEnDegres)) &&
-             Dist1<(DIST_METRE_PTS*40) && Dist2<(DIST_METRE_PTS*40) )
+             (AngleDeg < MemeDirectionEnDegres || AngleDeg > (180-MemeDirectionEnDegres)) )
             {
             DeleteVec = true ;
             delete (*m_pVecOrigine)[ipa+1] ;
             (*m_pVecOrigine)[ipa+1] = NULL ;
-            continue ;
+            ipa-- ;
+            break ;
             }
         }
 
-    // recopie des points restant
+    // recopie des points non suprimmes
     std::vector<st_coord_poly*> VecReduce ;
     for ( long ipt = 0 ; ipt < (int)m_pVecOrigine->size() ; ipt++ )
         {
@@ -197,6 +189,7 @@ return ret ;
 void CVecZoneReduce::ReduceNuageDroite( float DistanceMetresEcartDroite )
 {
 std::vector<st_coord_poly*> VecReduce ;
+
 const long size = m_pVecOrigine->size() ;
 
 CVecGroupAligne VecGroupAligne ;
@@ -292,10 +285,13 @@ for ( size_t ig = VecGroupAligne.size() - 1 ; ig > 0 ; ig-- )
         }
     }
 
-for ( size_t ip = 0 ; ip < m_pVecOrigine->size() ; ip++ )
+// recopie des points pas a detruire
+VecReduce.clear() ;
+for ( size_t ipo = 0 ; ipo < m_pVecOrigine->size() ; ipo++ )
     {
-    if ( ! (*m_pVecOrigine)[ip]->m_PtADetuire )
-        VecReduce.push_back( (*m_pVecOrigine)[ip] ) ;
+    st_coord_poly * pSt = (*m_pVecOrigine)[ipo] ;
+    if ( ! pSt->m_PtADetuire )
+        VecReduce.push_back( pSt ) ;
     }
 // recopie du vecteur reduit
 *m_pVecOrigine = VecReduce ;
@@ -309,7 +305,7 @@ if ( pStCoord == NULL )
     return ;
 
 for ( size_t ip = 0 ; ip < VecReduce.size() ; ip++ )
-    if ( pStCoord == VecReduce[ip] )
+    if ( pStCoord->m_Lat == VecReduce[ip]->m_Lat && pStCoord->m_Lon == VecReduce[ip]->m_Lon )
         return ;
 
 VecReduce.push_back( pStCoord ) ;
@@ -343,7 +339,7 @@ const int debpts = 3 ;
 for ( long ipall = 0 ; ipall < size ; ipall+=1 )
     {
     // nombre de points croissant/glissant
-    double CoefBravaisPearsonOld = -DBL_MAX ;
+    //double CoefBravaisPearsonOld = -DBL_MAX ;
     CGroupeAligne GroupeAligneOld ;
     CGroupeAligne GroupeAligneCur ;
     for ( NbPts = debpts ; NbPts + ipall < size ; NbPts++ )

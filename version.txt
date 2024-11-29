@@ -1,3 +1,8 @@
+le 20241129b :
+ - enfin beton sur CompZoneAerienne et zonesaer.txt. Compression
+   iterative 3 points distance droite < 4.5m. 
+ - la resolution firmware des zones reste à 18m.
+ 
 le 20241129a :
  - recopie de CompZoneAerienne de BertheVarioTac.
  

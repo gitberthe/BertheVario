@@ -10,13 +10,13 @@
 #ifndef _VECZONEREDUCE_
 #define _VECZONEREDUCE_
 
-#define DIST_METRE_PTS              40   ///< distance en metre pour le calcul/compression entre 2 points
-#define ANGLE_DEGRES                4   ///< angle pour supression/compression si points alignés par degres
-#define DIST_METRE_DROITE           7   ///< distance à la droite pour supression
-#define DIST_METRE_MULTI_DROITE     5   ///< distance à la droite pour supression multi droite
-#define DIST_METRE_NUAGE_DROITE     40  ///< distance à la droite pour supression par nuage de points
-#define DIST_METRE_NUAGE_DROITE_BP  40  ///< distance à la droite pour supression par nuage de points/ bravaisPearson
-#define COEF_BRAVAIS_PEARSON        0.99
+//#define DIST_METRE_PTS              40   ///< distance en metre pour le calcul/compression entre 2 points
+//#define ANGLE_DEGRES                4   ///< angle pour supression/compression si points alignés par degres
+#define DIST_METRE_DROITE             4.5 ///< distance à la droite pour supression
+//#define DIST_METRE_MULTI_DROITE     5   ///< distance à la droite pour supression multi droite
+//#define DIST_METRE_NUAGE_DROITE     40  ///< distance à la droite pour supression par nuage de points
+//#define DIST_METRE_NUAGE_DROITE_BP  40  ///< distance à la droite pour supression par nuage de points/ bravaisPearson
+//#define COEF_BRAVAIS_PEARSON        0.99
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Classe de reduction du nombre de points par suppression de ceux qui
@@ -37,7 +37,7 @@ public :
 
     void Set( std::vector<st_coord_poly*> & VecToReduce )
         { m_pVecOrigine = & VecToReduce ; } ;
-    void ReduceToDistanceDroiteAngleDistancePoint( int DistanceMetresEcartDroite , int MemeDirectionEnDegres , int DistanceMetresEntrePoints ) ;
+    void ReduceToDistanceDroiteAngleDistancePoint( double DistanceMetresEcartDroite , double MemeDirectionEnDegres , double DistanceMetresEntrePoints ) ;
     int  ReduceMultiDistanceDroite( float DistanceMetresEcartDroite ) ;
     void ReduceNuageDroite( float DistanceMetresEcartDroite ) ;
     void ReduceNuageBravaisPearson( double DistanceMetresEcartDroite , double CoefBravaisPearson ) ;

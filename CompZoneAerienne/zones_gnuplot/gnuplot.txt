@@ -1,10 +1,26 @@
 #!/bin/sh 
 gnuplot << EOF
+reset
 set terminal postscript eps color enhanced
-set term png size 2200,1800
-set output "out.png"
+set term png size 2000,1500
+
+set output "out_chastreix_1.png"
 plot   "077_avc.txt" with linespoints,"077_apc.txt" with linespoints
-#plot   "077_apc.txt" with linespoints
-#plot   "073_avc.txt" with linespoints,"073_apc.txt" with linespoints
-#plot   "075_avc.txt" with linespoints,"075_apc.txt" with linespoints
+#plot   "077_apc.txt" with linespoints # vectors
+
+set output "out_chaudefour.png"
+plot   "076_avc.txt" with linespoints,"076_apc.txt" with linespoints
+
+set output "out_ctr.png"
+plot   "075_avc.txt" with linespoints,"075_apc.txt" with linespoints
+
+set output "out_tma_1.png"
+plot   "073_avc.txt" with linespoints,"073_apc.txt" with linespoints
+
+set output "out_chastreix_2.png"
+plot   "071_avc.txt" with linespoints,"071_apc.txt" with linespoints
+
+set output "out_chastreix_3.png"
+plot   "048_avc.txt" with linespoints,"048_apc.txt" with linespoints
+
 EOF
