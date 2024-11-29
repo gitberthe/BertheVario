@@ -1,3 +1,6 @@
+le 20241129a :
+ - recopie de CompZoneAerienne de BertheVarioTac.
+ 
 le 20241128a :
  - fichier zonesaer.txt recrée mieux defini. Programme de 
    generation CompZoneAerienne en cours de reecriture

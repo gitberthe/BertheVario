@@ -1,0 +1,10 @@
+#!/bin/sh 
+gnuplot << EOF
+set terminal postscript eps color enhanced
+set term png size 2200,1800
+set output "out.png"
+plot   "077_avc.txt" with linespoints,"077_apc.txt" with linespoints
+#plot   "077_apc.txt" with linespoints
+#plot   "073_avc.txt" with linespoints,"073_apc.txt" with linespoints
+#plot   "075_avc.txt" with linespoints,"075_apc.txt" with linespoints
+EOF
