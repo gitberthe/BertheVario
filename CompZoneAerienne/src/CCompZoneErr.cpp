@@ -31,12 +31,10 @@ for ( long ipbz = 0 ; ipbz < (long)BigZone.size() ; ipbz++ )
             ptfin = SmallZone[ipsz+1] ;
             }
 
-        double distance ;
-        if ( (distance=GetErrMetres(ptdeb,ptfin,pPBz)) >= 0. )
-            {
-            if ( distance_min > distance )
-                distance_min = distance ;
-            }
+        double distance = GetErrMetres(ptdeb,ptfin,pPBz) ;
+
+        if ( distance_min > distance )
+            distance_min = distance ;
         }
 
     // ajout de la distance
@@ -47,8 +45,8 @@ return ErrMetre/NbSect ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Renvoie la distance du point à la droite en metre ou -1 si le point
-/// projete n'est pas entre les points A/B.
+/// \brief Renvoie la distance du point à la droite en metre ou si le point
+/// projete n'est pas entre les points A/B, distance A ou B
 double CCompZoneErr::GetErrMetres( const CVecZoneReduce::st_coord_poly* pPtLineA , const CVecZoneReduce::st_coord_poly* pPtLineB , const CVecZoneReduce::st_coord_poly* pPt )
 {
 // point A
@@ -78,11 +76,19 @@ CPoint2D PtProj = Droite.GetProjectionDuPoint(Pt) ;
 
 // si en dehors du segment de droite
 CVecteur2D VecPtSurDroite( PtA , PtProj ) ;
-if ( VecPtSurDroite.GetNorm() > VecDroite.GetNorm() ) //|| VecPtSurDroite.GetAngleDeg( VecDroite ) > 90 )
-    return -1;
+double DistanceDroite = DBL_MAX ;
+if ( VecPtSurDroite.GetNorm() > VecDroite.GetNorm() || VecPtSurDroite.GetAngleDeg( VecDroite ) > 90 )
+    {
+    CVecteur2D VecProj( Pt , PtProj ) ;
+    DistanceDroite = VecProj.GetNorm() * MilesParDegres * UnMileEnMetres ;
+    }
 
-// distance à la droite
-CVecteur2D VecProj( Pt , PtProj ) ;
-double Distance = VecProj.GetNorm() * MilesParDegres * UnMileEnMetres ;
-return Distance ;
+// distance à points A et B
+double DistanceA = Pt.GetDistanceAuPoint(PtA) * MilesParDegres * UnMileEnMetres ;
+double DistanceB = Pt.GetDistanceAuPoint(PtB) * MilesParDegres * UnMileEnMetres ;
+
+// distance min
+double DistanceMin = MIN( DistanceA , DistanceB ) ;
+DistanceMin = MIN( DistanceMin , DistanceDroite ) ;
+return DistanceMin ;
 }

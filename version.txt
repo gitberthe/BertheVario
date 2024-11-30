@@ -1,3 +1,6 @@
+le 20241130c :
+ - correction calcul erreur moyenne pour CompZoneAerienne.
+
 le 20241130b :
  - augmentation des decimales et precision dans zonesaer.txt.
 

@@ -8,7 +8,7 @@
 /// \date creation     : 23/03/2024
 /// \date 25/11/2024 : ajout de compression de zone par distance entre points et par
 ///                    angle de meme direction.
-/// \date 29/11/2024 : modification
+/// \date 30/11/2024 : modification
 ///
 
 #include "CompZoneAerienne.h"
@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241130b" ;
+char NumVer[]="20241130c" ;
 
 // centre clermont
 double LatCentreDeg = 45.783329 ;
