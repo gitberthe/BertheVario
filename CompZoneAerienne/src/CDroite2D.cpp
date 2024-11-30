@@ -5,7 +5,7 @@
 /// \brief
 ///
 /// \date 20/10/2020 : NVIDIA_FUNC
-/// \date 27/11/2024: Derniere modification.
+/// \date 30/11/2024: Derniere modification.
 ///
 
 #include "CompZoneAerienne.h"
@@ -63,7 +63,7 @@ return VecAP.IsCollinear(m_VecDir) ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoie un point de la droite. Calcul sous forme parametrique.
 /// \param t [in] : le parametre de l'equation parametrique.
-const CPoint2D CDroite2D::GetPoint( float t ) const
+const CPoint2D CDroite2D::GetPoint( double t ) const
 {
 CPoint2D pt ;
 pt.m_x = m_VecDir.m_x*t + m_pta.m_x ;
@@ -81,9 +81,9 @@ const CPoint2D CDroite2D::GetProjectionDuPoint(const CPoint2D& pt) const
 //k = kmini = -------------------
 //                 dx²+dy²
 
-float NUM = m_VecDir.m_x*(pt.m_x-m_pta.m_x)+m_VecDir.m_y*(pt.m_y-m_pta.m_y) ;
-float DEN = POW(m_VecDir.m_x,2.)+POW(m_VecDir.m_y,2.) ;
-float k_mini=NUM/DEN ;
+double NUM = m_VecDir.m_x*(pt.m_x-m_pta.m_x)+m_VecDir.m_y*(pt.m_y-m_pta.m_y) ;
+double DEN = POW(m_VecDir.m_x,2.)+POW(m_VecDir.m_y,2.) ;
+double k_mini=NUM/DEN ;
 
 CPoint2D PtProj = GetPoint(k_mini) ;
 return PtProj ;
@@ -93,12 +93,12 @@ return PtProj ;
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoi la plus courte distance droite/droite.
 /// d=|det(AB,u,v)|/||u^v|| (internet)
-float CDroite2D::GetDistanceADroite(const CDroite2D& db ) const
+double CDroite2D::GetDistanceADroite(const CDroite2D& db ) const
 {
 CVecteur2D AB(m_pta,db.m_pta) ;
 CMatrice Matrice( AB , m_VecDir , db.m_VecDir ) ;
-float Determinant=FABS(Matrice.GetDeterminant()) ;
-float DEN=m_VecDir.GetProduitVectoriel(db.m_VecDir).GetNorm() ;
+double Determinant=FABS(Matrice.GetDeterminant()) ;
+double DEN=m_VecDir.GetProduitVectoriel(db.m_VecDir).GetNorm() ;
 return Determinant/DEN ;
 }
 */

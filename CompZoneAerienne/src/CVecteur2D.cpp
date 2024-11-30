@@ -5,7 +5,7 @@
 /// \brief
 ///
 /// \date 20/10/2020 : NVIDIA_FUNC
-/// \date 27/09/2024 : Derniere modification.
+/// \date 30/11/2024 : Derniere modification.
 ///
 
 #include "CompZoneAerienne.h"
@@ -26,21 +26,21 @@ return CVecteur2D( VecA.m_x-VecB.m_x , VecA.m_y-VecB.m_y ) ;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Multiplication d'un vecteur.
-CVecteur2D operator * ( const CVecteur2D & Vec , float Nombre )
+CVecteur2D operator * ( const CVecteur2D & Vec , double Nombre )
 {
 return CVecteur2D( Vec.m_x*Nombre , Vec.m_y*Nombre ) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Division d'un vecteur.
-CVecteur2D operator / ( const CVecteur2D & Vec , float Nombre )
+CVecteur2D operator / ( const CVecteur2D & Vec , double Nombre )
 {
 return CVecteur2D( Vec.m_x/Nombre , Vec.m_y/Nombre ) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Produit scalaire de 2 vecteurs <a,b>.
-float operator ^ ( const CVecteur2D & VecA , const CVecteur2D & VecB )
+double operator ^ ( const CVecteur2D & VecA , const CVecteur2D & VecB )
 {
 return VecA.GetProduitScalaire( VecB ) ;
 }
@@ -49,7 +49,7 @@ return VecA.GetProduitScalaire( VecB ) ;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Positionne le point.
-void CPoint2D::Set(float x,float y)
+void CPoint2D::Set(double x,double y)
 {
 m_x=x;
 m_y=y;
@@ -57,9 +57,9 @@ m_y=y;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Donne la distance entre 2 points.
-float CPoint2D::GetDistanceAuPoint( const CPoint2D & pt ) const
+double CPoint2D::GetDistanceAuPoint( const CPoint2D & pt ) const
 {
-float Distance = SQRT(POW(m_x-pt.m_x,2.) + POW(m_y-pt.m_y,2.) ) ;
+double Distance = SQRT(POW(m_x-pt.m_x,2.) + POW(m_y-pt.m_y,2.) ) ;
 return Distance ;
 }
 
@@ -121,7 +121,7 @@ m_x=m_y=0.;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Constructeur
-CVecteur2D::CVecteur2D(float x,float y)
+CVecteur2D::CVecteur2D(double x,double y)
 {
 m_x=x;
 m_y=y;
@@ -129,7 +129,7 @@ m_y=y;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Positionne le vecteur.
-void CVecteur2D::Set(float x,float y)
+void CVecteur2D::Set(double x,double y)
 {
 m_x=x;
 m_y=y;
@@ -171,10 +171,10 @@ return false ;
 /// Probleme de bruit de calcul contourne avec PRECISION_ZERO.
 bool CVecteur2D::IsCollinear( const CVecteur2D & Vec , bool Strict /*= false */) const
 {
-float Precision = PRECISION_ZERO*1000. ; // 0.01
+double Precision = PRECISION_ZERO*1000. ; // 0.01
 if ( Strict )
     Precision = PRECISION_ZERO ; // 0.00001
-float rap=Vec.m_x/m_x ;
+double rap=Vec.m_x/m_x ;
 if ( FABS(rap - (Vec.m_y/m_y)) > Precision )
     return false ;
 return true ;
@@ -182,32 +182,32 @@ return true ;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Retourne l'angle entre les 2 vecteur en radians (internet).
-float CVecteur2D::GetAngleRad( const CVecteur2D & Vec ) const
+double CVecteur2D::GetAngleRad( const CVecteur2D & Vec ) const
 {
 // ASSERT( GetNorm() > 0. ) ;
 // ASSERT( Vec.GetNorm() > 0. ) ;
-float CosA = GetProduitScalaire(Vec)/(GetNorm()*Vec.GetNorm()) ;
+double CosA = GetProduitScalaire(Vec)/(GetNorm()*Vec.GetNorm()) ;
 if (CosA > 1. )
     CosA = 1.;
 if( CosA < -1. )
     CosA = -1.;
-float AngleRad=ACOS(CosA) ;
+double AngleRad=ACOS(CosA) ;
 return AngleRad;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Retourne l'angle entre les 2 vecteur en degres (internet).
-float CVecteur2D::GetAngleDeg( const CVecteur2D & Vec ) const
+double CVecteur2D::GetAngleDeg( const CVecteur2D & Vec ) const
 {
-float AngleDeg=RAD_2_DEG(GetAngleRad(Vec)) ;
+double AngleDeg=RAD_2_DEG(GetAngleRad(Vec)) ;
 return AngleDeg ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Retourne la longeur du vecteur (internet).
-float CVecteur2D::GetNorm() const
+double CVecteur2D::GetNorm() const
 {
-float Norme=SQRT(m_x*m_x + m_y*m_y) ;
+double Norme=SQRT(m_x*m_x + m_y*m_y) ;
 return Norme ;
 }
 
@@ -215,8 +215,8 @@ return Norme ;
 /// \brief Calcul le produit scalaire de 2 vecteurs, qui est nul si les vecteurs
 /// sont orthogonos. u.v = |u|*|v|*COS(angle entre u et v) (internet).
 /// ou note <u,v> parfois
-float CVecteur2D::GetProduitScalaire( const CVecteur2D & Vec ) const
+double CVecteur2D::GetProduitScalaire( const CVecteur2D & Vec ) const
 {
-float PScalaire=m_x*Vec.m_x + m_y*Vec.m_y ;
+double PScalaire=m_x*Vec.m_x + m_y*Vec.m_y ;
 return PScalaire ;
 }

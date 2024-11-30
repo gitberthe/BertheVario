@@ -16,14 +16,14 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241129b" ;
+char NumVer[]="20241130b" ;
 
 // centre clermont
-float LatCentreDeg = 45.783329 ;
-float LonCentreDeg =  3.08333 ;
+double LatCentreDeg = 45.783329 ;
+double LonCentreDeg =  3.08333 ;
 
 // rayon 120km
-float RayonDeg = 120. * 1000. / UnMilesEnMetres / 60. ;
+double RayonDeg = 120. * 1000. / UnMilesEnMetres / 60. ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Zone aerienne pour tri suivant nombre de points. Pour optimization
@@ -93,7 +93,7 @@ for ( long iz = 0 ; iz < NbAreas ; iz++ )
     bool DansPerimetre = false ;
     for ( long nbc = 0 ; nbc < (long)Zone.m_VecPts.size() ; nbc++ )
         {
-        float DistanceAngu = sqrtf( powf( Zone.m_VecPts[nbc]->m_Lon - LonCentreDeg , 2 ) + powf( Zone.m_VecPts[nbc]->m_Lat - LatCentreDeg , 2 ) ) ;
+        double DistanceAngu = sqrtf( powf( Zone.m_VecPts[nbc]->m_Lon - LonCentreDeg , 2 ) + powf( Zone.m_VecPts[nbc]->m_Lat - LatCentreDeg , 2 ) ) ;
         if ( DistanceAngu < RayonDeg )
             {
             DansPerimetre = true ;
@@ -130,6 +130,11 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
         }
     ofs_znc.close() ;
 
+    // recopie de zone pour comparaison
+    CZone ZoneBig = Zone ;
+    for ( size_t ip = 0 ; ip < Zone.m_VecPts.size() ; ip++ )
+        ZoneBig.m_VecPts[ip] = new CVecZoneReduce::st_coord_poly( *Zone.m_VecPts[ip] ) ;
+
     // compression de points
     VecZoneReduce.Set( Zone.m_VecPts ) ;
     //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( DIST_METRE_DROITE , -1 , DIST_METRE_PTS ) ;
@@ -140,10 +145,10 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( -1 , ANGLE_DEGRES , DIST_METRE_PTS ) ;
     //VecZoneReduce.ReduceNuageBravaisPearson( DIST_METRE_NUAGE_DROITE_BP , COEF_BRAVAIS_PEARSON ) ;
 
-    // ecriture
+    // ecriture pour fichier texte
     cout << Zone.m_Name << ";" << Zone.m_Bottom << ";" ;
     for ( long nbc = 0 ; nbc < (long)Zone.m_VecPts.size() ; nbc++ )
-        cout << "" << Zone.m_VecPts[nbc]->m_Lon << "," << Zone.m_VecPts[nbc]->m_Lat << ";" ;
+        cout << "" << setprecision(8) << Zone.m_VecPts[nbc]->m_Lon << "," << Zone.m_VecPts[nbc]->m_Lat << ";" ;
     cout << endl ;
 
     // fichier de zone pour gnuplot apres compression
@@ -159,8 +164,20 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
         }
     ofs_zc.close() ;
 
+    // erreur entre 2 courbes
+    CCompZoneErr CompZoneErr ;
+    double ErreurEnMetre = CompZoneErr.GetErrMetres( ZoneBig.m_VecPts , Zone.m_VecPts ) ;
+
     // cerr
-    cerr << iz << " " << Zone.m_Name << " " << NbPtsAvantComp << " > " << NbPtsApresComp << endl ;
+    cerr << setw(3) << setfill('0') << iz << ", comp:" << NbPtsAvantComp << "/" << NbPtsApresComp
+         << ", err:" << fixed << setprecision(2) << ErreurEnMetre
+         << " : " << Zone.m_Name << endl ;
+
+    // png gnuplot
+    char TmpChar[100] ;
+    string path = std::filesystem::current_path() ;
+    sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
+    system( TmpChar ) ;
 
     }
 

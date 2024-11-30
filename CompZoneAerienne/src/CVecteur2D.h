@@ -5,7 +5,7 @@
 /// \brief
 ///
 /// \date 20/10/2020 : NVIDIA_FUNC
-/// \date 10/04/2024 : Derniere modification.
+/// \date 30/11/2024 : Derniere modification.
 ///
 
 #ifndef _CVECTEUR2D_
@@ -21,18 +21,18 @@ class CPoint2D
 public :
     CPoint2D()
         {m_x=m_y=0.;};
-    CPoint2D(float x,float y)
+    CPoint2D(double x,double y)
         {m_x=x;m_y=y;} ;
     ~CPoint2D()
         {} ;
-    float         GetDistanceAuPoint( const CPoint2D & pt ) const ;
+    double         GetDistanceAuPoint( const CPoint2D & pt ) const ;
     const CPoint2D GetPointLePlusProche( const CPoint2D & pta , const CPoint2D & ptb ) const ;
     const CPoint2D GetPointLePlusLoin( const CPoint2D & pta , const CPoint2D & ptb ) const ;
     void            SetPointMilieu( const CPoint2D & pta , const CPoint2D & ptb ) ;
-    void            Set(float x,float y) ;
+    void            Set(double x,double y) ;
 
-    float m_x ;   ///< coordonnees x du point
-    float m_y ;   ///< coordonnees y du point
+    double m_x ;   ///< coordonnees x du point
+    double m_y ;   ///< coordonnees y du point
 
     bool operator == ( const CPoint2D & pt ) const ;
     bool operator != ( const CPoint2D & pt ) const ;
@@ -44,21 +44,21 @@ class CVecteur2D
 {
 public :
     CVecteur2D() ;
-    CVecteur2D(float x,float y) ;
+    CVecteur2D(double x,double y) ;
     CVecteur2D(const CPoint2D & ptdestination , const CPoint2D & ptorigine) ;
     ~CVecteur2D() ;
 
-    float     GetAngleRad( const CVecteur2D & Vec ) const ;
-    float     GetAngleDeg( const CVecteur2D & Vec ) const ;
-    float     GetNorm() const ;
-    float     GetProduitScalaire( const CVecteur2D & Vec ) const ;
+    double     GetAngleRad( const CVecteur2D & Vec ) const ;
+    double     GetAngleDeg( const CVecteur2D & Vec ) const ;
+    double     GetNorm() const ;
+    double     GetProduitScalaire( const CVecteur2D & Vec ) const ;
     bool        IsZero() const ;
-    void        Set(float x,float y) ;
+    void        Set(double x,double y) ;
     void        Set(const CPoint2D & ptdestination , const CPoint2D & ptorigine) ;
     bool        IsCollinear( const CVecteur2D & Vec , bool Strict = false ) const ;
 
-    float m_x ;   ///< coordonnees x du vecteur
-    float m_y ;   ///< coordonnees y du vecteur
+    double m_x ;   ///< coordonnees x du vecteur
+    double m_y ;   ///< coordonnees y du vecteur
 
 private :
 
@@ -68,8 +68,8 @@ private :
 CVecteur2D operator + ( const CVecteur2D & VecA , const CVecteur2D & VecB ) ;    ///< addition
 CVecteur2D operator - ( const CVecteur2D & VecA , const CVecteur2D & VecB ) ;    ///< soustraction
 CVecteur2D operator * ( const CVecteur2D & VecA , const CVecteur2D & VecB ) ;    ///< produit vectoriel
-float     operator ^ ( const CVecteur2D & VecA , const CVecteur2D & VecB ) ;    ///< produit scalaire
-CVecteur2D operator * ( const CVecteur2D & Vec , float Nombre ) ;               ///< multiplication de norme
-CVecteur2D operator / ( const CVecteur2D & Vec , float Nombre ) ;               ///< division de norme
+double     operator ^ ( const CVecteur2D & VecA , const CVecteur2D & VecB ) ;    ///< produit scalaire
+CVecteur2D operator * ( const CVecteur2D & Vec , double Nombre ) ;               ///< multiplication de norme
+CVecteur2D operator / ( const CVecteur2D & Vec , double Nombre ) ;               ///< division de norme
 
 #endif // _CVECTEUR_

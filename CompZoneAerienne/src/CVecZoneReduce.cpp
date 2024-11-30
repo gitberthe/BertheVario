@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 25/11/2024
-/// \date modification : 29/11/2024
+/// \date modification : 30/11/2024
 ///
 
 #include "CompZoneAerienne.h"
@@ -107,7 +107,7 @@ while ( DeleteVec )
 /// \brief Reduit le vecteur en nombre de points. Prends les points 3 a 3 et
 /// supprime les points centreaux s'il est a une distance trop importante à
 /// la droite qui relie les 2 extremes.
-int CVecZoneReduce::ReduceMultiDistanceDroite( float DistanceMetresEcartDroite )
+int CVecZoneReduce::ReduceMultiDistanceDroite( double DistanceMetresEcartDroite )
 {
 std::vector<st_coord_poly*> VecReduce ;
 const long size = m_pVecOrigine->size() ;
@@ -137,7 +137,7 @@ for ( long ipall = 0 ; ipall < size ; ipall+=NbPts-1 )
 
         /*CVecteur2D VecDir1( Vectxpts[0] , Vectxpts[Vectxpts.size()-1] ) ;
         CVecteur2D VecDir2( Vectxpts[0] , Vectxpts[Vectxpts.size()-2] ) ;
-        float Angle = VecDir1.GetAngleDeg(VecDir2) ;*/
+        double Angle = VecDir1.GetAngleDeg(VecDir2) ;*/
 
         // calcul de la droite des extremites
         CVecteur2D VecDir( Vectxpts[0] , Vectxpts[Vectxpts.size()-1] ) ;
@@ -186,7 +186,7 @@ return ret ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Reduit les zones par approximation de nuage de points par une droite.
-void CVecZoneReduce::ReduceNuageDroite( float DistanceMetresEcartDroite )
+void CVecZoneReduce::ReduceNuageDroite( double DistanceMetresEcartDroite )
 {
 std::vector<st_coord_poly*> VecReduce ;
 

@@ -5,7 +5,7 @@
 /// \brief
 ///
 /// \date 20/10/2020 : NVIDIA_FUNC
-/// \date 10/04/2024 : Derniere modification.
+/// \date 30/11/2024 : Derniere modification.
 ///
 
 #ifndef _CDROITE2D_
@@ -24,9 +24,9 @@ public :
     void    Set(const CPoint2D & pta, const CPoint2D & ptb ) ;
     void    Set(const CVecteur2D & VecDir, const CPoint2D & pta ) ;
     bool    IsPointInDroite( const CPoint2D& pt ) const ;
-    float GetDistanceAuPoint(const CPoint2D& pt) const ;
-    float GetDistanceADroite(const CDroite2D& db ) const ;
-    const CPoint2D GetPoint( float t ) const ;
+    double GetDistanceAuPoint(const CPoint2D& pt) const ;
+    double GetDistanceADroite(const CDroite2D& db ) const ;
+    const CPoint2D GetPoint( double t ) const ;
     const CPoint2D GetProjectionDuPoint(const CPoint2D& pt) const ;
 
     // donnees de la droite

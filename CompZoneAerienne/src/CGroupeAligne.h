@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 28/11/2024
-/// \date modification : 29/11/2024
+/// \date modification : 30/11/2024
 ///
 
 #pragma once
@@ -36,7 +36,7 @@ class CVecGroupAligne : public std::vector<CGroupeAligne>
 class CSortPts
 {
 public :
-    float m_Lon  ;
+    double m_Lon  ;
     int   m_ipts ;
 
     static void Sort( std::vector<CVecZoneReduce::st_coord_poly*> & VecToSort ) ;

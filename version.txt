@@ -1,3 +1,9 @@
+le 20241130b :
+ - augmentation des decimales et precision dans zonesaer.txt.
+
+le 20241130a :
+ - Erreur moyenne des courbes pour CompZoneAerienne.
+
 le 20241129b :
  - enfin beton sur CompZoneAerienne et zonesaer.txt. Compression
    iterative 3 points distance droite < 4.5m. 

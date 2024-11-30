@@ -33,6 +33,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="src/CCompZoneErr.cpp" />
+		<Unit filename="src/CCompZoneErr.h" />
 		<Unit filename="src/CDroite2D.cpp" />
 		<Unit filename="src/CDroite2D.h" />
 		<Unit filename="src/CGroupeAligne.cpp" />
