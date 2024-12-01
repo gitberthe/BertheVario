@@ -63,7 +63,7 @@ return -1 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Compresse la zone en tableau de int de resolution 18m et maximum +-589km.
+/// \brief Compresse la zone en tableau de int de resolution ResolCompress.
 void CZoneAer::CompressZone()
 {
 // si pas de points a compresser
@@ -78,9 +78,11 @@ if ( m_LowResShortArr != NULL )
 m_LowResShortArr = new short [m_NbPts*2] ;
 
 // verification que la zone n'est pas trop grande
-if ( m_RayonMetre >= 589.*1000. )
+const float RayonMaxZoneEnMetre = 32767. * ResolCompress ;
+if ( m_RayonMetre >= RayonMaxZoneEnMetre )
     {
     Serial.println( "zone aerienne trop grande") ;
+    g_GlobalVar.BeepError() ;
     g_GlobalVar.Reboot() ;
     }
 

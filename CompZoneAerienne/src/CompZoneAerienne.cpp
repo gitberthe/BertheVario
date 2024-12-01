@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241201b" ;
+char NumVer[]="20241201c" ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -192,6 +192,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
 std::sort( VecZone.begin() , VecZone.end() ) ;
 
 // ecriture des zones sur cout, fichier gnuplot
+double RayonMaxKm = 0 ;
 for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     {
     CZone & Zone = VecZone[iz] ;
@@ -243,7 +244,12 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     string path = std::filesystem::current_path() ;
     sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
     system( TmpChar ) ;
+
+    // pour rayon max de zone
+    RayonMaxKm = MAX ( RayonMaxKm , Zone.GetRayonMaxKm() ) ;
     }
+cerr << "Rayon maximum toutes zones en km : " << RayonMaxKm << endl ;
+cerr << "Resolution short admise en metre : "<< RayonMaxKm * 1000. / pow(2.,15) << endl ;
 
 /*
 std::vector<CVecZoneReduce::st_coord_poly*> VecTest ;

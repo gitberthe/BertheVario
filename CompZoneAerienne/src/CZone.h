@@ -23,7 +23,8 @@ public :
     std::vector<CVecZoneReduce::st_coord_poly*> m_VecPtsBig ;   ///< vecteur des points avant compression
     std::vector<CVecZoneReduce::st_coord_poly*> m_VecPtsSmall ; ///< vecteur des points apres compression
 
-    void Compress() ;
+    void    Compress() ;
+    double  GetRayonMaxKm() const ;
 
     bool operator < ( const CZone & Zone ) const
         { return m_VecPtsSmall.size() < Zone.m_VecPtsSmall.size() ; } ;

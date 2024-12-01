@@ -37,3 +37,28 @@ m_NbPtsApresCompression = m_VecPtsSmall.size() ;
 CCompZoneErr CompZoneErr ;
 m_ErreurMoyenneEnMetre = CompZoneErr.GetErrMetres( m_VecPtsBig , m_VecPtsSmall ) ;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Donne le rayon max de la zone autour du barycentre
+double CZone::GetRayonMaxKm() const
+{
+double LatBary = 0 ;
+double LonBary = 0 ;
+for ( size_t ip = 0 ; ip < m_VecPtsSmall.size() ; ip++ )
+    {
+    const CVecZoneReduce::st_coord_poly* pSt = m_VecPtsSmall[ip] ;
+    LatBary += pSt->m_Lat ;
+    LonBary += pSt->m_Lon ;
+    }
+LatBary /= m_VecPtsSmall.size() ;
+LonBary /= m_VecPtsSmall.size() ;
+
+double RayonMaxDeg = 0 ;
+for ( size_t ip = 0 ; ip < m_VecPtsSmall.size() ; ip++ )
+    {
+    const CVecZoneReduce::st_coord_poly* pSt = m_VecPtsSmall[ip] ;
+    double RayonDeg = sqrt( pow( LatBary - pSt->m_Lat , 2. ) + pow( LonBary - pSt->m_Lon , 2. ) ) ;
+    RayonMaxDeg = MAX( RayonMaxDeg , RayonDeg ) ;
+    }
+return RayonMaxDeg * MilesParDegres * UnMilesEnMetres / 1000. ;
+}

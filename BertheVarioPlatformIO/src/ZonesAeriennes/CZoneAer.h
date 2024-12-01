@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 26/11/2024
+/// \date modification : 01/12/2024
 ///
 
 #ifndef _ZONE_AR_
@@ -17,7 +17,7 @@
 #define DIST_METRE_4_ZONE       50  ///< distance en metre pour le calcul/compression entre 2 points
 #define ANGLE_DEGRES_4_ZONE     6   ///< angle pour supression/compression si points alignés
 
-#define ResolCompress        (18.)
+#define ResolCompress        (10.)
 
 // FL 195	5800 mètres
 // FL 175	5332 mètres
