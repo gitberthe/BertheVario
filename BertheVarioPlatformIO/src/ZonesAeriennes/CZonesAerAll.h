@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 28/09/2024
+/// \date modification : 01/12/2024
 ///
 
 #ifndef _ZONE_AR_ALL_
@@ -58,10 +58,8 @@ protected :
     CZoneAer * Find( const char * NomOri ) ;
 
 private :
-    const int m_PlafondZoneProtegee = 300 ; ///< plafond zone protegee
-
     void LectureFichierZonesAer() ;
-    void TraiteBufferZoneAer( char * buff ) ;
+    CZoneAer * TraiteBufferZoneAer( char * buff ) ;
     void LectureFichierZonesPeriode() ;
     void TraiteBufferZonePeriode( char * buff ) ;
     void LectureFichierZonesActive() ;

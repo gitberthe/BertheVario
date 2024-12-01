@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 30/11/2024
-/// \date modification : 30/11/2024
+/// \date modification : 01/12/2024
 ///
 
 #include "CompZoneAerienne.h"
@@ -21,21 +21,14 @@ for ( long ipbz = 0 ; ipbz < (long)BigZone.size() ; ipbz++ )
     const CVecZoneReduce::st_coord_poly* pPBz = BigZone[ipbz] ;
     double distance_min = DBL_MAX ;
     // distance à la petite zone
-    for ( long ipsz = 0 ; ipsz < (long)SmallZone.size() ; ipsz++ )
+    for ( long ipsz = 0 ; ipsz < (long)SmallZone.size()-1 ; ipsz++ )
         {
-        CVecZoneReduce::st_coord_poly* ptdeb=SmallZone[0] ;
-        CVecZoneReduce::st_coord_poly* ptfin=SmallZone[((long)SmallZone.size())-1] ;
-        if ( ipsz < ((long)SmallZone.size()-1) )
-            {
-            ptdeb = SmallZone[ipsz] ;
-            ptfin = SmallZone[ipsz+1] ;
-            }
-
-        double distance = GetErrMetres(ptdeb,ptfin,pPBz) ;
-
-        if ( distance_min > distance )
-            distance_min = distance ;
+        CVecZoneReduce::st_coord_poly* ptdeb=SmallZone[ipsz] ;
+        CVecZoneReduce::st_coord_poly* ptfin=SmallZone[ipsz+1] ;
+        distance_min = MIN ( distance_min , GetErrMetres(ptdeb,ptfin,pPBz) ) ;
         }
+    // dernier segment
+    distance_min = MIN ( distance_min , GetErrMetres( SmallZone[0] ,SmallZone[(long)SmallZone.size()-1], pPBz) ) ;
 
     // ajout de la distance
     ErrMetre += distance_min ;
@@ -49,13 +42,13 @@ return ErrMetre/NbSect ;
 /// projete n'est pas entre les points A/B, distance A ou B
 double CCompZoneErr::GetErrMetres( const CVecZoneReduce::st_coord_poly* pPtLineA , const CVecZoneReduce::st_coord_poly* pPtLineB , const CVecZoneReduce::st_coord_poly* pPt )
 {
-// point A
+// pt == point A
 if ( pPt->m_Lat == pPtLineA->m_Lat && pPt->m_Lon == pPtLineA->m_Lon )
     return 0. ;
-// point B
+// pt == point B
 if ( pPt->m_Lat == pPtLineB->m_Lat && pPt->m_Lon == pPtLineB->m_Lon )
     return 0. ;
-// pas de droite
+// pas de droite ptA == ptb
 if ( pPtLineA->m_Lat == pPtLineB->m_Lat && pPtLineA->m_Lon == pPtLineB->m_Lon )
     {
     CPoint2D Pt( pPt->m_Lon , pPt->m_Lat );
@@ -74,21 +67,18 @@ CDroite2D Droite( VecDroite , PtA ) ;
 // point projete
 CPoint2D PtProj = Droite.GetProjectionDuPoint(Pt) ;
 
-// si en dehors du segment de droite
+// si dans le segment de droite
 CVecteur2D VecPtSurDroite( PtA , PtProj ) ;
 double DistanceDroite = DBL_MAX ;
-if ( VecPtSurDroite.GetNorm() > VecDroite.GetNorm() || VecPtSurDroite.GetAngleDeg( VecDroite ) > 90 )
-    {
-    CVecteur2D VecProj( Pt , PtProj ) ;
-    DistanceDroite = VecProj.GetNorm() * MilesParDegres * UnMileEnMetres ;
-    }
+if ( VecDroite.GetNorm() >= VecPtSurDroite.GetNorm() && VecPtSurDroite.GetAngleDeg( VecDroite ) < 10 )
+    DistanceDroite = Pt.GetDistanceAuPoint(PtProj) * MilesParDegres * UnMileEnMetres ;
 
 // distance à points A et B
 double DistanceA = Pt.GetDistanceAuPoint(PtA) * MilesParDegres * UnMileEnMetres ;
 double DistanceB = Pt.GetDistanceAuPoint(PtB) * MilesParDegres * UnMileEnMetres ;
 
 // distance min
-double DistanceMin = MIN( DistanceA , DistanceB ) ;
-DistanceMin = MIN( DistanceMin , DistanceDroite ) ;
+double DistanceMinPt = MIN( DistanceA , DistanceB ) ;
+double DistanceMin = MIN( DistanceMinPt , DistanceDroite ) ;
 return DistanceMin ;
 }

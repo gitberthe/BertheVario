@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 26/11/2024
+/// \date modification : 01/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -84,7 +84,7 @@ LectureFichierZonesPeriode() ;
 /// \brief Lecture du fichier zonesaer.txt
 void CZonesAerAll::LectureFichierZonesAer()
 {
-const int TaillMaxChar = 35000 ; // taille buffer en concurence memoire avec g_Termic
+const int TaillMaxChar = 20000 ; // taille buffer en concurence memoire avec g_Termic
 char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ;
 
@@ -111,25 +111,35 @@ while(m_File.available())
         {
         // si fin de ligne on traite le buffer
         TmpChar[ic++] = 0 ;
-        TraiteBufferZoneAer( TmpChar ) ;
+
+        // traitement du buffer si memoire 30k free mem
+        if ( esp_get_free_heap_size() > 30*1024 )
+            {
+            CZoneAer * pZone = TraiteBufferZoneAer( TmpChar ) ;
+            if ( pZone != NULL )
+                {
+                pZone->CompressZone() ;
+                pZone->FreeFloat() ;
+                }
+            }
+        else
+            g_GlobalVar.BeepError() ;
+
         ic = 0 ;
         }
     }
 
 // pour la derniere zone
-TraiteBufferZoneAer( TmpChar ) ;
+CZoneAer * pZone = TraiteBufferZoneAer( TmpChar ) ;
+if ( pZone != NULL )
+    {
+    pZone->CompressZone() ;
+    pZone->FreeFloat() ;
+    }
 
 m_File.close();
 
 delete [] TmpChar ;
-
-// compression des zones
-for ( int nz = 0 ; nz < m_NbZones ; nz++ )
-    {
-    CZoneAer * pZone = m_ZonesArr[nz] ;
-    pZone->CompressZone() ;
-    pZone->FreeFloat() ;
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -137,7 +147,7 @@ for ( int nz = 0 ; nz < m_NbZones ; nz++ )
 /// dans le tableau m_ZonesArr.
 /// Reduction de zone par CVecReduce.
 /// Calcul aussi le barycentre et le rayon max de la zone pour une recheche rapide.
-void CZonesAerAll::TraiteBufferZoneAer( char * buff )
+CZoneAer * CZonesAerAll::TraiteBufferZoneAer( char * buff )
 {
 
 // test fin de ligne ou commentaire
@@ -145,7 +155,7 @@ char * pChar = strtok( buff , ";" ) ;
 if ( pChar == NULL || *pChar == 0 || *pChar == '#' )
     {
     *buff = 0 ;
-    return ;
+    return NULL ;
     }
 
 // on ne prend pas en compte les zone 1.20, 5.20, 4.20...
@@ -279,6 +289,8 @@ for ( int is = 0 ; is < pZone->m_NbPts ; is++ )
 
 // pour prochain appel, buffer vide
 *buff = 0 ;
+
+return pZone ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -804,13 +816,29 @@ for ( int iz = 0 ; iz < VecZoneInAreaActivee.size() && RetNbrIn != ZONE_DEDANS ;
     }
 
 // si zone protege et pas deja dedans une comme TMA ou activable
+int HauteurSolZoneProtegee = 1000 ;
+int PlafondZoneProtegee = g_GlobalVar.m_AltitudeSolHgt+HauteurSolZoneProtegee ;
 if ( pZoneProtegee != NULL && RetNbrIn != ZONE_DEDANS )
     {
-    int PlafondZoneProtegee = g_GlobalVar.m_AltitudeSolHgt+m_PlafondZoneProtegee ;
+    // detertimation plafond zone proetegee
+    if ( strstr( pZoneProtegee->m_NomOri.c_str() , "1000m/sol" ) != NULL )
+        HauteurSolZoneProtegee = 1000 ;
+    else if ( strstr( pZoneProtegee->m_NomOri.c_str() , "500m/sol" ) != NULL )
+        HauteurSolZoneProtegee = 500 ;
+    else if ( strstr( pZoneProtegee->m_NomOri.c_str() , "300m/sol" ) != NULL )
+        HauteurSolZoneProtegee = 300 ;
+    else if ( strstr( pZoneProtegee->m_NomOri.c_str() , "150m/sol" ) != NULL )
+        HauteurSolZoneProtegee = 150 ;
+    else if ( strstr( pZoneProtegee->m_NomOri.c_str() , "50m/sol" ) != NULL )
+        HauteurSolZoneProtegee = 50 ;
+
+    // actualisation plafond zone protege
+    PlafondZoneProtegee = g_GlobalVar.m_AltitudeSolHgt+HauteurSolZoneProtegee ;
+
     // si dedans
     if ( g_GlobalVar.m_TerrainPosCur.m_AltiBaro < PlafondZoneProtegee )
         {
-        m_Plafond4Valid = m_PlafondZoneProtegee ;
+        m_Plafond4Valid = HauteurSolZoneProtegee ;
         RetNbrIn = ZONE_DEDANS ;
         sprintf( TmpChar , "Zp %s al:%4dm" , (*pZoneProtegee).m_NomAff.c_str() , m_Plafond4Valid ) ;
         RetStrIn = TmpChar ;
@@ -818,7 +846,7 @@ if ( pZoneProtegee != NULL && RetNbrIn != ZONE_DEDANS )
     // si limite
     else if ( g_GlobalVar.m_TerrainPosCur.m_AltiBaro < (PlafondZoneProtegee + g_GlobalVar.m_Config.m_AltiMargin) )
         {
-        m_Plafond4Valid = m_PlafondZoneProtegee ;
+        m_Plafond4Valid = HauteurSolZoneProtegee ;
         RetNbrLimite = ZONE_LIMITE_ALTI ;
         sprintf( TmpChar , "Al %s al:%4dm" , (*pZoneProtegee).m_NomAff.c_str() , m_Plafond4Valid ) ;
         RetStrLimite = TmpChar ;
@@ -863,10 +891,7 @@ for ( int iz = 0 ; iz < m_NbZones && RetNbrLimite != ZONE_LIMITE_ALTI && RetNbrI
     // prise en compte de l'altitude
     bool IsNearFrontAlti ;
     if ( ZoneProtege )
-        {
-        int PlafondZoneProtegee = g_GlobalVar.m_AltitudeSolHgt+m_PlafondZoneProtegee ;
         IsNearFrontAlti = IsNearFront && (g_GlobalVar.m_TerrainPosCur.m_AltiBaro <= (PlafondZoneProtegee+g_GlobalVar.m_Config.m_AltiMargin)) ;
-        }
     else
         IsNearFrontAlti = IsNearFront && (g_GlobalVar.m_TerrainPosCur.m_AltiBaro >= (Zone.GetAltiBasse()-g_GlobalVar.m_Config.m_AltiMargin)) ;
 
@@ -875,7 +900,10 @@ for ( int iz = 0 ; iz < m_NbZones && RetNbrLimite != ZONE_LIMITE_ALTI && RetNbrI
         {
         RetNbrLimite = ZONE_LIMITE_FRONTIERE ;
         // construction nom + altitude
-        m_Plafond4Valid=Zone.GetAltiBasse() ;
+        if ( ZoneProtege )
+            m_Plafond4Valid = HauteurSolZoneProtegee ;
+        else
+            m_Plafond4Valid = Zone.GetAltiBasse() ;
         sprintf( TmpChar , "Bo %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
         RetStrLimite = TmpChar ;
         break ;

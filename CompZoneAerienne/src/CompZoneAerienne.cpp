@@ -8,7 +8,7 @@
 /// \date creation     : 23/03/2024
 /// \date 25/11/2024 : ajout de compression de zone par distance entre points et par
 ///                    angle de meme direction.
-/// \date 30/11/2024 : modification
+/// \date 01/12/2024 : modification
 ///
 
 #include "CompZoneAerienne.h"
@@ -16,48 +16,95 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241130c" ;
-
-// centre clermont
-double LatCentreDeg = 45.783329 ;
-double LonCentreDeg =  3.08333 ;
-
-// rayon 120km
-double RayonDeg = 120. * 1000. / UnMilesEnMetres / 60. ;
+char NumVer[]="20241201b" ;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Zone aerienne pour tri suivant nombre de points. Pour optimization
-/// memoire/compression zone BertheVario
-class CZone
+/// \brief
+void split(const string &chaine, vector<string> &elements)
+{
+string sousChaine ;
+char TmpChar[1000] ;
+strcpy( TmpChar , chaine.c_str() ) ;
+char * pChar = strtok( TmpChar , " \n\t" ) ;
+while ( pChar != NULL )
+    {
+    elements.push_back(pChar);
+    pChar = strtok( NULL , " \n\t" ) ;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief parametre de la ligne de commande (clermont)
+class CCmdLineParam
 {
 public :
-    std::string     m_Name ;
-    long            m_Bottom ;
-    std::vector<CVecZoneReduce::st_coord_poly*> m_VecPts ;
-
-    bool operator < ( const CZone & Zone ) const
-        { return m_VecPts.size() < Zone.m_VecPts.size() ; } ;
-    bool operator > ( const CZone & Zone ) const
-        { return m_VecPts.size() > Zone.m_VecPts.size() ; } ;
+    double m_LatCentreDeg = 45.783329 ; ///< centre clermont
+    double m_LonCentreDeg =  3.08333 ;  ///< centre clermont
+    double m_RayonDeg     = 120. * 1000. / UnMilesEnMetres / MilesParDegres ;
 } ;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction main.
 int main(int argc, char *argv[])
 {
-if ( argc < 4 )
+// destruction des png et zone gnuplot
+char TmpChar[100] ;
+string path = std::filesystem::current_path() ;
+sprintf( TmpChar , "rm -rf %s/zones_gnuplot/*.txt %s/zones_gnuplot/*.png", path.c_str() , path.c_str() ) ;
+system( TmpChar ) ;
+
+// verification ligne de commande
+if ( argc < 2 || (strcmp(argv[1],"--batch") != 0 && argc < 4) || (strcmp(argv[1],"--batch") == 0 && argc < 4) )
     {
-    cout << argv[0] << " lat_deg lon_deg rayon_km " << endl ;
-    cout << "version du " << NumVer << endl ;
-    cout << " ex pour clermont : ./CompZoneAerienne 45.783329 3.08333 120 > zonesaer.txt" << endl ;
+    cerr << argv[0] << " lat_deg lon_deg rayon_km " << endl ;
+    cerr << argv[0] << " --batch terconnu.txt rayon_km " << endl ;
+    cerr << "version du " << NumVer << endl ;
+    cerr << " ex pour clermont : ./CompZoneAerienne 45.783329 3.08333 120 > zonesaer.txt" << endl ;
+    cerr << " ex mode batch    : ./CompZoneAerienne --batch terconnu.txt 80 > zonesaer.txt" << endl ;
     return 1 ;
     }
 
+// vecteur des differents points centre/rayon de recherche de zone
+std::vector<CCmdLineParam> VectPtCentreRayon ;
+
+// fichier batch de rayon/centre
+if ( strcmp(argv[1],"--batch") == 0 )
+    {
+    ifstream ifs_zprc( argv[2] );
+    double RayonKm = atof( argv[3] ) ;
+    for( std::string line; getline( ifs_zprc, line ); )
+        {
+        vector<string> VecMot ;
+        split(line, VecMot);
+
+        // ligne vide ou commentaire
+        if ( VecMot.size() == 0 || VecMot[0][0] == '#' )
+            continue ;
+
+        if ( VecMot.size() != 0 && VecMot[0] == "break")
+            break ;
+
+        // ajout zone
+        CCmdLineParam CmdLineParam ;
+        CmdLineParam.m_LatCentreDeg = atof( VecMot[2].c_str() ) ;
+        CmdLineParam.m_LonCentreDeg = atof( VecMot[3].c_str() ) ;
+        CmdLineParam.m_RayonDeg = RayonKm * 1000. / UnMilesEnMetres / MilesParDegres ;
+
+        VectPtCentreRayon.push_back( CmdLineParam ) ;
+        }
+    ifs_zprc.close() ;
+    }
 // parametres de la ligne de commande
-LatCentreDeg = atof( argv[1] ) ;
-LonCentreDeg = atof( argv[2] ) ;
-RayonDeg = atof( argv[3] ) * 1000. / UnMilesEnMetres / 60. ;
+else
+    {
+    CCmdLineParam CmdLineParam ;
+
+    CmdLineParam.m_LatCentreDeg = atof( argv[1] ) ;
+    CmdLineParam.m_LonCentreDeg = atof( argv[2] ) ;
+    CmdLineParam.m_RayonDeg = atof( argv[3] ) * 1000. / UnMilesEnMetres / MilesParDegres ;
+
+    VectPtCentreRayon.push_back( CmdLineParam ) ;
+    }
 
 std::ifstream ifs(IN_ZONE_FILE);
 json jf = json::parse(ifs);
@@ -70,107 +117,125 @@ long NbAreas = jf["headerFile"]["numberOfAreas"] ;
 std::vector< CZone > VecZone ;
 
 cout << "#Nom Zone;alti basse;lon0_deg,lat0_deg;lon1_deg,lat1_deg" << endl ;
-// pour toutes les zones
-for ( long iz = 0 ; iz < NbAreas ; iz++ )
+
+// pour tout les points centre de recherche
+for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ )
     {
-    CZone Zone ;
-    // nom
-    Zone.m_Name = jf["features"][iz]["properties"]["name"] ;
-    // bas
-    Zone.m_Bottom = jf["features"][iz]["properties"]["bottom_m"] ;
+    const CCmdLineParam & CmdLineParam = VectPtCentreRayon[iptcentre] ;
+    double LonCentreDeg = CmdLineParam.m_LonCentreDeg ;
+    double LatCentreDeg = CmdLineParam.m_LatCentreDeg ;
+    double RayonDeg     = CmdLineParam.m_RayonDeg ;
 
-    // coordonnees de la zone
-    auto CordArr = jf["features"][iz]["geometry"]["coordinates"][0] ;
-    for (auto it = CordArr.begin(); it != CordArr.end(); ++it)
+    // pour toutes les zones, determonation si dans perimetres
+    // et ajout au VecZone
+    for ( long iz = 0 ; iz < NbAreas ; iz++ )
         {
-        CVecZoneReduce::st_coord_poly * pStPts = new CVecZoneReduce::st_coord_poly ;
-        Zone.m_VecPts.push_back( pStPts ) ;
-        pStPts->m_Lon = (*it)[0] ;
-        pStPts->m_Lat = (*it)[1] ;
-        }
+        CZone Zone ;
+        // nom
+        Zone.m_Name = jf["features"][iz]["properties"]["name"] ;
 
-    // determination si un points de la zone dans le perimetre
-    bool DansPerimetre = false ;
-    for ( long nbc = 0 ; nbc < (long)Zone.m_VecPts.size() ; nbc++ )
-        {
-        double DistanceAngu = sqrtf( powf( Zone.m_VecPts[nbc]->m_Lon - LonCentreDeg , 2 ) + powf( Zone.m_VecPts[nbc]->m_Lat - LatCentreDeg , 2 ) ) ;
-        if ( DistanceAngu < RayonDeg )
+        // zone a ne pas traiter
+        if ( strstr( Zone.m_Name.c_str() , "LTA FRANCE 1" ) != NULL )
             {
-            DansPerimetre = true ;
-            break ;
+            cerr << Zone.m_Name << " **** non traite **** " << endl ;
+            continue ;
             }
-        }
 
-    // si dans perimetre affichage
-    if ( DansPerimetre )
-        VecZone.push_back( Zone ) ;
+        // doublon de nom zone
+        bool ZoneDejaFaite = false ;
+        for ( size_t izdf = 0 ; izdf < VecZone.size() ; izdf++ )
+            if ( VecZone[izdf].m_Name == Zone.m_Name )
+                {
+                ZoneDejaFaite = true ;
+                break ;
+                }
+
+        if ( ZoneDejaFaite )
+            continue ;
+
+        // bas de zone
+        Zone.m_Bottom = jf["features"][iz]["properties"]["bottom_m"] ;
+
+        // coordonnees de la zone
+        auto CordArr = jf["features"][iz]["geometry"]["coordinates"][0] ;
+        for (auto it = CordArr.begin(); it != CordArr.end(); ++it)
+            {
+            CVecZoneReduce::st_coord_poly * pStPts = new CVecZoneReduce::st_coord_poly ;
+            Zone.m_VecPtsBig.push_back( pStPts ) ;
+            pStPts->m_Lon = (*it)[0] ;
+            pStPts->m_Lat = (*it)[1] ;
+            }
+
+        // determination si un points de la zone dans le perimetre
+        bool DansPerimetre = false ;
+        for ( long nbc = 0 ; nbc < (long)Zone.m_VecPtsBig.size() ; nbc++ )
+            {
+            double DistanceAngu = sqrtf( powf( Zone.m_VecPtsBig[nbc]->m_Lon - LonCentreDeg , 2 ) + powf( Zone.m_VecPtsBig[nbc]->m_Lat - LatCentreDeg , 2 ) ) ;
+            if ( DistanceAngu < RayonDeg )
+                {
+                DansPerimetre = true ;
+                break ;
+                }
+            }
+
+        // si dans perimetre affichage
+        if ( DansPerimetre )
+            VecZone.push_back( Zone ) ;
+        }
     }
 
-// tri croissant des zones
+// compression des zones
+for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
+    VecZone[iz].Compress() ;
+
+// tri croissant des zones compressees
 std::sort( VecZone.begin() , VecZone.end() ) ;
 
-// compression puis ecriture des zones
-CVecZoneReduce VecZoneReduce ;
+// ecriture des zones sur cout, fichier gnuplot
 for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     {
     CZone & Zone = VecZone[iz] ;
     char NomFichierGnuplotAvecChemin[3000] ;
-    int NbPtsAvantComp = Zone.m_VecPts.size() ;
 
     // fichier de zone pour gnuplot avant compression
     // gnuplot> replot "zone_c.txt" with linespoints 6
     sprintf(NomFichierGnuplotAvecChemin,"./zones_gnuplot/%03ld_avc.txt",iz) ;
     ofstream ofs_znc(NomFichierGnuplotAvecChemin, std::ofstream::out);
-    for ( long ip = 0 ; ip < (long)Zone.m_VecPts.size() ; ip++ )
+    for ( long ip = 0 ; ip < (long)Zone.m_VecPtsBig.size() ; ip++ )
         {
-        ofs_znc << setprecision(8)
-            << Zone.m_VecPts[ip]->m_Lon
+        ofs_znc << setprecision(9)
+            << Zone.m_VecPtsBig[ip]->m_Lon
             << " "
-            << Zone.m_VecPts[ip]->m_Lat << endl ;
+            << Zone.m_VecPtsBig[ip]->m_Lat << endl ;
         }
+    // echelle 1km
+    ofs_znc << setprecision(9) << Zone.m_VecPtsBig[0]->m_Lon << " " << Zone.m_VecPtsBig[0]->m_Lat << endl ;
+    ofs_znc << setprecision(9) << Zone.m_VecPtsBig[0]->m_Lon + 1000./(MilesParDegres*UnMileEnMetres) << " " << Zone.m_VecPtsBig[0]->m_Lat << endl ;
+    ofs_znc << setprecision(9) << Zone.m_VecPtsBig[0]->m_Lon << " " << Zone.m_VecPtsBig[0]->m_Lat << endl ;
+    ofs_znc << setprecision(9) << Zone.m_VecPtsBig[0]->m_Lon << " " << Zone.m_VecPtsBig[0]->m_Lat + 1000./(MilesParDegres*UnMileEnMetres) << endl ;
     ofs_znc.close() ;
 
-    // recopie de zone pour comparaison
-    CZone ZoneBig = Zone ;
-    for ( size_t ip = 0 ; ip < Zone.m_VecPts.size() ; ip++ )
-        ZoneBig.m_VecPts[ip] = new CVecZoneReduce::st_coord_poly( *Zone.m_VecPts[ip] ) ;
-
-    // compression de points
-    VecZoneReduce.Set( Zone.m_VecPts ) ;
-    //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( DIST_METRE_DROITE , -1 , DIST_METRE_PTS ) ;
-    VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( DIST_METRE_DROITE , -1 , -1 ) ;
-    //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( -1 , ANGLE_DEGRES , -1 ) ;
-    //VecZoneReduce.ReduceMultiDistanceDroite( DIST_METRE_MULTI_DROITE ) ;
-    //VecZoneReduce.ReduceNuageDroite( DIST_METRE_NUAGE_DROITE ) ;
-    //VecZoneReduce.ReduceToDistanceDroiteAngleDistancePoint( -1 , ANGLE_DEGRES , DIST_METRE_PTS ) ;
-    //VecZoneReduce.ReduceNuageBravaisPearson( DIST_METRE_NUAGE_DROITE_BP , COEF_BRAVAIS_PEARSON ) ;
-
-    // ecriture pour fichier texte
+    // ecriture pour fichier texte sur cout
     cout << Zone.m_Name << ";" << Zone.m_Bottom << ";" ;
-    for ( long nbc = 0 ; nbc < (long)Zone.m_VecPts.size() ; nbc++ )
-        cout << "" << setprecision(8) << Zone.m_VecPts[nbc]->m_Lon << "," << Zone.m_VecPts[nbc]->m_Lat << ";" ;
+    for ( long nbc = 0 ; nbc < (long)Zone.m_VecPtsSmall.size() ; nbc++ )
+        cout << "" << setprecision(9) << Zone.m_VecPtsSmall[nbc]->m_Lon << "," << Zone.m_VecPtsSmall[nbc]->m_Lat << ";" ;
     cout << endl ;
 
     // fichier de zone pour gnuplot apres compression
-    int NbPtsApresComp = Zone.m_VecPts.size() ;
     sprintf(NomFichierGnuplotAvecChemin,"./zones_gnuplot/%03ld_apc.txt",iz) ;
     ofstream ofs_zc(NomFichierGnuplotAvecChemin, std::ofstream::out);
-    for ( long ip = 0 ; ip < (long)Zone.m_VecPts.size() ; ip++ )
+    for ( long ip = 0 ; ip < (long)Zone.m_VecPtsSmall.size() ; ip++ )
         {
-        ofs_zc << setprecision(8)
-            << Zone.m_VecPts[ip]->m_Lon
+        ofs_zc << setprecision(9)
+            << Zone.m_VecPtsSmall[ip]->m_Lon
             << " "
-            << Zone.m_VecPts[ip]->m_Lat << endl ;
+            << Zone.m_VecPtsSmall[ip]->m_Lat << endl ;
         }
     ofs_zc.close() ;
 
-    // erreur entre 2 courbes
-    CCompZoneErr CompZoneErr ;
-    double ErreurEnMetre = CompZoneErr.GetErrMetres( ZoneBig.m_VecPts , Zone.m_VecPts ) ;
-
     // cerr
-    cerr << setw(3) << setfill('0') << iz << ", comp:" << NbPtsAvantComp << "/" << NbPtsApresComp
-         << ", err:" << fixed << setprecision(2) << ErreurEnMetre
+    cerr << setw(3) << setfill('0') << iz << ", comp:" << Zone.m_NbPtsAvantCompression << "/" << Zone.m_NbPtsApresCompression
+         << ", err:" << fixed << setprecision(2) << Zone.m_ErreurMoyenneEnMetre
          << " : " << Zone.m_Name << endl ;
 
     // png gnuplot
@@ -178,7 +243,6 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     string path = std::filesystem::current_path() ;
     sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
     system( TmpChar ) ;
-
     }
 
 /*

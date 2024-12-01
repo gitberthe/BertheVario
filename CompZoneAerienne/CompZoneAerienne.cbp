@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="45.783329 3.08333 120" />
+				<Option parameters="--batch SpinBertheZone.txt" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -45,6 +45,8 @@
 		<Unit filename="src/CVecZoneReduce.h" />
 		<Unit filename="src/CVecteur2D.cpp" />
 		<Unit filename="src/CVecteur2D.h" />
+		<Unit filename="src/CZone.cpp" />
+		<Unit filename="src/CZone.h" />
 		<Unit filename="src/CompZoneAerienne.cpp" />
 		<Unit filename="src/CompZoneAerienne.h" />
 		<Extensions />

@@ -1,3 +1,10 @@
+le 20241201a :
+ - correction calcul erreur moyenne pour CompZoneAerienne.
+ - CompZoneAerienne genere les zones à partir de terconnu.txt.
+ - modification buffer calcul zone pour zone 1000 pts cevennes.
+ - prise en compte hauteur sol zone protege 1000/500/300/150/50m.
+ - modification son deguelante.
+ 
 le 20241130c :
  - correction calcul erreur moyenne pour CompZoneAerienne.
 

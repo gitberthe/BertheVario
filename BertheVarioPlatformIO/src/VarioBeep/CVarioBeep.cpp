@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 04/10/2024
+/// \date modification : 01/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -72,8 +72,8 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     // si degueulante
     if ( LocalVitVertMS <= g_GlobalVar.m_Config.m_vz_seuil_bas )
         {
-        g_GlobalVar.beeper( LowFreq , 400 ) ;
-        delay( 400 ) ;
+        g_GlobalVar.beeper( LowFreq , 200 ) ;
+        delay( 200 ) ;
         continue ;
         }
     // descente normale
