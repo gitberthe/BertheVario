@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241201c" ;
+char NumVer[]="20241201d" ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -192,7 +192,8 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
 std::sort( VecZone.begin() , VecZone.end() ) ;
 
 // ecriture des zones sur cout, fichier gnuplot
-double RayonMaxKm = 0 ;
+double RayonMaxAllKm = 0 ;
+double ResolutionMoyenneMetre = 0 ;
 for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     {
     CZone & Zone = VecZone[iz] ;
@@ -234,8 +235,16 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
         }
     ofs_zc.close() ;
 
+    // resolution zone
+    double RayonMaxZoneKm = Zone.GetRayonMaxKm() ;
+    double ResolutionZoneMetre = RayonMaxZoneKm * 1000. / pow(2.,15) ;
+    short  ResolutionEntiere   = ceil(ResolutionZoneMetre) ;
+    ResolutionMoyenneMetre += ResolutionEntiere ;
+    RayonMaxAllKm = MAX ( RayonMaxAllKm , RayonMaxZoneKm ) ;
+
     // cerr
-    cerr << setw(3) << setfill('0') << iz << ", comp:" << Zone.m_NbPtsAvantCompression << "/" << Zone.m_NbPtsApresCompression
+    cerr << setw(3) << setfill(' ') << iz << ", comp:" << setw(4) << Zone.m_NbPtsAvantCompression << "/" << setw(4) << Zone.m_NbPtsApresCompression
+         << ", resol:" << ResolutionZoneMetre << "/" << ResolutionEntiere
          << ", err:" << fixed << setprecision(2) << Zone.m_ErreurMoyenneEnMetre
          << " : " << Zone.m_Name << endl ;
 
@@ -245,11 +254,12 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
     system( TmpChar ) ;
 
-    // pour rayon max de zone
-    RayonMaxKm = MAX ( RayonMaxKm , Zone.GetRayonMaxKm() ) ;
     }
-cerr << "Rayon maximum toutes zones en km : " << RayonMaxKm << endl ;
-cerr << "Resolution short admise en metre : "<< RayonMaxKm * 1000. / pow(2.,15) << endl ;
+
+ResolutionMoyenneMetre /= VecZone.size() ;
+cerr << "Rayon maximum toutes zones en km : " << RayonMaxAllKm << endl ;
+cerr << "Resolution short admise en metre : "<< RayonMaxAllKm * 1000. / pow(2.,15) << endl ;
+cerr << "Resolution moyenne en metre : "<< ResolutionMoyenneMetre << endl ;
 
 /*
 std::vector<CVecZoneReduce::st_coord_poly*> VecTest ;

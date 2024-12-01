@@ -17,8 +17,6 @@
 #define DIST_METRE_4_ZONE       50  ///< distance en metre pour le calcul/compression entre 2 points
 #define ANGLE_DEGRES_4_ZONE     6   ///< angle pour supression/compression si points alignés
 
-#define ResolCompress        (10.)
-
 // FL 195	5800 mètres
 // FL 175	5332 mètres
 // FL 155	4722 mètres
@@ -89,7 +87,9 @@ private :
     st_coord_poly   m_Barycentre ;      ///< pour une recherche rapide
     float           m_RayonMetre ;      ///< pour une recherche rapide
 
-    static bool ms_TriParNom ;  ///< pour un tri par nom
+    short           m_ResolutionMetre ;     ///< resolution en metre de la zone lors de compression short
+
+    static bool     ms_TriParNom ;  ///< pour un tri par nom
 } ;
 
 /*////////////////////////////////////////////////////////////////////////////////

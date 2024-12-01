@@ -63,7 +63,8 @@ return -1 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Compresse la zone en tableau de int de resolution ResolCompress.
+/// \brief Compresse la zone en tableau de short de resolution variable.
+/// (de 1 a 7 metres, 2 metres en moyenne)
 void CZoneAer::CompressZone()
 {
 // si pas de points a compresser
@@ -77,8 +78,14 @@ if ( m_LowResShortArr != NULL )
 // allocation du tableau de short
 m_LowResShortArr = new short [m_NbPts*2] ;
 
+// short maximum en float
+const float ShortMax = 32767. ;
+
+// resolution entiere minimum
+m_ResolutionMetre = ceilf( m_RayonMetre / ShortMax ) ;
+
 // verification que la zone n'est pas trop grande
-const float RayonMaxZoneEnMetre = 32767. * ResolCompress ;
+const float RayonMaxZoneEnMetre = ShortMax * m_ResolutionMetre ;
 if ( m_RayonMetre >= RayonMaxZoneEnMetre )
     {
     Serial.println( "zone aerienne trop grande") ;
@@ -92,8 +99,8 @@ for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
     {
     const st_coord_poly * pStPts = m_PolygoneArr[ipstruct] ;
 
-    m_LowResShortArr[ipshort++] = (short)((float)((pStPts->m_Lat - m_Barycentre.m_Lat) * MilesParDegres * UnMileEnMetres / ResolCompress)) ;
-    m_LowResShortArr[ipshort++] = (short)((float)((pStPts->m_Lon - m_Barycentre.m_Lon) * MilesParDegres * UnMileEnMetres / ResolCompress)) ;
+    m_LowResShortArr[ipshort++] = (short)((float)((pStPts->m_Lat - m_Barycentre.m_Lat) * MilesParDegres * UnMileEnMetres / ((float)m_ResolutionMetre))) ;
+    m_LowResShortArr[ipshort++] = (short)((float)((pStPts->m_Lon - m_Barycentre.m_Lon) * MilesParDegres * UnMileEnMetres / ((float)m_ResolutionMetre))) ;
     }
 
 // supression des float
@@ -101,8 +108,7 @@ FreeFloat() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief  Supression du tableau des float et des short
-/// ne reste que le lz4
+/// \brief  Supression du tableau des float.
 void CZoneAer::FreeFloat()
 {
 // destruction buffer structure float lat/lon
@@ -133,8 +139,8 @@ for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
     st_coord_poly * pStPts = new st_coord_poly ;
     m_PolygoneArr[ipstruct] = pStPts ;
 
-    pStPts->m_Lat = ((float)m_LowResShortArr[ipshort++]) / (MilesParDegres * UnMileEnMetres / ResolCompress) + m_Barycentre.m_Lat ;
-    pStPts->m_Lon = ((float)m_LowResShortArr[ipshort++]) / (MilesParDegres * UnMileEnMetres / ResolCompress) + m_Barycentre.m_Lon ;
+    pStPts->m_Lat = ((float)m_LowResShortArr[ipshort++]) / (MilesParDegres * UnMileEnMetres / ((float)m_ResolutionMetre)) + m_Barycentre.m_Lat ;
+    pStPts->m_Lon = ((float)m_LowResShortArr[ipshort++]) / (MilesParDegres * UnMileEnMetres / ((float)m_ResolutionMetre)) + m_Barycentre.m_Lon ;
     }
 }
 

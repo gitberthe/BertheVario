@@ -1,3 +1,7 @@
+le 20241201d :
+ - resolution variable dans la compression de zone en short firmware.
+   resolution entiere de 1 à 7 metres pour les zones en presence, 1.95metre en moyenne.
+
 le 20241201c :
  - simplification calcul dans zone et modification fichier de validation zone.
  

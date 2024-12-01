@@ -19,7 +19,7 @@ public :
     long            m_Bottom ;                      ///< altitude basse de la zone
     long            m_NbPtsAvantCompression = 0 ;   ///< nombre de points avant compression
     long            m_NbPtsApresCompression = 0 ;   ///< nombre de points apres compression
-    double          m_ErreurMoyenneEnMetre = 0. ;   ///< erreur moyenne en metres de la zone compressee par rapport à la zone non copressee
+    double          m_ErreurMoyenneEnMetre = 0. ;   ///< erreur moyenne en metres de la zone compressee par rapport à la zone non compressee
     std::vector<CVecZoneReduce::st_coord_poly*> m_VecPtsBig ;   ///< vecteur des points avant compression
     std::vector<CVecZoneReduce::st_coord_poly*> m_VecPtsSmall ; ///< vecteur des points apres compression
 
