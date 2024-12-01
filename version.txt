@@ -1,3 +1,6 @@
+le 20241201c :
+ - simplification calcul dans zone et modification fichier de validation zone.
+ 
 le 20241201b :
  - calcul rayon maxi/resolution mini zone dans CompZoneAerienne.
  - Modification resolution compression zone à 10. metres.

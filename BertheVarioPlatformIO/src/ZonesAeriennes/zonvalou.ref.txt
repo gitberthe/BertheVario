@@ -6,7 +6,7 @@
 9;corent;2024,3,31;822;Be TMA CLERMONT 1 al: 822m;DessousUneZone;
 10;corent;2024,3,31;0;Bo CTR CLERMONT Twr al:   0m;LimiteFrontiere;
 12;anzat;2024,3,31;0;Bo R 368 B al:   0m;LimiteFrontiere;
-13;anzat;2024,3,31;2590;Be TMA CLERMONT 4.2 al:2590m;DessousUneZone;
+13;anzat;2024,3,31;2590;Be TMA CLERMONT 4.20 al:2590m;DessousUneZone;
 15;murol;2024,3,31;0;In R 368 B al:   0m;DedansUneZone;
 16;murol;2024,3,31;2590;Be TMA CFD 5 al:2590m;DessousUneZone;
 18;pdd;2024,3,31;3500;Be TMA CLERMONT 5.1 al:3500m;DessousUneZone;
@@ -32,3 +32,5 @@
 46;sancy-chastreix-pail;2024,07,14;2590;Be TMA CFD 5 al:2590m;DessousUneZone;
 47;sancy-chastreix-pail;2024,07,14;300;Zp Chastreix al: 300m;DedansUneZone;
 48;sancy-chaudefour;2024,07,14;300;Zp Chaudefour al: 300m;DedansUneZone;
+50;sancy-pail;2024,07,14;2590;Be TMA CFD 5 al:2590m;DessousUneZone;
+51;sancy-pail;2024,07,14;0;In R 368 B al:   0m;DedansUneZone;
