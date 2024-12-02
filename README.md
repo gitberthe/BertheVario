@@ -9,7 +9,7 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - documentation utilisateur dans /doc
 - projet PlateformIO dans /BertheVarioPlatformIO
 - editer/modifier avec codeblocs dans /BertheVarioCdb
-- documentation developpeur dans ../../DoxyBertheVario avec le commande "doxygen Doxyfile.BertheVario" depuis /BertheVarioCdb
+- documentation developpeur dans ../../DoxyBertheVario avec le commande "doxygen Doxyfile.BertheVario" depuis /Codeblocks
 - generation de fichier de zones aériennes avec /CompZoneAerienne depuis codeblocks/linux ou windows
 - firmware compilé pour une version "standard écran 1.54 Pcb2 de GnuVario" dans /firmware
 
