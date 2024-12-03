@@ -1,3 +1,6 @@
+le 20241202b :
+ - Gain memoire doublon nom de CZoneAer.
+ 
 le 20241202a :
  - Modification affichage CompZoneAerienne.
  - Modification determination zone protegee CZoneAer.

@@ -67,7 +67,6 @@ public :
                 { return m_HauteurSolZoneProtege ; } ;
 
     std::string         m_NomAff ;             ///< nom court de la zone a afficher
-    std::string         m_NomOri ;             ///< nom entier de la zone dans fichier origine
     bool                m_Activee = true ;          ///< zone activee
     bool                m_DansFchActivation = false;///< si dans fichier d'activation de zones pour reecriture apres configuration menu
     short               m_AltiBasse=-1 ;            ///< altitude basse de la zone par defaut
