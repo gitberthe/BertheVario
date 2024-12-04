@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 02/12/2024
+/// \date modification : 04/12/2024
 ///
 
 #ifndef _ZONE_AR_
@@ -66,11 +66,11 @@ public :
     short   GetHauteurSolZoneProtect() const
                 { return m_HauteurSolZoneProtege ; } ;
 
-    std::string         m_NomAff ;             ///< nom court de la zone a afficher
+    char *              m_pNomAff ;                 ///< nom court de la zone a afficher
     bool                m_Activee = true ;          ///< zone activee
     bool                m_DansFchActivation = false;///< si dans fichier d'activation de zones pour reecriture apres configuration menu
     short               m_AltiBasse=-1 ;            ///< altitude basse de la zone par defaut
-    CZoneAerDerogFfvl * m_pDerogFfvl = NULL ; ///< si zone avec derogation ffvl
+    CZoneAerDerogFfvl * m_pDerogFfvl = NULL ;       ///< si zone avec derogation ffvl
 
     void CompressZone() ;
     void UnCompressZone() ;

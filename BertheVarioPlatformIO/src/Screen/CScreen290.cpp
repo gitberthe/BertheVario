@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 26/10/2024
+/// \date modification : 04/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -946,7 +946,7 @@ do
         display.print(":");
         // nom
         //display.setCursor(0, 35);
-        display.print(pZone->m_NomAff.c_str());
+        display.print(pZone->m_pNomAff);
         // activation
         display.setCursor(0, 60);
         display.print( "Active:");
@@ -1072,7 +1072,7 @@ do
         {
         display.setCursor(0+xcol, 40 + yligne );
         if ( VecZonesMod[iz]->m_Activee )
-            display.print( VecZonesMod[iz]->m_NomAff.c_str() ) ;
+            display.print( VecZonesMod[iz]->m_pNomAff ) ;
         else
             display.print( "-" ) ;
         yligne += 17 ;

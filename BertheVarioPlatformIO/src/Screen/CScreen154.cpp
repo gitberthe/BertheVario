@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 04/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -1017,7 +1017,7 @@ if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
     {
     CZoneAer * pZone = VecAffZones[NumTmaCtr] ;
     for ( long iz = 0 ; iz < VecAffZones.size() ; iz++ )
-        if ( VecAffZones[iz]->m_NomAff == pZone->m_NomAff )
+        if ( ! strcmp( VecAffZones[iz]->m_pNomAff , pZone->m_pNomAff ) )
             VecZone2Mod.push_back( VecAffZones[iz] ) ;
     }
 
@@ -1045,7 +1045,7 @@ do
         // nom
         //display.setCursor(0, 35);
         CZoneAer * pZone = VecAffZones[NumTmaCtr] ;
-        display.print(pZone->m_NomAff.c_str());
+        display.print(pZone->m_pNomAff);
         // activation
         display.setCursor(0, 60);
         display.print( "Active:");
@@ -1192,11 +1192,11 @@ do
         display.setCursor(0+xcol, 40 + yligne );
 
         if ( VecZonesMod[iz]->m_Activee )
-            display.print( VecZonesMod[iz]->m_NomAff.c_str() ) ;
+            display.print( VecZonesMod[iz]->m_pNomAff ) ;
         else
             {
             char TmpChar[25] ;
-            sprintf( TmpChar , "-%s" ,  VecZonesMod[iz]->m_NomAff.c_str() ) ;
+            sprintf( TmpChar , "-%s" ,  VecZonesMod[iz]->m_pNomAff ) ;
             TmpChar[9] = 0 ;
             display.print( TmpChar  ) ;
             }

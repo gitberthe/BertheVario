@@ -30,7 +30,7 @@ if ( m_PolygoneArr != NULL )
 bool CZoneAer::operator > ( const CZoneAer & Zone ) const
 {
 if ( ms_TriParNom )
-    return (strcmp( m_NomAff.c_str() , Zone.m_NomAff.c_str() ) > 0 ) ;
+    return (strcmp( m_pNomAff , Zone.m_pNomAff ) > 0 ) ;
 
 //return m_Area > Zone.m_Area ;
 return GetAltiBasse() > Zone.GetAltiBasse() ;
@@ -41,7 +41,7 @@ return GetAltiBasse() > Zone.GetAltiBasse() ;
 bool CZoneAer::operator < ( const CZoneAer & Zone ) const
 {
 if ( ms_TriParNom )
-    return ( strcmp( m_NomAff.c_str() , Zone.m_NomAff.c_str() ) < 0 ) ;
+    return ( strcmp( m_pNomAff , Zone.m_pNomAff ) < 0 ) ;
 
 //return m_Area < Zone.m_Area ;
 return GetAltiBasse() < Zone.GetAltiBasse() ;

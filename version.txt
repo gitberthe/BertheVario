@@ -1,3 +1,6 @@
+le 20241204a :
+ - Gain memoire nom de CZoneAer string => char*.
+ 
 le 20241202b :
  - Gain memoire doublon nom de CZoneAer.
  

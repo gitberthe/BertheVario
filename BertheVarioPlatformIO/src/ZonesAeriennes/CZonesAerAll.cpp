@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 02/12/2024
+/// \date modification : 04/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -182,7 +182,7 @@ else
 m_ZonesArr[m_NbZones-1] = pZone ;
 
 // recopie nom de zone
-pZone->m_NomAff = pChar ;
+std::string NomAff = pChar ;
 
 // zone protege PROTECT ou FFVL-Prot dans chaine
 bool IsProtect = (strstr( pChar , "PROTECT" ) != NULL) || (strstr( pChar , "FFVL-Prot" ) != NULL) ;
@@ -222,25 +222,26 @@ if ( strstr( pChar , NomProtect ) )
         if ( pTmpChar != NULL )
             pChar += strlen( NomRND ) ;
         }
-    pZone->m_NomAff = pChar ;
+    NomAff = pChar ;
     }
 
 // formattage nom de zone 3 champs
 int iespace = 0 ;
-for ( int ic = 0 ; ic < pZone->m_NomAff.size() ; ic++ )
+for ( int ic = 0 ; ic < NomAff.size() ; ic++ )
     {
-    if ( pZone->m_NomAff[ic] == '(' )   // premier (
+    if ( NomAff[ic] == '(' )   // premier (
         {
-        pZone->m_NomAff.resize( ic ) ;
+        NomAff.resize( ic ) ;
         break ;
         }
-    else if ( (pZone->m_NomAff[ic] == ' ' || pZone->m_NomAff[ic] == '-') && ++iespace >= iespacemax ) // trois champs max
+    else if ( (NomAff[ic] == ' ' || NomAff[ic] == '-') && ++iespace >= iespacemax ) // trois champs max
         {
-        pZone->m_NomAff.resize( ic ) ;
+        NomAff.resize( ic ) ;
         break ;
         }
     }
-pZone->m_NomAff.shrink_to_fit();
+pZone->m_pNomAff = new char [ NomAff.size() + 1 ] ;
+strcpy( pZone->m_pNomAff , NomAff.c_str() ) ;
 
 // altitude de basse zone
 pChar = strtok( NULL , ";" ) ;
@@ -388,12 +389,13 @@ if ( pZone == NULL )
 // recopie nom pour affiche
 if ( NomAff != "-" && NomAff != "" )
     {
-    pZone->m_NomAff = NomAff ;
-    pZone->m_NomAff.shrink_to_fit() ;
+    delete [] pZone->m_pNomAff ;
+    pZone->m_pNomAff = new char [ NomAff.size() + 1 ] ;
+    strcpy( pZone->m_pNomAff , NomAff.c_str() ) ;
     }
 /*Serial.print(pZone->m_NomOri.c_str()) ;
 Serial.print("|") ;
-Serial.println(pZone->m_NomAff.c_str()) ;*/
+Serial.println(pZone->m_pNomAff) ;*/
 
 // periode debut
 if ( PeriodeDeb != "-" && PeriodeDeb != "" )
@@ -471,7 +473,7 @@ for ( int iz = 0 ; iz < m_NbZones ; iz++ )
     bool DejaFait = false ;
     for ( long iv = 0 ; iv < VecNomDejaEcrit.size() ; iv++ )
         {
-        if ( VecNomDejaEcrit[iv] == pZone->m_NomAff )
+        if ( VecNomDejaEcrit[iv] == pZone->m_pNomAff )
             {
             DejaFait = true ;
             break ;
@@ -484,10 +486,10 @@ for ( int iz = 0 ; iz < m_NbZones ; iz++ )
         continue ;
 
     // empilement pour suivit deja fait
-    VecNomDejaEcrit.push_back( pZone->m_NomAff ) ;
+    VecNomDejaEcrit.push_back( pZone->m_pNomAff ) ;
 
     // ecriture fichier
-    Fch.print( pZone->m_NomAff.c_str() ) ;
+    Fch.print( pZone->m_pNomAff ) ;
     Fch.print( ";" ) ;
     if ( pZone->m_Activee )
         Fch.print( "1" ) ;
@@ -565,7 +567,7 @@ std::string Activation = pActivation ;
 for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     {
     const CZoneAer & Zone = *m_ZonesArr[iz] ;
-    if ( Zone.m_NomAff == NomOri )
+    if ( NomOri == Zone.m_pNomAff )
         {
         CZoneAer * pZone = m_ZonesArr[iz] ;
 
@@ -589,7 +591,7 @@ CZoneAer * CZonesAerAll::Find( const char * NomOri )
 for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     {
     const CZoneAer & Zone = *m_ZonesArr[iz] ;
-    if ( Zone.m_NomAff == NomOri )
+    if ( ! strcmp( Zone.m_pNomAff , NomOri ) )
         return m_ZonesArr[iz] ;
     }
 
@@ -747,14 +749,14 @@ else
         if ( (g_GlobalVar.m_TerrainPosCur.m_AltiBaro > m_Plafond4Valid) &&
              (g_GlobalVar.m_TerrainPosCur.m_AltiBaro > (g_GlobalVar.m_AltitudeSolHgt+300)) )
             {
-            sprintf( TmpChar , "In %s al:%4dm" , pZone->m_NomAff.c_str() , m_Plafond4Valid ) ;
+            sprintf( TmpChar , "In %s al:%4dm" , pZone->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_DEDANS ;
             RetStrIn = TmpChar ;
             }
         // dessous
         else
             {
-            sprintf( TmpChar , "Be %s al:%4dm" , pZone->m_NomAff.c_str() , m_Plafond4Valid ) ;
+            sprintf( TmpChar , "Be %s al:%4dm" , pZone->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_DESSOUS ;
             RetStrIn = TmpChar ;
             }
@@ -768,7 +770,7 @@ else
         if ( ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > m_Plafond4Valid) &&
              ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > (g_GlobalVar.m_AltitudeSolHgt+300)) )
             {
-            sprintf( TmpChar , "Al %s al:%4dm" , pZone->m_NomAff.c_str() , m_Plafond4Valid ) ;
+            sprintf( TmpChar , "Al %s al:%4dm" , pZone->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrLimite = ZONE_LIMITE_ALTI ;
             RetStrLimite = TmpChar ;
             }
@@ -781,7 +783,7 @@ else
         if ( PlafondZone < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
             {
             m_Plafond4Valid = PlafondZone ;
-            sprintf( TmpChar , "In %s al:%4dm" , pZone->m_NomAff.c_str() , m_Plafond4Valid ) ;
+            sprintf( TmpChar , "In %s al:%4dm" , pZone->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_DEDANS ;
             RetStrIn = TmpChar ;
             }
@@ -790,7 +792,7 @@ else
             {
             //const CZoneAer & ZoneDuDessus = *VecZoneInAreaNorm[1] ;
             m_Plafond4Valid = pZone->GetAltiBasse() ;
-            sprintf( TmpChar , "Be %s al:%4dm" , pZone->m_NomAff.c_str() , m_Plafond4Valid ) ;
+            sprintf( TmpChar , "Be %s al:%4dm" , pZone->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_DESSOUS ;
             RetStrIn = TmpChar ;
             }
@@ -799,7 +801,7 @@ else
         if ( (g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > PlafondZone )
             {
             m_Plafond4Valid = PlafondZone ;
-            sprintf( TmpChar , "Al %s al:%4dm" , pZone->m_NomAff.c_str() , m_Plafond4Valid ) ;
+            sprintf( TmpChar , "Al %s al:%4dm" , pZone->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrLimite = ZONE_LIMITE_ALTI ;
             RetStrLimite = TmpChar ;
             }
@@ -819,7 +821,7 @@ for ( int iz = 0 ; iz < VecZoneInAreaActivee.size() && RetNbrIn != ZONE_DEDANS ;
         // construction nom + altitude
         char TmpChar[50] ;
         m_Plafond4Valid=PlafondZone ;
-        sprintf( TmpChar , "In %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
+        sprintf( TmpChar , "In %s al:%4dm" , Zone.m_pNomAff , m_Plafond4Valid ) ;
         RetStrIn = TmpChar ;
         break ;
         }
@@ -827,7 +829,7 @@ for ( int iz = 0 ; iz < VecZoneInAreaActivee.size() && RetNbrIn != ZONE_DEDANS ;
     else if ( (PlafondZone-g_GlobalVar.m_Config.m_AltiMargin) < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
         {
         m_Plafond4Valid = PlafondZone ;
-        sprintf( TmpChar , "Al %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
+        sprintf( TmpChar , "Al %s al:%4dm" , Zone.m_pNomAff , m_Plafond4Valid ) ;
         RetNbrLimite = ZONE_LIMITE_ALTI ;
         RetStrLimite = TmpChar ;
         }
@@ -849,7 +851,7 @@ if ( pZoneProtegee != NULL && RetNbrIn != ZONE_DEDANS )
         {
         m_Plafond4Valid = HauteurSolZoneProtegee ;
         RetNbrIn = ZONE_DEDANS ;
-        sprintf( TmpChar , "Zp %s al:%4dm" , (*pZoneProtegee).m_NomAff.c_str() , m_Plafond4Valid ) ;
+        sprintf( TmpChar , "Zp %s al:%4dm" , (*pZoneProtegee).m_pNomAff , m_Plafond4Valid ) ;
         RetStrIn = TmpChar ;
         }
     // si limite
@@ -857,7 +859,7 @@ if ( pZoneProtegee != NULL && RetNbrIn != ZONE_DEDANS )
         {
         m_Plafond4Valid = HauteurSolZoneProtegee ;
         RetNbrLimite = ZONE_LIMITE_ALTI ;
-        sprintf( TmpChar , "Al %s al:%4dm" , (*pZoneProtegee).m_NomAff.c_str() , m_Plafond4Valid ) ;
+        sprintf( TmpChar , "Al %s al:%4dm" , (*pZoneProtegee).m_pNomAff , m_Plafond4Valid ) ;
         RetStrLimite = TmpChar ;
         }
     }
@@ -913,7 +915,7 @@ for ( int iz = 0 ; iz < m_NbZones && RetNbrLimite != ZONE_LIMITE_ALTI && RetNbrI
             m_Plafond4Valid = HauteurSolZoneProtegee ;
         else
             m_Plafond4Valid = Zone.GetAltiBasse() ;
-        sprintf( TmpChar , "Bo %s al:%4dm" , Zone.m_NomAff.c_str() , m_Plafond4Valid ) ;
+        sprintf( TmpChar , "Bo %s al:%4dm" , Zone.m_pNomAff , m_Plafond4Valid ) ;
         RetStrLimite = TmpChar ;
         break ;
         }
