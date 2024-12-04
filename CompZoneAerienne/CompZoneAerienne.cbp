@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--batch SpinBertheZone.txt" />
+				<Option parameters="--batch terconnu.txt 80" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

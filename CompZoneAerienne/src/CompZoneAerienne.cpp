@@ -8,7 +8,7 @@
 /// \date creation     : 23/03/2024
 /// \date 25/11/2024 : ajout de compression de zone par distance entre points et par
 ///                    angle de meme direction.
-/// \date 01/12/2024 : modification
+/// \date 04/12/2024 : modification
 ///
 
 #include "CompZoneAerienne.h"
@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241202a" ;
+char NumVer[]="20241204a" ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -48,7 +48,7 @@ public :
 int main(int argc, char *argv[])
 {
 // destruction des png et zone gnuplot
-char TmpChar[100] ;
+char TmpChar[10000] ;
 string path = std::filesystem::current_path() ;
 sprintf( TmpChar , "rm -rf %s/zones_gnuplot/*.txt %s/zones_gnuplot/*.png", path.c_str() , path.c_str() ) ;
 system( TmpChar ) ;
@@ -126,7 +126,7 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
     double LatCentreDeg = CmdLineParam.m_LatCentreDeg ;
     double RayonDeg     = CmdLineParam.m_RayonDeg ;
 
-    // pour toutes les zones, determonation si dans perimetres
+    // pour toutes les zones, determination si dans perimetres
     // et ajout au VecZone
     for ( long iz = 0 ; iz < NbAreas ; iz++ )
         {
@@ -141,18 +141,6 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
             continue ;
             }
 
-        // doublon de nom zone
-        bool ZoneDejaFaite = false ;
-        for ( size_t izdf = 0 ; izdf < VecZone.size() ; izdf++ )
-            if ( VecZone[izdf].m_Name == Zone.m_Name )
-                {
-                ZoneDejaFaite = true ;
-                break ;
-                }
-
-        if ( ZoneDejaFaite )
-            continue ;
-
         // bas de zone
         Zone.m_Bottom = jf["features"][iz]["properties"]["bottom_m"] ;
 
@@ -166,6 +154,43 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
             pStPts->m_Lat = (*it)[1] ;
             }
 
+        // doublon de nom zone et definition de zone
+        bool ZoneDejaFaite = false ;
+        // pour toutes les zones deja enregistrées
+        for ( size_t izdf = 0 ; izdf < VecZone.size() ; izdf++ )
+            {
+            // nom different
+            if ( VecZone[izdf].m_Name != Zone.m_Name )
+                continue ;
+
+            // comparaison des tailles de vecteur
+            std::vector<CVecZoneReduce::st_coord_poly*> & VecNewZone = Zone.m_VecPtsBig ;
+            std::vector<CVecZoneReduce::st_coord_poly*> & VecOldZone = VecZone[izdf].m_VecPtsBig ;
+            if ( VecNewZone.size() != VecOldZone.size() )
+                continue ;
+
+            // comparaison des points
+            bool ToutPtsIdentiques = true ;
+            for ( size_t ipt = 0 ; ipt < VecOldZone.size() ; ipt++ )
+                if ( (VecOldZone[ipt]->m_Lat != VecNewZone[ipt]->m_Lat) ||
+                     (VecOldZone[ipt]->m_Lon != VecNewZone[ipt]->m_Lon))
+                    {
+                    ToutPtsIdentiques = false ;
+                    break ;
+                    }
+
+            // si tous points identiques
+            if ( ToutPtsIdentiques )
+                {
+                ZoneDejaFaite = true ;
+                break ;
+                }
+            }
+
+        if ( ZoneDejaFaite )
+            continue ;
+
+
         // determination si un points de la zone dans le perimetre
         bool DansPerimetre = false ;
         for ( long nbc = 0 ; nbc < (long)Zone.m_VecPtsBig.size() ; nbc++ )
@@ -178,7 +203,7 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
                 }
             }
 
-        // si dans perimetre affichage
+        // si dans perimetre affichage et pas en doublons
         if ( DansPerimetre )
             VecZone.push_back( Zone ) ;
         }
@@ -250,7 +275,6 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
          << " : " << Zone.m_Name << endl ;
 
     // png gnuplot
-    char TmpChar[100] ;
     string path = std::filesystem::current_path() ;
     sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
     system( TmpChar ) ;
