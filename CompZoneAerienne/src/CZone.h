@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date 01/12/2024 : creation
-/// \date 01/12/2024 : modification
+/// \date 05/12/2024 : modification
 ///
 
 #pragma once
@@ -30,4 +30,7 @@ public :
         { return m_VecPtsSmall.size() < Zone.m_VecPtsSmall.size() ; } ;
     bool operator > ( const CZone & Zone ) const
         { return m_VecPtsSmall.size() > Zone.m_VecPtsSmall.size() ; } ;
+    bool operator == ( const CZone & Zone ) const
+        { return ! ( (*this) != Zone ) ; } ;
+    bool operator != ( const CZone & Zone ) const ;
 } ;

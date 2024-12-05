@@ -8,7 +8,7 @@
 /// \date creation     : 23/03/2024
 /// \date 25/11/2024 : ajout de compression de zone par distance entre points et par
 ///                    angle de meme direction.
-/// \date 04/12/2024 : modification
+/// \date 05/12/2024 : modification
 ///
 
 #include "CompZoneAerienne.h"
@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241204a" ;
+char NumVer[]="20241205a" ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -128,11 +128,11 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
 
     // pour toutes les zones, determination si dans perimetres
     // et ajout au VecZone
-    for ( long iz = 0 ; iz < NbAreas ; iz++ )
+    for ( long izf = 0 ; izf < NbAreas ; izf++ )
         {
         CZone Zone ;
         // nom
-        Zone.m_Name = jf["features"][iz]["properties"]["name"] ;
+        Zone.m_Name = jf["features"][izf]["properties"]["name"] ;
 
         // zone a ne pas traiter
         if ( strstr( Zone.m_Name.c_str() , "LTA FRANCE 1" ) != NULL )
@@ -142,10 +142,10 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
             }
 
         // bas de zone
-        Zone.m_Bottom = jf["features"][iz]["properties"]["bottom_m"] ;
+        Zone.m_Bottom = jf["features"][izf]["properties"]["bottom_m"] ;
 
         // coordonnees de la zone
-        auto CordArr = jf["features"][iz]["geometry"]["coordinates"][0] ;
+        auto CordArr = jf["features"][izf]["geometry"]["coordinates"][0] ;
         for (auto it = CordArr.begin(); it != CordArr.end(); ++it)
             {
             CVecZoneReduce::st_coord_poly * pStPts = new CVecZoneReduce::st_coord_poly ;
@@ -154,42 +154,17 @@ for ( size_t iptcentre = 0 ; iptcentre < VectPtCentreRayon.size() ; iptcentre++ 
             pStPts->m_Lat = (*it)[1] ;
             }
 
-        // doublon de nom zone et definition de zone
+        // si zone deja faite
         bool ZoneDejaFaite = false ;
-        // pour toutes les zones deja enregistrées
         for ( size_t izdf = 0 ; izdf < VecZone.size() ; izdf++ )
-            {
-            // nom different
-            if ( VecZone[izdf].m_Name != Zone.m_Name )
-                continue ;
-
-            // comparaison des tailles de vecteur
-            std::vector<CVecZoneReduce::st_coord_poly*> & VecNewZone = Zone.m_VecPtsBig ;
-            std::vector<CVecZoneReduce::st_coord_poly*> & VecOldZone = VecZone[izdf].m_VecPtsBig ;
-            if ( VecNewZone.size() != VecOldZone.size() )
-                continue ;
-
-            // comparaison des points
-            bool ToutPtsIdentiques = true ;
-            for ( size_t ipt = 0 ; ipt < VecOldZone.size() ; ipt++ )
-                if ( (VecOldZone[ipt]->m_Lat != VecNewZone[ipt]->m_Lat) ||
-                     (VecOldZone[ipt]->m_Lon != VecNewZone[ipt]->m_Lon))
-                    {
-                    ToutPtsIdentiques = false ;
-                    break ;
-                    }
-
-            // si tous points identiques
-            if ( ToutPtsIdentiques )
+            if ( VecZone[izdf] == Zone )
                 {
                 ZoneDejaFaite = true ;
                 break ;
                 }
-            }
 
         if ( ZoneDejaFaite )
             continue ;
-
 
         // determination si un points de la zone dans le perimetre
         bool DansPerimetre = false ;

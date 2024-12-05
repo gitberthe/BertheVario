@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date 01/12/2024 : creation
-/// \date 01/12/2024 : modification
+/// \date 05/12/2024 : modification
 ///
 
 #include "CompZoneAerienne.h"
@@ -61,4 +61,28 @@ for ( size_t ip = 0 ; ip < m_VecPtsSmall.size() ; ip++ )
     RayonMaxDeg = MAX( RayonMaxDeg , RayonDeg ) ;
     }
 return RayonMaxDeg * MilesParDegres * UnMilesEnMetres / 1000. ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Renvoie si une zone non compressee est strictement differente en nom
+/// et dimension
+bool CZone::operator != ( const CZone & Zone ) const
+{
+// pour toutes les zones deja enregistrées
+if ( m_Name != Zone.m_Name )
+    return true ;
+
+// comparaison des tailles de vecteur
+const std::vector<CVecZoneReduce::st_coord_poly*> & VecOldZone = m_VecPtsBig ;
+const std::vector<CVecZoneReduce::st_coord_poly*> & VecNewZone = Zone.m_VecPtsBig ;
+if ( VecNewZone.size() != VecOldZone.size() )
+    return true ;
+
+// comparaison des points
+for ( size_t ipt = 0 ; ipt < VecOldZone.size() ; ipt++ )
+    if ( (VecOldZone[ipt]->m_Lat != VecNewZone[ipt]->m_Lat) ||
+         (VecOldZone[ipt]->m_Lon != VecNewZone[ipt]->m_Lon))
+        return true ;
+
+return false ;
 }
