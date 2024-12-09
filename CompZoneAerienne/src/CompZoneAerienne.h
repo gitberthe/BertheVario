@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date 26/11/2024 : creation
-/// \date 01/12/2024 : modification
+/// \date 09/12/2024 : modification
 ///
 
 #ifndef _BVTZonesAerienne_
@@ -19,6 +19,8 @@
 #include <algorithm>
 #include <limits>
 #include <cfloat>
+#include <unistd.h>
+#include <filesystem>
 #include <unistd.h>
 
 ///////////

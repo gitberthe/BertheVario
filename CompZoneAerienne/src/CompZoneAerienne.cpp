@@ -8,7 +8,7 @@
 /// \date creation     : 23/03/2024
 /// \date 25/11/2024 : ajout de compression de zone par distance entre points et par
 ///                    angle de meme direction.
-/// \date 05/12/2024 : modification
+/// \date 09/12/2024 : modification
 ///
 
 #include "CompZoneAerienne.h"
@@ -16,7 +16,7 @@
 using namespace std;
 using namespace nlohmann ;
 
-char NumVer[]="20241205a" ;
+char NumVer[]="20241209a" ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -48,10 +48,20 @@ public :
 int main(int argc, char *argv[])
 {
 // destruction des png et zone gnuplot
-char TmpChar[10000] ;
-string path = std::filesystem::current_path() ;
-sprintf( TmpChar , "rm -rf %s/zones_gnuplot/*.txt %s/zones_gnuplot/*.png", path.c_str() , path.c_str() ) ;
-system( TmpChar ) ;
+const long TailleBuffer = 10000 ;
+char TmpChar[TailleBuffer] ;
+//string path = std::filesystem::current_path() ;
+getcwd( TmpChar , TailleBuffer ) ;
+string path = TmpChar ;
+#ifdef WIN32
+ chdir( "./zones_gnuplot" ) ;
+ system( "del *.txt" ) ;
+ system( "del *.png" ) ;
+ chdir( "..") ;
+#else
+ sprintf( TmpChar , "rm -rf %s/zones_gnuplot/*.txt %s/zones_gnuplot/*.png", path.c_str() , path.c_str() ) ;
+ system( TmpChar ) ;
+#endif
 
 // verification ligne de commande
 if ( argc < 2 || (strcmp(argv[1],"--batch") != 0 && argc < 4) || (strcmp(argv[1],"--batch") == 0 && argc < 4) )
@@ -199,6 +209,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     CZone & Zone = VecZone[iz] ;
     char NomFichierGnuplotAvecChemin[3000] ;
 
+    #ifndef WIN32
     // fichier de zone pour gnuplot avant compression
     // gnuplot> replot "zone_c.txt" with linespoints 6
     sprintf(NomFichierGnuplotAvecChemin,"./zones_gnuplot/%03ld_avc.txt",iz) ;
@@ -216,6 +227,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
     ofs_znc << setprecision(9) << Zone.m_VecPtsBig[0]->m_Lon << " " << Zone.m_VecPtsBig[0]->m_Lat << endl ;
     ofs_znc << setprecision(9) << Zone.m_VecPtsBig[0]->m_Lon << " " << Zone.m_VecPtsBig[0]->m_Lat + 1000./(MilesParDegres*UnMileEnMetres) << endl ;
     ofs_znc.close() ;
+    #endif
 
     // ecriture pour fichier texte sur cout
     cout << Zone.m_Name << ";" << Zone.m_Bottom << ";" ;
@@ -223,6 +235,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
         cout << "" << setprecision(9) << Zone.m_VecPtsSmall[nbc]->m_Lon << "," << Zone.m_VecPtsSmall[nbc]->m_Lat << ";" ;
     cout << endl ;
 
+    #ifndef WIN32
     // fichier de zone pour gnuplot apres compression
     sprintf(NomFichierGnuplotAvecChemin,"./zones_gnuplot/%03ld_apc.txt",iz) ;
     ofstream ofs_zc(NomFichierGnuplotAvecChemin, std::ofstream::out);
@@ -234,6 +247,7 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
             << Zone.m_VecPtsSmall[ip]->m_Lat << endl ;
         }
     ofs_zc.close() ;
+    #endif
 
     // resolution zone
     double RayonMaxZoneKm = Zone.GetRayonMaxKm() ;
@@ -250,10 +264,10 @@ for ( long iz = VecZone.size() -1 ; iz >= 0 ; iz-- )
          << " : " << Zone.m_Name << endl ;
 
     // png gnuplot
-    string path = std::filesystem::current_path() ;
-    sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
-    system( TmpChar ) ;
-
+    #ifndef WIN32
+     sprintf( TmpChar , "%s/zones_gnuplot/gnuplot.sh %s/zones_gnuplot/%03ld", path.c_str() , path.c_str() , iz ) ;
+     system( TmpChar ) ;
+    #endif
     }
 
 ResolutionMoyenneMetre /= VecZone.size() ;

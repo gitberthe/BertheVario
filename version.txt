@@ -1,3 +1,6 @@
+le 20241209a :
+ - CompZoneAerienne.exe windows 10, zonesaer.txt inchangé.
+ 
 le 20241205a :
  - structuration CompZoneAerienne, zonesaer.txt inchangé.
 
