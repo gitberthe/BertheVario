@@ -1,3 +1,8 @@
+le 20241212a :
+ - correction affichage trop lent par temps froid.
+ - [vitesse_igc_kmh] à 14 par defaut.
+ - [coef_filtre_alti_baro] à 0.85 par defaut.
+
 le 20241209a :
  - CompZoneAerienne.exe windows 10, zonesaer.txt inchangé.
  

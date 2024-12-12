@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 04/12/2024
+/// \date modification : 12/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -392,9 +392,6 @@ uint16_t tbw, tbh;
 display.firstPage();
 do
     {
-    //display.fillScreen(GxEPD_WHITE);
-    //g_GlobalVar.DoRect( 0 , 0 , 200 , 200 , false );
-
     ///////////////////////////////////////////
     // nom de zone aerienne ou termique/terrain
     if ( g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )
@@ -603,7 +600,6 @@ if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
     display.firstPage();
     display.setFont(&FreeMonoBold12pt7b);
     do  {
-        display.fillScreen(GxEPD_WHITE);
         // message
         display.setCursor(0, 20);
         display.print("0 histo");
@@ -643,8 +639,6 @@ display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     // nom fch igc
     display.setCursor(0, y);
     display.print(TmpCharNomFchIgc);
@@ -786,7 +780,6 @@ display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
     {
-    //display.fillScreen(GxEPD_WHITE);
     // date et heure
     display.setCursor(12, 15);
     display.print(TmpCharDate) ;
@@ -880,8 +873,6 @@ display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     // Mod
     display.setCursor(0, 20);
     display.print(TmpMod) ;
@@ -1026,8 +1017,6 @@ display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     // titre
     if ( VecZone2Mod.size() == 0 )
         {
@@ -1174,8 +1163,6 @@ sprintf( TmpTitre , "%2d B. Cen. Mo." , g_GlobalVar.m_ZonesAerAll.GetNbZones() )
 display.firstPage();
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     // titre
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor( 0, 20 );
@@ -1257,8 +1244,6 @@ char TmpChar[25] ;
 display.firstPage();
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     display.setFont(&FreeMonoBold12pt7b);
 
     display.setFont(&FreeMonoBold9pt7b);
@@ -1325,8 +1310,6 @@ char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n  Bouton GD" ;
 display.firstPage();
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     // titre
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor( 0, 20 );
@@ -1383,8 +1366,6 @@ display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
     {
-    display.fillScreen(GxEPD_WHITE);
-
     // nom zone
     display.setCursor(0,90);
     display.print( "Tma Dessus:\n" );
