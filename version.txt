@@ -1,3 +1,9 @@
+le 20241221a :
+ - suppression reset affichage inutile lors de changement de pages.
+ - time out page modification fichier configuration.
+ - update librairie Epd2, MS5611.
+ - correction bug lecture cap magnetique.
+
 le 20241212a :
  - correction affichage trop lent par temps froid.
  - [vitesse_igc_kmh] à 14 par defaut.

@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/12/2024
+/// \date modification : 21/12/2024
 ///
 
 //////////////////
@@ -13,7 +13,6 @@
 #include <esp32-hal-dac.h>
 #include <Wire.h>
 #include <Arduino.h>
-#include <ESP32Servo.h>
 #include <SPI.h>
 #include <SD.h>
 #include <WiFi.h>

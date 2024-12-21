@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 12/12/2024
+/// \date modification : 21/12/2024
 ///
 
-char NumVer[] = "20241212a" ;
+char NumVer[] = "20241221a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -141,10 +141,6 @@ if ( g_GlobalVar.BoutonGauche() )
     CGlobalVar::Reboot() ;
     }
 
-#ifndef MPU9250_DEBUG
-// lancement tache de calcul du cap magnetique
-//g_GlobalVar.m_Mpu9250.LancerTacheCalculCapMag() ;
-
 // lancement tache de calcul de la Vz et acquisition cap magnetique
 g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 
@@ -153,7 +149,6 @@ g_GlobalVar.LanceTacheGps(true) ;
 
 // lancement tache beep
 g_GlobalVar.LanceTacheVarioBeep() ;
-#endif // MPU9250_DEBUG
 
 #ifdef _LG_DEBUG_
   Serial.println("setup done");
@@ -252,8 +247,8 @@ if ( once )
 // fonction d'affichage
 g_GlobalVar.AfficheAll();
 
-// attente 0.05s, l'affichage n'est pas prioritaire
-delay(50) ;
+// attente 0.1s, l'affichage n'est pas prioritaire
+delay(100) ;
 
 /*// animation attente gps
 if ( g_GlobalVar.m_AltiGps == 0 )

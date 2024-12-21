@@ -4,10 +4,12 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/12/2024
+/// \date modification : 21/12/2024
 ///
 
 #include "../BertheVario.h"
+
+//#define ENABLE_GxEPD2_GFX
 
 #if ( TYPE_SCREEN == 154 )
 
@@ -16,13 +18,13 @@
 
 // base class GxEPD2_GFX can be used to pass references or pointers to the display instance as parameter, uses ~1.2k more code
 // enable or disable GxEPD2_GFX base class
-#define ENABLE_GxEPD2_GFX 1
+//#define ENABLE_GxEPD2_GFX 1
 
 #include <GxEPD2_BW.h>
 
 // uncomment next line to use class GFX of library GFX_Root instead of Adafruit_GFX
-//#include <GFX.h>
-#include <GxEPD2_GFX.h>
+//#include <Arduino_GFX.h>
+//#include <GxEPD2_GFX.h>
 // Note: if you use this with ENABLE_GxEPD2_GFX 1:
 //       uncomment it in GxEPD2_GFX.h too, or add #include <GFX.h> before any #include <GxEPD2_GFX.h>
 
@@ -57,7 +59,7 @@ display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DES
 //hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
 //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
 
-//display.init(115200, true, 10, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
+//display.init(115200, true, 100, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
 //display.init(115200, true, 10, false, SPI0, SPISettings(4000000, MSBFIRST, SPI_MODE0)); // extended init method with SPI channel and/or settings selection
 display.setTextColor( GxEPD_BLACK );
 /*if (display.pages() > 1)
@@ -81,16 +83,16 @@ while (display.nextPage());*/
 // mise hors tension ecran
 //display.hibernate();
 //display.powerOff();
+display.setRotation(0) ;
 display.setPartialWindow( 0, 0, 200 , 200 );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief Raz de l'ecran.
+/// \brief Raz de l'ecran (deja fait dans display.firstPage() donc doublon)
 void CScreen154::ScreenRaz()
 {
 //display.powerOff();
 //display.setFullWindow() ;
-//display.setPartialWindow( 0, 0, 200 , 200 );
 //display.setFont(&FreeMonoBold18pt7b);
 /*display.firstPage();
 do  {
@@ -127,7 +129,6 @@ display.powerOff();
 /// \brief Affichage de "Connect to Wifi".
 void CScreen154::AfficheConnectWifi()
 {
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -143,7 +144,6 @@ while (display.nextPage());
 /// \brief Affichage de la calibration magnetique.
 void CScreen154::AfficheCalibreMag()
 {
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -159,7 +159,6 @@ while (display.nextPage());
 /// \brief Affichage de l'adresse ip.
 void CScreen154::AfficheWifi(char * IpAdress)
 {
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -183,9 +182,7 @@ float Voltage = g_GlobalVar.GetVoltage() ;
 char TmpChar[10] ;
 sprintf( TmpChar , "%1.2fv", Voltage ) ;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
-//display.setFullWindow();
 do
     {
     // voltage
@@ -380,15 +377,13 @@ else*/
         }
     }
 
-// selection fonts et rotation
-display.setRotation(0);
+// selection fonts
 display.setFont(&FreeMonoBold24pt7b);
 
 // affichage valeur de VZ
 int16_t tbx, tby;
 uint16_t tbw, tbh;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -486,7 +481,7 @@ do
     if ( GrosseVz )
     // ascendance
         {
-        // align with centered HelloWorld
+        // align with centered
         display.getTextBounds( TmpCharVz, 0, 0, &tbx, &tby, &tbw, &tbh);
         uint16_t xv ;
         if ( SigneNeg )
@@ -551,6 +546,9 @@ do
         }
     }
 while (display.nextPage());
+//display.display(false) ;
+//display.displayWindow(0,0,200,200) ;
+//display.refresh(0,0,200,200) ;
 
 /*// si changement d'ecran si pas en mode V ou G/S
 if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&
@@ -564,10 +562,7 @@ if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&
 
 // si changement d'ecran
 if ( BoutonCentre() )
-    {
-    m_MillisEcran0 = millis() ;
     return ECRAN_1_Histo ;
-    }
 
 // si activation / desactivation beep attente Gps / Vitesse
 if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
@@ -596,7 +591,6 @@ g_GlobalVar.m_HistoVol.LectureFichiers() ;
 // si pas de fichiers histo
 if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
     {
-    //display.setPartialWindow( 0, 0, 200 , 200 );
     display.firstPage();
     display.setFont(&FreeMonoBold12pt7b);
     do  {
@@ -634,7 +628,6 @@ sprintf( TmpCharDistMax , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_Dis
 char TmpCharTV[20] ;
 sprintf( TmpCharTV , " %3d'", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_TempsDeVol ) ;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
@@ -700,10 +693,7 @@ fin_histo :
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
-    {
-    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_0_Vz ;
-    }
 
 // si changement de numero histo vol
 if ( BoutonDroit() )
@@ -775,7 +765,6 @@ g_GlobalVar.m_MutexCore.PrendreMutex() ;
  int cpu1 = g_GlobalVar.m_PercentCore1 ;
 g_GlobalVar.m_MutexCore.RelacherMutex() ;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
@@ -833,10 +822,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 
 // si changement d'ecran
 if ( BoutonCentre() )
-    {
-    m_MillisEcran0 = millis() ;
     return ECRAN_0_Vz ;
-    }
 
 return ECRAN_6_Sys ;
 }
@@ -854,10 +840,9 @@ std::string Value ; ;
 static bool Modif = false ;
 static int iChamps = -1 ;
 
+// si nouvelle page
 if ( IsPageChanged() )
-    {
     g_GlobalVar.m_Config.ConstructVect() ;
-    }
 
 // sortie
 if ( iChamps == -1 )
@@ -866,9 +851,11 @@ if ( iChamps == -1 )
     Name = " Editeur Cfg\nBoutons <GCD>" ;
     }
 else
+    {
     g_GlobalVar.m_Config.GetChar( iChamps , Name , Value ) ;
+    m_MillisEcran0 = millis() ;
+    }
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
@@ -891,7 +878,6 @@ bool BoutonDroi = BoutonDroit() ;
 // sortie ecran
 if ( BoutonCent && !Modif && iChamps == -1 )
     {
-    m_MillisEcran0 = millis() ;
     g_GlobalVar.m_Config.EcritureFichier() ;
     g_GlobalVar.m_Config.LectureFichier() ;
     return ECRAN_5_TmaDessous ;
@@ -907,6 +893,7 @@ if ( BoutonCent && iChamps != -1 )
         strcpy( TmpMod , "" ) ;
     }
 
+// decrementation variable
 if ( BoutonGau && Modif )
     {
     CConfigFile::st_line * pLine = g_GlobalVar.m_Config.m_LinesVect[iChamps] ;
@@ -930,6 +917,7 @@ if ( BoutonGau && Modif )
         }
     }
 
+// incrementation variable
 if ( BoutonDroi && Modif )
     {
     CConfigFile::st_line * pLine = g_GlobalVar.m_Config.m_LinesVect[iChamps] ;
@@ -970,6 +958,12 @@ if ( BoutonDroi && !Modif  )
     else
         iChamps = -1 ;
     }
+
+// si time out ecran en premeire page
+unsigned long Temps = millis() - m_MillisEcran0 ;
+if ( ((Temps/1000) > m_SecRetourEcran0) && (iChamps == -1) )
+    return ECRAN_0_Vz ;
+
 
 return ECRAN_4_CfgFch ;
 }
@@ -1012,7 +1006,6 @@ if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
             VecZone2Mod.push_back( VecAffZones[iz] ) ;
     }
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
@@ -1084,10 +1077,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 // si changement d'ecran
 bool BCentre = BoutonCentre() ;
 if ( BCentre && VecZone2Mod.size() == 0 )
-    {
-    m_MillisEcran0 = millis() ;
     return ECRAN_3a_TmaAll ;
-    }
 
 // si modification activation
 if ( BCentre && VecZone2Mod.size() != 0 )
@@ -1159,7 +1149,6 @@ for ( long iz = 0 ; iz < NbZones ; iz++ )
 char TmpTitre[15] ;
 sprintf( TmpTitre , "%2d B. Cen. Mo." , g_GlobalVar.m_ZonesAerAll.GetNbZones() ) ;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -1240,7 +1229,6 @@ for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
     TotalMin += VecTempsIgc[ifch] ;
 
 char TmpChar[25] ;
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -1267,9 +1255,7 @@ while (display.nextPage());
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
-    {
     return ECRAN_0_Vz ;
-    }
 
 // si changement d'ecran
 if ( BoutonDroit() )
@@ -1287,10 +1273,7 @@ if ( BoutonGauche() )
 
 // si changement modification zone
 if ( BoutonCentre() )
-    {
-    m_MillisEcran0 = millis() ;
     return ECRAN_3a_TmaAll ;
-    }
 
 return ECRAN_2a_ListeIgc ;
 }
@@ -1306,7 +1289,6 @@ CGestEcrans::EtatsAuto CScreen154::EcranConfimeArchIgcFch()
 // titre
 char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n  Bouton GD" ;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 do
     {
@@ -1324,10 +1306,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 
 // si changement d'ecran
 if ( BoutonCentre() )
-    {
-    m_MillisEcran0 = millis() ;
     return ECRAN_2a_ListeIgc ;
-    }
 
 // si changement d'ecran
 if ( BoutonGauche() )
@@ -1361,7 +1340,6 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
     NomZone = g_GlobalVar.m_ZonesAerAll.m_NomZoneDansDessous ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 
-//display.setPartialWindow( 0, 0, 200 , 200 );
 display.firstPage();
 display.setFont(&FreeMonoBold12pt7b);
 do
@@ -1380,10 +1358,7 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 
 // si changement d'ecran
 if ( BoutonCentre() )
-    {
-    m_MillisEcran0 = millis() ;
     return ECRAN_6_Sys ;
-    }
 
 return ECRAN_5_TmaDessous ;
 }

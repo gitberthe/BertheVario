@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 20/11/2024
+/// \date modification : 21/12/2024
 ///
 
 #include "../BertheVario.h"
@@ -85,7 +85,7 @@ return CalcAltitude( GetPressureMb() * 100. ) ;
 /// Met a jour aussi le cap magnetique.
 /// Modifier le fichier ./Projects/BertheVario/.pio/libdeps/esp32dev/MPU9250/MPU9250.h,
 /// ligne 85, static constexpr uint8_t MAG_MODE {0x02}; pour une lecture basse frequence
-/// du capteur.
+/// du capteur (mais proche de 8hz).
 void CMS5611::TacheVzCapMag(void *param)
 {
 #ifdef _LG_DEBUG_
@@ -94,6 +94,8 @@ void CMS5611::TacheVzCapMag(void *param)
 
 delay( 1000 ) ;
 
+int count_div_mag = 0 ;
+const int DIV_MAG = 3 ;
 const int DIV_SECONDES = 3 ;
 float AltiPressForVzArr[DIV_SECONDES+1] ;
 
@@ -108,8 +110,20 @@ g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 // alti pression filtree
 while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     {
+    // mesure du cap magnetique a 9 hz ou plantage
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
-     // mesures du capteur de pression
+     g_GlobalVar.m_Mpu9250.Update() ;
+    g_GlobalVar.m_MutexI2c.RelacherMutex() ;
+
+    // 9hz
+    delay(1000/(DIV_SECONDES*DIV_MAG)) ;
+
+    // 3hz
+    if ( (count_div_mag++)%DIV_MAG )
+        continue ;
+
+    // mesures du capteur de pression
+    g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_GlobalVar.m_MS5611.Read() ;
      float AltiMesCapteur = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres()  ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
@@ -121,14 +135,6 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     g_GlobalVar.m_MS5611.m_AltiPressionFiltree = AltiPressionFiltree ;
     //Serial.print("altipress:") ;
     //Serial.println(g_GlobalVar.CMS5611::m_AltiPressionFiltree);
-
-    // mesure du cap magnetique
-    g_GlobalVar.m_MutexI2c.PrendreMutex() ;
-     g_GlobalVar.m_Mpu9250.Update() ;
-    g_GlobalVar.m_MutexI2c.RelacherMutex() ;
-
-    // 3hz
-    delay(1000/DIV_SECONDES) ;
 
     // decalage du tableau alti fifo par 0 sur x secondes
     for ( int i = DIV_SECONDES ; i>0 ; i-- )
