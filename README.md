@@ -13,7 +13,8 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - generation de fichier de zones aériennes avec /CompZoneAerienne depuis codeblocks/linux ou windows
 - firmware compilé pour une version "standard écran 1.54 Pcb2 de GnuVario" dans /firmware
 
-   
+**Important :**
+- penser à bien modifier votre fichier de configuration pour un fonctionnement correct. En particulier le coeficient du filtre alti-baro (valeurs par defaut dans la documentation ou lorsque le fichier est absent/recréé)
 
 **Pour les développeur :**
 - voire la documentation doxygen generée.
