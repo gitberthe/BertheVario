@@ -1,3 +1,6 @@
+le 20241229a3 :
+ - modification documentation, image fichier configuration coherente.
+
 le 20241229a2 :
  - modification readme.md.
 

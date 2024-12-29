@@ -1,11 +1,10 @@
-[coef_filtre_alti_baro] 0.40 #
-[periode_integration_sec] 2 #
-[vitesse_igc_kmh] 18 #
-[temps_igc_sec] 5 #
+[coef_filtre_alti_baro] 0.85 #
+[vitesse_igc_kmh] 14 #
 [vz_igc_ms] 0.70 #
 [stab_gps_metre] 30 #
 [stab_gps_sec] 10 #
-[sat_sec] 7 #
+[sat_sec] 12 #
+[temps_igc_sec] 4 #
 [vz_seuil_haut] 0.20 #
 [vz_seuil_bas] -2.50 #
 [vz_seuil_max] 3.50 #
