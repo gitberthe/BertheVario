@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 21/12/2024
+/// \date modification : 29/12/2024
 ///
 
 //////////////////
@@ -35,6 +35,9 @@
 #define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
 //#define VARIO_CAP_MAG_A_PLAT  1
 
+////////////////////////////////////
+// platform de la version precedente
+// platform = https://github.com/tasmota/platform-espressif32/releases/download/2024.01.01/platform-espressif32.zip
 
 ////////////////
 // si mode debug

@@ -211,7 +211,7 @@ FreeVect() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Permet d'afficher la variable a l'ecran (mode mini editeur).
 void CConfigFile::GetChar( int iVec , std::string & Name , std::string & Value ) const
 {
 if ( iVec < 0 || iVec >= m_LinesVect.size() )

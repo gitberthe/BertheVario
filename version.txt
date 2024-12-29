@@ -1,3 +1,7 @@
+le 20241229a :
+ - modification commentaires
+ - modification platformio.ini pour platform espressif32 standard.
+
 le 20241221a :
  - suppression reset affichage inutile lors de changement de pages.
  - time out page modification fichier configuration.
