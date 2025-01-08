@@ -54,7 +54,8 @@
 void CScreen154::InitScreen()
 {
 // init ecran
-display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
+//display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
+display.init() ;
 
 //hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
 //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
@@ -102,7 +103,7 @@ while (display.nextPage()); */
 
 display.firstPage();
 do  {
-    display.fillScreen(GxEPD_WHITE);
+    //display.fillScreen(GxEPD_WHITE);
     }
 while (display.nextPage());
 //display.powerOff();
@@ -384,9 +385,11 @@ display.setFont(&FreeMonoBold24pt7b);
 int16_t tbx, tby;
 uint16_t tbw, tbh;
 
-display.firstPage();
+//display.firstPage();
 do
     {
+    display.fillScreen( GxEPD_WHITE ) ;
+
     ///////////////////////////////////////////
     // nom de zone aerienne ou termique/terrain
     if ( g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )

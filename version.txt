@@ -1,3 +1,6 @@
+le 20250108a :
+ - desactivation serial dans CScreen154::InitScreen() (ecran plus rapide ?).
+
 le 20241229a4 :
  - modification documentation.
 

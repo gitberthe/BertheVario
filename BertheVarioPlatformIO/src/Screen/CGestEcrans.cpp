@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 21/12/2024
+/// \date modification : 08/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -59,8 +59,8 @@ if ( m_EtatAuto != NextStep )
     m_MillisEcran0 = millis() ;
 
     // raz screen si changement ecran (doublon)
-    if ( NextStep == ECRAN_0_Vz )
-        ScreenRaz() ;
+    //if ( NextStep == ECRAN_0_Vz )
+    //    ScreenRaz() ;
 
     // pour un gain memoire
     g_GlobalVar.GainMemoire() ;
