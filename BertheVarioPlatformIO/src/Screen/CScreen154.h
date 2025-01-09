@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 08/08/2025
+/// \date modification : 09/08/2025
 ///
 
 #ifndef _SCREEN154_
@@ -23,7 +23,7 @@ public :
     void AfficheCalibreMag() ;
     void ScreenRaz() ;
     void ScreenOff() ;
-    void DoRect( int x , int y , int w , int h , bool Black ) ;
+    void DoRect( int x , int y , int w , int h ) ;
     void DoChar( int x , int y , const char * pChar ) ;
 
     EtatsAuto EcranVz() ;

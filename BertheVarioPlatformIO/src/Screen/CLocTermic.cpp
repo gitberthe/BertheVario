@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/03/2024
-/// \date modification : 20/07/2024
+/// \date modification : 09/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -18,21 +18,21 @@ void CLocTermic::Affiche( float CapDeg , float DistMetres )
 // en plein arrier +- 45
 if ( fabsf( 180 + CapDeg ) < 45 )
     {
-    g_GlobalVar.DoRect( 10 , 0 , 10 , 10 , true ); // x y w h
-    g_GlobalVar.DoRect( 0 , 0 , 10 , 20 , true ); // x y w h
-    g_GlobalVar.DoRect( 180 , 0 , 10 , 10 , true ); // x y w h
-    g_GlobalVar.DoRect( 190 , 0 , 10 , 20 , true ); // x y w h
+    g_GlobalVar.DoRect( 10 , 0 , 10 , 10 ); // x y w h
+    g_GlobalVar.DoRect( 0 , 0 , 10 , 20 ); // x y w h
+    g_GlobalVar.DoRect( 180 , 0 , 10 , 10 ); // x y w h
+    g_GlobalVar.DoRect( 190 , 0 , 10 , 20 ); // x y w h
     CapDeg = 0. ;
     }
 else if ( CapDeg < -90 )
     {
-    g_GlobalVar.DoRect( 10 , 0 , 10 , 10 , true ); // x y w h
-    g_GlobalVar.DoRect( 0 , 0 , 10 , 20 , true ); // x y w h
+    g_GlobalVar.DoRect( 10 , 0 , 10 , 10 ); // x y w h
+    g_GlobalVar.DoRect( 0 , 0 , 10 , 20 ); // x y w h
     }
 else if ( CapDeg > 90 )
     {
-    g_GlobalVar.DoRect( 180 , 0 , 10 , 10 , true ); // x y w h
-    g_GlobalVar.DoRect( 190 , 0 , 10 , 20 , true ); // x y w h
+    g_GlobalVar.DoRect( 180 , 0 , 10 , 10 ); // x y w h
+    g_GlobalVar.DoRect( 190 , 0 , 10 , 20 ); // x y w h
     }
 
 // distancemetre

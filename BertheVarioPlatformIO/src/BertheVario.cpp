@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 29/12/2024
+/// \date modification : 09/01/2025
 ///
 
-char NumVer[] = "20250108b" ;
+char NumVer[] = "20250109a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -245,10 +245,12 @@ if ( once )
 #endif
 
 // fonction d'affichage
+unsigned long TimeAvAff = millis() ;
 g_GlobalVar.AfficheAll();
 
-// attente 0.1s, l'affichage n'est pas prioritaire
-delay(100) ;
+// attente 0.5s, l'affichage n'est pas prioritaire
+while ( (millis() - TimeAvAff) < 500 )
+    delay( 10 ) ;
 
 /*// animation attente gps
 if ( g_GlobalVar.m_AltiGps == 0 )

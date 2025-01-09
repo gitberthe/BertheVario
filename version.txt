@@ -1,4 +1,7 @@
-le 20250108b :
+le 20250109a :
+ - modification CScreen154::EcranVz() plus rapide (meilleur temps froid).
+
+ le 20250108b :
  - modification CScreen154::EcranVz() (ecran plus rapide ?).
 
 le 20250108a :

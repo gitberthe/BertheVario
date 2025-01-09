@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 08/01/2025
+/// \date modification : 09/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -17,6 +17,7 @@ CGestEcrans::CGestEcrans()
 for ( int ie = 0 ; ie < FIN ; ie++ )
     m_Automate[ie].m_pFunction = & CGestEcrans::Erreur ;
 
+m_Automate[ECRAN_Debut].m_pFunction     = & CGestEcrans::EcranVz ;
 m_Automate[ECRAN_0_Vz].m_pFunction      = & CGestEcrans::EcranVz ;
 m_Automate[ECRAN_1_Histo].m_pFunction   = & CGestEcrans::EcranHisto ;
 m_Automate[ECRAN_2a_ListeIgc].m_pFunction= & CGestEcrans::EcranListeIgcFch ;

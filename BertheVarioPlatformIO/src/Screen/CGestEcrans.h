@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 09/01/2025
 ///
 
 #ifndef _GESTECRANS_
@@ -24,6 +24,7 @@ public :
     // etats de l'automate
     enum EtatsAuto
         {
+        ECRAN_Debut ,
         ECRAN_0_Vz ,
         ECRAN_1_Histo ,
         ECRAN_2a_ListeIgc ,
@@ -73,7 +74,7 @@ protected :
             CGestEcrans::EtatsAuto (CGestEcrans::*m_pFunction)() ;
         } ;
 
-    EtatsAuto        m_EtatAuto = ECRAN_0_Vz ;  ///< etat courant de l'automate
+    EtatsAuto        m_EtatAuto = ECRAN_Debut ; //ECRAN_0_Vz ;  ///< etat courant de l'automate
     CEtatAutoFunc    m_Automate[FIN] ;       ///< l'automate
 } ;
 
