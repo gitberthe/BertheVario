@@ -85,6 +85,7 @@ while (display.nextPage());*/
 //display.hibernate();
 //display.powerOff();
 display.setRotation(0) ;
+//display.setFullWindow() ;
 display.setPartialWindow( 0, 0, 200 , 200 );
 }
 
@@ -198,12 +199,15 @@ do
 while (display.nextPage());
 }
 
+// bitmap 8 bits
+GFXcanvas8 canvas( 200 , 200 ) ;
+
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche un rectangle plein
 void CScreen154::DoRect(int x, int y, int w, int h, bool Black )
 {
 auto Color = (Black) ? GxEPD_BLACK : GxEPD_WHITE ;
-display.fillRect(x, y, w, h, Color ); // x y w h
+canvas.fillRect(x, y, w, h, Color ); // x y w h
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -212,9 +216,9 @@ void CScreen154::DoChar(int x, int y, const char * pChar )
 {
 //auto Color = (Black) ? GxEPD_BLACK : GxEPD_WHITE ;
 //display.fillRect(x, y, w, h, Color ); // x y w h
-display.setFont(&FreeMonoBold12pt7b);
-display.setCursor(x, y);
-display.print( pChar );
+canvas.setFont(&FreeMonoBold12pt7b);
+canvas.setCursor(x, y);
+canvas.print( pChar );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -379,176 +383,180 @@ else*/
     }
 
 // selection fonts
-display.setFont(&FreeMonoBold24pt7b);
+canvas.setTextColor( GxEPD_BLACK );
+canvas.fillScreen( GxEPD_WHITE ) ;
 
 // affichage valeur de VZ
 int16_t tbx, tby;
 uint16_t tbw, tbh;
 
-//display.firstPage();
-do
+///////////////////////////////////////////
+// nom de zone aerienne ou termique/terrain
+if ( g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )
     {
-    display.fillScreen( GxEPD_WHITE ) ;
-
-    ///////////////////////////////////////////
-    // nom de zone aerienne ou termique/terrain
-    if ( g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )
+    canvas.setFont(&FreeMonoBold12pt7b);
+    canvas.setCursor(0, 15);
+    canvas.print("*** ERREUR *** * FICHIER HGT*");
+    if ( g_GlobalVar.m_BeepAttenteGVZone )
+        CGlobalVar::BeepError() ;
+    }
+else if ( DansUneZone == ZONE_DEDANS )
+    {
+    canvas.setFont(&FreeMonoBold12pt7b);
+    canvas.setCursor(0, 15);
+    canvas.print(NomZoneDessous.c_str());
+    if ( g_GlobalVar.m_BeepAttenteGVZone )
         {
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0, 15);
-        display.print("*** ERREUR *** * FICHIER HGT*");
-        if ( g_GlobalVar.m_BeepAttenteGVZone )
-            CGlobalVar::BeepError() ;
-        }
-    else if ( DansUneZone == ZONE_DEDANS )
-        {
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0, 15);
-        display.print(NomZoneDessous.c_str());
-        if ( g_GlobalVar.m_BeepAttenteGVZone )
-            {
-            CGlobalVar::BeepOk() ;
-            //delay( 150 ) ;
-            //CGlobalVar::BeepOk() ;
-            }
-        }
-    else if ( LimiteZone == ZONE_LIMITE_ALTI )
-        {
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0, 15);
-        display.print(NomZoneDessous.c_str());
-        //if ( g_GlobalVar.m_BeepAttenteGVZone )
-        //    CGlobalVar::BeepOk() ;
-        }
-    else if ( LimiteZone == ZONE_LIMITE_FRONTIERE )
-        {
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0, 15);
-        display.print(NomZoneLimite.c_str());
-        //if ( g_GlobalVar.m_BeepAttenteGVZone )
-        //    CGlobalVar::BeepOk() ;
-        }
-    else
-        {
-        // thermique
-        if ( DistanceTermic != -1 )
-            LocTermic.Affiche( CapTermic , DistanceTermic ) ;
-        else
-            LocTermic.Affiche( -180. , DistanceMaxMetres ) ;
-
-        /////////////
-        // bandeaux 1
-        const int y1 = 46 ;
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0, y1);
-        display.print(TmpCharNomSite);
-        display.setFont(&FreeMonoBold18pt7b);
-        display.setCursor(155, y1);
-        display.print(TmpCharFinesseSite);
-        }
-
-    /////////////
-    // bandeaux 2
-    const int y2 = 78 ;
-    display.setFont(&FreeMonoBold18pt7b);
-    // duree du vol
-    display.setCursor(0, y2+21);
-    display.print(TmpCharDV);
-    display.setFont(&FreeMonoBold12pt7b);
-    if ( g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ||
-         g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS ||
-         g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL )
-        display.print(" ");
-    else
-        display.print("'");
-    display.drawLine( 0 , 107 , 200 , 107 , GxEPD_BLACK ) ; // -
-    display.drawLine( 90 , 108 , 90 , 85 , GxEPD_BLACK ) ; // |
-    display.drawLine( 200 - 70 , 85 , 200 -70, 107 , GxEPD_BLACK ) ; // |
-    display.drawLine( 90 , 85 , 200 -70, 85 , GxEPD_BLACK ) ; // -
-
-    // derive
-    display.setFont(&FreeMonoBold18pt7b);
-    display.setCursor(59, y2);
-    display.print(TmpCharAngleDerive);
-
-    // cap
-    display.setFont(&FreeMonoBold9pt7b);
-    display.setCursor(135, y2+21);
-    display.print(TmpCharCap);
-    display.setFont(&FreeMonoBold18pt7b);
-    display.print(TmpCharNomCap);
-
-    /////////////
-    // bandeaux 3
-    // VZ / Finesse sol
-    if ( GrosseVz )
-    // ascendance
-        {
-        // align with centered
-        display.getTextBounds( TmpCharVz, 0, 0, &tbx, &tby, &tbw, &tbh);
-        uint16_t xv ;
-        if ( SigneNeg )
-            xv = (display.width() - tbw) / 2 - 20 ;
-        else
-            xv = (display.width() - tbw) / 2 - 30 ;
-
-        display.setFont(&FreeMonoBold24pt7b);
-        display.setCursor(xv, 152);
-        display.print(TmpCharVz);
-
-        auto Color = (SigneNeg) ? GxEPD_BLACK : GxEPD_WHITE ;
-        display.fillRect(0, 108, 200, 8, Color ); // x y w h
-        display.fillRect(0, 160, 200, 8, Color );
-        display.fillRect(0, 116, 20, 44, Color );
-        display.fillRect(180,116, 20, 44, Color );
-        }
-    else
-        {
-        display.setFont(&FreeMonoBold18pt7b);
-        display.setCursor(0 , 147);
-        display.print(TmpCharVz);
-        display.setFont(&FreeMonoBold9pt7b);
-        display.print("m");
-        display.setFont(&FreeMonoBold18pt7b);
-        display.setCursor(110 , 147);
-        display.print(TmpCharFin);
-        display.drawLine( 105 ,110 ,105 , 160 , GxEPD_BLACK ) ;
-
-        auto Color = (SigneNeg) ? GxEPD_BLACK : GxEPD_WHITE ;
-        display.fillRect(0, 108, 105, 7, Color ); // x y w h
-        display.fillRect(0, 157, 105, 7, Color );
-        display.fillRect(0, 108, 7, 49, Color );
-        display.fillRect(98,108, 7, 49, Color );
-        }
-
-    /////////////
-    // bandeaux 4
-    // alti
-    display.drawLine( 0 , 163 , 200 , 163 , GxEPD_BLACK ) ;
-    display.setFont(&FreeMonoBold18pt7b);
-    display.setCursor(0, 195);
-    display.print(TmpCharAlt);
-    display.setFont(&FreeMonoBold9pt7b);
-    display.print("m");
-
-    // vitesse sol/hauteur sol
-    display.setFont(&FreeMonoBold18pt7b);
-    display.setCursor(102, 195);
-    display.drawLine( 100 ,200 ,100 , 163 , GxEPD_BLACK ) ;
-    if ( AffichageHauteurSol )
-        {
-        display.print(TmpCharVitSol);
-        display.setFont(&FreeMonoBold9pt7b);
-        display.print("k");
-        }
-    else
-        {
-        display.print(TmpCharHauteurSol);
-        display.setFont(&FreeMonoBold9pt7b);
-        display.print("m");
+        CGlobalVar::BeepOk() ;
+        //delay( 150 ) ;
+        //CGlobalVar::BeepOk() ;
         }
     }
-while (display.nextPage());
+else if ( LimiteZone == ZONE_LIMITE_ALTI )
+    {
+    canvas.setFont(&FreeMonoBold12pt7b);
+    canvas.setCursor(0, 15);
+    canvas.print(NomZoneDessous.c_str());
+    //if ( g_GlobalVar.m_BeepAttenteGVZone )
+    //    CGlobalVar::BeepOk() ;
+    }
+else if ( LimiteZone == ZONE_LIMITE_FRONTIERE )
+    {
+    canvas.setFont(&FreeMonoBold12pt7b);
+    canvas.setCursor(0, 15);
+    canvas.print(NomZoneLimite.c_str());
+    //if ( g_GlobalVar.m_BeepAttenteGVZone )
+    //    CGlobalVar::BeepOk() ;
+    }
+else
+    {
+    // thermique
+    if ( DistanceTermic != -1 )
+        LocTermic.Affiche( CapTermic , DistanceTermic ) ;
+    else
+        LocTermic.Affiche( -180. , DistanceMaxMetres ) ;
+
+    /////////////
+    // bandeaux 1
+    const int y1 = 46 ;
+    canvas.setFont(&FreeMonoBold12pt7b);
+    canvas.setCursor(0, y1);
+    canvas.print(TmpCharNomSite);
+    canvas.setFont(&FreeMonoBold18pt7b);
+    canvas.setCursor(155, y1);
+    canvas.print(TmpCharFinesseSite);
+    }
+
+/////////////
+// bandeaux 2
+const int y2 = 78 ;
+canvas.setFont(&FreeMonoBold18pt7b);
+// duree du vol
+canvas.setCursor(0, y2+21);
+canvas.print(TmpCharDV);
+canvas.setFont(&FreeMonoBold12pt7b);
+if ( g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ||
+     g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS ||
+     g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL )
+    canvas.print(" ");
+else
+    canvas.print("'");
+canvas.drawLine( 0 , 107 , 200 , 107 , GxEPD_BLACK ) ; // -
+canvas.drawLine( 90 , 108 , 90 , 85 , GxEPD_BLACK ) ; // |
+canvas.drawLine( 200 - 70 , 85 , 200 -70, 107 , GxEPD_BLACK ) ; // |
+canvas.drawLine( 90 , 85 , 200 -70, 85 , GxEPD_BLACK ) ; // -
+
+// derive
+canvas.setFont(&FreeMonoBold18pt7b);
+canvas.setCursor(59, y2);
+canvas.print(TmpCharAngleDerive);
+
+// cap
+canvas.setFont(&FreeMonoBold9pt7b);
+canvas.setCursor(135, y2+21);
+canvas.print(TmpCharCap);
+canvas.setFont(&FreeMonoBold18pt7b);
+canvas.print(TmpCharNomCap);
+
+/////////////
+// bandeaux 3
+// VZ / Finesse sol
+if ( GrosseVz )
+// ascendance
+    {
+    // align with centered
+    canvas.getTextBounds( TmpCharVz, 0, 0, &tbx, &tby, &tbw, &tbh);
+    uint16_t xv ;
+    if ( SigneNeg )
+        xv = (canvas.width() - tbw) / 2 - 20 ;
+    else
+        xv = (canvas.width() - tbw) / 2 - 30 ;
+
+    canvas.setFont(&FreeMonoBold24pt7b);
+    canvas.setCursor(xv, 152);
+    canvas.print(TmpCharVz);
+
+    auto Color = (SigneNeg) ? GxEPD_BLACK : GxEPD_WHITE ;
+    canvas.fillRect(0, 108, 200, 8, Color ); // x y w h
+    canvas.fillRect(0, 160, 200, 8, Color );
+    canvas.fillRect(0, 116, 20, 44, Color );
+    canvas.fillRect(180,116, 20, 44, Color );
+    }
+else
+    {
+    canvas.setFont(&FreeMonoBold18pt7b);
+    canvas.setCursor(0 , 147);
+    canvas.print(TmpCharVz);
+    canvas.setFont(&FreeMonoBold9pt7b);
+    canvas.print("m");
+    canvas.setFont(&FreeMonoBold18pt7b);
+    canvas.setCursor(110 , 147);
+    canvas.print(TmpCharFin);
+    canvas.drawLine( 105 ,110 ,105 , 160 , GxEPD_BLACK ) ;
+
+    auto Color = (SigneNeg) ? GxEPD_BLACK : GxEPD_WHITE ;
+    canvas.fillRect(0, 108, 105, 7, Color ); // x y w h
+    canvas.fillRect(0, 157, 105, 7, Color );
+    canvas.fillRect(0, 108, 7, 49, Color );
+    canvas.fillRect(98,108, 7, 49, Color );
+    }
+
+/////////////
+// bandeaux 4
+// alti
+canvas.drawLine( 0 , 163 , 200 , 163 , GxEPD_BLACK ) ;
+canvas.setFont(&FreeMonoBold18pt7b);
+canvas.setCursor(0, 195);
+canvas.print(TmpCharAlt);
+canvas.setFont(&FreeMonoBold9pt7b);
+canvas.print("m");
+
+// vitesse sol/hauteur sol
+canvas.setFont(&FreeMonoBold18pt7b);
+canvas.setCursor(102, 195);
+canvas.drawLine( 100 ,200 ,100 , 163 , GxEPD_BLACK ) ;
+if ( AffichageHauteurSol )
+    {
+    canvas.print(TmpCharVitSol);
+    canvas.setFont(&FreeMonoBold9pt7b);
+    canvas.print("k");
+    }
+else
+    {
+    canvas.print(TmpCharHauteurSol);
+    canvas.setFont(&FreeMonoBold9pt7b);
+    canvas.print("m");
+    }
+
+// recopie bitmap
+for ( int x = 0 ; x < 200 ; x++ )
+    for ( int y = 0 ; y < 200 ; y++ )
+        display.drawPixel( x , y , canvas.getPixel( x , y ) ) ;
+//display.drawBitmap( 0 , 0 , canvas.getBuffer() , 200 , 200 , GxEPD_WHITE ,GxEPD_BLACK ) ;
+// attente nouvelle page
+while (display.nextPage()) delay(1) ;
+//display.refresh(true) ;
+
 //display.display(false) ;
 //display.displayWindow(0,0,200,200) ;
 //display.refresh(0,0,200,200) ;

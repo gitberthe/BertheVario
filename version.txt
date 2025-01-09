@@ -1,3 +1,6 @@
+le 20250108b :
+ - modification CScreen154::EcranVz() (ecran plus rapide ?).
+
 le 20250108a :
  - desactivation serial dans CScreen154::InitScreen() (ecran plus rapide ?).
 
