@@ -75,7 +75,18 @@ Serial.println( "CZonesAerAll::SetDatePeriode()" ) ;*/
 /// \brief Lecture des 3 fichier, zones, activation et periode.
 void CZonesAerAll::LectureFichiers()
 {
+// ouverture fichier out nom zone
+m_FileNomZoneOut = SD.open(NOM_FCH_OUT_NOM_ZONE, FILE_WRITE , true );
+if (!m_FileNomZoneOut)
+    Serial.print( "erreur creation fichier NOM_FCH_OUT_NOM_ZONE" ) ;
+m_FileNomZoneOut.seek(0) ;
+
+// traitement des zones
 LectureFichierZonesAer() ;
+
+// fermeture fichier nom zone
+m_FileNomZoneOut.close() ;
+
 LectureFichierZonesActive() ;
 LectureFichierZonesPeriode() ;
 }
@@ -89,8 +100,8 @@ char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ;
 
 // ouverture fichier
-m_File = SD.open(NOM_FCH_ZONE_AER);
-if ( !m_File )
+File FileZone = SD.open(NOM_FCH_ZONE_AER);
+if ( !FileZone )
     {
     Serial.println("Failed to open file for reading");
     delete [] TmpChar ;
@@ -98,9 +109,9 @@ if ( !m_File )
     }
 
 // lecture fichier
-while(m_File.available())
+while(FileZone.available())
     {
-    char c = m_File.read() ;
+    char c = FileZone.read() ;
     if ( c != '\n' )
         {
         // si taille chaine maximum on empile plus dans le buffer
@@ -137,7 +148,7 @@ if ( pZone != NULL )
     pZone->FreeFloat() ;
     }
 
-m_File.close();
+FileZone.close();
 
 delete [] TmpChar ;
 }
@@ -181,12 +192,8 @@ else
 // ajout de la nouvelle zone au tableau
 m_ZonesArr[m_NbZones-1] = pZone ;
 
-// recopie nom de zone
-std::string NomAff = pChar ;
-
 // zone protege PROTECT ou FFVL-Prot dans chaine
 bool IsProtect = (strstr( pChar , "PROTECT" ) != NULL) || (strstr( pChar , "FFVL-Prot" ) != NULL) ;
-IsProtect = IsProtect && (strstr( pChar , "m/sol" ) != NULL) ;
 if ( IsProtect )
     {
     // detertimation plafond zone proetegee
@@ -204,41 +211,49 @@ if ( IsProtect )
         pZone->m_HauteurSolZoneProtege = 1000 ;
     }
 
-// zone protegee on enleve "reserve naturelle nationale de la vallee de"
+// pour controle nom zone
+std::string NomOri = pChar ;
+
+// zone protegee on enleve des chaines
 int iespacemax = 3 ;
 char NomRND[]  = "Reserve naturelle nationale de " ;
 char NomRNDV[] = "Reserve naturelle nationale de la Vallee de " ;
 char NomProtect[] = "PROTECT " ;
-if ( strstr( pChar , NomProtect ) )
-    {
-    iespacemax = 1 ;
+char NomFFVL[] = "FFVL-Prot " ;
+// zone "FFVL"
+if ( strstr( pChar , NomFFVL ) && (pChar[0] == 'F') )
+    pChar += strlen( NomFFVL ) ;
+// zone "PROTECT"
+if ( strstr( pChar , NomProtect ) && (pChar[0] == 'P') )
     pChar += strlen( NomProtect ) ;
-    char * pTmpChar = strstr( pChar , NomRNDV ) ;
-    if ( pTmpChar != NULL )
-       pChar += strlen( NomRNDV ) ;
-    else
-        {
-        pTmpChar = strstr( pChar , NomRND ) ;
-        if ( pTmpChar != NULL )
-            pChar += strlen( NomRND ) ;
-        }
-    NomAff = pChar ;
+// reserve naturelle nationale de la vallee
+char * pTmpChar = strstr( pChar , NomRNDV ) ;
+if ( pTmpChar != NULL )
+    {
+    pChar += strlen( NomRNDV ) ;
+    iespacemax = 1 ;
     }
-
-// affichage port serie
-Serial.print( NomAff.c_str() ) ;
-Serial.print( " => " ) ;
+// reserve naturelle nationale de
+pTmpChar = strstr( pChar , NomRND ) ;
+if ( pTmpChar != NULL )
+    {
+    pChar += strlen( NomRND ) ;
+    iespacemax = 1 ;
+    }
+std::string NomAff = pChar ;
 
 // formattage nom de zone 3 champs
 int iespace = 0 ;
 for ( int ic = 0 ; ic < NomAff.size() ; ic++ )
     {
-    if ( NomAff[ic] == '(' )   // premier (
+    // premier (
+    if ( NomAff[ic] == '(' )
         {
         NomAff.resize( ic ) ;
         break ;
         }
-    else if ( (NomAff[ic] == ' ' || NomAff[ic] == '-') && ++iespace >= iespacemax ) // trois champs max
+    // trois champs max
+    else if ( (NomAff[ic] == ' ' || NomAff[ic] == '-') && ++iespace >= iespacemax )
         {
         NomAff.resize( ic ) ;
         break ;
@@ -251,9 +266,10 @@ if ( NomAff[NomAff.size()-1] == ' ' )
 pZone->m_pNomAff = new char [ NomAff.size() + 1 ] ;
 strcpy( pZone->m_pNomAff , NomAff.c_str() ) ;
 
-// affichage port serie
-Serial.print( NomAff.c_str() ) ;
-Serial.println( ";" ) ;
+// affichage nom zone pour controle
+m_FileNomZoneOut.print( NomAff.c_str() ) ;
+m_FileNomZoneOut.print( " <= " ) ;
+m_FileNomZoneOut.println( NomOri.c_str() ) ;
 
 // altitude de basse zone
 pChar = strtok( NULL , ";" ) ;
@@ -333,8 +349,8 @@ char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ;
 
 // ouverture fichier
-m_File = SD.open(NOM_FCH_ZONE_PER);
-if ( !m_File )
+File FilePeriode = SD.open(NOM_FCH_ZONE_PER);
+if ( !FilePeriode )
     {
     Serial.println("Failed to open file for reading");
     delete [] TmpChar ;
@@ -342,9 +358,9 @@ if ( !m_File )
     }
 
 // lecture fichier
-while(m_File.available())
+while(FilePeriode.available())
     {
-    char c = m_File.read() ;
+    char c = FilePeriode.read() ;
     if ( c != '\n' )
         {
         // si taille chaine maximum on empile plus dans le buffer
@@ -363,7 +379,7 @@ while(m_File.available())
 // pour la derniere zone
 TraiteBufferZonePeriode( TmpChar ) ;
 
-m_File.close();
+FilePeriode.close();
 
 delete [] TmpChar ;
 }
@@ -521,8 +537,8 @@ char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ;
 
 // ouverture fichier
-m_File = SD.open(NOM_FCH_ZONE_ACT);
-if ( !m_File )
+File FileAct = SD.open(NOM_FCH_ZONE_ACT);
+if ( !FileAct )
     {
     Serial.println("Failed to open file for reading");
     delete [] TmpChar ;
@@ -530,9 +546,9 @@ if ( !m_File )
     }
 
 // lecture fichier
-while(m_File.available())
+while(FileAct.available())
     {
-    char c = m_File.read() ;
+    char c = FileAct.read() ;
     if ( c != '\n' )
         {
         // si taille chaine maximum on empile plus dans le buffer
@@ -551,7 +567,7 @@ while(m_File.available())
 // pour la derniere zone
 TraiteBufferZoneActive( TmpChar ) ;
 
-m_File.close();
+FileAct.close();
 
 delete [] TmpChar ;
 }

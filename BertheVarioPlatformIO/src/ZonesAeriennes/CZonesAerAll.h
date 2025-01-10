@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 01/12/2024
+/// \date modification : 10/01/2025
 ///
 
 #ifndef _ZONE_AR_ALL_
@@ -13,6 +13,8 @@
 #define NOM_FCH_ZONE_AER "/config/zonesaer.txt"
 #define NOM_FCH_ZONE_PER "/config/zonesper.txt"
 #define NOM_FCH_ZONE_ACT "/config/zonesact.txt"
+
+#define NOM_FCH_OUT_NOM_ZONE "/valid/zonomout.txt"
 
 #define ZONE_EN_DEHORS          0
 #define ZONE_LIMITE_ALTI        1
@@ -50,7 +52,7 @@ public :
     int         m_LimiteZone ;          ///< si en limite de zone
 
 protected :
-    File            m_File ;          ///< fichier de zones
+    File            m_FileNomZoneOut ;///< fichier des noms de zones courts pour veriofiocation transformation
     int             m_NbZones = 0 ;   ///< nombre de zones
     CZoneAer **     m_ZonesArr= NULL ;///< tableau des zones
     int             m_Plafond4Valid ; /// pour validation

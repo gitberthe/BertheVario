@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 30/03/2024
-/// \date modification : 04/11/2024
+/// \date modification : 10/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -29,8 +29,8 @@ if (!m_FileOut)
 m_FileOut.seek(0) ;
 
 // ouverture fichier in
-m_File = SD.open(ZONE_VALID_IN_FCH);
-if ( !m_File )
+File FileIn = SD.open(ZONE_VALID_IN_FCH);
+if ( !FileIn )
     {
     Serial.println("Failed to open file for reading ZONE_VALID_IN_FCH");
     delete [] TmpChar ;
@@ -39,9 +39,9 @@ if ( !m_File )
 
 // lecture fichier in
 m_Ligne = 1 ;
-while(m_File.available())
+while(FileIn.available())
     {
-    char c = m_File.read() ;
+    char c = FileIn.read() ;
     if ( c != '\n' )
         {
         // si taille chaine maximum on empile plus dans le buffer
@@ -61,7 +61,7 @@ while(m_File.available())
 // pour la derniere zone
 TraiteBufferValidZoneIn( TmpChar ) ;
 
-m_File.close();
+FileIn.close();
 m_FileOut.close();
 
 delete [] TmpChar ;

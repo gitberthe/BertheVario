@@ -1,3 +1,8 @@
+le 20250110b :
+ - meilleur nom de zone protegee.
+ - affichage hauteur sol si zone protege lors de 
+   selection/visualisation de zone.
+
 le 20250110a :
  - correction bug nom zone RTBA 143 ou 593.
 

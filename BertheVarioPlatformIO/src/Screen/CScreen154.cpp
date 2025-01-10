@@ -1069,6 +1069,13 @@ do
         display.print( "A week : ");
         display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeWeekEnd : -1 );
 
+        // si zone protegee
+        if ( pZone->IsProtect() )
+            {
+            display.setCursor(0,180);
+            display.print( "hau sol: ");
+            display.print( pZone->GetHauteurSolZoneProtect() );
+            }
         }
     }
 while (display.nextPage());
