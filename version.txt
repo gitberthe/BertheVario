@@ -1,3 +1,6 @@
+le 20250110a :
+ - correction bug nom zone RTBA 143 ou 593.
+
 le 20250109a :
  - modification CScreen154::EcranVz() plus rapide (meilleur temps froid).
 

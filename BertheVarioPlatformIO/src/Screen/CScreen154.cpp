@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 09/01/2025
+/// \date modification : 10/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -551,7 +551,8 @@ else
     }
 
 // attente nouvelle page
-while (display.nextPage()) delay(1) ;
+//while (display.nextPage()) delay(1) ;
+display.display(true) ;
 
 /*// si changement d'ecran si pas en mode V ou G/S
 if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&

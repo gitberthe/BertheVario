@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 04/12/2024
+/// \date modification : 10/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -225,6 +225,10 @@ if ( strstr( pChar , NomProtect ) )
     NomAff = pChar ;
     }
 
+// affichage port serie
+Serial.print( NomAff.c_str() ) ;
+Serial.print( " => " ) ;
+
 // formattage nom de zone 3 champs
 int iespace = 0 ;
 for ( int ic = 0 ; ic < NomAff.size() ; ic++ )
@@ -240,8 +244,16 @@ for ( int ic = 0 ; ic < NomAff.size() ; ic++ )
         break ;
         }
     }
+// on eneleve le dernier blanc
+if ( NomAff[NomAff.size()-1] == ' ' )
+    NomAff.resize(NomAff.size()-1) ;
+
 pZone->m_pNomAff = new char [ NomAff.size() + 1 ] ;
 strcpy( pZone->m_pNomAff , NomAff.c_str() ) ;
+
+// affichage port serie
+Serial.print( NomAff.c_str() ) ;
+Serial.println( ";" ) ;
 
 // altitude de basse zone
 pChar = strtok( NULL , ";" ) ;
@@ -479,7 +491,6 @@ for ( int iz = 0 ; iz < m_NbZones ; iz++ )
             break ;
             }
         }
-
 
     // si deja ecrit dans le fichier
     if ( DejaFait )
