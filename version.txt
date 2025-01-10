@@ -1,3 +1,7 @@
+le 20250110c :
+ - init ecran pour temps froid (congelateur ok).
+ - contournement bug capteur altitude negative.
+
 le 20250110b :
  - meilleur nom de zone protegee.
  - affichage hauteur sol si zone protege lors de 

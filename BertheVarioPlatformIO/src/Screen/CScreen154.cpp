@@ -55,7 +55,7 @@ void CScreen154::InitScreen()
 {
 // init ecran
 //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
-display.init() ;
+display.init(0,false,5,true) ;
 
 //hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
 //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
@@ -87,6 +87,10 @@ while (display.nextPage());*/
 display.setRotation(0) ;
 //display.setFullWindow() ;
 display.setPartialWindow( 0, 0, 200 , 200 );
+
+// raz page precedente
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+display.display(true) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

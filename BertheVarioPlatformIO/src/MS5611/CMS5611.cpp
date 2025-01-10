@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 21/12/2024
+/// \date modification : 10/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -76,7 +76,11 @@ return g_MS5611.getTemperature() ;
 /// \brief Renvoie la mesure d'altitude pression directe du capteur
 float CMS5611::GetAltiPressionCapteurMetres()
 {
-return CalcAltitude( GetPressureMb() * 100. ) ;
+float Alti = CalcAltitude( GetPressureMb() * 100. ) ;
+// byg capteur alti tres basse
+if ( Alti < -500 )
+    Alti = -500 ;
+return Alti ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
