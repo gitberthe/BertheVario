@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 10/01/2025
+/// \date modification : 11/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -193,7 +193,8 @@ else
 m_ZonesArr[m_NbZones-1] = pZone ;
 
 // zone protege PROTECT ou FFVL-Prot dans chaine
-bool IsProtect = (strstr( pChar , "PROTECT" ) != NULL) || (strstr( pChar , "FFVL-Prot" ) != NULL) ;
+bool IsProtect = ( (*pChar == 'P') && (strstr( pChar , "PROTECT" ) != NULL)) ||
+                 ( (*pChar == 'F') && (strstr( pChar , "FFVL-Prot" ) != NULL)) ;
 if ( IsProtect )
     {
     // detertimation plafond zone proetegee
@@ -221,10 +222,10 @@ char NomRNDV[] = "Reserve naturelle nationale de la Vallee de " ;
 char NomProtect[] = "PROTECT " ;
 char NomFFVL[] = "FFVL-Prot " ;
 // zone "FFVL"
-if ( strstr( pChar , NomFFVL ) && (pChar[0] == 'F') )
+if ( (pChar[0] == 'F') && strstr( pChar , NomFFVL ) )
     pChar += strlen( NomFFVL ) ;
 // zone "PROTECT"
-if ( strstr( pChar , NomProtect ) && (pChar[0] == 'P') )
+if ( (pChar[0] == 'P') && strstr( pChar , NomProtect ) )
     pChar += strlen( NomProtect ) ;
 // reserve naturelle nationale de la vallee
 char * pTmpChar = strstr( pChar , NomRNDV ) ;

@@ -77,7 +77,7 @@ return g_MS5611.getTemperature() ;
 float CMS5611::GetAltiPressionCapteurMetres()
 {
 float Alti = CalcAltitude( GetPressureMb() * 100. ) ;
-// byg capteur alti tres basse
+// bug capteur alti tres basse
 if ( Alti < -500 )
     Alti = -500 ;
 return Alti ;

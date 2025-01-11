@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 10/01/2025
+/// \date modification : 11/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -55,7 +55,8 @@ void CScreen154::InitScreen()
 {
 // init ecran
 //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
-display.init(0,false,5,true) ;
+//display.init(0,false,5,true) ;
+display.init(0,false,15,true) ;
 
 //hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
 //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
