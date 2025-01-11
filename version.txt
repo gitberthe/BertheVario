@@ -1,3 +1,6 @@
+le 20250111a2 :
+ - correction documentation.
+
 le 20250111a :
  - modification init ecran pour 15ms reset pulse.
  - modification documentation.
