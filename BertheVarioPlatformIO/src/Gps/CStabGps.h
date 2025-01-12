@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/04/2024
-/// \date modification : 06/09/2024
+/// \date modification : 12/01/2025
 ///
 
 #ifndef _STABGPS_
@@ -19,7 +19,8 @@ public :
 
     void PushGpPos4Stab() ;
     bool IsGpsStable() const ;
-    void RazGpsPos() ;
+    void SetAlwaysStable()
+            { m_AlwaysStable = true ; } ;
 
 private :
 
@@ -33,6 +34,7 @@ private :
     bool  m_pile_full = false ;         ///< si la pile est pleine
     int   m_ipile = 0 ;                 ///< position dans le buffer
     int   m_TaillePile = 0 ;            ///< taille pile stabilisation gps
+    bool  m_AlwaysStable = false ;      ///< lors d'un redemmarage en vols cause stationnaire long
 } ;
 
 #endif

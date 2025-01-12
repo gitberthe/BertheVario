@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 24/08/2024
+/// \date modification : 12/01/2025
 ///
 
 #ifndef _CGPS_
@@ -13,13 +13,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Classe qui gere le gps, le temps de vol et l'enregistrement du fichier
 /// IGC.
-class CGps : public CTrame , public CIgc, public CStabGps
+class CGps : public CTrame , public CIgc
 {
 public :
     void InitGps() ;
     void LanceTacheGps( bool AvecPortSerie ) ;
 
     CFinDeVol        m_FinDeVol ;           /// pour la fin de vol
+    CStabGps         m_StabGps ;
 
 private :
     static const int m_BeepSecondes = 5 ;    ///< secondes de beep

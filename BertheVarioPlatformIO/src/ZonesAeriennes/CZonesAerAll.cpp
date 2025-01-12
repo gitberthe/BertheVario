@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 11/01/2025
+/// \date modification : 12/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -35,6 +35,10 @@ m_ZonesArr = NULL ;
 /// \brief Positionne l'altitude des zones suivant leur periode et la date courante.
 void CZonesAerAll::SetDatePeriode()
 {
+// si date pas encore acquise
+if ( g_GlobalVar.m_Annee < 2010 )
+    return ;
+
 SetDateTU( g_GlobalVar.m_Annee, g_GlobalVar.m_Mois, g_GlobalVar.m_Jour, 0. ) ;
 bool WeekEnd = IsWeekEnd() ;
 float JDCur = GetJD_TU() ;

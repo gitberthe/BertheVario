@@ -1389,7 +1389,7 @@ if ( NbAppButGD == 1 )
     do
         {
         display.setCursor(0,70);
-        display.print( "Confirmation enregistrement point GD" );
+        display.print( "Confirmation enregistrement point gps GD" );
         }
     while (display.nextPage());
     return ECRAN_5_TmaDessous ;
@@ -1399,17 +1399,15 @@ if ( NbAppButGD == 1 )
 if ( NbAppButGD >= 2 )
     {
     char TmpChar[50] ;
+    NbAppButGD = 0 ;
     File FchTerCon = SD.open(TERRAIN_FCH,FILE_APPEND);
     if ( !FchTerCon )
-        {
         return ECRAN_5_TmaDessous ;
-        NbAppButGD = 0 ;
-        }
     FchTerCon.seek(SeekEnd) ;
     // nom
-    sprintf(TmpChar,"pt_loc_%d%d%d    ",(int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro,
-                                       (int)g_GlobalVar.m_TerrainPosCur.m_Lat,
-                                       (int)g_GlobalVar.m_TerrainPosCur.m_Lon) ;
+    sprintf(TmpChar,"pt_%d%d%d    ",(int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro,
+                                       (int)(10*g_GlobalVar.m_TerrainPosCur.m_Lat),
+                                       (int)(10*g_GlobalVar.m_TerrainPosCur.m_Lon)) ;
     FchTerCon.write((const uint8_t*)TmpChar,strlen(TmpChar)) ;
     // altitude
     sprintf( TmpChar , "%d    ", (int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
@@ -1422,13 +1420,13 @@ if ( NbAppButGD >= 2 )
     FchTerCon.write((const uint8_t*)TmpChar,strlen(TmpChar)) ;
     // fermeture fichier
     FchTerCon.close() ;
-    NbAppButGD = 0 ;
+    // affichage
     display.firstPage();
     display.setFont(&FreeMonoBold12pt7b);
     do
         {
         display.setCursor(0,70);
-        display.print( "Enregistrement point" );
+        display.print( "Enregistrement point gps" );
         }
     while (display.nextPage());
     return ECRAN_5_TmaDessous ;

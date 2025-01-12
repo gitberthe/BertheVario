@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 17/11/2024
+/// \date modification : 12/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -47,8 +47,8 @@ g_GlobalVar.m_FinDeVol.InitFinDeVol() ;
 // reset debut de vol vitesse
 g_GlobalVar.m_PileVit.ResetVit() ;
 
-// pour stabilisation gps
-g_GlobalVar.RazGpsPos() ;
+// on ne refait pas la stabilisation gps
+g_GlobalVar.m_StabGps.SetAlwaysStable() ;
 
 // demande d'arret des taches
 g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run = false ;
