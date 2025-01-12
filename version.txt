@@ -1,6 +1,6 @@
 le 20250112b :
  - modification nom points gps memorisable en page TMA dessous.
- - modification CGps et autre pour redemmarage en vol non blocant si long stationnaire.
+ - modification CGps et autre pour redemmarage en vol non bloquant si long stationnaire.
 
 
 le 20250112a :
