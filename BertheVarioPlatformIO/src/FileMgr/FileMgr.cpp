@@ -4,7 +4,7 @@
 /// \brief Fonction du file manager
 ///
 /// \date creation     : 04/04/2024
-/// \date modification : 26/11/2024
+/// \date modification : 12/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -44,7 +44,7 @@ void addFileSystems()
   //const byte SS = 5;  // D8
   //if (SD.begin(SS))
   //{ */
-    if (! pfilemgr->AddFS(SD, "SD-Card", false)) {
+    if (! pfilemgr->AddFS(SD, "SD-Card", true)) {
       Serial.println(F("Adding SD failed."));
     } /*
   //} else {

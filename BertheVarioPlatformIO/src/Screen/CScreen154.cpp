@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 11/01/2025
+/// \date modification : 12/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -1348,7 +1348,11 @@ return ECRAN_2b_ConfirmArchIgc ;
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranTmaDessous()
 {
+static int NbAppButGD = 0 ;
 std::string NomZone = "" ;
+
+if ( IsPageChanged() )
+    NbAppButGD = 0 ;
 
 // zone au dessus
 g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
@@ -1356,25 +1360,97 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
     NomZone = g_GlobalVar.m_ZonesAerAll.m_NomZoneDansDessous ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 
-display.firstPage();
-display.setFont(&FreeMonoBold12pt7b);
-do
-    {
-    // nom zone
-    display.setCursor(0,90);
-    display.print( "Tma Dessus:\n" );
-    display.print( NomZone.c_str() );
-    }
-while (display.nextPage());
-
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
     return ECRAN_0_Vz ;
 
-// si changement d'ecran
+// si changement d'ecran ou non enregistrement point
 if ( BoutonCentre() )
-    return ECRAN_6_Sys ;
+    {
+    if ( NbAppButGD == 0 )
+        return ECRAN_6_Sys ;
+    m_MillisEcran0 = millis() ;
+    NbAppButGD=0 ;
+    }
+
+// pour memorisation point
+if ( BoutonGauche() || BoutonDroit() )
+    {
+    m_MillisEcran0 = millis() ;
+    NbAppButGD++ ;
+    }
+
+// demande confirmation enregistrement point
+if ( NbAppButGD == 1 )
+    {
+    display.firstPage();
+    display.setFont(&FreeMonoBold12pt7b);
+    do
+        {
+        display.setCursor(0,70);
+        display.print( "Confirmation enregistrement point GD" );
+        }
+    while (display.nextPage());
+    return ECRAN_5_TmaDessous ;
+    }
+
+// enregistrement point dans
+if ( NbAppButGD >= 2 )
+    {
+    char TmpChar[50] ;
+    File FchTerCon = SD.open(TERRAIN_FCH,FILE_APPEND);
+    if ( !FchTerCon )
+        {
+        return ECRAN_5_TmaDessous ;
+        NbAppButGD = 0 ;
+        }
+    FchTerCon.seek(SeekEnd) ;
+    // nom
+    sprintf(TmpChar,"pt_loc_%d%d%d    ",(int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro,
+                                       (int)g_GlobalVar.m_TerrainPosCur.m_Lat,
+                                       (int)g_GlobalVar.m_TerrainPosCur.m_Lon) ;
+    FchTerCon.write((const uint8_t*)TmpChar,strlen(TmpChar)) ;
+    // altitude
+    sprintf( TmpChar , "%d    ", (int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
+    FchTerCon.write((const uint8_t*)TmpChar,strlen(TmpChar)) ;
+    // latitude
+    sprintf( TmpChar , "%.5f    ", g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
+    FchTerCon.write((const uint8_t*)TmpChar,strlen(TmpChar)) ;
+    // longitude
+    sprintf( TmpChar , "%.5f\n", g_GlobalVar.m_TerrainPosCur.m_Lon ) ;
+    FchTerCon.write((const uint8_t*)TmpChar,strlen(TmpChar)) ;
+    // fermeture fichier
+    FchTerCon.close() ;
+    NbAppButGD = 0 ;
+    display.firstPage();
+    display.setFont(&FreeMonoBold12pt7b);
+    do
+        {
+        display.setCursor(0,70);
+        display.print( "Enregistrement point" );
+        }
+    while (display.nextPage());
+    return ECRAN_5_TmaDessous ;
+    }
+
+// affichage zone et coordonnees
+display.firstPage();
+display.setFont(&FreeMonoBold12pt7b);
+do
+    {
+    // nom zone
+    display.setCursor(0,20);
+    display.print( "Tma Dessus:\n" );
+    display.println( NomZone.c_str() );
+    display.print( "lat: " ) ;
+    display.println( g_GlobalVar.m_TerrainPosCur.m_Lat , 5 ) ;
+    display.print( "lon:  " ) ;
+    display.println( g_GlobalVar.m_TerrainPosCur.m_Lon , 5 ) ;
+    display.print( "alt:" ) ;
+    display.println( g_GlobalVar.m_TerrainPosCur.m_AltiBaro , 0 ) ;
+    }
+while (display.nextPage());
 
 return ECRAN_5_TmaDessous ;
 }
