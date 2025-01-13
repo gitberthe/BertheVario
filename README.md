@@ -28,3 +28,4 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 **Développement à venir :**
 - comme je suis pas doué en orientation, je vais include un module de guidage rando-vol basé sur des fichiers de trace *.GPX. 
 plus besoin d'une autre montre ou gps ni d'user la batterie du telephone.
+et plus de limitation sur le nombre de traces en memoire non plus.
