@@ -177,8 +177,6 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         beep = false ;
         CGlobalVar::BeepOk() ;
         }
-
-    //delay( DELAY_TRUE ) ;
     }
 
 g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Stopped = true ;

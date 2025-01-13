@@ -27,7 +27,6 @@ ESP32PWM::allocateTimer(3);*/
 /// \brief Lance la tache de gestion du Gps
 void CVarioBeep::LanceTacheVarioBeep()
 {
-//delay(500) ;
 #ifdef _LG_DEBUG_
  Serial.println("lancement tache vario beep");
 #endif
@@ -63,7 +62,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
         }
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //LocalVitVertMS = 0.1 ;
+    //LocalVitVertMS = 4 ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
@@ -73,7 +72,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     if ( LocalVitVertMS <= g_GlobalVar.m_Config.m_vz_seuil_bas )
         {
         g_GlobalVar.beeper( LowFreq , 200 ) ;
-        delay( 200 ) ;
+        delay( 400 ) ;
         continue ;
         }
     // descente normale
@@ -124,7 +123,6 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
 
     // attente
     delay(RecurrenceMs) ;
-
 
     // emmission son
     g_GlobalVar.beeper( Freq, LargeurBeepMs ) ;

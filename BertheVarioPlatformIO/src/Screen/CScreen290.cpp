@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 04/12/2024
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -376,7 +376,7 @@ do
         if ( g_GlobalVar.m_BeepAttenteGVZone )
             {
             CGlobalVar::BeepOk() ;
-            delay( 150 ) ;
+            CGlobalVar::beeper( SOUND_DELAY_ONLY , 150 ) ;
             CGlobalVar::BeepOk() ;
             }
         }

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/01/2025
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -66,12 +66,10 @@ display.init(0,false,15,true) ;
 display.setTextColor( GxEPD_BLACK );
 /*if (display.pages() > 1)
     {
-    delay(100);
     Serial.print("pages = ");
     Serial.print(display.pages());
     Serial.print(" page height = ");
     Serial.println(display.pageHeight());
-    delay(1000);
     }*/
 
 /*
@@ -399,7 +397,7 @@ if ( g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )
     display.setCursor(0, 15);
     display.print("*** ERREUR *** * FICHIER HGT*");
     if ( g_GlobalVar.m_BeepAttenteGVZone )
-        CGlobalVar::BeepError() ;
+        CGlobalVar::BeepError(true) ;
     }
 else if ( DansUneZone == ZONE_DEDANS )
     {
@@ -409,8 +407,8 @@ else if ( DansUneZone == ZONE_DEDANS )
     if ( g_GlobalVar.m_BeepAttenteGVZone )
         {
         CGlobalVar::BeepOk() ;
-        //delay( 150 ) ;
-        //CGlobalVar::BeepOk() ;
+        CGlobalVar::beeper( SOUND_DELAY_ONLY , 150 ) ;
+        CGlobalVar::BeepOk() ;
         }
     }
 else if ( LimiteZone == ZONE_LIMITE_ALTI )
@@ -418,16 +416,16 @@ else if ( LimiteZone == ZONE_LIMITE_ALTI )
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor(0, 15);
     display.print(NomZoneDessous.c_str());
-    //if ( g_GlobalVar.m_BeepAttenteGVZone )
-    //    CGlobalVar::BeepOk() ;
+    if ( g_GlobalVar.m_BeepAttenteGVZone )
+        CGlobalVar::BeepOk() ;
     }
 else if ( LimiteZone == ZONE_LIMITE_FRONTIERE )
     {
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor(0, 15);
     display.print(NomZoneLimite.c_str());
-    //if ( g_GlobalVar.m_BeepAttenteGVZone )
-    //    CGlobalVar::BeepOk() ;
+    if ( g_GlobalVar.m_BeepAttenteGVZone )
+        CGlobalVar::BeepOk() ;
     }
 else
     {

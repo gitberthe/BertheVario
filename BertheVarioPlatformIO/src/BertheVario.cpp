@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 12/01/2025
+/// \date modification : 13/01/2025
 ///
 
-char NumVer[] = "20250112b" ;
+char NumVer[] = "20250113a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -42,7 +42,9 @@ Serial.println("Setup") ;
 //#endif
 
 // beeper init
-g_GlobalVar.InitSpeaker() ;
+//g_GlobalVar.InitSpeaker() ;
+g_GlobalVar.LanceTacheSound() ;
+delay(500) ;
 CGlobalVar::BeepOk() ;
 
 // init alim
@@ -54,9 +56,6 @@ g_GlobalVar.AfficheVoltage() ;
 
 // init boutons
 g_GlobalVar.InitButton() ;
-
-// attente
-//delay(1000);
 
 // init sdcard
 g_GlobalVar.InitSDCard() ;
@@ -215,14 +214,10 @@ if ( g_GlobalVar.m_ModeHttp )
 if ( once )
     {
     once = false ;
-    delay(200);
     CGlobalVar::BeepOk() ;
-    delay(200);
+    CGlobalVar::beeper( SOUND_DELAY_ONLY , 200 );
     CGlobalVar::BeepOk() ;
-    delay(200);
 
-    // tache acquisition termic
-    //g_TermicMap.LancerTacheTermic() ;
     // screen tache de fond calcul
     g_GlobalVar.LancerTacheCalcul() ;
     // tache de mesure % utilisation cpu

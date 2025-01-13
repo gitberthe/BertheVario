@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 12/01/2025
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -125,9 +125,6 @@ digitalWrite(POWER_PIN, POWER_PIN_STATE); // turn on POWER (POWER_PIN_STATE is t
 // Init mesure tension batterie
 pinMode(VOLTAGE_DIVISOR_PIN, INPUT);
 analogReadResolution(12);
-
-// wait for devices power on
-//delay(2000);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -152,12 +149,19 @@ delay (250);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief Permet de generer un son.
-void CGlobalVar::beeper( int frequence , int DurationMs )
+/// \brief Permet de generer un son. Par l'intermediaire du serveur de son.
+/// La tache appelante n'est donc pas bloquée.
+void CGlobalVar::beeper( int frequence , int DurationMs , int Volume )
 {
-g_GlobalVar.m_MutexI2c.PrendreMutex() ;
+/* g_GlobalVar.m_MutexI2c.PrendreMutex() ;
  tone(SPEAKER_PIN, frequence, DurationMs ) ;
-g_GlobalVar.m_MutexI2c.RelacherMutex() ;
+g_GlobalVar.m_MutexI2c.RelacherMutex() ; */
+
+CSoundSvr::StSoundRequest Req ;
+Req.m_Frequence = frequence ;
+Req.m_DelayMs = DurationMs ;
+Req.m_Cycle = Volume ;
+g_GlobalVar.PostSoundRequest( & Req ) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,17 +175,15 @@ g_GlobalVar.beeper( 7000 , 100 ) ;
 /// \brief Fonction statique de signalement d'erreur.
 void CGlobalVar::BeepError(bool small)
 {
-delay( 500 ) ;
 beeper(7000, 300) ;
-delay( 500 ) ;
+beeper( SOUND_DELAY_ONLY , 500 ) ;
 beeper(7000, 300) ;
 if ( small )
     return ;
-delay( 500 ) ;
+beeper( SOUND_DELAY_ONLY , 500 ) ;
 beeper(7000, 300) ;
-delay( 500 ) ;
+beeper( SOUND_DELAY_ONLY , 500 ) ;
 beeper(7000, 300) ;
-delay( 500 ) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

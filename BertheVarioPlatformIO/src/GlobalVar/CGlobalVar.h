@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 20/11/2024
+/// \date modification : 13/01/2025
 ///
 
 #ifndef _GLOBALVAR_
@@ -16,10 +16,10 @@ class CSimuVol ;
 /// \brief Variable globale du projet. Contient CConfigFile m_Config, CMS5611 m_MS5611
 /// , CMpu9250 m_Mpu9250, CZonesAerAll m_ZonesAer et CHgt2Agl m_Hgt2Agl.
 #if ( TYPE_SCREEN == 154 )
- class CGlobalVar : public CGps, public CScreen154, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol
+ class CGlobalVar : public CGps, public CScreen154, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol , public CSoundSvr
 #endif
 #if ( TYPE_SCREEN == 290 )
- class CGlobalVar : public CGps, public CScreen290, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol
+ class CGlobalVar : public CGps, public CScreen290, public CVarioBeep, public CSDCard, public CNumTaskArr, public CFinSol , public CSoundSvr
 #endif
 {
 public :
@@ -75,7 +75,7 @@ public :
 
     static void  DeInit() ;
     static float GetDiffAngle( float AngleA , float AngleB ) ;
-    static void  beeper( int frequence , int DurationMs ) ;
+    static void  beeper( int frequence , int DurationMs , int Volume = VOLUME_MOYEN ) ;
     static void  BeepOk() ;
     static void  BeepError(bool small = false) ;
     static void  Reboot() ;

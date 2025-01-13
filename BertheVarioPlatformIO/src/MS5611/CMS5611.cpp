@@ -172,7 +172,6 @@ if ( Alti > 9999. || isnan(Alti) || Alti < -500. )
      g_MS5611.reset() ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
     InitMs5611() ;
-    //delay( 500 ) ;
     }
 return Alti ;
 }
@@ -196,7 +195,6 @@ void CMS5611::LancerTacheCalculVzCapMag()
 {
 // tache de calcul Vz
 xTaskCreatePinnedToCore(TacheVzCapMag, "MS5611AltiTaskEtMag", VZ_MAG_STACK_SIZE, this, VZ_MAG_PRIORITY,NULL, VZ_MAG_CORE);
-//delay(100) ;
 }
 
 

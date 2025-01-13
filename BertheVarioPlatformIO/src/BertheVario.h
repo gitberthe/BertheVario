@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/01/2025
+/// \date modification : 13/01/2025
 ///
 
 //////////////////
@@ -20,6 +20,9 @@
 #include <MS5611.h>
 #include <MPU9250.h>
 #include <ESPFMfGK.h>
+#include <freertos/queue.h>
+//#include <soc/dac_channel.h>
+//#include <driver/dac.h>
 
 #include <math.h>
 #include <map>
@@ -130,6 +133,7 @@
 #include "Screen/CScreen154.h"
 #include "Screen/CScreen290.h"
 #include "Screen/CLocTermic.h"
+#include "VarioBeep/CSoundSvr.h"
 #include "VarioBeep/CVarioBeep.h"
 #include "SDCard/CSDCard.h"
 #include "GlobalVar/CNbSatDelay.h"
@@ -234,8 +238,14 @@
 #define RELANCE_IGC_PRIORITY   0
 #define RELANCE_IGC_CORE       1
 
+// serveur de son, priorite moyenne
+#define SOUNDSVR_NUM_TASK   10
+#define SOUNDSVR_STACK_SIZE 1500
+#define SOUNDSVR_PRIORITY   10
+#define SOUNDSVR_CORE       1
+
 // nombre total de taches
-#define SIZE_TASK 10
+#define SIZE_TASK 11
 
 #include "GlobalVar/CNumTaskArr.h"
 #include "GlobalVar/CGlobalVar.h"

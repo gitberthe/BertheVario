@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 24/08/2024
-/// \date modification : 26/10/2024
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -80,7 +80,7 @@ if ( DistXY < 30. && DistAlti < 3. && VitesseHorPetite && VitesseVerPetite )
     {
     // bip fin de vol
     CGlobalVar::BeepOk() ;
-    delay(200);
+    CGlobalVar::beeper( SOUND_DELAY_ONLY , 200 );
     CGlobalVar::BeepOk() ;
     return true ;
     }
