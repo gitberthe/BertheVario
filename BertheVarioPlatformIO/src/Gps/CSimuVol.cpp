@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 30/03/2024
-/// \date modification : 10/04/2024
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -128,6 +128,9 @@ while( g_GlobalVar.m_TaskArr[SIMUVOL_NUM_TASK].m_Run )
     LastLon = g_GlobalVar.m_TerrainPosCur.m_Lon ;
     LastAlti= g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
     }
+
+while( true )
+    vTaskDelete(NULL) ;
 }
 
 #endif

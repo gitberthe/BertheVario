@@ -50,6 +50,8 @@ while (g_GlobalVar.m_TaskArr[SERIAL_NUM_TASK].m_Run)
     delay(2) ;
     }
 g_GlobalVar.m_TaskArr[SERIAL_NUM_TASK].m_Stopped = true ;
+while( true )
+    vTaskDelete(NULL) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

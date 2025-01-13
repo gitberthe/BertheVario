@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 01/12/2024
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -129,4 +129,6 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     }
 
 g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Stopped = true ;
+while( true )
+    vTaskDelete(NULL) ;
 }

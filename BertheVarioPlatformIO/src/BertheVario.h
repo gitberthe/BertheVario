@@ -167,6 +167,7 @@
  #include "Gps/CSimuVol.h"
 #endif
 #include "FileMgr/FileMgr.h"
+#include "RandoVol/CRandoVol.h"
 
 ///////////////////////////
 // taches plus affichage //

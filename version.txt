@@ -1,3 +1,7 @@
+le 20250114a :
+ - raz ecran lors reboot.
+ - bouton droit au boot ebauche mode rando-vol.
+
 le 20250113b :
  - modification GetAltiMetres(). Plus de reset m_DiffAltiFchAgl.
    du coup plus de faux depart de vol cause Vz. (a voir Vz départ de vol à la baisse)

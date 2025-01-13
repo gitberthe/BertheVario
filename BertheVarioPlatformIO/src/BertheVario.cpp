@@ -7,7 +7,7 @@
 /// \date modification : 13/01/2025
 ///
 
-char NumVer[] = "20250113b" ;
+char NumVer[] = "20250114a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -129,19 +129,28 @@ g_GlobalVar.m_Mpu9250.Init() ;
 // init port serie GPS
 g_GlobalVar.InitGps() ;
 
-/////////////////
+////////////////////////////////////
 // si calibration capteur magnetique
 if ( g_GlobalVar.BoutonGauche() )
     {
     g_GlobalVar.AfficheCalibreMag() ;
-
     g_GlobalVar.m_Mpu9250.Calibration() ;
-
     CGlobalVar::Reboot() ;
     }
 
 // lancement tache de calcul de la Vz et acquisition cap magnetique
 g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
+
+
+/////////////////////
+// si mode vol-rando
+if ( g_GlobalVar.BoutonDroit() )
+    {
+    g_GlobalVar.m_ModeRandoVol = true ;
+    return ;
+    }
+else
+    g_GlobalVar.m_ModeRandoVol = false ;
 
 // lancement tache gps
 g_GlobalVar.LanceTacheGps(true) ;
@@ -160,53 +169,32 @@ bool once = true ;
 /// \brief fonction loop toujours appelée.
 void loop()
 {
-/*
-// test Hgt2Agl
-// pdd
-float PddLat = 45.772396 ;
-float PddLon = 2.964061  ;
-// vichy
-float ViLat = 46.1239268 ;
-float ViLon = 3.4203712  ;
+// si boucle a ne plus faire
+if ( g_GlobalVar.m_StopLoop )
+    {
+    delay( 100 ) ;
+    return ;
+    }
 
-// aiguille du midi
-float MiLat = 45. + 52./60 + 43./3600. ;
-float MiLon = 6. + 53./60 + 14./3600. ;
-
-// aiguille du midi
-float MbLat = 45.878723 ;
-float MbLon = 6.887614 ;
-
-// aiguille du midi
-float PtLat = 45.885989 ;
-float PtLon = 2.727933 ;
-
-CHgt2Agl Hgt2Agl ;
-int PddAlti = Hgt2Agl.GetGroundZ( PddLon , PddLat ) ;
-int ViAlti = Hgt2Agl.GetGroundZ( ViLon , ViLat ) ;
-int MiAlti = Hgt2Agl.GetGroundZ( MiLon , MiLat ) ;
-int MbAlti = Hgt2Agl.GetGroundZ( MbLon , MbLat ) ;
-int PtAlti = Hgt2Agl.GetGroundZ( PtLon , PtLat ) ;
-
-Serial.println("--------------") ;
-Serial.print("pdd(1465) alti:") ; Serial.println( PddAlti ) ;
-Serial.print("vichy(255) alti:");    Serial.println( ViAlti ) ;
-Serial.print("midi(3842) alti:") ; Serial.println( MiAlti ) ;
-Serial.print("mb(4809) alti:") ; Serial.println( MbAlti ) ;
-Serial.print("pt(686) alti:") ;  Serial.println( PtAlti ) ;
-
-return ; // */
-
-//Serial.println( xPortGetCoreID() ) ;
-
-//Serial.print("Altibaro:");
-//Serial.println( g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
-
-//////////////
-// si mode ftp
+////////////////////
+// si mode http wifi
 if ( g_GlobalVar.m_ModeHttp )
     {
     pfilemgr->handleClient();
+    return ;
+    }
+
+////////////////////
+// si mode rando-vol
+if ( g_GlobalVar.m_ModeRandoVol )
+    {
+    if ( once )
+        {
+        once = false ;
+        g_GlobalVar.InitRandoVol() ;
+        }
+    g_GlobalVar.AfficheRandoVol() ;
+    delay( 1000 ) ;
     return ;
     }
 

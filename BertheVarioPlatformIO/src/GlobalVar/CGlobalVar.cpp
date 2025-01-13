@@ -79,9 +79,15 @@ while( true )
 /// Attention la abort() est bugguee et ne redemarre pas defois
 void CGlobalVar::Reboot()
 {
+g_GlobalVar.StopAll() ;
+
+g_GlobalVar.m_StopLoop  = true ;
+
 g_GlobalVar.BeepError(true) ;
 
-g_GlobalVar.StopAll() ;
+g_GlobalVar.ScreenOff() ;
+
+//delay( 1000 ) ;
 
 ESP.restart();
 

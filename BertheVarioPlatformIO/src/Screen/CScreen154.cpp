@@ -122,9 +122,21 @@ delete [] bitmap ; */
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Raz screen en reboot
 void CScreen154::ScreenOff()
 {
+display.setFullWindow() ;
+
+display.clearScreen() ;
+
+display.firstPage();
+do
+    {
+    //display.fillScreen(GxEPD_BLACK);
+    display.fillScreen(GxEPD_WHITE);
+    }
+while (display.nextPage());
+
 // mise hors tension ecran
 display.powerOff();
 //display.end();
@@ -1449,6 +1461,45 @@ do
 while (display.nextPage());
 
 return ECRAN_5_TmaDessous ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief
+void CScreen154::EcranRandoVol()
+{
+// si gps non operationnel
+if ( ! g_GlobalVar.IsGpsOk() )
+    {
+    CGlobalVar::beeper( 6000 , 300 ) ;
+
+    display.setFullWindow() ;
+
+    display.firstPage();
+    do
+        {
+        //display.fillScreen(GxEPD_BLACK);
+        //display.fillScreen(GxEPD_WHITE);
+
+        // voltage
+        display.setFont(&FreeMonoBold12pt7b);
+        display.setCursor(20, 75);
+        display.print("Acquisition\n      Gps");
+        }
+    while (display.nextPage());
+
+    return ;
+    }
+
+display.firstPage();
+do
+    {
+    // voltage
+    display.setFont(&FreeMonoBold12pt7b);
+    display.setCursor(20, 75);
+    display.print("Gps ok");
+    }
+while (display.nextPage());
+
 }
 
 #endif

@@ -158,6 +158,8 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     }
 
 g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Stopped = true ;
+while( true )
+    vTaskDelete(NULL) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
