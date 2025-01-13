@@ -24,3 +24,7 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - fichier version.txt pour modification apportées aux differentes versions.
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/ESP32 File Manager for Generation Klick ESPFMfGK/src/ESPFMfGKGa.cpp" ligne 6 : crc32.h => CRC32.h
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/MPU9250/MPU9250.h" ligne 85 : 0x06 => 0x02
+
+**développement à venir :**
+- comme je suis pas doué en orientation, je vais include un module de guidage rando-vol basé sur des fichiers de trace *.GPX. 
+plus besoin d'un autre montre ou gps ou d'user la batterie du telephone.
