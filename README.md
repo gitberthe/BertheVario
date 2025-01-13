@@ -26,6 +26,6 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/MPU9250/MPU9250.h" ligne 85 : 0x06 => 0x02
 
 **Développement à venir :**
-- comme je suis pas doué en orientation, je vais include un module de guidage rando-vol basé sur des fichiers de trace *.GPX. 
+- comme je suis pas doué en orientation, je vais inclure un module de guidage rando-vol basé sur des fichiers de trace *.GPX. 
 plus besoin d'une autre montre ou gps ni d'user la batterie du telephone.
 et plus de limitation sur le nombre de traces en memoire non plus.
