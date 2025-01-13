@@ -53,10 +53,10 @@ const int resolution = 8; // Résolution de 8 bits, 256 valeurs possibles
 StSoundRequest SoundRequest ;
 while (g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Run)
     {
-    // attente 10 millisecondes
+    // attente 5 millisecondes
     if( !xQueueReceive(g_GlobalVar.m_queue, &(SoundRequest), (TickType_t)0))
         {
-        delay( 10 ) ;
+        delay( 5 ) ;
         continue ;
         }
 
@@ -67,8 +67,8 @@ while (g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Run)
         g_GlobalVar.m_MutexI2c.PrendreMutex() ;
          ledcSetup( channel , SoundRequest.m_Frequence , resolution ) ;
          ledcAttachPin(SPEAKER_PIN, channel);
-         //ledcWrite(channel,127);    // son maximum 255
-         ledcWrite(channel, SoundRequest.m_Cycle );    // son maximum 255
+         //ledcWrite(channel,127);    // son cycle 255
+         ledcWrite(channel, SoundRequest.m_Cycle );
         g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
         // attente

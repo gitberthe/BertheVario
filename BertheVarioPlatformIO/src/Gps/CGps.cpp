@@ -86,7 +86,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 
     // beep attente gps 'G'
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
-        CGlobalVar::beeper( 1100 , 100 ) ;
+        CGlobalVar::beeper( 1100 , 200 ) ;
 
     #ifdef REBOOT_DEBUG
      break ;
@@ -141,10 +141,11 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         }
 
     // si le gps nest pas stable au moins une fois (10 secondes)
+    // mais on ne le refait pas si second vol, uniquement 1 apres Mise Sous Tension
     #ifndef SIMU_VOL
      g_GlobalVar.m_StabGps.PushGpPos4Stab() ;
      // si pas attente vitesse
-     if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS )
+     if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS && ! g_GlobalVar.m_StabGps.IsAlwaysStable() )
          {
          // beep attente gps 'S'
          if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
@@ -172,9 +173,9 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     g_GlobalVar.m_PileVit.PusGpsVit() ;
     if ( beep && g_GlobalVar.m_BeepAttenteGVZone )
         {
-        CGlobalVar::beeper( 1500 , 100 ) ;
+        CGlobalVar::beeper( 1500 , 200 ) ;
         CGlobalVar::beeper( SOUND_DELAY_ONLY , 200 ) ;
-        CGlobalVar::beeper( 2000 , 100 ) ;
+        CGlobalVar::beeper( 2000 , 200 ) ;
         }
 
     // si debut de vol cause vitesses
@@ -223,7 +224,7 @@ g_GlobalVar.m_HistoVol.m_VzMin =  10 ;
 xTaskCreatePinnedToCore(TacheGpsIgc, "IgcTask", IGC_STACK_SIZE , & g_GlobalVar , IGC_PRIORITY , NULL, IGC_CORE);
 
 // bip debut enregistrement
-CGlobalVar::beeper( 6600 , 100 ) ;
+CGlobalVar::beeper( 7000 , 100 ) ;
 CGlobalVar::beeper( SOUND_DELAY_ONLY , 200 );
 CGlobalVar::beeper( 6800 , 100 ) ;
 CGlobalVar::beeper( SOUND_DELAY_ONLY , 200) ;

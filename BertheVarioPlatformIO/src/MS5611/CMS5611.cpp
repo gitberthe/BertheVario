@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 10/01/2025
+/// \date modification : 13/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -38,7 +38,8 @@ else
 
 // meilleur resolution de mb
 g_MS5611.setOversampling( OSR_ULTRA_HIGH ) ;
-g_MS5611.setCompensation( true ) ;
+//g_MS5611.setOversampling( OSR_HIGH ) ; // bug altitude negative non resolue
+g_MS5611.setCompensation( true ) ; // bug altitude negative non evite si on enleve
 
 g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 }
@@ -77,7 +78,7 @@ return g_MS5611.getTemperature() ;
 float CMS5611::GetAltiPressionCapteurMetres()
 {
 float Alti = CalcAltitude( GetPressureMb() * 100. ) ;
-// bug capteur alti tres basse
+// bug capteur alti tres basse non evite avec ça
 if ( Alti < -500 )
     Alti = -500 ;
 return Alti ;
@@ -106,6 +107,7 @@ float AltiPressForVzArr[DIV_SECONDES+1] ;
 // init des variables alti pression integree
 g_GlobalVar.m_MutexI2c.PrendreMutex() ;
  g_GlobalVar.m_MS5611.Read() ;
+ //delay( 5 ) ;   // delais pour bug altitude tres negative ???
  g_GlobalVar.m_MS5611.m_AltiPressionFiltree = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres() ;
  for ( int i = 0 ; i <= DIV_SECONDES ; i++ )
     AltiPressForVzArr[i] = g_GlobalVar.m_MS5611.m_AltiPressionFiltree ;
@@ -129,6 +131,7 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     // mesures du capteur de pression
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_GlobalVar.m_MS5611.Read() ;
+     //delay( 5 ) ;   // delais pour bug altitude tres negative ???
      float AltiMesCapteur = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres()  ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
@@ -148,6 +151,7 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
 
     // calcul VZ sur x secondes
     float VitVert = AltiPressForVzArr[ 0 ] - AltiPressForVzArr[ DIV_SECONDES ] ;
+    //g_GlobalVar.m_MutexI2c.RelacherMutex() ;    // Vz fausse et declenchement de faux vols non resolus
     #ifndef SIMU_VOL
      g_GlobalVar.m_VitVertMS = VitVert ;
     #endif
@@ -166,7 +170,8 @@ float Alti = m_AltiPressionFiltree + m_DiffAltiFchAgl ;
 if ( Alti > 9999. || isnan(Alti) || Alti < -500. )
     {
     Alti = 9999. ;
-    m_DiffAltiFchAgl = 0. ; // si probleme de diff alti comme reboot en vol
+    //m_DiffAltiFchAgl = 0. ; // si probleme de diff alti comme reboot en vol (impossible)
+                              // supprime le 13/01/2025 cause faux depart de vol Vz
     //CGlobalVar::BeepError() ;
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_MS5611.reset() ;

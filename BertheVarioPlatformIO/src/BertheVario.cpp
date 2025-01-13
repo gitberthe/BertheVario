@@ -7,7 +7,7 @@
 /// \date modification : 13/01/2025
 ///
 
-char NumVer[] = "20250113a" ;
+char NumVer[] = "20250113b" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/04/2024
-/// \date modification : 12/01/2025
+/// \date modification : 13/01/2025
 ///
 
 #ifndef _STABGPS_
@@ -21,6 +21,8 @@ public :
     bool IsGpsStable() const ;
     void SetAlwaysStable()
             { m_AlwaysStable = true ; } ;
+    bool IsAlwaysStable() const
+            { return m_AlwaysStable ; } ;
 
 private :
 

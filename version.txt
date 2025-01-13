@@ -1,3 +1,8 @@
+le 20250113b :
+ - modification GetAltiMetres(). Plus de reset m_DiffAltiFchAgl.
+   du coup plus de faux depart de vol cause Vz. (a voir Vz départ de vol à la baisse)
+ - changement priorite tache son et autres taches.
+
 le 20250113a :
  - creation de CSoundSvr pour que le son ne bloque plus les taches.
  - generation de son par ledcWrite desormais. mutex moins bloquant,

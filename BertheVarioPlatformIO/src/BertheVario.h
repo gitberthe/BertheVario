@@ -84,7 +84,6 @@
 
 #define MPU_STATIC_ADDRESS      (0x68)
 
-
 // boutons
 #define BUTTON_A_PIN 38
 #define BUTTON_B_PIN 37
@@ -173,26 +172,20 @@
 // taches plus affichage //
 ///////////////////////////
 
-// son priorite tres haute non interruptible (bloque/bug les capteurs sans mutex)
+// son vario priorite tres haute non interruptible (bloque/bug les capteurs sans mutex)
 #define VARIOBEEP_NUM_TASK   0
 #define VARIOBEEP_STACK_SIZE 1000
-#define VARIOBEEP_PRIORITY   20
+#define VARIOBEEP_PRIORITY   19
 #define VARIOBEEP_CORE       0
 
-/* // termic basse priorite
-#define TERMIC_NUM_TASK     1
-#define TERMIC_STACK_SIZE   4000
-#define TERMIC_PRIORITY     0
-#define TERMIC_CORE         1 */
-
 // calcul general basse priorite
-#define CALCUL_NUM_TASK     2
+#define CALCUL_NUM_TASK     1
 #define CALCUL_STACK_SIZE   2000
 #define CALCUL_PRIORITY     0
 #define CALCUL_CORE         1
 
 // simuvol basse priorite
-#define SIMUVOL_NUM_TASK     3
+#define SIMUVOL_NUM_TASK     2
 #define SIMUVOL_STACK_SIZE   3000
 #define SIMUVOL_PRIORITY     0
 #define SIMUVOL_CORE         1
@@ -203,49 +196,49 @@
 /////////////////////////////////////////////
 
 // pression calcul Vz, acquisition cap magnetique, priorite tres haute non interruptible
-#define VZ_MAG_NUM_TASK   4
+#define VZ_MAG_NUM_TASK   3
 #define VZ_MAG_STACK_SIZE 2000
 #define VZ_MAG_PRIORITY   20
 #define VZ_MAG_CORE       1
 
 // acquisition gps, priorite haute non interruptible
-#define SERIAL_NUM_TASK         5
+#define SERIAL_NUM_TASK         4
 #define SERIAL_GPS_STACK_SIZE   3000
 #define SERIAL_GPS_PRIORITY     19
 #define SERIAL_GPS_CORE         1
 
 // ecriture igc, priorite moyenne
-#define IGC_NUM_TASK    6
+#define IGC_NUM_TASK    5
 #define IGC_STACK_SIZE  4000
 #define IGC_PRIORITY    10
 #define IGC_CORE        1
 
 // temps de vol / histo, basse priorite
-#define TEMPS_NUM_TASK   7
+#define TEMPS_NUM_TASK   6
 #define TEMPS_STACK_SIZE 4000
 #define TEMPS_PRIORITY   5
 #define TEMPS_CORE       1
 
 // scan des boutons, basse priorite
-#define SCAN_BUTON_NUM_TASK     8
+#define SCAN_BUTON_NUM_TASK     7
 #define SCAN_BUTTON_STACK_SIZE  1000
 #define SCAN_BUTTON_PRIORITY    0
 #define SCAN_BUTTON_CORE        1
 
 // relance pour cause faux depart de vol, tache fugitive.
-#define RELANCE_IGC_NUM_TASK   9
+#define RELANCE_IGC_NUM_TASK   8
 #define RELANCE_IGC_STACK_SIZE 3000
 #define RELANCE_IGC_PRIORITY   0
 #define RELANCE_IGC_CORE       1
 
-// serveur de son, priorite moyenne
-#define SOUNDSVR_NUM_TASK   10
+// serveur de son, priorite tres haute non interruptible
+#define SOUNDSVR_NUM_TASK   9
 #define SOUNDSVR_STACK_SIZE 1500
-#define SOUNDSVR_PRIORITY   10
+#define SOUNDSVR_PRIORITY   19
 #define SOUNDSVR_CORE       1
 
 // nombre total de taches
-#define SIZE_TASK 11
+#define SIZE_TASK 10
 
 #include "GlobalVar/CNumTaskArr.h"
 #include "GlobalVar/CGlobalVar.h"
