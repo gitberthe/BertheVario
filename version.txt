@@ -1,10 +1,16 @@
+le 20250113a :
+ - creation de CSoundSvr pour que le son ne bloque plus les taches.
+ - generation de son par ledcWrite desormais. mutex moins bloquant,
+   et volume modulable.
+ - remise prealarme sonore frontiere zone et proche altitude.
+
 le 20250112b :
  - modification nom points gps memorisable en page TMA dessous.
  - modification CGps et autre pour redemmarage en vol non bloquant si long stationnaire.
 
 
 le 20250112a :
- - ajout memorisation point page TMA dessus.
+ - ajout memorisation point page TMA dessous.
 
 le 20250111a2 :
  - correction documentation.

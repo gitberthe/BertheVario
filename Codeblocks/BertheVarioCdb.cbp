@@ -106,6 +106,8 @@
 		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_display_selection_new_style.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_selection_check.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_wiring_examples.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CSoundSvr.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CSoundSvr.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CVarioBeep.cpp" />
 		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CVarioBeep.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CDate.cpp" />
