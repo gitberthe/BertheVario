@@ -1487,6 +1487,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         }
     while (display.nextPage());
 
+    #ifdef DEBUG_RANDO_VOl
     // bouton droit forcage à vichy
     if ( BoutonDroit() )
         {
@@ -1500,6 +1501,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         // affichage menu
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
         }
+    #endif
     display.setPartialWindow( 0, 0, 200 , 200 );
     // si gps ok
     if ( g_GlobalVar.IsGpsOk() )
@@ -1517,23 +1519,17 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
 
 // si affichage menu
 static int NbMenu = 0 ;
-if ( NbMenu++ < 5 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
+if ( NbMenu++ <= 3 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     {
     // affichage nom de fichier
     display.setCursor(0,20);
-    display.setFont(&FreeMonoBold12pt7b);
+    display.setFont(&FreeMonoBold9pt7b);
     display.firstPage();
     do
         {
-        // nom trace
-        display.println( g_GlobalVar.GetTrackName(0) );
-        display.println( g_GlobalVar.GetTrackName(1) );
-        display.println( g_GlobalVar.GetTrackName(2) );
-        display.println( g_GlobalVar.GetTrackName(3) );
-        display.println( g_GlobalVar.GetTrackName(4) );
-        display.println( g_GlobalVar.GetTrackName(5) );
-        display.println( g_GlobalVar.GetTrackName(6) );
-        display.println( g_GlobalVar.GetTrackName(7) );
+        // nom trace des traces proches
+        for ( int it = 0 ; it < 20 ; it++ )
+            display.println( g_GlobalVar.GetTrackName(it) );
         }
     while (display.nextPage());
     return ;
@@ -1541,16 +1537,80 @@ if ( NbMenu++ < 5 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
 else
     g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
 
+// vetceur de la trace la plus proche
+if ( g_GlobalVar.m_VecGpx.size() == 0 )
+    return ;
+
+const std::vector<CFileGpx::StPoint> & VecPts = g_GlobalVar.m_VecGpx[0]->m_VecTrack ;
+
 // si navigation
-display.setCursor(0,20);
-display.setFont(&FreeMonoBold12pt7b);
+static float Slope = g_GlobalVar.m_VecGpx[0]->m_SlopeMax * 2. ;
+int EchelleMetre = Slope*MilesParDegres*200*UnMileEnMetres ;
+
+// affichage de la carte
+
 display.firstPage();
 do
     {
-    // nom trace
-    display.println( "Navigation" );
+    // on efface
+    //display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+
+    // dessin de la trace
+    for ( int ip = 1 ; ip < VecPts.size() ; ip++ )
+        {
+        CFileGpx::StPoint PtsDeb ;
+        CFileGpx::StPoint PtsFin ;
+        PtsDeb.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip-1].m_Lat ;
+        PtsDeb.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip-1].m_Lon;
+        PtsFin.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip].m_Lat ;
+        PtsFin.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip].m_Lon ;
+
+        PtsDeb.m_Lat /=  Slope ;
+        PtsDeb.m_Lon /= -Slope ;
+        PtsFin.m_Lat /=  Slope ;
+        PtsFin.m_Lon /= -Slope ;
+
+        PtsDeb.m_Lat += 100 ;
+        PtsDeb.m_Lon += 100 ;
+        PtsFin.m_Lat += 100 ;
+        PtsFin.m_Lon += 100 ;
+
+        Serial.println( PtsFin.m_Lon ) ;
+
+        display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
+
+        if ( ip == 1 )
+            display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 2 , GxEPD_BLACK ) ;
+        }
+
+    // dessin du cap nord
+    long xn = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+    long yn =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+
+    display.drawLine( 100 , 100 , xn , yn , GxEPD_BLACK ) ;
+    display.drawCircle( 100 , 100 , 2 , GxEPD_BLACK ) ;
+
+    // nom de la trace
+    display.setFont(&FreeMonoBold9pt7b);
+    display.setCursor(0,10);
+    display.print( g_GlobalVar.m_VecGpx[0]->m_TrackName.c_str() ) ;
+    // zoom + zoom-
+    display.setFont(&FreeMonoBold12pt7b);
+    display.setCursor(0,190);
+    display.print( "z-" ) ;
+    display.setCursor(170,190);
+    display.print( "z+" ) ;
+    // echelle
+    display.setCursor(60,190);
+    display.print( EchelleMetre ) ;
+    display.print( "m2" ) ;
     }
 while (display.nextPage());
+
+if ( g_GlobalVar.BoutonDroit() )
+    Slope /= 2. ;
+if ( g_GlobalVar.BoutonGauche() )
+    Slope *= 2. ;
 }
 
 #endif

@@ -32,9 +32,9 @@ public :
 
     const char * GetTrackName( int i ) const ;
 
+    std::vector<CFileGpx*>  m_VecGpx ;  ///< vecteur des Gpx
+
 private :
     void LanceTacheRandoVol() ;
     void SortGpxFromCurPos() ;
-
-    std::vector<CFileGpx*>  m_VecGpx ;  ///< vecteur des Gpx
 } ;

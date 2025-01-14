@@ -33,7 +33,10 @@ public :
     std::string             m_FileName ;    ///< nom du fichier
     std::vector<StPoint>    m_VecTrack ;    ///< trace de la rando
 
+    float                   m_SlopeMax = 1. ;   ///< echelle du dessin
+    StPoint                 m_Barycenter ;      ///< barycentre de la trace
+
 private :
-    StPoint                 m_Barycenter ;  ///< barycentre de la trace
+    void    TraiteLigne( char * Ligne ) ;
     float                   m_DistFrom ;    ///< distance à un point pour tri menu proche
 } ;

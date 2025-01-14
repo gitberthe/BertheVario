@@ -3,7 +3,11 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - Code C++ Visual Studio/PlateformIO pour alti-vario gps parapente (avec gestion des TMA CTR...).
 - Plateforme Espressif EPS32 Dev Module, TTGO T5, Lilygo v2.4, Arduino (processeur 32bits, bi-core 240mhz).
 
+**GnuVario BerteVario mode vol :**
 <img src="./GnuVario-Firmware-BertheVario.jpg" width="250"/>
+
+**GnuVario BerteVario mode randonnée :**
+<img src="./GnuVario-BertheVario-Rando.jpg" width="250"/>
 
 **Utilisation / description :**
 - documentation utilisateur dans /doc
@@ -24,8 +28,3 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - fichier version.txt pour modification apportées aux differentes versions.
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/ESP32 File Manager for Generation Klick ESPFMfGK/src/ESPFMfGKGa.cpp" ligne 6 : crc32.h => CRC32.h
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/MPU9250/MPU9250.h" ligne 85 : 0x06 => 0x02
-
-**Développement à venir :**
-- comme je suis pas doué en orientation, je vais inclure un module de guidage rando-vol basé sur des fichiers de trace *.GPX. 
-plus besoin d'une autre montre ou gps ni d'user la batterie du telephone.
-et plus de limitation sur le nombre de traces en memoire non plus.

@@ -7,7 +7,7 @@
 /// \date modification : 14/01/2025
 ///
 
-char NumVer[] = "20250114b" ;
+char NumVer[] = "20250114c" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -212,7 +212,7 @@ if ( g_GlobalVar.m_ModeRandoVol )
         g_GlobalVar.InitRandoVol() ;
         }
     g_GlobalVar.AfficheRandoVol() ;
-    delay( 1000 ) ;
+    delay( 300 ) ;
     return ;
     }
 
