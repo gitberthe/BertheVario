@@ -4,9 +4,11 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - Plateforme Espressif EPS32 Dev Module, TTGO T5, Lilygo v2.4, Arduino (processeur 32bits, bi-core 240mhz).
 
 **GnuVario BerteVario mode vol :**
+
 <img src="./GnuVario-Firmware-BertheVario.jpg" width="250"/>
 
 **GnuVario BerteVario mode randonnée :**
+
 <img src="./GnuVario-BertheVario-Rando.jpg" width="250"/>
 
 **Utilisation / description :**
