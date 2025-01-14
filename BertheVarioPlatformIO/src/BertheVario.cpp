@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 14/01/2025
 ///
 
-char NumVer[] = "20250114a" ;
+char NumVer[] = "20250114b" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -60,21 +60,35 @@ g_GlobalVar.InitButton() ;
 // init sdcard
 g_GlobalVar.InitSDCard() ;
 
-// lecture fichier de configuration
-g_GlobalVar.m_Config.LectureFichier() ;
+// boutons
+bool BoutonDroitAppuye = false ;   // mode rando-vol
+bool BoutonCentreAppuye = false ;  // mode wifi
+if ( g_GlobalVar.BoutonDroit() )
+    BoutonDroitAppuye = true ;
+else if ( g_GlobalVar.BoutonCentre() )
+    {
+    BoutonCentreAppuye = true ;
+    // lecture fichier de configuration
+    g_GlobalVar.m_Config.LectureFichier() ;
+    }
+else
+    {
+    // lecture fichier de configuration
+    g_GlobalVar.m_Config.LectureFichier() ;
 
-// lecture fichier terrains
-g_GlobalVar.m_TerrainArr.LireFichierTerrains() ;
+    // lecture fichier terrains
+    g_GlobalVar.m_TerrainArr.LireFichierTerrains() ;
 
-// lecture fichier zones aeriennes
-g_GlobalVar.m_ZonesAerAll.LectureFichiers() ;
+    // lecture fichier zones aeriennes
+    g_GlobalVar.m_ZonesAerAll.LectureFichiers() ;
+    }
 
 // Init BUS I2C
 g_GlobalVar.InitI2C() ;
 
 ////////////////////
 // si mode http wifi
-if ( g_GlobalVar.BoutonCentre() )
+if ( BoutonCentreAppuye )
     {
     // mode ftp pour loop
     g_GlobalVar.m_ModeHttp = true ;
@@ -144,7 +158,11 @@ g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 
 /////////////////////
 // si mode vol-rando
-if ( g_GlobalVar.BoutonDroit() )
+#ifdef DEBUG_RANDO_VOl
+ g_GlobalVar.m_ModeRandoVol = true ;
+ return ;
+#endif
+if ( BoutonDroitAppuye )
     {
     g_GlobalVar.m_ModeRandoVol = true ;
     return ;

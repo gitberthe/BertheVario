@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 14/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -88,6 +88,8 @@ display.setRotation(0) ;
 display.setPartialWindow( 0, 0, 200 , 200 );
 
 // raz page precedente
+display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+display.display(true) ;
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.display(true) ;
 }
@@ -1464,42 +1466,91 @@ return ECRAN_5_TmaDessous ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Affichage de l'ecran rando-vol dans ses etats successifs
 void CScreen154::EcranRandoVol()
 {
-// si gps non operationnel
-if ( ! g_GlobalVar.IsGpsOk() )
+// si inuit rando
+if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
     {
+    // beep
     CGlobalVar::beeper( 6000 , 300 ) ;
 
+    // raz ecran
     display.setFullWindow() ;
-
+    display.setFont(&FreeMonoBold12pt7b);
+    display.setCursor(20, 75);
     display.firstPage();
     do
         {
-        //display.fillScreen(GxEPD_BLACK);
-        //display.fillScreen(GxEPD_WHITE);
-
-        // voltage
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(20, 75);
+        // message
         display.print("Acquisition\n      Gps");
         }
     while (display.nextPage());
 
+    // bouton droit forcage à vichy
+    if ( BoutonDroit() )
+        {
+        // force gps ok
+        g_GlobalVar.ForceGpsOk() ;
+        // vichy
+        g_GlobalVar.m_AltiGps = 254 ;
+        g_GlobalVar.m_TerrainPosCur.m_AltiBaro = 254 ;
+        g_GlobalVar.m_TerrainPosCur.m_Lat = 46.122511 ;
+        g_GlobalVar.m_TerrainPosCur.m_Lon = 3.4050107 ;
+        // affichage menu
+        g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
+        }
+    display.setPartialWindow( 0, 0, 200 , 200 );
+    // si gps ok
+    if ( g_GlobalVar.IsGpsOk() )
+        g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
     return ;
     }
 
+// si nitialisation menu
+if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
+    {
+    g_GlobalVar.LireFichiersGpx() ;
+    g_GlobalVar.m_EtatRando = CRandoVol::AfficheMenu ;
+    return ;
+    }
+
+// si affichage menu
+static int NbMenu = 0 ;
+if ( NbMenu++ < 5 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
+    {
+    // affichage nom de fichier
+    display.setCursor(0,20);
+    display.setFont(&FreeMonoBold12pt7b);
+    display.firstPage();
+    do
+        {
+        // nom trace
+        display.println( g_GlobalVar.GetTrackName(0) );
+        display.println( g_GlobalVar.GetTrackName(1) );
+        display.println( g_GlobalVar.GetTrackName(2) );
+        display.println( g_GlobalVar.GetTrackName(3) );
+        display.println( g_GlobalVar.GetTrackName(4) );
+        display.println( g_GlobalVar.GetTrackName(5) );
+        display.println( g_GlobalVar.GetTrackName(6) );
+        display.println( g_GlobalVar.GetTrackName(7) );
+        }
+    while (display.nextPage());
+    return ;
+    }
+else
+    g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
+
+// si navigation
+display.setCursor(0,20);
+display.setFont(&FreeMonoBold12pt7b);
 display.firstPage();
 do
     {
-    // voltage
-    display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor(20, 75);
-    display.print("Gps ok");
+    // nom trace
+    display.println( "Navigation" );
     }
 while (display.nextPage());
-
 }
 
 #endif

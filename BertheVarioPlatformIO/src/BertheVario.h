@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 14/01/2025
 ///
 
 //////////////////
@@ -55,6 +55,7 @@
 //#define SMALL_VZ_DEBUG
 //#define TMA_DEBUG
 //#define REBOOT_DEBUG
+//#define DEBUG_RANDO_VOl
 
 //#define SIMU_VOL      ///< attention pour le progamme validation simulateur de vol
 
@@ -167,6 +168,7 @@
  #include "Gps/CSimuVol.h"
 #endif
 #include "FileMgr/FileMgr.h"
+#include "RandoVol/CFileGpx.h"
 #include "RandoVol/CRandoVol.h"
 
 ///////////////////////////

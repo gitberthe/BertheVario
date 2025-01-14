@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 14/01/2025
 ///
 
 #ifndef _GLOBALVAR_

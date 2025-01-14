@@ -642,7 +642,7 @@ TriSchellMetzner() ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction de tri de vector.
-bool MySortFunction (const CZoneAer *p1,const CZoneAer *p2)
+bool MySortFunction(const CZoneAer *p1,const CZoneAer *p2)
 {
 return ((*p1)<(*p2));
 }

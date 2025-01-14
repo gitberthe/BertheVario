@@ -1,3 +1,6 @@
+le 20250114b :
+ - menu fichier repertoire SdCard/Gpx.
+
 le 20250114a :
  - raz ecran lors reboot.
  - bouton droit au boot ebauche mode rando-vol.

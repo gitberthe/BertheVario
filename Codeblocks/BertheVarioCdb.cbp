@@ -89,6 +89,8 @@
 		<Unit filename="../BertheVarioPlatformIO/src/MS5611/CMS5611.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Perfmon/esp32_perfmon.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Perfmon/perfmon.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CFileGpx.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CFileGpx.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CRandoVol.cpp" />
 		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CRandoVol.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/SDCard/CSDCard.cpp" />
