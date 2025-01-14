@@ -78,6 +78,7 @@ CFileGpx::StPoint CurPts ;
 CurPts.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat ;
 CurPts.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon ;
 CurPts.m_Alt = g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
+m_VecGpx.reserve( 100 ) ;
 // pour toute la directorie lecture fichier
 while( true )
     {
@@ -110,10 +111,10 @@ while( true )
 
 GpxDir.close() ;
 
-// tri des Gps en distance
+// tri des Gpx en distance
 SortGpxFromCurPos() ;
 
-// relecture premier Gps
+// relecture plus proche Gpx
 if ( m_VecGpx.size() )
     m_VecGpx[0]->LireFichier() ;
 

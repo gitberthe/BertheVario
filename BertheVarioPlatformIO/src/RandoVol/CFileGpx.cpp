@@ -17,7 +17,7 @@ char TmpChar[1000] = "" ;
 
 // raz precedent
 m_VecTrack.clear() ;
-m_VecTrack.reserve( 200 ) ;
+m_VecTrack.reserve( 300 ) ;
 m_TrackName = "" ;
 
 // ouverture fichier
@@ -55,7 +55,7 @@ m_VecTrack.shrink_to_fit() ;
 /// la trace.
 void CFileGpx::SetDistanceFrom( const StPoint PtCur )
 {
-m_DistFrom = 500. ;
+m_DistFrom = 500.*500. ;
 float DeltaLL = 0 ;
 
 m_Barycenter.m_Lat = 0 ;
@@ -65,7 +65,7 @@ for ( int i = 0 ; i < m_VecTrack.size() ; i++ )
     m_Barycenter.m_Lat += m_VecTrack[i].m_Lat ;
     m_Barycenter.m_Lon += m_VecTrack[i].m_Lon ;
 
-    float DistFrom = sqrtf( powf(PtCur.m_Lat-m_VecTrack[i].m_Lat,2.0) + powf(PtCur.m_Lon-m_VecTrack[i].m_Lon,2.0) ) ;
+    float DistFrom = powf(PtCur.m_Lat-m_VecTrack[i].m_Lat,2.0) + powf(PtCur.m_Lon-m_VecTrack[i].m_Lon,2.0) ;
     if ( m_DistFrom > DistFrom )
         m_DistFrom = DistFrom ;
     }
@@ -75,10 +75,12 @@ m_Barycenter.m_Lon /= m_VecTrack.size() ;
 // delta de lat/lon
 for ( int i = 0 ; i < m_VecTrack.size() ; i++ )
     {
-    if ( DeltaLL < fabsf(m_Barycenter.m_Lat - m_VecTrack[i].m_Lat ) )
-        DeltaLL = fabsf(m_Barycenter.m_Lat - m_VecTrack[i].m_Lat ) ;
-    if ( DeltaLL < fabsf(m_Barycenter.m_Lon - m_VecTrack[i].m_Lon ) )
-        DeltaLL = fabsf(m_Barycenter.m_Lon - m_VecTrack[i].m_Lon ) ;
+    float Dist = fabsf(m_Barycenter.m_Lat - m_VecTrack[i].m_Lat) ;
+    if ( DeltaLL < Dist )
+        DeltaLL = Dist ;
+    Dist = fabsf(m_Barycenter.m_Lon - m_VecTrack[i].m_Lon) ;
+    if ( DeltaLL < Dist )
+        DeltaLL = Dist ;
     }
 m_SlopeMax = DeltaLL/200./2. ;
 }
@@ -89,7 +91,7 @@ void CFileGpx::TraiteLigne( char * Ligne )
 {
 StPoint Pts ;
 // nom piste
-if ( strstr( Ligne , "<name>" ) != NULL && m_TrackName == "" )
+if ( m_TrackName == "" && strstr( Ligne , "<name>" ) != NULL )
     {
     strtok( Ligne , "<>" ) ;
     strtok( NULL , "<>" ) ;

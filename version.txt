@@ -1,3 +1,7 @@
+le 20250114e :
+ - optimisation vitesse lecture gpx.
+ - modification valeur echelle metre ecran rando.
+
 le 20250114d :
  - correction bug nom trace gpx.
  - ajout cap gps mode randonnee.

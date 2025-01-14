@@ -1509,7 +1509,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
     return ;
     }
 
-// si nitialisation menu
+// si initialisation menu
 if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     {
     g_GlobalVar.LireFichiersGpx() ;
@@ -1519,7 +1519,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
 
 // si affichage menu
 static int NbMenu = 0 ;
-if ( NbMenu++ <= 3 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
+if ( NbMenu++ < 3 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     {
     // affichage nom de fichier
     display.setCursor(0,20);
@@ -1528,7 +1528,7 @@ if ( NbMenu++ <= 3 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     do
         {
         // nom trace des traces proches
-        for ( int it = 0 ; it < 20 ; it++ )
+        for ( int it = 0 ; it < 10 ; it++ )
             display.println( g_GlobalVar.GetTrackName(it) );
         }
     while (display.nextPage());
@@ -1537,18 +1537,17 @@ if ( NbMenu++ <= 3 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
 else
     g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
 
-// vetceur de la trace la plus proche
+// vecteur de la trace la plus proche
 if ( g_GlobalVar.m_VecGpx.size() == 0 )
     return ;
 
 const std::vector<CFileGpx::StPoint> & VecPts = g_GlobalVar.m_VecGpx[0]->m_VecTrack ;
 
 // si navigation
-static float Slope = g_GlobalVar.m_VecGpx[0]->m_SlopeMax * 2. ;
-int EchelleMetre = Slope*MilesParDegres*200*UnMileEnMetres ;
+static float Slope = g_GlobalVar.m_VecGpx[0]->m_SlopeMax ;
+int EchelleMetre = Slope*MilesParDegres*100*UnMileEnMetres ;
 
-// affichage de la carte
-
+// affichage de la carte gpx
 display.firstPage();
 do
     {
@@ -1590,7 +1589,7 @@ do
     display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
     display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
 
-    // dessin du cap gps derriere
+    // dessin du cap gps
     int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
     int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
 
