@@ -3,11 +3,11 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - Code C++ Visual Studio/PlateformIO pour alti-vario gps parapente (avec gestion des TMA CTR...).
 - Plateforme Espressif EPS32 Dev Module, TTGO T5, Lilygo v2.4, Arduino (processeur 32bits, bi-core 240mhz).
 
-**GnuVario/BerteVario mode vol :**
+**GnuVario/BertheVario mode vol :**
 
 <img src="./GnuVario-Firmware-BertheVario.jpg" width="250"/>
 
-**GnuVario/BerteVario mode randonnée :**
+**GnuVario/BertheVario mode randonnée :**
 
 <img src="./GnuVario-BertheVario-Rando.jpg" width="250"/>
 
