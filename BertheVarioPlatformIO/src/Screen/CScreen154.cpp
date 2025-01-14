@@ -1580,15 +1580,21 @@ do
         display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
 
         if ( ip == 1 )
-            display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 2 , GxEPD_BLACK ) ;
+            display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
         }
 
-    // dessin du cap nord
-    long xn = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-    long yn =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+    // dessin du cap magnetique nord
+    int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+    int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
 
-    display.drawLine( 100 , 100 , xn , yn , GxEPD_BLACK ) ;
-    display.drawCircle( 100 , 100 , 2 , GxEPD_BLACK ) ;
+    display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
+    display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
+
+    // dessin du cap gps derriere
+    int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+    int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+
+    display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
 
     // nom de la trace
     display.setFont(&FreeMonoBold9pt7b);

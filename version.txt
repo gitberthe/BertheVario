@@ -1,3 +1,7 @@
+le 20250114d :
+ - correction bug nom trace gpx.
+ - ajout cap gps mode randonnee.
+ 
 le 20250114c :
  - mode rando-vol operationnel, voir documentation.
  

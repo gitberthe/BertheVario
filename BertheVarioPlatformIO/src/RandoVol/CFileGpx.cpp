@@ -10,13 +10,15 @@
 #include "../BertheVario.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief lit un fichier et remplit la trace
 void CFileGpx::LireFichier()
 {
 char TmpChar[1000] = "" ;
-//m_TrackName = m_FileName ;
 
+// raz precedent
 m_VecTrack.clear() ;
+m_VecTrack.reserve( 200 ) ;
+m_TrackName = "" ;
 
 // ouverture fichier
 File file = SD.open(m_FileName.c_str());
@@ -44,6 +46,8 @@ TraiteLigne( TmpChar ) ;
 
 // fermeture fichier
 file.close() ;
+
+m_VecTrack.shrink_to_fit() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -80,12 +84,12 @@ m_SlopeMax = DeltaLL/200./2. ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Traite une ligne de *.gpx
 void CFileGpx::TraiteLigne( char * Ligne )
 {
 StPoint Pts ;
 // nom piste
-if ( strstr( Ligne , "<name>" ) != NULL )
+if ( strstr( Ligne , "<name>" ) != NULL && m_TrackName == "" )
     {
     strtok( Ligne , "<>" ) ;
     strtok( NULL , "<>" ) ;
