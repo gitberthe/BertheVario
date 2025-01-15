@@ -21,6 +21,7 @@ public :
         InitRando ,
         InitAfficheMenu ,
         AfficheMenu ,
+        InitTrace ,
         Navigation
         } ;
 

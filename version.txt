@@ -1,3 +1,6 @@
+le 20250115b :
+ - prise en compte altitude fichier gpx.
+
 le 20250115a :
  - menu rando selection bouton gauche droite centre.
 

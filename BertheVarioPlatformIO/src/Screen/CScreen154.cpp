@@ -1502,7 +1502,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         /* g_GlobalVar.m_TerrainPosCur.m_Lat = 46.19453 ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 3.14594 ; // */
         // corent
-        g_GlobalVar.m_TerrainPosCur.m_Lat = 45.64608830455222 ;
+        /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.64608830455222 ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 3.1817007064819336 ; // */
         // affichage menu
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
@@ -1532,6 +1532,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     }
 
 // si affichage menu
+static CFileGpx * pFileGpx = NULL ;
 static int NbMenu = 0 ;
 static int selection = 0 ;
 if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
@@ -1571,16 +1572,25 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     while (display.nextPage());
     return ;
     }
-else
+else if ( g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
+    {
+    g_GlobalVar.m_EtatRando = CRandoVol::InitTrace ;
+    return ;
+    }
+
+if ( g_GlobalVar.m_EtatRando == CRandoVol::InitTrace )
+    {
     g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
 
-// vecteur de la trace la plus proche
-if ( selection < 0 || selection >= g_GlobalVar.m_VecGpx.size() )
-    return ;
+    // vecteur de la trace la plus proche
+    if ( selection < 0 || selection >= g_GlobalVar.m_VecGpx.size() )
+        return ;
 
-// relecture fichier selectionné
-CFileGpx * pFileGpx = g_GlobalVar.m_VecGpx[selection] ;
-pFileGpx->LireFichier() ;
+    // relecture fichier selectionné
+    pFileGpx = g_GlobalVar.m_VecGpx[selection] ;
+    pFileGpx->LireFichier(true) ;
+    return ;
+    }
 
 const std::vector<CFileGpx::StPoint> & VecPts = pFileGpx->m_VecTrack ;
 
@@ -1615,7 +1625,7 @@ do
         PtsFin.m_Lat += 100 ;
         PtsFin.m_Lon += 100 ;
 
-        Serial.println( PtsFin.m_Lon ) ;
+        //Serial.println( PtsFin.m_Lon ) ;
 
         display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
 

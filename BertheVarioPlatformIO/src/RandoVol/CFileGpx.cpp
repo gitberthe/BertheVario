@@ -4,14 +4,14 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 14/01/2025
+/// \date modification : 15/01/2025
 ///
 
 #include "../BertheVario.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief lit un fichier et remplit la trace
-void CFileGpx::LireFichier()
+void CFileGpx::LireFichier(bool AvecAlt)
 {
 char TmpChar[1000] = "" ;
 
@@ -38,11 +38,11 @@ while(file.available())
         {
         TmpChar[ic++] = 0 ;
         ic = 0 ;
-        TraiteLigne( TmpChar ) ;
+        TraiteLigne( TmpChar , AvecAlt ) ;
         }
     }
 TmpChar[ic++] = 0 ;
-TraiteLigne( TmpChar ) ;
+TraiteLigne( TmpChar , AvecAlt ) ;
 
 // fermeture fichier
 file.close() ;
@@ -87,9 +87,8 @@ m_SlopeMax = DeltaLL/200./2. ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Traite une ligne de *.gpx
-void CFileGpx::TraiteLigne( char * Ligne )
+void CFileGpx::TraiteLigne( char * Ligne , bool AvecAlt )
 {
-StPoint Pts ;
 // nom piste
 if ( m_TrackName == "" && strstr( Ligne , "<name>" ) != NULL )
     {
@@ -100,13 +99,23 @@ if ( m_TrackName == "" && strstr( Ligne , "<name>" ) != NULL )
 // point de piste
 else if ( strstr( Ligne , "<trkpt " ) != NULL )
     {
+    StPoint Pts ;
     strtok( Ligne , "\"" ) ;
     Pts.m_Lat = atof( strtok( NULL , "\"" ) ) ;
     strtok( NULL , "\"" ) ;
     Pts.m_Lon = atof( strtok( NULL , "\"" ) ) ;
     m_VecTrack.push_back( Pts ) ;
-    Serial.print( Pts.m_Lat ) ;
-    Serial.print( " " ) ;
-    Serial.println( Pts.m_Lon ) ;
+    //Serial.print( Pts.m_Lat ) ;
+    //Serial.print( " " ) ;
+    //Serial.println( Pts.m_Lon ) ;
+    }
+// altitude du dernier point
+else if ( AvecAlt && strstr( Ligne , "<ele>" ) != NULL && m_VecTrack.size() )
+    {
+    StPoint & Pts = m_VecTrack[m_VecTrack.size()-1] ;
+    strtok( Ligne , "<>" ) ;
+    strtok( NULL , "<>" ) ;
+    Pts.m_Alt = atof( strtok( NULL , "<>" ) ) ;
+    //Serial.println( Pts.m_Alt ) ;
     }
 }

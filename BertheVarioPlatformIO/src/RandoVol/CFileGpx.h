@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 14/01/2025
+/// \date modification : 15/01/2025
 ///
 
 #pragma once
@@ -16,12 +16,12 @@ class CFileGpx
 public :
     struct StPoint
         {
-        float m_Lat ;
-        float m_Lon ;
-        int   m_Alt ;
+        float m_Lat = 0 ;
+        float m_Lon = 0 ;
+        float m_Alt = 0 ;
         } ;
 
-    void    LireFichier() ;
+    void    LireFichier(bool AvecAlt = false) ;
     void    SetDistanceFrom( const StPoint PtCur ) ;
 
     bool    operator < ( const CFileGpx & File ) const
@@ -37,6 +37,7 @@ public :
     StPoint                 m_Barycenter ;      ///< barycentre de la trace
 
 private :
-    void    TraiteLigne( char * Ligne ) ;
-    float                   m_DistFrom ;    ///< distance à un point pour tri menu proche
+    void    TraiteLigne( char * Ligne , bool AvecAlt ) ;
+
+    float   m_DistFrom ;    ///< distance à un point pour tri menu proche
 } ;
