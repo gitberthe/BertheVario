@@ -31,7 +31,7 @@ public :
 
     std::string             m_TrackName ;   ///< nom de la trace dans le fichier
     std::string             m_FileName ;    ///< nom du fichier
-    std::vector<StPoint>    m_VecTrack ;    ///< trace de la rando
+    std::vector<StPoint> *  m_pVecTrack = NULL ;    ///< trace de la rando
 
     float                   m_SlopeMax = 1. ;   ///< echelle du dessin
     StPoint                 m_Barycenter ;      ///< barycentre de la trace

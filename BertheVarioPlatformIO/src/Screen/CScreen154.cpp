@@ -1504,6 +1504,12 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         // corent
         /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.64608830455222 ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 3.1817007064819336 ; // */
+        // paillaret
+        /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.49812  ;
+        g_GlobalVar.m_TerrainPosCur.m_Lon = 2.82271 ; // */
+        // pdd
+        g_GlobalVar.m_TerrainPosCur.m_Lat = 45.747387022763235 ;
+        g_GlobalVar.m_TerrainPosCur.m_Lon = 2.972681522369385 ; // */
         // affichage menu
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
         }
@@ -1512,6 +1518,9 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
     // si gps ok
     if ( g_GlobalVar.IsGpsOk() )
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
+
+    // pour vide le bouton droit
+    g_GlobalVar.BoutonDroit() ;
     return ;
     }
 
@@ -1528,6 +1537,8 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     while (display.nextPage());
     g_GlobalVar.LireFichiersGpx() ;
     g_GlobalVar.m_EtatRando = CRandoVol::AfficheMenu ;
+    // pour vide le bouton droit
+    g_GlobalVar.BoutonDroit() ;
     return ;
     }
 
@@ -1572,12 +1583,14 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     while (display.nextPage());
     return ;
     }
+// si fin affichage menu
 else if ( g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     {
     g_GlobalVar.m_EtatRando = CRandoVol::InitTrace ;
     return ;
     }
 
+// di initialisation trace
 if ( g_GlobalVar.m_EtatRando == CRandoVol::InitTrace )
     {
     g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
@@ -1589,85 +1602,161 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitTrace )
     // relecture fichier selectionné
     pFileGpx = g_GlobalVar.m_VecGpx[selection] ;
     pFileGpx->LireFichier(true) ;
+
+    // destruction autres fichiers
+    for ( int ifch = 0 ; ifch < g_GlobalVar.m_VecGpx.size() ; ifch++ )
+        if ( g_GlobalVar.m_VecGpx[ifch] != pFileGpx )
+            delete g_GlobalVar.m_VecGpx[ifch] ;
+    g_GlobalVar.m_VecGpx.clear() ;
+    g_GlobalVar.m_VecGpx.shrink_to_fit() ;
     return ;
     }
 
-const std::vector<CFileGpx::StPoint> & VecPts = pFileGpx->m_VecTrack ;
+const std::vector<CFileGpx::StPoint> & VecPts = *(pFileGpx->m_pVecTrack) ;
 
 // si navigation
 static float Slope = pFileGpx->m_SlopeMax ;
 int EchelleMetre = Slope*MilesParDegres*100*UnMileEnMetres ;
+static int NbInfo = -1 ;
 
-// affichage de la carte gpx
-display.firstPage();
-do
+// demande page info
+if ( g_GlobalVar.BoutonCentre() )
+    NbInfo = 5 ;
+if ( NbInfo < -1 )
+    NbInfo = -1 ;
+
+// page info
+if ( NbInfo-- >= 0 )
     {
-    // on efface
-    //display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    float Altitude = 222 ;
+    float Distance = 1000 ;
 
-    // dessin de la trace
-    for ( int ip = 1 ; ip < VecPts.size() ; ip++ )
-        {
-        CFileGpx::StPoint PtsDeb ;
-        CFileGpx::StPoint PtsFin ;
-        PtsDeb.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip-1].m_Lat ;
-        PtsDeb.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip-1].m_Lon;
-        PtsFin.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip].m_Lat ;
-        PtsFin.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip].m_Lon ;
+    // date
+    char TmpCharDate[35] ;
+    int secondes_date = g_GlobalVar.m_HeureSec ;
+    sprintf( TmpCharDate ,"%02d%02d%02d-%02d:%02d" ,
+            (int)(g_GlobalVar.m_Annee - 2000) ,
+            g_GlobalVar.m_Mois ,
+            g_GlobalVar.m_Jour ,
+            (int) (secondes_date/3600) ,   // heure
+            (int)((secondes_date/60)%60)   // minutes
+            ) ;
 
-        PtsDeb.m_Lat /=  Slope ;
-        PtsDeb.m_Lon /= -Slope ;
-        PtsFin.m_Lat /=  Slope ;
-        PtsFin.m_Lon /= -Slope ;
+    // altitude restante
+    char TmpAltitude[20] ;
+    sprintf( TmpAltitude , "Alt r:  %4.0fm", Altitude) ;
 
-        PtsDeb.m_Lat += 100 ;
-        PtsDeb.m_Lon += 100 ;
-        PtsFin.m_Lat += 100 ;
-        PtsFin.m_Lon += 100 ;
+    // distance restante
+    char TmpDistance[20] ;
+    sprintf( TmpDistance , "Dis r: %5.0fm", Distance) ;
 
-        //Serial.println( PtsFin.m_Lon ) ;
+    // v batterie
+    char TmpCharVB[20] ;
+    sprintf( TmpCharVB ,   "V bat:  %1.2fv", g_GlobalVar.GetVoltage() ) ;
 
-        display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
+    // memoire
+    char TmpCharMem[35] ;
+    sprintf( TmpCharMem ,  "f mem:%6db", (int) esp_get_free_heap_size() ) ;
 
-        if ( ip == 1 )
-            display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
-        }
-
-    // dessin du cap magnetique nord
-    int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-    int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-
-    display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
-    display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
-
-    // dessin du cap gps
-    int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
-    int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
-
-    display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
-
-    // nom de la trace
-    display.setFont(&FreeMonoBold9pt7b);
-    display.setCursor(0,10);
-    display.print( pFileGpx->m_TrackName.c_str() ) ;
-    // zoom + zoom-
     display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor(0,190);
-    display.print( "z-" ) ;
-    display.setCursor(170,190);
-    display.print( "z+" ) ;
-    // echelle
-    display.setCursor(60,190);
-    display.print( EchelleMetre ) ;
-    display.print( "m2" ) ;
-    }
-while (display.nextPage());
+    display.firstPage();
+    do
+        {
+        // date et heure
+        display.setCursor(12, 15);
+        display.print(TmpCharDate) ;
 
-// modification echelle
-if ( g_GlobalVar.BoutonDroit() )
-    Slope /= 2. ;
-if ( g_GlobalVar.BoutonGauche() )
-    Slope *= 2. ;
+        // alti restante
+        display.setCursor(0, 75);
+        display.print(TmpAltitude);
+
+        // distance restance
+        display.setCursor(0, 95);
+        display.print(TmpDistance);
+
+        // memory
+        display.setCursor(0,145);
+        display.print(TmpCharMem);
+
+        // batterie
+        display.setCursor(0,165);
+        display.print(TmpCharVB);
+        }
+    while (display.nextPage());
+    }
+// affichage de la carte gpx
+else
+    {
+    display.firstPage();
+    do
+        {
+        // on efface
+        //display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+
+        // dessin de la trace
+        for ( int ip = 1 ; ip < VecPts.size() ; ip++ )
+            {
+            CFileGpx::StPoint PtsDeb ;
+            CFileGpx::StPoint PtsFin ;
+            PtsDeb.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip-1].m_Lat ;
+            PtsDeb.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip-1].m_Lon;
+            PtsFin.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip].m_Lat ;
+            PtsFin.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip].m_Lon ;
+
+            PtsDeb.m_Lat /=  Slope ;
+            PtsDeb.m_Lon /= -Slope ;
+            PtsFin.m_Lat /=  Slope ;
+            PtsFin.m_Lon /= -Slope ;
+
+            PtsDeb.m_Lat += 100 ;
+            PtsDeb.m_Lon += 100 ;
+            PtsFin.m_Lat += 100 ;
+            PtsFin.m_Lon += 100 ;
+
+            //Serial.println( PtsFin.m_Lon ) ;
+
+            display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
+
+            if ( ip == 1 )
+                display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
+            }
+
+        // dessin du cap magnetique nord
+        int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+        int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+
+        display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
+        display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
+
+        // dessin du cap gps
+        int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+        int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+
+        display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
+
+        // nom de la trace
+        display.setFont(&FreeMonoBold9pt7b);
+        display.setCursor(0,10);
+        display.print( pFileGpx->m_TrackName.c_str() ) ;
+        // zoom + zoom-
+        display.setFont(&FreeMonoBold12pt7b);
+        display.setCursor(0,190);
+        display.print( "z-" ) ;
+        display.setCursor(170,190);
+        display.print( "z+" ) ;
+        // echelle
+        display.setCursor(60,190);
+        display.print( EchelleMetre ) ;
+        display.print( "m2" ) ;
+        }
+    while (display.nextPage());
+
+    // modification echelle
+    if ( g_GlobalVar.BoutonDroit() )
+        Slope /= 2. ;
+    if ( g_GlobalVar.BoutonGauche() )
+        Slope *= 2. ;
+    }
 }
 
 #endif

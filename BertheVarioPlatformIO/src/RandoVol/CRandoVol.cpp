@@ -100,8 +100,8 @@ while( true )
     pFileGpxMem->LireFichier() ;
     pFileGpxMem->SetDistanceFrom( CurPts ) ;
     // destruction trace
-    pFileGpxMem->m_VecTrack.clear() ;
-    pFileGpxMem->m_VecTrack.shrink_to_fit() ;
+    delete pFileGpxMem->m_pVecTrack ;
+    pFileGpxMem->m_pVecTrack = NULL ;
     // ajout du fichier
     m_VecGpx.push_back( pFileGpxMem ) ;
     // fermeture fichier

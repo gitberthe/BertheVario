@@ -7,7 +7,7 @@
 /// \date modification : 15/01/2025
 ///
 
-char NumVer[] = "20250115b" ;
+char NumVer[] = "20250115c" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -164,6 +164,7 @@ g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 #endif
 if ( BoutonDroitAppuye )
     {
+    g_GlobalVar.m_Config.LectureFichier() ;
     g_GlobalVar.m_ModeRandoVol = true ;
     return ;
     }
