@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 14/01/2025
+/// \date modification : 15/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -1497,7 +1497,13 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         g_GlobalVar.m_AltiGps = 254 ;
         g_GlobalVar.m_TerrainPosCur.m_AltiBaro = 254 ;
         g_GlobalVar.m_TerrainPosCur.m_Lat = 46.122511 ;
-        g_GlobalVar.m_TerrainPosCur.m_Lon = 3.4050107 ;
+        g_GlobalVar.m_TerrainPosCur.m_Lon = 3.4050107 ; // */
+        // charroux
+        /* g_GlobalVar.m_TerrainPosCur.m_Lat = 46.19453 ;
+        g_GlobalVar.m_TerrainPosCur.m_Lon = 3.14594 ; // */
+        // corent
+        g_GlobalVar.m_TerrainPosCur.m_Lat = 45.64608830455222 ;
+        g_GlobalVar.m_TerrainPosCur.m_Lon = 3.1817007064819336 ; // */
         // affichage menu
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
         }
@@ -1512,6 +1518,14 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
 // si initialisation menu
 if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     {
+    display.setCursor(5, 75);
+    display.firstPage();
+    do
+        {
+        // message
+        display.print("Lecture *.gpx");
+        }
+    while (display.nextPage());
     g_GlobalVar.LireFichiersGpx() ;
     g_GlobalVar.m_EtatRando = CRandoVol::AfficheMenu ;
     return ;
@@ -1519,17 +1533,40 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
 
 // si affichage menu
 static int NbMenu = 0 ;
-if ( NbMenu++ < 3 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
+static int selection = 0 ;
+if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     {
+    // defilement du menu
+    if ( g_GlobalVar.BoutonDroit() && selection < (g_GlobalVar.m_VecGpx.size()-1) )
+        {
+        NbMenu = 0 ;
+        selection++ ;
+        }
+    if ( g_GlobalVar.BoutonGauche() && selection > 0 )
+        {
+        NbMenu = 0 ;
+        selection-- ;
+        }
+    if ( g_GlobalVar.BoutonCentre() )
+        NbMenu = 10 ;
+
     // affichage nom de fichier
     display.setCursor(0,20);
     display.setFont(&FreeMonoBold9pt7b);
     display.firstPage();
     do
         {
+        char TmpChar[50] ;
         // nom trace des traces proches
+
         for ( int it = 0 ; it < 10 ; it++ )
-            display.println( g_GlobalVar.GetTrackName(it) );
+            {
+            if ( it == selection )
+                sprintf(TmpChar,">%s",g_GlobalVar.GetTrackName(it)) ;
+            else
+                sprintf(TmpChar," %s",g_GlobalVar.GetTrackName(it)) ;
+            display.println( TmpChar );
+            }
         }
     while (display.nextPage());
     return ;
@@ -1538,13 +1575,17 @@ else
     g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
 
 // vecteur de la trace la plus proche
-if ( g_GlobalVar.m_VecGpx.size() == 0 )
+if ( selection < 0 || selection >= g_GlobalVar.m_VecGpx.size() )
     return ;
 
-const std::vector<CFileGpx::StPoint> & VecPts = g_GlobalVar.m_VecGpx[0]->m_VecTrack ;
+// relecture fichier selectionné
+CFileGpx * pFileGpx = g_GlobalVar.m_VecGpx[selection] ;
+pFileGpx->LireFichier() ;
+
+const std::vector<CFileGpx::StPoint> & VecPts = pFileGpx->m_VecTrack ;
 
 // si navigation
-static float Slope = g_GlobalVar.m_VecGpx[0]->m_SlopeMax ;
+static float Slope = pFileGpx->m_SlopeMax ;
 int EchelleMetre = Slope*MilesParDegres*100*UnMileEnMetres ;
 
 // affichage de la carte gpx
@@ -1598,7 +1639,7 @@ do
     // nom de la trace
     display.setFont(&FreeMonoBold9pt7b);
     display.setCursor(0,10);
-    display.print( g_GlobalVar.m_VecGpx[0]->m_TrackName.c_str() ) ;
+    display.print( pFileGpx->m_TrackName.c_str() ) ;
     // zoom + zoom-
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor(0,190);
@@ -1612,6 +1653,7 @@ do
     }
 while (display.nextPage());
 
+// modification echelle
 if ( g_GlobalVar.BoutonDroit() )
     Slope /= 2. ;
 if ( g_GlobalVar.BoutonGauche() )

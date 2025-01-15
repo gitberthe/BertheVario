@@ -1,3 +1,6 @@
+le 20250115a :
+ - menu rando selection bouton gauche droite centre.
+
 le 20250114e :
  - optimisation vitesse lecture gpx.
  - modification valeur echelle metre ecran rando.

@@ -114,9 +114,5 @@ GpxDir.close() ;
 // tri des Gpx en distance
 SortGpxFromCurPos() ;
 
-// relecture plus proche Gpx
-if ( m_VecGpx.size() )
-    m_VecGpx[0]->LireFichier() ;
-
 Serial.println( "lecture Gpx ok" ) ;
 }
