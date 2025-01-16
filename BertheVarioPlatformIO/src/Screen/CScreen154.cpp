@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 15/01/2025
+/// \date modification : 16/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -1505,10 +1505,10 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.64608830455222 ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 3.1817007064819336 ; // */
         // paillaret
-        /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.49812  ;
+        g_GlobalVar.m_TerrainPosCur.m_Lat = 45.49812  ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 2.82271 ; // */
         // pdd
-        g_GlobalVar.m_TerrainPosCur.m_Lat = 45.747387022763235 ;
+        /* g_GlobalVar.m_TerrainPosCur.m_Lat = 45.747387022763235 ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 2.972681522369385 ; // */
         // affichage menu
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
@@ -1590,7 +1590,7 @@ else if ( g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     return ;
     }
 
-// di initialisation trace
+// si initialisation trace
 if ( g_GlobalVar.m_EtatRando == CRandoVol::InitTrace )
     {
     g_GlobalVar.m_EtatRando = CRandoVol::Navigation ;
@@ -1621,21 +1621,33 @@ static int NbInfo = -1 ;
 
 // demande page info
 if ( g_GlobalVar.BoutonCentre() )
-    NbInfo = 5 ;
+    NbInfo = 7 ;
 if ( NbInfo < -1 )
     NbInfo = -1 ;
 
-// page info
+// affichage page info
 if ( NbInfo-- >= 0 )
     {
-    float Altitude = 222 ;
-    float Distance = 1000 ;
+    float AltitudeRest = 222 ;
+    float DistanceRest = 1000 ;
+    float AltitudeFait = 222 ;
+    float DistanceFait = 1000 ;
+
+    // definition point courant
+    CHgt2Agl Hgt2Agl ;
+    CFileGpx::StPoint PtCur ;
+    PtCur.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat ;
+    PtCur.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon ;
+    PtCur.m_Alt = Hgt2Agl.GetGroundZ( PtCur.m_Lon , PtCur.m_Lat ) ;
+
+    // calcul info
+    pFileGpx->GetInfo( PtCur , AltitudeRest , DistanceRest , AltitudeFait , DistanceFait ) ;
 
     // date
     char TmpCharDate[35] ;
     int secondes_date = g_GlobalVar.m_HeureSec ;
-    sprintf( TmpCharDate ,"%02d%02d%02d-%02d:%02d" ,
-            (int)(g_GlobalVar.m_Annee - 2000) ,
+    sprintf( TmpCharDate ,"%04d%02d%02d-%02d:%02d" ,
+            (int)(g_GlobalVar.m_Annee) ,
             g_GlobalVar.m_Mois ,
             g_GlobalVar.m_Jour ,
             (int) (secondes_date/3600) ,   // heure
@@ -1643,12 +1655,17 @@ if ( NbInfo-- >= 0 )
             ) ;
 
     // altitude restante
-    char TmpAltitude[20] ;
-    sprintf( TmpAltitude , "Alt r:  %4.0fm", Altitude) ;
-
+    char TmpAltitudeRest[20] ;
+    sprintf( TmpAltitudeRest , "Alt r:  %4.0fm", AltitudeRest) ;
     // distance restante
-    char TmpDistance[20] ;
-    sprintf( TmpDistance , "Dis r: %5.0fm", Distance) ;
+    char TmpDistanceRest[20] ;
+    sprintf( TmpDistanceRest , "Dis r: %5.0fm", DistanceRest) ;
+    // altitude fait
+    char TmpAltitudeFait[20] ;
+    sprintf( TmpAltitudeFait , "Alt f:  %4.0fm", AltitudeFait) ;
+    // distance restante
+    char TmpDistanceFait[20] ;
+    sprintf( TmpDistanceFait , "Dis f: %5.0fm", DistanceFait) ;
 
     // v batterie
     char TmpCharVB[20] ;
@@ -1663,23 +1680,28 @@ if ( NbInfo-- >= 0 )
     do
         {
         // date et heure
-        display.setCursor(12, 15);
+        display.setCursor(0, 15);
         display.print(TmpCharDate) ;
 
         // alti restante
-        display.setCursor(0, 75);
-        display.print(TmpAltitude);
-
+        display.setCursor(0, 55);
+        display.print(TmpAltitudeRest);
         // distance restance
-        display.setCursor(0, 95);
-        display.print(TmpDistance);
+        display.setCursor(0, 75);
+        display.print(TmpDistanceRest);
+        // alti restante
+        display.setCursor(0,105);
+        display.print(TmpAltitudeFait);
+        // distance restance
+        display.setCursor(0,125);
+        display.print(TmpDistanceFait);
 
         // memory
-        display.setCursor(0,145);
+        display.setCursor(0,165);
         display.print(TmpCharMem);
 
         // batterie
-        display.setCursor(0,165);
+        display.setCursor(0,185);
         display.print(TmpCharVB);
         }
     while (display.nextPage());

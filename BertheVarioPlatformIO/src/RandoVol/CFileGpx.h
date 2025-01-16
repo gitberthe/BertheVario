@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 15/01/2025
+/// \date modification : 16/01/2025
 ///
 
 #pragma once
@@ -14,6 +14,8 @@
 class CFileGpx
 {
 public :
+    ~CFileGpx() ;
+
     struct StPoint
         {
         float m_Lat = 0 ;
@@ -23,6 +25,7 @@ public :
 
     void    LireFichier(bool AvecAlt = false) ;
     void    SetDistanceFrom( const StPoint PtCur ) ;
+    void    GetInfo( const StPoint PtCur , float & AltitudeRest , float & DistanceRest , float & AltitudeFait , float & DistanceFait ) ;
 
     bool    operator < ( const CFileGpx & File ) const
                 { return m_DistFrom < File.m_DistFrom ; } ;
@@ -38,6 +41,7 @@ public :
 
 private :
     void    TraiteLigne( char * Ligne , bool AvecAlt ) ;
+    float    DistanceMetre( StPoint PtA , StPoint PtB ) const ;
 
     float   m_DistFrom ;    ///< distance à un point pour tri menu proche
 } ;

@@ -4,10 +4,18 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 15/01/2025
+/// \date modification : 16/01/2025
 ///
 
 #include "../BertheVario.h"
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief
+CFileGpx::~CFileGpx()
+{
+if ( m_pVecTrack != NULL )
+    delete m_pVecTrack ;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief lit un fichier et remplit la trace
@@ -86,7 +94,7 @@ for ( int i = 0 ; i < (*m_pVecTrack).size() ; i++ )
     if ( DeltaLL < Dist )
         DeltaLL = Dist ;
     }
-m_SlopeMax = DeltaLL/200./2. ;
+m_SlopeMax = DeltaLL/200. ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -122,4 +130,59 @@ else if ( AvecAlt && strstr( Ligne , "<ele>" ) != NULL && m_pVecTrack->size() )
     Pts.m_Alt = atof( strtok( NULL , "<>" ) ) ;
     //Serial.println( Pts.m_Alt ) ;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Renvoie la distance et l'altitude restante en metres.
+void CFileGpx::GetInfo( const StPoint PtCur , float & AltitudeRest , float & DistanceRest , float & AltitudeFait , float & DistanceFait )
+{
+// determination du pt proche
+int iPtProche = 0 ;
+float DistProche = 360. ;
+for ( int i = 0 ; i < m_pVecTrack->size() ; i++ )
+    {
+    float Dist = powf(PtCur.m_Lat-(*m_pVecTrack)[i].m_Lat,2.0) + powf(PtCur.m_Lon-(*m_pVecTrack)[i].m_Lon,2.0) ;
+    if ( DistProche > Dist )
+        {
+        DistProche = Dist ;
+        iPtProche = i ;
+        }
+    }
+
+// init altitude distance restante
+DistanceRest = DistanceMetre( PtCur , (*m_pVecTrack)[iPtProche] ) ;
+AltitudeRest = (*m_pVecTrack)[iPtProche].m_Alt - PtCur.m_Alt ;
+if ( AltitudeRest < 0 )
+    AltitudeRest = 0 ;
+for ( int i = iPtProche + 1 ; i < m_pVecTrack->size() ; i++ )
+    {
+    DistanceRest += DistanceMetre( (*m_pVecTrack)[i-1] , (*m_pVecTrack)[i] ) ;
+    float AltiPos = (*m_pVecTrack)[i].m_Alt - (*m_pVecTrack)[i-1].m_Alt ;
+    if ( AltiPos > 0. )
+        AltitudeRest += AltiPos ;
+    }
+
+// init altitude distance fait
+DistanceFait = DistanceMetre( PtCur , (*m_pVecTrack)[iPtProche] ) ;
+AltitudeFait = PtCur.m_Alt - (*m_pVecTrack)[iPtProche].m_Alt ;
+if ( AltitudeFait < 0 )
+    AltitudeFait = 0 ;
+for ( int i = 0 ; i < iPtProche && i < m_pVecTrack->size() ; i++ )
+    {
+    DistanceFait += DistanceMetre( (*m_pVecTrack)[i+1] , (*m_pVecTrack)[i] ) ;
+    float AltiPos = (*m_pVecTrack)[i+1].m_Alt - (*m_pVecTrack)[i].m_Alt ;
+    if ( AltiPos > 0. )
+        AltitudeFait += AltiPos ;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Renvoie la distance entre points en metres
+float CFileGpx::DistanceMetre( StPoint PtA , StPoint PtB ) const
+{
+float DelLat = PtA.m_Lat-PtB.m_Lat ;
+float DelLon = PtA.m_Lon-PtB.m_Lon ;
+float DelAlt = PtA.m_Alt-PtB.m_Alt ;
+float Dist = powf(DelLat*MilesParDegres*UnMileEnMetres,2.) + powf(DelLon*MilesParDegres*UnMileEnMetres,2.) + powf(DelAlt,2.) ;
+return sqrtf(Dist) ;
 }
