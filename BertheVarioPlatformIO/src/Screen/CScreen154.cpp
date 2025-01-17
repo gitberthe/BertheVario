@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 16/01/2025
+/// \date modification : 17/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -56,7 +56,8 @@ void CScreen154::InitScreen()
 // init ecran
 //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
 //display.init(0,false,5,true) ;
-display.init(0,false,15,true) ;
+//display.init(0,false,15,true) ;
+display.init(0,false,25,true) ;
 
 //hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
 //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
@@ -78,7 +79,7 @@ display.firstPage();
 do  {
     display.fillScreen(GxEPD_WHITE);
     }
-while (display.nextPage());*/
+display.display(true);*/
 
 // mise hors tension ecran
 //display.hibernate();
@@ -105,13 +106,13 @@ void CScreen154::ScreenRaz()
 do  {
     display.fillScreen(GxEPD_BLACK);
     }
-while (display.nextPage()); */
+display.display(true); */
 
-display.firstPage();
-do  {
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    {
     //display.fillScreen(GxEPD_WHITE);
     }
-while (display.nextPage());
+display.display(true);
 //display.powerOff();
 //display.refresh() ;
 
@@ -131,13 +132,15 @@ display.setFullWindow() ;
 
 display.clearScreen() ;
 
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+display.display(true);
+delay( 500 ) ;
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     //display.fillScreen(GxEPD_BLACK);
-    display.fillScreen(GxEPD_WHITE);
+    //display.fillScreen(GxEPD_WHITE);
     }
-while (display.nextPage());
+display.display(true);
 
 // mise hors tension ecran
 display.powerOff();
@@ -148,38 +151,35 @@ display.powerOff();
 /// \brief Affichage de "Connect to Wifi".
 void CScreen154::AfficheConnectWifi()
 {
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     // connect to wifi
     display.setFont(&FreeMonoBold9pt7b);
     display.setCursor(10, 100);
     display.print("Connect to Wifi");
     }
-while (display.nextPage());
+display.display(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Affichage de la calibration magnetique.
 void CScreen154::AfficheCalibreMag()
 {
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     // voltage
     display.setFont(&FreeMonoBold9pt7b);
     display.setCursor(0, 75);
     display.print("Calibre magnitude (8)");
     }
-while (display.nextPage());
+display.display(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Affichage de l'adresse ip.
 void CScreen154::AfficheWifi(char * IpAdress)
 {
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     // voltage
     display.setFont(&FreeMonoBold9pt7b);
@@ -188,7 +188,7 @@ do
     display.print(IpAdress);
     display.print(":8080");
     }
-while (display.nextPage());
+display.display(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -201,8 +201,7 @@ float Voltage = g_GlobalVar.GetVoltage() ;
 char TmpChar[10] ;
 sprintf( TmpChar , "%1.2fv", Voltage ) ;
 
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     // voltage
     display.setFont(&FreeMonoBold24pt7b);
@@ -213,7 +212,7 @@ do
     display.setCursor(5, 150);
     display.print(NumVer);
     }
-while (display.nextPage());
+display.display(true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -612,14 +611,14 @@ g_GlobalVar.m_HistoVol.LectureFichiers() ;
 // si pas de fichiers histo
 if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
     {
-    display.firstPage();
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     display.setFont(&FreeMonoBold12pt7b);
-    do  {
+        {
         // message
         display.setCursor(0, 20);
         display.print("0 histo");
         }
-    while (display.nextPage());
+    display.display(true);
 
     goto fin_histo ;
     }
@@ -649,9 +648,8 @@ sprintf( TmpCharDistMax , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_Dis
 char TmpCharTV[20] ;
 sprintf( TmpCharTV , " %3d'", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_TempsDeVol ) ;
 
-display.firstPage();
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-do
     {
     // nom fch igc
     display.setCursor(0, y);
@@ -706,7 +704,7 @@ do
     display.setCursor(110, y);
     display.print(TmpCharTV);
     }
-while (display.nextPage());
+display.display(true);
 
 // fin de la fonction
 fin_histo :
@@ -766,19 +764,23 @@ sprintf( TmpCharDate ,"%02d%02d%02d-%02d:%02d" ,
     ) ;
 
 // v batterie
-char TmpCharVB[20] ;
+char TmpCharVB[30] ;
 sprintf( TmpCharVB , "%1.2fv", g_GlobalVar.GetVoltage() ) ;
 
 // cap magnetique
-char TmpCharCM[20] ;
-sprintf( TmpCharCM , " %3dd", (int)g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
+char TmpCharCM[30] ;
+sprintf( TmpCharCM , "Cap m :   %3dd", (int)g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
 
 // alti baro
-char TmpAltiBaro[20] ;
-sprintf( TmpAltiBaro , "%4.0fm", g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
+char TmpAltiBaro[30] ;
+sprintf( TmpAltiBaro , "Al bar:  %4.0fm", g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
+
+// temperature
+char TmpCharTemp[30] ;
+sprintf( TmpCharTemp , "Temp  :  %4.1fd", g_GlobalVar.m_MS5611.GetTemperatureDegres() ) ;
 
 // memoire
-char TmpCharMem[20] ;
+char TmpCharMem[30] ;
 
 // pourcantage utilisation cpu
 g_GlobalVar.m_MutexCore.PrendreMutex() ;
@@ -786,55 +788,53 @@ g_GlobalVar.m_MutexCore.PrendreMutex() ;
  int cpu1 = g_GlobalVar.m_PercentCore1 ;
 g_GlobalVar.m_MutexCore.RelacherMutex() ;
 
-display.firstPage();
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-do
-    {
-    // date et heure
-    display.setCursor(12, 15);
-    display.print(TmpCharDate) ;
 
-    // alti baro
-    display.setCursor(0, 55);
-    display.print("Al bar:");
-    display.setCursor(110,55);
-    display.print(TmpAltiBaro);
+// date et heure
+display.setCursor(12, 15);
+display.print(TmpCharDate) ;
 
-    // Cap Magnetique
-    display.setCursor(0, 75);
-    display.print("Cap m :");
-    display.setCursor(110,75);
-    display.print(TmpCharCM);
+// alti baro
+display.setCursor(0, 35);
+display.print(TmpAltiBaro);
 
-    // core 0 usage
-    display.setCursor(0,95);
-    display.print("core 0:   ");
-    display.print(cpu0) ;
-    display.print("%");
+// Cap Magnetique
+display.setCursor(0, 55);
+display.print(TmpCharCM);
 
-    // core 1 usage
-    display.setCursor(0,115);
-    display.print("core 1:   ");
-    display.print(cpu1) ;
-    display.print("%");
+// temperature
+display.setCursor(0, 75);
+display.print(TmpCharTemp);
 
-    // memory
-    display.setCursor(0,135);
-    sprintf( TmpCharMem , "f mem:%6db", (int) esp_get_free_heap_size() ) ;
-    display.print(TmpCharMem);
+// core 0 usage
+display.setCursor(0, 95);
+display.print("core 0:    ");
+display.print(cpu0) ;
+display.print("%");
 
-    // batterie
-    display.setCursor(0,155);
-    display.print("V bat :");
-    display.setCursor(110,155);
-    display.print(TmpCharVB);
+// core 1 usage
+display.setCursor(0,115);
+display.print("core 1:    ");
+display.print(cpu1) ;
+display.print("%");
 
-    // firmware
-    display.setCursor(0, 195);
-    display.print("fir:");
-    display.print(NumVer);
-    }
-while (display.nextPage());
+// memory
+display.setCursor(0,135);
+sprintf( TmpCharMem , "f mem :%6db", (int) esp_get_free_heap_size() ) ;
+display.print(TmpCharMem);
+
+// batterie
+display.setCursor(0,155);
+display.print("V bat :  ");
+display.print(TmpCharVB);
+
+// firmware
+display.setCursor(0, 195);
+display.print("fir:");
+display.print(NumVer);
+
+display.display(true) ;
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
@@ -877,9 +877,8 @@ else
     m_MillisEcran0 = millis() ;
     }
 
-display.firstPage();
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-do
     {
     // Mod
     display.setCursor(0, 20);
@@ -891,7 +890,7 @@ do
     display.setCursor(0, 140);
     display.print(Value.c_str()) ;
     }
-while (display.nextPage());
+display.display(true);
 
 bool BoutonCent = BoutonCentre() ;
 bool BoutonGau  = BoutonGauche() ;
@@ -1027,9 +1026,8 @@ if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
             VecZone2Mod.push_back( VecAffZones[iz] ) ;
     }
 
-display.firstPage();
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-do
     {
     // titre
     if ( VecZone2Mod.size() == 0 )
@@ -1095,7 +1093,7 @@ do
             }
         }
     }
-while (display.nextPage());
+display.display(true);
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
@@ -1177,8 +1175,7 @@ for ( long iz = 0 ; iz < NbZones ; iz++ )
 char TmpTitre[15] ;
 sprintf( TmpTitre , "%2d B. Cen. Mo." , g_GlobalVar.m_ZonesAerAll.GetNbZones() ) ;
 
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     // titre
     display.setFont(&FreeMonoBold12pt7b);
@@ -1212,7 +1209,7 @@ do
             }
         }
     }
-while (display.nextPage());
+display.display(true);
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
@@ -1257,8 +1254,7 @@ for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
     TotalMin += VecTempsIgc[ifch] ;
 
 char TmpChar[25] ;
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     display.setFont(&FreeMonoBold12pt7b);
 
@@ -1278,7 +1274,7 @@ do
     display.setCursor( 0, y_cursor + 25 );
     display.print( TmpChar ) ;
     }
-while (display.nextPage());
+display.display(true);
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
@@ -1317,15 +1313,14 @@ CGestEcrans::EtatsAuto CScreen154::EcranConfimeArchIgcFch()
 // titre
 char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n  Bouton GD" ;
 
-display.firstPage();
-do
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     // titre
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor( 0, 20 );
     display.print( TmpChar ) ;
     }
-while (display.nextPage());
+display.display(true);
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
@@ -1396,14 +1391,13 @@ if ( BoutonGauche() || BoutonDroit() )
 // demande confirmation enregistrement point
 if ( NbAppButGD == 1 )
     {
-    display.firstPage();
     display.setFont(&FreeMonoBold12pt7b);
-    do
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
         {
         display.setCursor(0,70);
         display.print( "Confirmation enregistrement point gps GD" );
         }
-    while (display.nextPage());
+    display.display(true);
     return ECRAN_5_TmaDessous ;
     }
 
@@ -1433,21 +1427,19 @@ if ( NbAppButGD >= 2 )
     // fermeture fichier
     FchTerCon.close() ;
     // affichage
-    display.firstPage();
     display.setFont(&FreeMonoBold12pt7b);
-    do
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
         {
         display.setCursor(0,70);
         display.print( "Enregistrement point gps" );
         }
-    while (display.nextPage());
+    display.display(true);
     return ECRAN_5_TmaDessous ;
     }
 
 // affichage zone et coordonnees
-display.firstPage();
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-do
     {
     // nom zone
     display.setCursor(0,20);
@@ -1460,7 +1452,7 @@ do
     display.print( "alt:" ) ;
     display.println( g_GlobalVar.m_TerrainPosCur.m_AltiBaro , 0 ) ;
     }
-while (display.nextPage());
+display.display(true);
 
 return ECRAN_5_TmaDessous ;
 }
@@ -1479,13 +1471,12 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
     display.setFullWindow() ;
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor(20, 75);
-    display.firstPage();
-    do
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
         {
         // message
         display.print("Acquisition\n      Gps");
         }
-    while (display.nextPage());
+    display.display(true);
 
     #ifdef DEBUG_RANDO_VOl
     // bouton droit forcage à vichy
@@ -1528,13 +1519,12 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
 if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     {
     display.setCursor(5, 75);
-    display.firstPage();
-    do
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
         {
         // message
         display.print("Lecture *.gpx");
         }
-    while (display.nextPage());
+    display.display(true);
     g_GlobalVar.LireFichiersGpx() ;
     g_GlobalVar.m_EtatRando = CRandoVol::AfficheMenu ;
     // pour vide le bouton droit
@@ -1565,8 +1555,7 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     // affichage nom de fichier
     display.setCursor(0,20);
     display.setFont(&FreeMonoBold9pt7b);
-    display.firstPage();
-    do
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
         {
         char TmpChar[50] ;
         // nom trace des traces proches
@@ -1580,7 +1569,7 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
             display.println( TmpChar );
             }
         }
-    while (display.nextPage());
+    display.display(true);
     return ;
     }
 // si fin affichage menu
@@ -1626,8 +1615,12 @@ if ( NbInfo < -1 )
     NbInfo = -1 ;
 
 // affichage page info
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 if ( NbInfo-- >= 0 )
     {
+    display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+
     float AltitudeRest = 222 ;
     float DistanceRest = 1000 ;
     float AltitudeFait = 222 ;
@@ -1656,122 +1649,122 @@ if ( NbInfo-- >= 0 )
 
     // altitude restante
     char TmpAltitudeRest[20] ;
-    sprintf( TmpAltitudeRest , "Alt r:  %4.0fm", AltitudeRest) ;
+    sprintf( TmpAltitudeRest , "Alt r:   %4.0fm", AltitudeRest) ;
     // distance restante
     char TmpDistanceRest[20] ;
-    sprintf( TmpDistanceRest , "Dis r: %5.0fm", DistanceRest) ;
+    sprintf( TmpDistanceRest , "Dis r:  %5.0fm", DistanceRest) ;
     // altitude fait
     char TmpAltitudeFait[20] ;
-    sprintf( TmpAltitudeFait , "Alt f:  %4.0fm", AltitudeFait) ;
+    sprintf( TmpAltitudeFait , "Alt f:   %4.0fm", AltitudeFait) ;
     // distance restante
     char TmpDistanceFait[20] ;
-    sprintf( TmpDistanceFait , "Dis f: %5.0fm", DistanceFait) ;
+    sprintf( TmpDistanceFait , "Dis f:  %5.0fm", DistanceFait) ;
+
+    // temperature
+    char TmpCharTemp[30] ;
+    sprintf( TmpCharTemp , "Temp :   %4.1fd", g_GlobalVar.m_MS5611.GetTemperatureDegres() ) ;
+
 
     // v batterie
     char TmpCharVB[20] ;
-    sprintf( TmpCharVB ,   "V bat:  %1.2fv", g_GlobalVar.GetVoltage() ) ;
+    sprintf( TmpCharVB ,   "V bat:   %1.2fv", g_GlobalVar.GetVoltage() ) ;
 
     // memoire
     char TmpCharMem[35] ;
-    sprintf( TmpCharMem ,  "f mem:%6db", (int) esp_get_free_heap_size() ) ;
+    sprintf( TmpCharMem ,  "f mem: %6db", (int) esp_get_free_heap_size() ) ;
 
     display.setFont(&FreeMonoBold12pt7b);
-    display.firstPage();
-    do
-        {
-        // date et heure
-        display.setCursor(0, 15);
-        display.print(TmpCharDate) ;
 
-        // alti restante
-        display.setCursor(0, 55);
-        display.print(TmpAltitudeRest);
-        // distance restance
-        display.setCursor(0, 75);
-        display.print(TmpDistanceRest);
-        // alti restante
-        display.setCursor(0,105);
-        display.print(TmpAltitudeFait);
-        // distance restance
-        display.setCursor(0,125);
-        display.print(TmpDistanceFait);
+    // date et heure
+    display.setCursor(0, 15);
+    display.print(TmpCharDate) ;
 
-        // memory
-        display.setCursor(0,165);
-        display.print(TmpCharMem);
+    // alti restante
+    display.setCursor(0, 55);
+    display.print(TmpAltitudeRest);
+    // distance restance
+    display.setCursor(0, 75);
+    display.print(TmpDistanceRest);
+    // alti restante
+    display.setCursor(0,105);
+    display.print(TmpAltitudeFait);
+    // distance restance
+    display.setCursor(0,125);
+    display.print(TmpDistanceFait);
 
-        // batterie
-        display.setCursor(0,185);
-        display.print(TmpCharVB);
-        }
-    while (display.nextPage());
+    // temperature
+    display.setCursor(0,155);
+    display.print(TmpCharTemp);
+
+    // memory
+    display.setCursor(0,175);
+    display.print(TmpCharMem);
+
+    // batterie
+    display.setCursor(0,195);
+    display.print(TmpCharVB);
     }
 // affichage de la carte gpx
 else
     {
-    display.firstPage();
-    do
+    // dessin de la trace
+    for ( int ip = 1 ; ip < VecPts.size() ; ip++ )
         {
-        // on efface
-        //display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+        CFileGpx::StPoint PtsDeb ;
+        CFileGpx::StPoint PtsFin ;
+        PtsDeb.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip-1].m_Lat ;
+        PtsDeb.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip-1].m_Lon;
+        PtsFin.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip].m_Lat ;
+        PtsFin.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip].m_Lon ;
 
-        // dessin de la trace
-        for ( int ip = 1 ; ip < VecPts.size() ; ip++ )
-            {
-            CFileGpx::StPoint PtsDeb ;
-            CFileGpx::StPoint PtsFin ;
-            PtsDeb.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip-1].m_Lat ;
-            PtsDeb.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip-1].m_Lon;
-            PtsFin.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip].m_Lat ;
-            PtsFin.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip].m_Lon ;
+        PtsDeb.m_Lat /=  Slope ;
+        PtsDeb.m_Lon /= -Slope ;
+        PtsFin.m_Lat /=  Slope ;
+        PtsFin.m_Lon /= -Slope ;
 
-            PtsDeb.m_Lat /=  Slope ;
-            PtsDeb.m_Lon /= -Slope ;
-            PtsFin.m_Lat /=  Slope ;
-            PtsFin.m_Lon /= -Slope ;
+        PtsDeb.m_Lat += 100 ;
+        PtsDeb.m_Lon += 100 ;
+        PtsFin.m_Lat += 100 ;
+        PtsFin.m_Lon += 100 ;
 
-            PtsDeb.m_Lat += 100 ;
-            PtsDeb.m_Lon += 100 ;
-            PtsFin.m_Lat += 100 ;
-            PtsFin.m_Lon += 100 ;
+        //Serial.println( PtsFin.m_Lon ) ;
 
-            //Serial.println( PtsFin.m_Lon ) ;
+        display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
 
-            display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
+        display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 1 , GxEPD_BLACK ) ;
+        if ( ip == 1 )
+            display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
 
-            if ( ip == 1 )
-                display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
-            }
-
-        // dessin du cap magnetique nord
-        int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-        int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-
-        display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
-        display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
-
-        // dessin du cap gps
-        int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
-        int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
-
-        display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
-
-        // nom de la trace
-        display.setFont(&FreeMonoBold9pt7b);
-        display.setCursor(0,10);
-        display.print( pFileGpx->m_TrackName.c_str() ) ;
-        // zoom + zoom-
-        display.setFont(&FreeMonoBold12pt7b);
-        display.setCursor(0,190);
-        display.print( "z-" ) ;
-        display.setCursor(170,190);
-        display.print( "z+" ) ;
-        // echelle
-        display.setCursor(60,190);
-        display.print( EchelleMetre ) ;
-        display.print( "m2" ) ;
         }
-    while (display.nextPage());
+
+    // dessin du cap magnetique nord
+    int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+    int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+
+    display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
+    display.drawCircle( 100 , 100 , 4 , GxEPD_BLACK ) ;
+    display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
+
+    // dessin du cap gps
+    int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+    int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+
+    display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
+
+    // nom de la trace
+    display.setFont(&FreeMonoBold9pt7b);
+    display.setCursor(0,10);
+    display.print( pFileGpx->m_TrackName.c_str() ) ;
+    // zoom + zoom-
+    display.setFont(&FreeMonoBold12pt7b);
+    display.setCursor(0,190);
+    display.print( "z-" ) ;
+    display.setCursor(170,190);
+    display.print( "z+" ) ;
+    // echelle
+    display.setCursor(60,190);
+    display.print( EchelleMetre ) ;
+    display.print( "m2" ) ;
 
     // modification echelle
     if ( g_GlobalVar.BoutonDroit() )
@@ -1779,6 +1772,8 @@ else
     if ( g_GlobalVar.BoutonGauche() )
         Slope *= 2. ;
     }
+
+display.display(true);
 }
 
 #endif

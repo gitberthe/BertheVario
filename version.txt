@@ -1,3 +1,8 @@
+le 20250117a :
+ - temperature page sys.
+ - [vz_igc_ms] à 0,5 par défaut.
+ - gestion affichage different.
+  
 le 20250116a :
  - page info rando bouton centre.
  

@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 20/11/2024
+/// \date modification : 17/01/2025
 ///
 
 #ifndef _CMS5611_
@@ -30,12 +30,12 @@ public :
     friend CTrame ;
 
     float GetAltiMetres() ;             ///< alti pression filtree recalee alti gps en debut de vol
+    float GetTemperatureDegres() ;
 
 private :
     void  Read() ;
     float GetPressureMb() ;
     float GetAltiPressionCapteurMetres() ;
-    float GetTemperatureDegres() ;
 
     float m_AltiPressionFiltree ;       ///< altitude pression filtree
     float m_DiffAltiFchAgl = 0 ;        ///< difference avec alti fichier agl
