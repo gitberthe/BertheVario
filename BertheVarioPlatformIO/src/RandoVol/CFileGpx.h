@@ -4,10 +4,12 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 16/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #pragma once
+
+#define SLOPE_MAX_DIV 200
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fichier Gpx de rando-vol. Avec son integration au GnuVario
@@ -36,12 +38,13 @@ public :
     std::string             m_FileName ;    ///< nom du fichier
     std::vector<StPoint> *  m_pVecTrack = NULL ;    ///< trace de la rando
 
-    float                   m_SlopeMax = 1. ;   ///< echelle du dessin
-    StPoint                 m_Barycenter ;      ///< barycentre de la trace
+    float       m_SlopeMax = 1. ;       ///< echelle du dessin
+    StPoint     m_Barycenter ;          ///< barycentre de la trace
+    float       m_DistFrom ;            ///< distance à un point pour tri menu proche
+    bool        m_PtTerConnu = false ;  ///< point de terrain connu
 
 private :
     void    TraiteLigne( char * Ligne , bool AvecAlt ) ;
-    float    DistanceMetre( StPoint PtA , StPoint PtB ) const ;
+    float   DistanceMetre( StPoint PtA , StPoint PtB ) const ;
 
-    float   m_DistFrom ;    ///< distance à un point pour tri menu proche
 } ;

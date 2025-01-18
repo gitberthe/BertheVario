@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 17/03/2024
-/// \date modification : 01/04/2024
+/// \date modification : 18/01/2025
 ///
 
 #ifndef _TERRAINCONNU_
@@ -45,6 +45,10 @@ public :
     void  LireFichierTerrains() ;
     void  CalcTerrainPlusProche() ;
     const CLocTerrain * GetTerrainProche( float & Finesse ) ;
+    const CLocTerrain * GetData(int it) const
+            { return m_pTerrainsArr[it] ; } ;
+    int   GetSize() const
+            { return m_Size ; } ;
 
 private :
     CLocTerrain **  m_pTerrainsArr = NULL ; ///< tableau des terrains + le decollage

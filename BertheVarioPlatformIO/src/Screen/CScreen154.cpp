@@ -1564,22 +1564,21 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     if ( g_GlobalVar.BoutonCentre() )
         NbMenu = 10 ;
 
-    // affichage nom de fichier
+    // affichage nom de piste
     display.setCursor(0,20);
     display.setFont(&FreeMonoBold9pt7b);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        {
-        char TmpChar[50] ;
-        // nom trace des traces proches
 
-        for ( int it = 0 ; it < 10 ; it++ )
-            {
-            if ( it == selection )
-                sprintf(TmpChar,">%s",g_GlobalVar.GetTrackName(it)) ;
-            else
-                sprintf(TmpChar," %s",g_GlobalVar.GetTrackName(it)) ;
-            display.println( TmpChar );
-            }
+    char TmpChar[50] ;
+    // nom trace des traces proches
+
+    for ( int it = 0 ; it < 10 ; it++ )
+        {
+        if ( it == selection )
+            sprintf(TmpChar,">%s",g_GlobalVar.GetTrackName(it)) ;
+        else
+            sprintf(TmpChar," %s",g_GlobalVar.GetTrackName(it)) ;
+        display.println( TmpChar );
         }
     display.display(true);
     return ;
@@ -1600,9 +1599,10 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitTrace )
     if ( selection < 0 || selection >= g_GlobalVar.m_VecGpx.size() )
         return ;
 
-    // relecture fichier selectionné
+    // relecture fichier selectionné si pas terrain connu
     pFileGpx = g_GlobalVar.m_VecGpx[selection] ;
-    pFileGpx->LireFichier(true) ;
+    if ( ! pFileGpx->m_PtTerConnu )
+        pFileGpx->LireFichier(true) ;
 
     // destruction autres fichiers
     for ( int ifch = 0 ; ifch < g_GlobalVar.m_VecGpx.size() ; ifch++ )
@@ -1751,8 +1751,25 @@ else
         display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 1 , GxEPD_BLACK ) ;
         if ( ip == 1 )
             display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
-
         }
+
+    // guidage point terrain connu
+    if ( VecPts.size() == 1 )
+        {
+        CFileGpx::StPoint PtsTerCon ;
+        PtsTerCon.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[0].m_Lat ;
+        PtsTerCon.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[0].m_Lon;
+
+        PtsTerCon.m_Lat /=  Slope ;
+        PtsTerCon.m_Lon /= -Slope ;
+
+        PtsTerCon.m_Lat += 100 ;
+        PtsTerCon.m_Lon += 100 ;
+
+        display.drawCircle( PtsTerCon.m_Lon , PtsTerCon.m_Lat , 1 , GxEPD_BLACK ) ;
+        display.drawCircle( PtsTerCon.m_Lon , PtsTerCon.m_Lat , 3 , GxEPD_BLACK ) ;
+        }
+
 
     // dessin du cap magnetique nord
     int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;

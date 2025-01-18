@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 13/01/2025
-/// \date modification : 14/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -61,7 +61,8 @@ return "--" ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief lit les fichiers Gpx, positionne la distance au point courant,
+/// \brief lit les fichiers Gpx, positionne la distance au point courant;
+/// Lit aussi le fichier terconnu.txt
 /// tri en distance et ne garde que le plus proche
 void CRandoVol::LireFichiersGpx()
 {
@@ -79,7 +80,8 @@ CurPts.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat ;
 CurPts.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon ;
 CurPts.m_Alt = g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
 m_VecGpx.reserve( 100 ) ;
-// pour toute la directorie lecture fichier
+///////////////////////////////////////////////////
+// pour toute la directorie lecture des fichier gpx
 while( true )
     {
     // ouverture fichier
@@ -108,8 +110,46 @@ while( true )
     SdFileGpx.close() ;
     Serial.println( pFileGpxMem->m_FileName.c_str() ) ;
     }
-
 GpxDir.close() ;
+
+/////////////////////////////////
+// lecture fichier terrain connus
+CTerrainsConnu TerrainsConnu ;
+TerrainsConnu.LireFichierTerrains() ;
+for ( int it = 0 ; it < TerrainsConnu.GetSize() ; it++ )
+    {
+    CFileGpx * pFileGpxMem = new CFileGpx ;
+    const CLocTerrain * pTerrain = TerrainsConnu.GetData(it) ;
+    // nom
+    pFileGpxMem->m_TrackName = "pt-" ,
+    pFileGpxMem->m_TrackName += pTerrain->m_Nom ;
+    Serial.println ( pFileGpxMem->m_TrackName.c_str() ) ;
+    // point
+    CFileGpx::StPoint PtsTer ;
+    PtsTer.m_Lat = pTerrain->m_Lat ;
+    PtsTer.m_Lon = pTerrain->m_Lon ;
+    PtsTer.m_Alt = pTerrain->m_AltiBaro ;
+    // ajout point
+    pFileGpxMem->m_pVecTrack = new std::vector<CFileGpx::StPoint> ;
+    pFileGpxMem->m_pVecTrack->push_back(PtsTer) ;
+    // calcul distance
+    pFileGpxMem->m_DistFrom = sqrtf( powf(CurPts.m_Lat-PtsTer.m_Lat,2.0) + powf(CurPts.m_Lon-PtsTer.m_Lon,2.0) ) ;
+    // point de terrain connus
+    pFileGpxMem->m_PtTerConnu = true ;
+    // loupe
+    float DeltaLL = 0. ;
+    float Dist = fabsf(CurPts.m_Lat-PtsTer.m_Lat) ;
+    if ( DeltaLL < Dist )
+        DeltaLL = Dist ;
+    Dist = fabsf(CurPts.m_Lon-PtsTer.m_Lon) ;
+    if ( DeltaLL < Dist )
+        DeltaLL = Dist ;
+    pFileGpxMem->m_SlopeMax = 3*DeltaLL/SLOPE_MAX_DIV ;
+
+    // ajout du fichier
+    m_VecGpx.push_back( pFileGpxMem ) ;
+    }
+
 
 // tri des Gpx en distance
 SortGpxFromCurPos() ;

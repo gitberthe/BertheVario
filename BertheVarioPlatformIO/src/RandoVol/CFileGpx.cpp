@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 16/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -77,7 +77,7 @@ for ( int i = 0 ; i < m_pVecTrack->size() ; i++ )
     m_Barycenter.m_Lat += (*m_pVecTrack)[i].m_Lat ;
     m_Barycenter.m_Lon += (*m_pVecTrack)[i].m_Lon ;
 
-    float DistFrom = powf(PtCur.m_Lat-(*m_pVecTrack)[i].m_Lat,2.0) + powf(PtCur.m_Lon-(*m_pVecTrack)[i].m_Lon,2.0) ;
+    float DistFrom = sqrtf( powf(PtCur.m_Lat-(*m_pVecTrack)[i].m_Lat,2.0) + powf(PtCur.m_Lon-(*m_pVecTrack)[i].m_Lon,2.0) ) ;
     if ( m_DistFrom > DistFrom )
         m_DistFrom = DistFrom ;
     }
@@ -94,7 +94,7 @@ for ( int i = 0 ; i < (*m_pVecTrack).size() ; i++ )
     if ( DeltaLL < Dist )
         DeltaLL = Dist ;
     }
-m_SlopeMax = DeltaLL/200. ;
+m_SlopeMax = DeltaLL/SLOPE_MAX_DIV ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
