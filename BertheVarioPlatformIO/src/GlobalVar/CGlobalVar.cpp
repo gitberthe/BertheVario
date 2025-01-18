@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 14/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -79,14 +79,15 @@ while( true )
 /// Attention la abort() est bugguee et ne redemarre pas defois
 void CGlobalVar::Reboot()
 {
+g_GlobalVar.m_StopLoop = true ;
+
+g_GlobalVar.DoChar(0,75,"  reboot",true);
+
 // beep
 g_GlobalVar.BeepError(true) ;
 
-// plus de loop()
-g_GlobalVar.m_StopLoop  = true ;
-
 // raz ecran
-g_GlobalVar.ScreenOff() ;
+//g_GlobalVar.ScreenOff() ;
 
 // on stop les taches
 g_GlobalVar.StopAll() ;

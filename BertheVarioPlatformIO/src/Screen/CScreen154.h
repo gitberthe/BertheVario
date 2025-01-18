@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #ifndef _SCREEN154_
@@ -24,7 +24,7 @@ public :
     void ScreenRaz() ;
     void ScreenOff() ;
     void DoRect( int x , int y , int w , int h ) ;
-    void DoChar( int x , int y , const char * pChar ) ;
+    void DoChar( int x , int y , const char * pChar , bool disp = false ) ;
 
     EtatsAuto EcranVz() ;
     EtatsAuto EcranHisto() ;

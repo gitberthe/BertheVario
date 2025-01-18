@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 17/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -41,7 +41,7 @@ g_MS5611.setOversampling( OSR_ULTRA_HIGH ) ;
 //g_MS5611.setOversampling( OSR_HIGH ) ; // bug altitude negative non resolue
 g_MS5611.setCompensation( true ) ; // bug altitude negative non evite si on enleve
 
-g_MS5611.setTemperatureOffset( -10.6 ) ;
+g_MS5611.setTemperatureOffset( -1. ) ;
 g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 }
 

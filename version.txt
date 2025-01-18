@@ -1,3 +1,7 @@
+le 20250118a :
+ - affichage bien plus propre.
+ - declenchement vol par Vz instantané.
+
 le 20250117a :
  - temperature page sys.
  - [vz_igc_ms] à 0,5 par défaut.

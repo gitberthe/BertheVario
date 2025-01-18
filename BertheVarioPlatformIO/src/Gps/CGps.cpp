@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 13/10/2024
+/// \date modification : 18/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -184,11 +184,11 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     if ( g_GlobalVar.m_PileVit.IsStartFlight() )
         break ;
 
-    // si vitesse verticale depassee pendant 4 secondes declenchement igc
+    // si vitesse verticale depassee pendant x secondes declenchement igc
     if ( fabs(g_GlobalVar.m_VitVertMS) >= g_GlobalVar.m_Config.m_vz_igc_ms )
         {
-        iVz++ ;
-        if ( iVz >= g_GlobalVar.m_Config.m_temps_igc_sec )
+        //iVz++ ;
+        //if ( iVz >= g_GlobalVar.m_Config.m_temps_igc_sec/2 )
             break ;
         }
     else

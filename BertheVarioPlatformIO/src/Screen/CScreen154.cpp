@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 17/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -86,13 +86,16 @@ display.display(true);*/
 //display.powerOff();
 display.setRotation(0) ;
 //display.setFullWindow() ;
-display.setPartialWindow( 0, 0, 200 , 200 );
 
 // raz page precedente
-display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
-display.display(true) ;
+/*display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+display.display(false) ;
+delay(SCREEN_DELAY) ;*/
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-display.display(true) ;
+display.display(false) ;
+//delay(SCREEN_DELAY) ;
+
+display.setPartialWindow( 0, 0, 200 , 200 );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,11 +111,18 @@ do  {
     }
 display.display(true); */
 
+// raz page precedente
+//display.setFullWindow() ;
+
+/*display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+display.display(true) ;
+delay(SCREEN_DELAY) ;*/
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-    {
-    //display.fillScreen(GxEPD_WHITE);
-    }
-display.display(true);
+display.display(false) ;
+//delay(SCREEN_DELAY) ;
+
+display.setPartialWindow( 0, 0, 200 , 200 );
+
 //display.powerOff();
 //display.refresh() ;
 
@@ -130,17 +140,17 @@ void CScreen154::ScreenOff()
 {
 display.setFullWindow() ;
 
-display.clearScreen() ;
+//display.clearScreen() ;
 
-display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
-display.display(true);
-delay( 500 ) ;
-display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+//display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+//display.display(false);
+//delay( SCREEN_DELAY ) ;
+//display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     {
     //display.fillScreen(GxEPD_BLACK);
     //display.fillScreen(GxEPD_WHITE);
     }
-display.display(true);
+//display.display(false);
 
 // mise hors tension ecran
 display.powerOff();
@@ -225,13 +235,15 @@ display.fillRect(x, y, w, h, GxEPD_BLACK ); // x y w h
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Cette fonction affiche un rectangle plein
-void CScreen154::DoChar(int x, int y, const char * pChar )
+void CScreen154::DoChar(int x, int y, const char * pChar , bool disp )
 {
 //auto Color = (Black) ? GxEPD_BLACK : GxEPD_WHITE ;
 //display.fillRect(x, y, w, h, Color ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
 display.setCursor(x, y);
 display.print( pChar );
+if ( disp )
+    display.display(false) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1609,17 +1621,22 @@ int EchelleMetre = Slope*MilesParDegres*100*UnMileEnMetres ;
 static int NbInfo = -1 ;
 
 // demande page info
+const int init_nb_info = 7 ;
 if ( g_GlobalVar.BoutonCentre() )
-    NbInfo = 7 ;
+    NbInfo = init_nb_info ;
 if ( NbInfo < -1 )
     NbInfo = -1 ;
 
 // affichage page info
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-if ( NbInfo-- >= 0 )
+if ( NbInfo >= 0 )
     {
-    display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
-    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    // raz page
+    if ( NbInfo-- == init_nb_info )
+        {
+        display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+        display.display(false) ;
+        }
 
     float AltitudeRest = 222 ;
     float DistanceRest = 1000 ;
