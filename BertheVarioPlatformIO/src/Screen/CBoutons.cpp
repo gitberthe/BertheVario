@@ -108,6 +108,21 @@ m_BoutonDroit  = false ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// \brief Reboot.
+void CBoutons::TestReboot()
+{
+// reboot si pas en vol
+if ( !digitalRead(BUTTON_A_PIN) && digitalRead(BUTTON_B_PIN) && !digitalRead(BUTTON_C_PIN) )
+    {
+    // pas de reboot en vol certain
+    if ( g_GlobalVar.m_FinDeVol.IsFlightLocked() )
+        return ;
+    Serial.println( "reboot button") ;
+    CGlobalVar::Reboot() ;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// \brief Tache de scan des boutons avec beep d'appui.
 void CBoutons::TacheScanButton(void* param)
 {
@@ -137,15 +152,8 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         g_GlobalVar.m_DelayPurgeMs = 0 ;
         }
 
-    // reboot si pas en vol
-    if ( !digitalRead(BUTTON_A_PIN) && digitalRead(BUTTON_B_PIN) && !digitalRead(BUTTON_C_PIN) )
-        {
-        // pas de reboot en vol certain
-        if ( g_GlobalVar.m_FinDeVol.IsFlightLocked() )
-            continue ;
-        Serial.println( "reboot button") ;
-        CGlobalVar::Reboot() ;
-        }
+    // test reboot
+    g_GlobalVar.TestReboot() ;
 
     // memorisation bouton gauche
     if ( !digitalRead(BUTTON_A_PIN) )
@@ -154,6 +162,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         g_GlobalVar.m_StopLoop = true ;
         while ( !digitalRead(BUTTON_A_PIN) )
             {
+            g_GlobalVar.TestReboot() ;
             // appuy 2 secondes
             if( (millis()-time) >= DELAY_LONG )
                 {
@@ -205,6 +214,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     // memorisation bouton droit
         if ( !digitalRead(BUTTON_C_PIN) )
         {
+        g_GlobalVar.TestReboot() ;
         unsigned long time = millis() ;
         g_GlobalVar.m_StopLoop = true ;
         while ( !digitalRead(BUTTON_C_PIN) )

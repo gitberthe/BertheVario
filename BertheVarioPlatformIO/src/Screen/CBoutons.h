@@ -31,6 +31,8 @@ public :
             { m_DelayPurgeMs = DelayMs ; } ;
 
 private :
+    void TestReboot() ;
+
     bool m_BoutonGauche     = false ;
     bool m_BoutonGaucheLong = false ;
     bool m_BoutonCentre     = false ;

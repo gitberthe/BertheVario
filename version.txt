@@ -1,3 +1,6 @@
+le 20250118e :
+ - meilleur reboot avec les boutons GD.
+
 le 20250118d :
  - plus de temps pour passer en mode wifi/calibration/rando en boot.
  - compte rendu ecran lors activation/de-activation zone
