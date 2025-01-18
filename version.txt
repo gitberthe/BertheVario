@@ -1,5 +1,5 @@
 le 20250118d :
- - plus de temps pour passer en mode wifi/calibration/rando eu boot.
+ - plus de temps pour passer en mode wifi/calibration/rando en boot.
  - compte rendu ecran lors activation/de-activation zone
 
 le 20250118c :
