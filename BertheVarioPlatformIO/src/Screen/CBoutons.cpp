@@ -42,6 +42,18 @@ return false ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// \brief Lecture reset bouton gauche long.
+bool CBoutons::BoutonGaucheLong()
+{
+if ( m_BoutonGaucheLong )
+    {
+    m_BoutonGaucheLong = false ;
+    return true ;
+    }
+return false ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// \brief Lecture reset bouton centre.
 bool CBoutons::BoutonCentre()
 {
@@ -66,9 +78,23 @@ return false ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// \brief Lecture reset bouton droit long.
+bool CBoutons::BoutonDroitLong()
+{
+if ( m_BoutonDroitLong )
+    {
+    m_BoutonDroitLong = false ;
+    return true ;
+    }
+return false ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// \brief reset des boutons.
 void CBoutons::RazBoutons()
 {
+m_BoutonGaucheLong =
+m_BoutonDroitLong =
 m_BoutonGauche =
 m_BoutonCentre =
 m_BoutonDroit  = false ;
@@ -122,21 +148,31 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         }
 
     // memorisation bouton gauche
-    if( !pThis->m_BoutonGauche )
+    if ( !digitalRead(BUTTON_A_PIN) )
         {
         unsigned long time = millis() ;
+        g_GlobalVar.m_StopLoop = true ;
         while ( !digitalRead(BUTTON_A_PIN) )
             {
-            // appui 50ms minimum
-            if( (millis()-time) >= DELAY_TRUE )
+            // appuy 2 secondes
+            if( (millis()-time) >= DELAY_LONG )
                 {
-                pThis->m_BoutonGauche = true ;
-                beep = true ;
+                pThis->m_BoutonGaucheLong = true ;
+                g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
+                time = millis() ;
                 break ;
                 }
-            delay( 1 ) ;
+            delay( 10 ) ;
+            }
+        // appui 50ms minimum
+        if( (millis()-time) >= DELAY_TRUE )
+            {
+            pThis->m_BoutonGauche = true ;
+            beep = true ;
             }
         }
+    else
+        g_GlobalVar.m_StopLoop = false ;
 
     // memorisation bouton centre
     if ( !digitalRead(BUTTON_B_PIN) )
@@ -146,16 +182,15 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         while ( !digitalRead(BUTTON_B_PIN) )
             {
             // appuy 2 secondes
-            if( (millis()-time) >= 2000 )
+            if( (millis()-time) >= DELAY_LONG )
                 {
                 g_GlobalVar.ScreenRaz() ;
                 pThis->m_BoutonCentre = false ;
-                g_GlobalVar.m_DelayPurgeMs = 3000 ;
-                beep = false ;
+                g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
                 time = millis() ;
                 break ;
                 }
-            delay( 1 ) ;
+            delay( 10 ) ;
             }
         // appui 50ms minimum
         if( (millis()-time) >= DELAY_TRUE )
@@ -165,27 +200,34 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             }
         }
     else
-        {
-        //pThis->m_BoutonCentreAppuye = false ;
         g_GlobalVar.m_StopLoop = false ;
-        }
 
     // memorisation bouton droit
-    if ( !pThis->m_BoutonDroit )
+        if ( !digitalRead(BUTTON_C_PIN) )
         {
         unsigned long time = millis() ;
+        g_GlobalVar.m_StopLoop = true ;
         while ( !digitalRead(BUTTON_C_PIN) )
             {
-            // appui 50ms minimum
-            if( (millis()-time) >= DELAY_TRUE )
+            // appuy 2 secondes
+            if( (millis()-time) >= DELAY_LONG )
                 {
-                pThis->m_BoutonDroit = true ;
-                beep = true ;
+                pThis->m_BoutonDroitLong = true ;
+                g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
+                time = millis() ;
                 break ;
                 }
-            delay( 1 ) ;
+            delay( 10 ) ;
+            }
+        // appui 50ms minimum
+        if( (millis()-time) >= DELAY_TRUE )
+            {
+            pThis->m_BoutonDroit = true ;
+            beep = true ;
             }
         }
+    else
+        g_GlobalVar.m_StopLoop = false ;
 
     // beep d'appui
     if ( beep )

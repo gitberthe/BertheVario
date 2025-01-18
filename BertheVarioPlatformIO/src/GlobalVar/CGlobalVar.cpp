@@ -81,7 +81,7 @@ void CGlobalVar::Reboot()
 {
 g_GlobalVar.m_StopLoop = true ;
 
-g_GlobalVar.DoChar(0,75,"  reboot",true);
+g_GlobalVar.DoChar(0,170," reboot...",true);
 
 // beep
 g_GlobalVar.BeepError(true) ;

@@ -10,7 +10,9 @@
 #ifndef _BOUTONS_
 #define _BOUTONS_
 
-#define DELAY_TRUE 10
+#define DELAY_TRUE          10
+#define DELAY_LONG          2000
+#define DELAY_PURGE_LONG    1500
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Permet l'utilisation des boutons. Scan 10hz avec beep.
@@ -19,17 +21,21 @@ class CBoutons
 public :
     void InitButton() ;
     bool BoutonGauche() ;
+    bool BoutonGaucheLong() ;
     bool BoutonCentre() ;
     bool BoutonDroit() ;
+    bool BoutonDroitLong() ;
     void RazBoutons() ;
     void RazBoutonDroit() ;
     void PurgeBoutons( unsigned long DelayMs )
             { m_DelayPurgeMs = DelayMs ; } ;
 
 private :
-    bool m_BoutonGauche = false ;
-    bool m_BoutonCentre = false ;
-    bool m_BoutonDroit  = false ;
+    bool m_BoutonGauche     = false ;
+    bool m_BoutonGaucheLong = false ;
+    bool m_BoutonCentre     = false ;
+    bool m_BoutonDroit      = false ;
+    bool m_BoutonDroitLong  = false ;
     unsigned long m_DelayPurgeMs = 0 ;      ///< delay de purge des boutons en ms
 
     static void TacheScanButton( void * param) ;

@@ -1121,6 +1121,17 @@ if ( BCentre && VecZone2Mod.size() != 0 )
         if ( pZone->m_DansFchActivation )
             {
             pZone->m_Activee = !pZone->m_Activee ;
+            // compte rendu ecran
+            //display.setFont(&FreeMonoBold9pt7b);
+            display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+            display.setCursor( 0 , 140 ) ;
+            display.println( "zone" ) ;
+            if ( pZone->m_Activee )
+                display.print( " activee" ) ;
+            else
+                display.print( " de-activee" ) ;
+            display.display(true) ;
+            // ecriture fichier zone
             g_GlobalVar.m_ZonesAerAll.EcritureFichierZonesActive() ;
             }
         }

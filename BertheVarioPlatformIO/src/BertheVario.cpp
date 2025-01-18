@@ -7,7 +7,7 @@
 /// \date modification : 18/01/2025
 ///
 
-char NumVer[] = "20250118c" ;
+char NumVer[] = "20250118d" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -61,13 +61,23 @@ g_GlobalVar.InitButton() ;
 g_GlobalVar.InitSDCard() ;
 
 // boutons
-bool BoutonDroitAppuye = false ;   // mode rando-vol
+bool BoutonGaucheAppuye = false ;  // calibration
 bool BoutonCentreAppuye = false ;  // mode wifi
-if ( g_GlobalVar.BoutonDroit() )
-    BoutonDroitAppuye = true ;
-else if ( g_GlobalVar.BoutonCentre() )
+bool BoutonDroitAppuye = false ;   // mode rando-vol
+unsigned long time = millis() ;
+while ( (millis() - time) < 300 )
     {
-    BoutonCentreAppuye = true ;
+    if ( g_GlobalVar.BoutonDroit() )
+        BoutonDroitAppuye = true ;
+    if ( g_GlobalVar.BoutonGauche() )
+        BoutonGaucheAppuye = true ;
+    if ( g_GlobalVar.BoutonCentre() )
+        BoutonCentreAppuye = true ;
+    }
+
+// si un bouton appuye
+if ( BoutonCentreAppuye || BoutonDroitAppuye || BoutonGaucheAppuye )
+    {
     // lecture fichier de configuration
     g_GlobalVar.m_Config.LectureFichier() ;
     }
@@ -145,7 +155,7 @@ g_GlobalVar.InitGps() ;
 
 ////////////////////////////////////
 // si calibration capteur magnetique
-if ( g_GlobalVar.BoutonGauche() )
+if ( BoutonGaucheAppuye )
     {
     g_GlobalVar.AfficheCalibreMag() ;
     g_GlobalVar.m_Mpu9250.Calibration() ;

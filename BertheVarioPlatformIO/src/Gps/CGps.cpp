@@ -110,7 +110,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
 g_GlobalVar.m_DureeVolMin = ATTENTE_STABILITE_GPS ;
 
 // boucle d'attente vitesse minimale
-int iVz = 0 ;
+//int iVz = 0 ;
 while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     {
     // toutes les 1 secondes a 1hz
@@ -191,8 +191,8 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
         //if ( iVz >= g_GlobalVar.m_Config.m_temps_igc_sec/2 )
             break ;
         }
-    else
-        iVz = 0 ;
+    //else
+    //    iVz = 0 ;
 
     #ifdef SOUND_DEBUG
      break ;
