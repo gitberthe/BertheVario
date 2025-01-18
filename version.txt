@@ -1,3 +1,6 @@
+le 20250118f :
+ - pas d'appui long au boot.
+
 le 20250118e :
  - meilleur reboot avec les boutons GD.
 

@@ -7,7 +7,7 @@
 /// \date modification : 18/01/2025
 ///
 
-char NumVer[] = "20250118e" ;
+char NumVer[] = "20250118f" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -74,6 +74,7 @@ while ( (millis() - time) < 300 )
     if ( g_GlobalVar.BoutonCentre() )
         BoutonCentreAppuye = true ;
     }
+g_GlobalVar.BootEffectue() ;
 
 // si un bouton appuye
 if ( BoutonCentreAppuye || BoutonDroitAppuye || BoutonGaucheAppuye )

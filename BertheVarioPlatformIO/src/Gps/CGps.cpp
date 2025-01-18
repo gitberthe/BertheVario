@@ -137,7 +137,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
             g_GlobalVar.m_MS5611.SetAltiSolUndef() ;
 
         // purge boutons pour eviter un arret vol dans la fouléé
-        g_GlobalVar.PurgeBoutons( 6000 ) ;
+        g_GlobalVar.PurgeBoutons( 3000 ) ;
         // on passe en vol
         break ;
         }
