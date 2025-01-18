@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 18/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -87,10 +87,12 @@ void CBoutons::TacheScanButton(void* param)
 {
 CBoutons * pThis = (CBoutons*) param ;
 
-// a 10 hz
+// a 100 hz
 while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     {
     bool beep = false ;
+
+    delay( 10 ) ;
 
     // si purge bouton
     if ( g_GlobalVar.m_DelayPurgeMs != 0 )
@@ -125,7 +127,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         unsigned long time = millis() ;
         while ( !digitalRead(BUTTON_A_PIN) )
             {
-            // appui 100ms minimum
+            // appui 50ms minimum
             if( (millis()-time) >= DELAY_TRUE )
                 {
                 pThis->m_BoutonGauche = true ;
@@ -137,21 +139,35 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         }
 
     // memorisation bouton centre
-    if ( !pThis->m_BoutonCentre )
+    if ( !digitalRead(BUTTON_B_PIN) )
         {
         unsigned long time = millis() ;
+        g_GlobalVar.m_StopLoop = true ;
         while ( !digitalRead(BUTTON_B_PIN) )
             {
-            // appui 100ms minimum
-            if( (millis()-time) >= DELAY_TRUE )
+            // appuy 2 secondes
+            if( (millis()-time) >= 2000 )
                 {
-                pThis->m_BoutonCentre = true ;
-                beep = true ;
+                g_GlobalVar.ScreenRaz() ;
+                pThis->m_BoutonCentre = false ;
+                g_GlobalVar.m_DelayPurgeMs = 3000 ;
+                beep = false ;
+                time = millis() ;
                 break ;
                 }
             delay( 1 ) ;
             }
-
+        // appui 50ms minimum
+        if( (millis()-time) >= DELAY_TRUE )
+            {
+            pThis->m_BoutonCentre = true ;
+            beep = true ;
+            }
+        }
+    else
+        {
+        //pThis->m_BoutonCentreAppuye = false ;
+        g_GlobalVar.m_StopLoop = false ;
         }
 
     // memorisation bouton droit
@@ -160,7 +176,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         unsigned long time = millis() ;
         while ( !digitalRead(BUTTON_C_PIN) )
             {
-            // appui 100ms minimum
+            // appui 50ms minimum
             if( (millis()-time) >= DELAY_TRUE )
                 {
                 pThis->m_BoutonDroit = true ;

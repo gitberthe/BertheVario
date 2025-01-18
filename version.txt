@@ -1,3 +1,6 @@
+le 20250118c :
+ - contournement ecran degueulasse par appui long bouton centre.
+ 
 le 20250118b :
  - ajout des pts terrains connus en guidage rando.
 

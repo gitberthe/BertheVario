@@ -57,7 +57,7 @@ void CScreen154::InitScreen()
 //display.init(115200); // default 10ms reset pulse, e.g. for bare panels with DESPI-C02
 //display.init(0,false,5,true) ;
 //display.init(0,false,15,true) ;
-display.init(0,false,25,true) ;
+display.init(0,false,15,true) ;
 
 //hspi.begin(13, 12, 14, 15); // remap hspi for EPD (swap pins)
 //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
@@ -88,11 +88,10 @@ display.setRotation(0) ;
 //display.setFullWindow() ;
 
 // raz page precedente
-/*display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
-display.display(false) ;
-delay(SCREEN_DELAY) ;*/
-display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-display.display(false) ;
+//display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+//display.display(false) ;
+//display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+//display.display(false) ;
 //delay(SCREEN_DELAY) ;
 
 display.setPartialWindow( 0, 0, 200 , 200 );
@@ -102,26 +101,21 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 /// \brief Raz de l'ecran (deja fait dans display.firstPage() donc doublon)
 void CScreen154::ScreenRaz()
 {
-//display.powerOff();
-//display.setFullWindow() ;
-//display.setFont(&FreeMonoBold18pt7b);
-/*display.firstPage();
-do  {
-    display.fillScreen(GxEPD_BLACK);
-    }
-display.display(true); */
+g_GlobalVar.m_StopLoop = true ;
 
-// raz page precedente
-//display.setFullWindow() ;
-
-/*display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
-display.display(true) ;
-delay(SCREEN_DELAY) ;*/
-display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+display.print( "" );
 display.display(false) ;
-//delay(SCREEN_DELAY) ;
 
-display.setPartialWindow( 0, 0, 200 , 200 );
+/*display.setFullWindow() ;
+
+display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+display.display(true) ;
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+display.display(true) ;
+
+display.setPartialWindow( 0, 0, 200 , 200 ); */
+
+g_GlobalVar.m_StopLoop = false ;
 
 //display.powerOff();
 //display.refresh() ;
@@ -138,7 +132,7 @@ delete [] bitmap ; */
 /// \brief Raz screen en reboot
 void CScreen154::ScreenOff()
 {
-display.setFullWindow() ;
+//display.setFullWindow() ;
 
 //display.clearScreen() ;
 
@@ -1629,15 +1623,8 @@ if ( NbInfo < -1 )
 
 // affichage page info
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-if ( NbInfo >= 0 )
+if ( NbInfo-- >= 0 )
     {
-    // raz page
-    if ( NbInfo-- == init_nb_info )
-        {
-        display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        display.display(false) ;
-        }
-
     float AltitudeRest = 222 ;
     float DistanceRest = 1000 ;
     float AltitudeFait = 222 ;
@@ -1680,7 +1667,6 @@ if ( NbInfo >= 0 )
     // temperature
     char TmpCharTemp[30] ;
     sprintf( TmpCharTemp , "Temp :   %4.1fd", g_GlobalVar.m_MS5611.GetTemperatureDegres() ) ;
-
 
     // v batterie
     char TmpCharVB[20] ;
