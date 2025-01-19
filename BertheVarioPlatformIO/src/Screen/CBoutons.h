@@ -4,12 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 19/01/2025
 ///
 
 #ifndef _BOUTONS_
 #define _BOUTONS_
 
+#define DELAY_ATTENTE         50
 #define DELAY_LONG          2000
 #define DELAY_PURGE_LONG    1500
 
@@ -42,7 +43,8 @@ private :
     bool m_BoutonCentreLong = false ;
     bool m_BoutonDroit      = false ;
     bool m_BoutonDroitLong  = false ;
-    unsigned long m_DelayPurgeMs = 0 ;      ///< delay de purge des boutons en ms
+    unsigned long m_DelayPurgeMs = 0 ;  ///< delay de purge des boutons en ms
+    unsigned long m_DelayAttenteMs= 0 ; ///< delay d'attente avant nouvel appuy en ms
 
     static void TacheScanButton( void * param) ;
 } ;

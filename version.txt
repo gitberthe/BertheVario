@@ -1,3 +1,8 @@
+le 20250119a :
+ - page de boot modifiee.
+ - appuie long G / D en page Vz.
+ - ajout de [temp_raz_screen] dans fichier de config
+
 le 20250118f :
  - pas d'appui long au boot.
 

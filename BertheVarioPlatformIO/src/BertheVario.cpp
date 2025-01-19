@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 19/01/2025
 ///
 
-char NumVer[] = "20250118f" ;
+char NumVer[] = "202501194" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -44,7 +44,7 @@ Serial.println("Setup") ;
 // beeper init
 //g_GlobalVar.InitSpeaker() ;
 g_GlobalVar.LanceTacheSound() ;
-delay(500) ;
+delay(300) ;
 CGlobalVar::BeepOk() ;
 
 // init alim
@@ -52,7 +52,9 @@ g_GlobalVar.InitAlim() ;
 
 // init ecran
 g_GlobalVar.InitScreen() ;
-g_GlobalVar.AfficheVoltage() ;
+
+// affichage boutons
+g_GlobalVar.AfficheBoutons() ;
 
 // init boutons
 g_GlobalVar.InitButton() ;
@@ -65,7 +67,7 @@ bool BoutonGaucheAppuye = false ;  // calibration
 bool BoutonCentreAppuye = false ;  // mode wifi
 bool BoutonDroitAppuye = false ;   // mode rando-vol
 unsigned long time = millis() ;
-while ( (millis() - time) < 300 )
+while ( (millis() - time) < 400 )
     {
     if ( g_GlobalVar.BoutonDroit() )
         BoutonDroitAppuye = true ;
@@ -75,6 +77,9 @@ while ( (millis() - time) < 300 )
         BoutonCentreAppuye = true ;
     }
 g_GlobalVar.BootEffectue() ;
+
+// affichage voltage
+g_GlobalVar.AfficheVoltage() ;
 
 // si un bouton appuye
 if ( BoutonCentreAppuye || BoutonDroitAppuye || BoutonGaucheAppuye )

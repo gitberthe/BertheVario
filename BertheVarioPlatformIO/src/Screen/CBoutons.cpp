@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 19/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -145,6 +145,16 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     {
     delay( 10 ) ;
 
+    // delait d'attente
+    if ( g_GlobalVar.m_DelayAttenteMs != 0 )
+        {
+        unsigned long time = millis() ;
+        while( millis()-time < g_GlobalVar.m_DelayAttenteMs )
+            delay( 1 ) ;
+        g_GlobalVar.m_DelayAttenteMs = 0 ;
+        continue ;
+        }
+
     // si purge bouton
     if ( g_GlobalVar.m_DelayPurgeMs != 0 )
         {
@@ -180,7 +190,6 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
                 {
                 pThis->m_BoutonGaucheLong = true ;
                 g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
-                //time = millis() ;
                 break ;
                 }
             else
@@ -190,6 +199,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         g_GlobalVar.m_StopLoop = false ;
         if( !pThis->m_BoutonGaucheLong )
             {
+            g_GlobalVar.m_DelayAttenteMs = DELAY_ATTENTE ;
             pThis->m_BoutonGauche = true ;
             CGlobalVar::BeepOk() ;
             }
@@ -219,6 +229,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         g_GlobalVar.m_StopLoop = false ;
         if( !pThis->m_BoutonCentreLong )
             {
+            g_GlobalVar.m_DelayAttenteMs = DELAY_ATTENTE ;
             pThis->m_BoutonCentre = true ;
             CGlobalVar::BeepOk() ;
             }
@@ -238,7 +249,6 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
                 {
                 pThis->m_BoutonDroitLong = true ;
                 g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
-                //time = millis() ;
                 break ;
                 }
             else
@@ -248,6 +258,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
         g_GlobalVar.m_StopLoop = false ;
         if( !pThis->m_BoutonDroitLong )
             {
+            g_GlobalVar.m_DelayAttenteMs = DELAY_ATTENTE ;
             pThis->m_BoutonDroit = true ;
             CGlobalVar::BeepOk() ;
             }

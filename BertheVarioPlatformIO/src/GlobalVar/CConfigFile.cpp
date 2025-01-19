@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 20/11/2024
+/// \date modification : 19/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -94,6 +94,12 @@ pLine = new st_line ;
 pLine->m_NomVar = "[vz_seuil_max]" ;
 pLine->m_pVar = (void*) & m_vz_seuil_max ;
 pLine->m_Type = TYPE_VAR_FLOAT ;
+m_LinesVect.push_back( pLine ) ;
+
+pLine = new st_line ;
+pLine->m_NomVar = "[temp_raz_screen]" ;
+pLine->m_pVar = (void*) & m_temp_raz_screen  ;
+pLine->m_Type =  TYPE_VAR_INT;
 m_LinesVect.push_back( pLine ) ;
 
 pLine = new st_line ;

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 19/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -98,13 +98,40 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief Raz de l'ecran (deja fait dans display.firstPage() donc doublon)
+/// \brief Raz de l'ecran suivant temperature boitier
 void CScreen154::ScreenRaz()
 {
 g_GlobalVar.m_StopLoop = true ;
 
-display.print( "" );
-display.display(false) ;
+if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_raz_screen )
+    {
+    display.print( "" );
+    display.display(false) ;
+    }
+else
+    {
+    //char c = 2 ; //219 ;
+    char c = '#';
+    char TmpChar[15] = {0} ;
+    for ( int i = 0 ; i < 14 ; i++ )
+        TmpChar[i] = c ;
+    display.setFont(&FreeMonoBold12pt7b);
+    display.setCursor( 0 , 0 ) ;
+    int ib = 0 ;
+    while( ib++ < 10 )
+        display.println( TmpChar );
+    display.display(true) ;
+    /*int ib = 0 ;
+    while( ib++ < 5 )
+        {
+        display.print( "" );
+        display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+        display.display(true) ;
+        display.print( "" );
+        display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+        display.display(true) ;
+        }*/
+    }
 
 /*display.setFullWindow() ;
 
@@ -156,12 +183,12 @@ display.powerOff();
 void CScreen154::AfficheConnectWifi()
 {
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-    {
-    // connect to wifi
-    display.setFont(&FreeMonoBold9pt7b);
-    display.setCursor(10, 100);
-    display.print("Connect to Wifi");
-    }
+
+// connect to wifi
+display.setFont(&FreeMonoBold12pt7b);
+display.setCursor(10, 100);
+display.print("Connecting to\n  Wifi");
+
 display.display(true);
 }
 
@@ -170,12 +197,12 @@ display.display(true);
 void CScreen154::AfficheCalibreMag()
 {
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-    {
-    // voltage
-    display.setFont(&FreeMonoBold9pt7b);
-    display.setCursor(0, 75);
-    display.print("Calibre magnitude (8)");
-    }
+
+// voltage
+display.setFont(&FreeMonoBold12pt7b);
+display.setCursor(0, 75);
+display.print("Calibre magnitude (8)");
+
 display.display(true);
 }
 
@@ -184,14 +211,14 @@ display.display(true);
 void CScreen154::AfficheWifi(char * IpAdress)
 {
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-    {
-    // voltage
-    display.setFont(&FreeMonoBold9pt7b);
-    display.setCursor(0, 75);
-    display.print("http://");
-    display.print(IpAdress);
-    display.print(":8080");
-    }
+
+// ip adresse
+display.setFont(&FreeMonoBold12pt7b);
+display.setCursor(0, 75);
+display.print("http://");
+display.print(IpAdress);
+display.print(":8080");
+
 display.display(true);
 }
 
@@ -206,16 +233,35 @@ char TmpChar[10] ;
 sprintf( TmpChar , "%1.2fv", Voltage ) ;
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-    {
-    // voltage
-    display.setFont(&FreeMonoBold24pt7b);
-    display.setCursor(30, 75);
-    display.print(TmpChar);
 
-    display.setFont(&FreeMonoBold18pt7b);
-    display.setCursor(5, 150);
-    display.print(NumVer);
-    }
+// voltage
+display.setFont(&FreeMonoBold24pt7b);
+display.setCursor(30, 75);
+display.print(TmpChar);
+
+display.setFont(&FreeMonoBold18pt7b);
+display.setCursor(5, 150);
+display.print(NumVer);
+
+display.display(true);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Cette fonction affiche les boutons de calibration/wifi/rando.
+void CScreen154::AfficheBoutons()
+{
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+
+display.setFont(&FreeMonoBold24pt7b);
+display.setCursor(10, 55);
+display.print("Berthe\n Vario");
+
+// boutons
+display.setFont(&FreeMonoBold18pt7b);
+display.setCursor(0, 155);
+display.println("B       B");
+display.print("C   W   R");
+
 display.display(true);
 }
 
@@ -590,6 +636,18 @@ if ( g_GlobalVar.m_DureeVolMin != ATTENTE_VITESSE_VOL &&
 if ( BoutonCentre() )
     return ECRAN_1_Histo ;
 
+if ( BoutonGaucheLong() )
+    {
+    g_GlobalVar.PurgeBoutons( 2000 ) ;
+    return ECRAN_6_Sys ;
+    }
+
+if ( BoutonDroitLong() )
+    {
+    g_GlobalVar.PurgeBoutons( 2000 ) ;
+    return ECRAN_3a_TmaAll ;
+    }
+
 // si activation / desactivation beep attente Gps / Vitesse
 if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
       g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS ||
@@ -788,7 +846,7 @@ sprintf( TmpCharTemp , "Temp  :  %4.1fd", g_GlobalVar.m_MS5611.GetTemperatureDeg
 // memoire
 char TmpCharMem[30] ;
 
-// pourcantage utilisation cpu
+// pourcentage utilisation cpu
 g_GlobalVar.m_MutexCore.PrendreMutex() ;
  int cpu0 = g_GlobalVar.m_PercentCore0 ;
  int cpu1 = g_GlobalVar.m_PercentCore1 ;
@@ -802,36 +860,36 @@ display.setCursor(12, 15);
 display.print(TmpCharDate) ;
 
 // alti baro
-display.setCursor(0, 35);
+display.setCursor(0, 38);
 display.print(TmpAltiBaro);
 
 // Cap Magnetique
-display.setCursor(0, 55);
+display.setCursor(0, 58);
 display.print(TmpCharCM);
 
 // temperature
-display.setCursor(0, 75);
+display.setCursor(0, 78);
 display.print(TmpCharTemp);
 
 // core 0 usage
-display.setCursor(0, 95);
+display.setCursor(0, 98);
 display.print("core 0:    ");
 display.print(cpu0) ;
 display.print("%");
 
 // core 1 usage
-display.setCursor(0,115);
+display.setCursor(0,118);
 display.print("core 1:    ");
 display.print(cpu1) ;
 display.print("%");
 
 // memory
-display.setCursor(0,135);
+display.setCursor(0,138);
 sprintf( TmpCharMem , "f mem :%6db", (int) esp_get_free_heap_size() ) ;
 display.print(TmpCharMem);
 
 // batterie
-display.setCursor(0,155);
+display.setCursor(0,158);
 display.print("V bat :  ");
 display.print(TmpCharVB);
 
