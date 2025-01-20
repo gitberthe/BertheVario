@@ -841,7 +841,7 @@ if ( IsPageChanged() )
 if ( iChamps == -1 )
     {
     strcpy( TmpMod , "" ) ;
-    Name = " Editeur Cfg\nBoutons <GCD>" ;
+    Name = " Editeur Cfg" ;
     }
 else
     {
@@ -872,10 +872,11 @@ if ( BoutonCent && !Modif && iChamps == -1 )
     {
     g_GlobalVar.m_Config.EcritureFichier() ;
     g_GlobalVar.m_Config.LectureFichier() ;
+    iChamps = -1 ;
     return ECRAN_5_TmaDessous ;
     }
 
-// modif
+// modification variable
 if ( BoutonCent && iChamps != -1 )
     {
     Modif = !Modif ;
@@ -934,12 +935,12 @@ if ( BoutonDroi && Modif )
     }
 
 // defilement
-if (  BoutonGau && !Modif )
+if ( BoutonGau && !Modif )
     {
     if ( iChamps > -1 )
         iChamps-- ;
     else
-        iChamps = g_GlobalVar.m_Config.m_LinesVect.size()-1 ;
+        iChamps = 0 ;
     }
 
 if ( BoutonDroi && !Modif  )
@@ -947,27 +948,32 @@ if ( BoutonDroi && !Modif  )
     int size = (g_GlobalVar.m_Config.m_LinesVect.size()-1) ;
     if ( iChamps < size )
         iChamps++ ;
-    else
-        iChamps = -1 ;
     }
 
 // si time out ecran en premeire page
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( ((Temps/1000) > m_SecRetourEcran0) && (iChamps == -1) )
-    return ECRAN_0_Vz ;
-
-bool GaucheDoubleAppui = BoutonGaucheDoubleAppui() ;
-if ( GaucheDoubleAppui && !Modif && iChamps == -1 )
-    return ECRAN_3a_TmaAll ;
-
-if ( GaucheDoubleAppui && !Modif && iChamps != -1 )
     {
+    g_GlobalVar.m_Config.EcritureFichier() ;
+    g_GlobalVar.m_Config.LectureFichier() ;
     iChamps = -1 ;
-    return ECRAN_4_CfgFch ;
+    return ECRAN_0_Vz ;
     }
 
-if ( BoutonGaucheLong() && !Modif && iChamps == -1 )
+if ( BoutonDroitDoubleAppui() && !Modif )
+    iChamps = g_GlobalVar.m_Config.m_LinesVect.size()-1 ;
+
+if ( BoutonGaucheDoubleAppui() && !Modif )
+    iChamps = 0 ;
+
+// retour page Vz
+if ( BoutonGaucheLong() && !Modif )
+    {
+    g_GlobalVar.m_Config.EcritureFichier() ;
+    g_GlobalVar.m_Config.LectureFichier() ;
+    iChamps = -1 ;
     return ECRAN_0_Vz ;
+    }
 
 return ECRAN_4_CfgFch ;
 }
@@ -978,7 +984,7 @@ return ECRAN_4_CfgFch ;
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranTmaMod()
 {
-static int NumTmaCtr = -1 ;
+static int NumTmaCtr = 0 ;
 
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
@@ -988,19 +994,20 @@ std::vector<CZoneAer*> VecAffZones ;
 const int NbZones = g_GlobalVar.m_ZonesAerAll.GetNbZones() ;
 CZoneAer ** pZoneArr = g_GlobalVar.m_ZonesAerAll.GetZoneArr() ;
 
-// construction vecteur des zones a afficher
+// construction vecteur des zones a afficher dans fichier activation
 for ( long iz = 0 ; iz < NbZones ; iz++ )
     {
     if ( pZoneArr[iz]->m_DansFchActivation )
         VecAffZones.push_back( pZoneArr[iz] ) ;
     }
+// ajout des zones a afficher pas dans le fichier activation
 for ( long iz = 0 ; iz < NbZones ; iz++ )
     {
     if ( !pZoneArr[iz]->m_DansFchActivation )
         VecAffZones.push_back( pZoneArr[iz] ) ;
     }
 
-// selection des zones de meme nom que selectionnee
+// zones de meme nom que selectionnee
 std::vector<CZoneAer *> VecZone2Mod ;
 if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
     {
@@ -1013,15 +1020,6 @@ if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
     {
-    // titre
-    if ( VecZone2Mod.size() == 0 )
-        {
-        display.setCursor(10, 70);
-        display.print("Ret  ^^^ Cent.");
-        display.setCursor(5, 90);
-        display.print("<Mod. B. G.D.>");
-        }
-    else
         {
         // num tma/ctr
         display.setCursor(0, 15);
@@ -1121,8 +1119,11 @@ if ( BoutonGauche() )
     {
     m_MillisEcran0 = millis() ;
     NumTmaCtr-- ;
-    if ( NumTmaCtr < -1 )
-        NumTmaCtr = NbZones - 1 ;
+    if ( NumTmaCtr < 0 )
+        {
+        NumTmaCtr = 0 ;
+        return ECRAN_3a_TmaAll ;
+        }
     }
 
 // incrementation numero de zone
@@ -1140,6 +1141,9 @@ if ( BoutonGaucheDoubleAppui() )
     NumTmaCtr = 0 ;
     return ECRAN_3b_TmaMod ;
     }
+
+if ( BoutonDroitDoubleAppui() )
+    NumTmaCtr = VecAffZones.size()-1 ;
 
 return ECRAN_3b_TmaMod ;
 }
@@ -1389,7 +1393,10 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
+    {
+    NbAppButGD = 0 ;
     return ECRAN_0_Vz ;
+    }
 
 // si changement d'ecran ou non enregistrement point
 if ( BoutonCentre() )
@@ -1407,6 +1414,18 @@ if ( BoutonGauche() || BoutonDroit() )
     NbAppButGD++ ;
     }
 
+if ( BoutonGaucheDoubleAppui() )
+    {
+    NbAppButGD = 0 ;
+    return ECRAN_4_CfgFch ;
+    }
+
+if ( BoutonGaucheLong() )
+    {
+    NbAppButGD = 0 ;
+    return ECRAN_0_Vz ;
+    }
+
 // demande confirmation enregistrement point
 if ( NbAppButGD == 1 )
     {
@@ -1421,8 +1440,17 @@ if ( NbAppButGD == 1 )
     }
 
 // enregistrement point dans
-if ( NbAppButGD >= 2 )
+if ( NbAppButGD >= 2  )
     {
+    if ( g_GlobalVar.m_TerrainPosCur.m_Lat == 0. && g_GlobalVar.m_TerrainPosCur.m_Lon == 0. )
+        {
+        NbAppButGD = 0 ;
+        display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+        display.setCursor(0,70);
+        display.print( "Point null non enregistre" );
+        display.display(true);
+        return ECRAN_5_TmaDessous ;
+        }
     char TmpChar[50] ;
     NbAppButGD = 0 ;
     File FchTerCon = SD.open(TERRAIN_FCH,FILE_APPEND);
@@ -1472,12 +1500,6 @@ display.setFont(&FreeMonoBold12pt7b);
     display.println( g_GlobalVar.m_TerrainPosCur.m_AltiBaro , 0 ) ;
     }
 display.display(true);
-
-if ( BoutonGaucheDoubleAppui() )
-    return ECRAN_4_CfgFch ;
-
-if ( BoutonGaucheLong() )
-    return ECRAN_0_Vz ;
 
 return ECRAN_5_TmaDessous ;
 }
