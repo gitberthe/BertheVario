@@ -1,5 +1,5 @@
 le 20250120f :
- - modofication timing double appui et rando.
+ - modification timing double appui et rando.
 
 le 20250120e :
  - double appui gauche page precedente. Appui gauche long page Vz.
