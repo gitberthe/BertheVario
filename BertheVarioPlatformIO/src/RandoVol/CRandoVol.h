@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 13/01/2025
-/// \date modification : 14/01/2025
+/// \date modification : 20/01/2025
 ///
 
 #pragma once
@@ -29,11 +29,12 @@ public :
     void LireFichiersGpx() ;
     void AfficheRandoVol() ;
 
-    EtatRando m_EtatRando = InitRando ;
+    EtatRando m_EtatRando         = InitRando ; ///< pour le sequencement init/menu/rando
+    bool      m_OrientationCapGps = false ;      ///< orientation carte de trace
 
     const char * GetTrackName( int i ) const ;
 
-    std::vector<CFileGpx*>  m_VecGpx ;  ///< vecteur des Gpx
+    std::vector<CFileGpx*>  m_VecGpx ;  ///< vecteur des traces Gpx
 
 private :
     void LanceTacheRandoVol() ;

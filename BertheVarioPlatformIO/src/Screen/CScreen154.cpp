@@ -1780,6 +1780,12 @@ if ( NbInfo-- >= 0 )
 // affichage de la carte gpx
 else
     {
+    float CapGpsRad = - g_GlobalVar.m_CapGpsDeg * PI / 180. ;
+
+    // si pas d'orientation cap gps
+    if ( !g_GlobalVar.m_OrientationCapGps )
+        CapGpsRad = 0. ;
+
     // dessin de la trace
     for ( int ip = 1 ; ip < VecPts.size() ; ip++ )
         {
@@ -1790,23 +1796,35 @@ else
         PtsFin.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[ip].m_Lat ;
         PtsFin.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[ip].m_Lon ;
 
-        PtsDeb.m_Lat /=  Slope ;
-        PtsDeb.m_Lon /= -Slope ;
-        PtsFin.m_Lat /=  Slope ;
-        PtsFin.m_Lon /= -Slope ;
+        float y1 = PtsDeb.m_Lat /  Slope ;
+        float x1 = PtsDeb.m_Lon / -Slope ;
+        float y2 = PtsFin.m_Lat /  Slope ;
+        float x2 = PtsFin.m_Lon / -Slope ;
 
-        PtsDeb.m_Lat += 100 ;
-        PtsDeb.m_Lon += 100 ;
-        PtsFin.m_Lat += 100 ;
-        PtsFin.m_Lon += 100 ;
+        if ( g_GlobalVar.m_OrientationCapGps )
+            {
+            float x1p = x1*cosf(CapGpsRad)-y1*sinf(CapGpsRad) ;
+            float y1p = x1*sinf(CapGpsRad)+y1*cosf(CapGpsRad) ;
+            float x2p = x2*cosf(CapGpsRad)-y2*sinf(CapGpsRad) ;
+            float y2p = x2*sinf(CapGpsRad)+y2*cosf(CapGpsRad) ;
+            x1 = x1p ;
+            y1 = y1p ;
+            x2 = x2p ;
+            y2 = y2p ;
+            }
 
-        //Serial.println( PtsFin.m_Lon ) ;
+        x1 += 100 ;
+        y1 += 100 ;
+        x2 += 100 ;
+        y2 += 100 ;
 
-        display.drawLine( PtsDeb.m_Lon , PtsDeb.m_Lat , PtsFin.m_Lon , PtsFin.m_Lat , GxEPD_BLACK ) ;
+        // ligne de la trace
+        display.drawLine( x1 , y1 , x2 , y2 , GxEPD_BLACK ) ;
 
-        display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 1 , GxEPD_BLACK ) ;
+        // point de la trace
+        display.drawCircle( x1 , y1 , 1 , GxEPD_BLACK ) ;
         if ( ip == 1 )
-            display.drawCircle( PtsDeb.m_Lon , PtsDeb.m_Lat , 3 , GxEPD_BLACK ) ;
+            display.drawCircle( x1 , y1 , 3 , GxEPD_BLACK ) ;
         }
 
     // guidage point terrain connu
@@ -1816,30 +1834,40 @@ else
         PtsTerCon.m_Lat = g_GlobalVar.m_TerrainPosCur.m_Lat - VecPts[0].m_Lat ;
         PtsTerCon.m_Lon = g_GlobalVar.m_TerrainPosCur.m_Lon - VecPts[0].m_Lon;
 
-        PtsTerCon.m_Lat /=  Slope ;
-        PtsTerCon.m_Lon /= -Slope ;
+        float y1 = PtsTerCon.m_Lat / Slope ;
+        float x1 = PtsTerCon.m_Lon / -Slope ;
 
-        PtsTerCon.m_Lat += 100 ;
-        PtsTerCon.m_Lon += 100 ;
+        if ( g_GlobalVar.m_OrientationCapGps )
+            {
+            float x1p = x1*cosf(CapGpsRad)-y1*sinf(CapGpsRad) ;
+            float y1p = x1*sinf(CapGpsRad)+y1*cosf(CapGpsRad) ;
+            x1 = x1p ;
+            y1 = y1p ;
+            }
 
-        display.drawCircle( PtsTerCon.m_Lon , PtsTerCon.m_Lat , 1 , GxEPD_BLACK ) ;
-        display.drawCircle( PtsTerCon.m_Lon , PtsTerCon.m_Lat , 3 , GxEPD_BLACK ) ;
+        x1 += 100 ;
+        y1 += 100 ;
+
+        display.drawCircle( x1 , y1 , 1 , GxEPD_BLACK ) ;
+        display.drawCircle( x1 , y1 , 3 , GxEPD_BLACK ) ;
         }
 
-
-    // dessin du cap magnetique nord
-    int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-    int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
-
-    display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
+    // position courante
     display.drawCircle( 100 , 100 , 4 , GxEPD_BLACK ) ;
     display.drawCircle( 100 , 100 , 3 , GxEPD_BLACK ) ;
 
-    // dessin du cap gps
-    int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
-    int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+    if ( !g_GlobalVar.m_OrientationCapGps )
+        {
+        // dessin du cap magnetique nord
+        int xnm = -50 * cosf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+        int ynm =  50 * sinf( g_GlobalVar.m_Mpu9250.m_CapMagnetique * PI / 180. - PI/2. ) + 100 ;
+        display.drawLine( 100 , 100 , xnm , ynm , GxEPD_BLACK ) ;
 
-    display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
+        // dessin du cap gps
+        int xng = -30 * cosf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+        int yng =  30 * sinf( -g_GlobalVar.m_CapGpsDeg * PI / 180. + PI + PI/2. ) + 100 ;
+        display.drawLine( 100 , 100 , xng , yng , GxEPD_BLACK ) ;
+        }
 
     // nom de la trace
     display.setFont(&FreeMonoBold9pt7b);
@@ -1861,6 +1889,12 @@ else
         Slope /= 2. ;
     if ( g_GlobalVar.BoutonGauche() )
         Slope *= 2. ;
+    // modification orientation carte
+    if ( g_GlobalVar.BoutonGaucheLong() || g_GlobalVar.BoutonDroitLong() )
+        {
+        g_GlobalVar.BeepOk() ;
+        g_GlobalVar.m_OrientationCapGps = !g_GlobalVar.m_OrientationCapGps ;
+        }
     }
 
 display.display(true);
