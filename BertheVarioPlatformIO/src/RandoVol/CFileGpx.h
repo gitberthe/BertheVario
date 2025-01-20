@@ -4,12 +4,12 @@
 /// \brief
 ///
 /// \date creation     : 14/01/2025
-/// \date modification : 18/01/2025
+/// \date modification : 20/01/2025
 ///
 
 #pragma once
 
-#define SLOPE_MAX_DIV 200
+#define SLOPE_MAX_DIV (200.)
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fichier Gpx de rando-vol. Avec son integration au GnuVario

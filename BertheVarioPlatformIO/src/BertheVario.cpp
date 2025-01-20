@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 19/01/2025
+/// \date modification : 20/01/2025
 ///
 
-char NumVer[] = "202501194" ;
+char NumVer[] = "20250120a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -93,7 +93,7 @@ else
     g_GlobalVar.m_Config.LectureFichier() ;
 
     // lecture fichier terrains
-    g_GlobalVar.m_TerrainArr.LireFichierTerrains() ;
+    g_GlobalVar.m_TerrainArr.LireFichierTerrains(TERRAIN_FCH) ;
 
     // lecture fichier zones aeriennes
     g_GlobalVar.m_ZonesAerAll.LectureFichiers() ;

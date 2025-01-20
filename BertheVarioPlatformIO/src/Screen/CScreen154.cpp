@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 19/01/2025
+/// \date modification : 20/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -1571,7 +1571,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
         /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.64608830455222 ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 3.1817007064819336 ; // */
         // paillaret
-        g_GlobalVar.m_TerrainPosCur.m_Lat = 45.49812  ;
+        /*g_GlobalVar.m_TerrainPosCur.m_Lat = 45.49812  ;
         g_GlobalVar.m_TerrainPosCur.m_Lon = 2.82271 ; // */
         // pdd
         /* g_GlobalVar.m_TerrainPosCur.m_Lat = 45.747387022763235 ;
@@ -1593,13 +1593,12 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
 // si initialisation menu
 if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     {
+    // message
     display.setCursor(5, 75);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        {
-        // message
         display.print("Lecture *.gpx");
-        }
     display.display(true);
+    // lecture fichiers
     g_GlobalVar.LireFichiersGpx() ;
     g_GlobalVar.m_EtatRando = CRandoVol::AfficheMenu ;
     // pour vide le bouton droit
@@ -1679,8 +1678,10 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitTrace )
 const std::vector<CFileGpx::StPoint> & VecPts = *(pFileGpx->m_pVecTrack) ;
 
 // si navigation
-static float Slope = pFileGpx->m_SlopeMax ;
+static float Slope = pFileGpx->m_SlopeMax + 0.00001 ;
 int EchelleMetre = Slope*MilesParDegres*100*UnMileEnMetres ;
+if ( EchelleMetre < 2 )
+    EchelleMetre = 2 ;
 static int NbInfo = -1 ;
 
 // demande page info

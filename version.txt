@@ -1,3 +1,6 @@
+le 20250120a :
+ - ajout de fichier ptremarq.txt identique terconnu.txt mais uniquement en rando-vol.
+
 le 20250119a :
  - page de boot modifiee.
  - appuie long G / D en page Vz.

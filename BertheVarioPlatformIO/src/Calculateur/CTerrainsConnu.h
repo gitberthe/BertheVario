@@ -4,13 +4,14 @@
 /// \brief
 ///
 /// \date creation     : 17/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 20/01/2025
 ///
 
 #ifndef _TERRAINCONNU_
 #define _TERRAINCONNU_
 
 #define TERRAIN_FCH         "/config/terconnu.txt"
+#define PT_REMARQUABLE_FCH  "/config/ptremarq.txt"
 #define FINESSE_IMPOSSIBLE  10000
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +43,7 @@ class CTerrainsConnu : public CSortArray<CLocTerrain>
 {
 public :
 
-    void  LireFichierTerrains() ;
+    void  LireFichierTerrains( const char * NameFch ) ;
     void  CalcTerrainPlusProche() ;
     const CLocTerrain * GetTerrainProche( float & Finesse ) ;
     const CLocTerrain * GetData(int it) const

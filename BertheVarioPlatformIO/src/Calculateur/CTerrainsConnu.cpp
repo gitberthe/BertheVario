@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 17/03/2024
-/// \date modification : 01/04/2024
+/// \date modification : 20/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -52,13 +52,13 @@ return false ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Lecture du fichier de terrains et ajout position de debut de vol.
-void CTerrainsConnu::LireFichierTerrains()
+void CTerrainsConnu::LireFichierTerrains(const char * NameFch)
 {
 char * TmpChar = new char [10000] ;
 int ic = 0 ;
 
 // ouverture fichier
-File file = SD.open(TERRAIN_FCH);
+File file = SD.open(NameFch);
 if ( !file )
     {
     Serial.println("Failed to open file for reading");
@@ -119,6 +119,12 @@ for ( int i = 0 ; i < VecLigne.size() ; i++ )
     }
 
 // ajout des terrains au tableau local
+if ( m_pTerrainsArr != NULL )
+    {
+    for ( int it = 0 ; it < CSortArray::m_Size ; it++ )
+        delete m_pTerrainsArr[it] ;
+    delete [] m_pTerrainsArr ;
+    }
 m_pTerrainsArr = new CLocTerrain* [VecTerrain.size() + 1] ;
 int iter = 0 ;
 for ( ; iter < VecTerrain.size() ; iter++ )

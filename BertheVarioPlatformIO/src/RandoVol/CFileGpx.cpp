@@ -94,7 +94,7 @@ for ( int i = 0 ; i < (*m_pVecTrack).size() ; i++ )
     if ( DeltaLL < Dist )
         DeltaLL = Dist ;
     }
-m_SlopeMax = DeltaLL/SLOPE_MAX_DIV ;
+m_SlopeMax = 3.*DeltaLL/SLOPE_MAX_DIV ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
