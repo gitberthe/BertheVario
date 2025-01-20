@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 18/10/2024
+/// \date modification : 20/10/2024
 ///
 
 #include "../BertheVario.h"
@@ -130,7 +130,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     #endif // TMA_DEBUG
 
     // declenchement du vol par bouton droit si ecran 0_Vz
-    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit() )
+    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroitTousAppui() )
         {
         // raz difference altitude presion/wgs84 = altitude affichée est barometrique pure
         if ( ! g_GlobalVar.m_StabGps.IsGpsStable() )
@@ -293,7 +293,7 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
     delay( 500 ) ;
 
     // arret du vol par bouton droit
-    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroit()
+    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroitTousAppui()
          && g_GlobalVar.m_VitesseKmh < 5. && fabsf(g_GlobalVar.m_VitVertMS) < 0.4 )
         {
         // beep prise en compte relance

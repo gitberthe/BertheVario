@@ -637,16 +637,7 @@ if ( BoutonCentre() )
     return ECRAN_1_Histo ;
 
 if ( BoutonGaucheLong() )
-    {
-    g_GlobalVar.PurgeBoutons( 2000 ) ;
-    return ECRAN_6_Sys ;
-    }
-
-if ( BoutonDroitLong() )
-    {
-    g_GlobalVar.PurgeBoutons( 2000 ) ;
     return ECRAN_3a_TmaAll ;
-    }
 
 // si activation / desactivation beep attente Gps / Vitesse
 if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
@@ -654,6 +645,9 @@ if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
       g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ) &&*/
       BoutonGauche() )
     g_GlobalVar.m_BeepAttenteGVZone = ! g_GlobalVar.m_BeepAttenteGVZone ;
+
+if ( BoutonGaucheDoubleAppui() )
+    return ECRAN_6_Sys ;
 
 return ECRAN_0_Vz ;
 
@@ -776,7 +770,16 @@ fin_histo :
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( (Temps/1000) > m_SecRetourEcran0 )
+    {
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_0_Vz ;
+    }
+
+if ( BoutonGaucheLong() )
+    {
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
+    return ECRAN_0_Vz ;
+    }
 
 // si changement de numero histo vol
 if ( BoutonDroit() )
@@ -807,109 +810,14 @@ if ( BoutonCentre() )
     return ECRAN_2a_ListeIgc ;
     }
 
+if ( BoutonGaucheDoubleAppui() )
+    {
+    g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
+    return ECRAN_0_Vz ;
+    }
+
 g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
 return ECRAN_1_Histo ;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-/// \brief Cette fonction affiche les informations de l'ecran 3, orienté systeme.
-/// \return l'etat suivant de l'automate
-CGestEcrans::EtatsAuto CScreen154::EcranSys()
-{
-// date
-char TmpCharDate[35] ;
-int secondes_date = g_GlobalVar.m_HeureSec ;
-sprintf( TmpCharDate ,"%02d%02d%02d-%02d:%02d" ,
-    (int)(g_GlobalVar.m_Annee - 2000) ,
-    g_GlobalVar.m_Mois ,
-    g_GlobalVar.m_Jour ,
-    (int) (secondes_date/3600) ,   // heure
-    (int)((secondes_date/60)%60)   // minutes
-    ) ;
-
-// v batterie
-char TmpCharVB[30] ;
-sprintf( TmpCharVB , "%1.2fv", g_GlobalVar.GetVoltage() ) ;
-
-// cap magnetique
-char TmpCharCM[30] ;
-sprintf( TmpCharCM , "Cap m :   %3dd", (int)g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
-
-// alti baro
-char TmpAltiBaro[30] ;
-sprintf( TmpAltiBaro , "Al bar:  %4.0fm", g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
-
-// temperature
-char TmpCharTemp[30] ;
-sprintf( TmpCharTemp , "Temp  :  %4.1fd", g_GlobalVar.m_MS5611.GetTemperatureDegres() ) ;
-
-// memoire
-char TmpCharMem[30] ;
-
-// pourcentage utilisation cpu
-g_GlobalVar.m_MutexCore.PrendreMutex() ;
- int cpu0 = g_GlobalVar.m_PercentCore0 ;
- int cpu1 = g_GlobalVar.m_PercentCore1 ;
-g_GlobalVar.m_MutexCore.RelacherMutex() ;
-
-display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-display.setFont(&FreeMonoBold12pt7b);
-
-// date et heure
-display.setCursor(12, 15);
-display.print(TmpCharDate) ;
-
-// alti baro
-display.setCursor(0, 38);
-display.print(TmpAltiBaro);
-
-// Cap Magnetique
-display.setCursor(0, 58);
-display.print(TmpCharCM);
-
-// temperature
-display.setCursor(0, 78);
-display.print(TmpCharTemp);
-
-// core 0 usage
-display.setCursor(0, 98);
-display.print("core 0:    ");
-display.print(cpu0) ;
-display.print("%");
-
-// core 1 usage
-display.setCursor(0,118);
-display.print("core 1:    ");
-display.print(cpu1) ;
-display.print("%");
-
-// memory
-display.setCursor(0,138);
-sprintf( TmpCharMem , "f mem :%6db", (int) esp_get_free_heap_size() ) ;
-display.print(TmpCharMem);
-
-// batterie
-display.setCursor(0,158);
-display.print("V bat :  ");
-display.print(TmpCharVB);
-
-// firmware
-display.setCursor(0, 195);
-display.print("fir:");
-display.print(NumVer);
-
-display.display(true) ;
-
-// si time out ecran
-unsigned long Temps = millis() - m_MillisEcran0 ;
-if ( (Temps/1000) > m_SecRetourEcran0 )
-    return ECRAN_0_Vz ;
-
-// si changement d'ecran
-if ( BoutonCentre() )
-    return ECRAN_0_Vz ;
-
-return ECRAN_6_Sys ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1048,6 +956,18 @@ unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( ((Temps/1000) > m_SecRetourEcran0) && (iChamps == -1) )
     return ECRAN_0_Vz ;
 
+bool GaucheDoubleAppui = BoutonGaucheDoubleAppui() ;
+if ( GaucheDoubleAppui && !Modif && iChamps == -1 )
+    return ECRAN_3a_TmaAll ;
+
+if ( GaucheDoubleAppui && !Modif && iChamps != -1 )
+    {
+    iChamps = -1 ;
+    return ECRAN_4_CfgFch ;
+    }
+
+if ( BoutonGaucheLong() && !Modif && iChamps == -1 )
+    return ECRAN_0_Vz ;
 
 return ECRAN_4_CfgFch ;
 }
@@ -1215,6 +1135,12 @@ if ( BoutonDroit() )
         NumTmaCtr = 0 ;
     }
 
+if ( BoutonGaucheDoubleAppui() )
+    {
+    NumTmaCtr = 0 ;
+    return ECRAN_3b_TmaMod ;
+    }
+
 return ECRAN_3b_TmaMod ;
 }
 
@@ -1309,6 +1235,12 @@ if ( BoutonGauche() )
 if ( BoutonCentre() )
     return ECRAN_4_CfgFch ;
 
+if ( BoutonGaucheDoubleAppui() )
+    return ECRAN_2a_ListeIgc ;
+
+if ( BoutonGaucheLong() )
+    return ECRAN_0_Vz ;
+
 return ECRAN_3a_TmaAll ;
 }
 
@@ -1374,6 +1306,12 @@ if ( BoutonGauche() )
 if ( BoutonCentre() )
     return ECRAN_3a_TmaAll ;
 
+if ( BoutonGaucheDoubleAppui() )
+    return ECRAN_1_Histo ;
+
+if ( BoutonGaucheLong() )
+    return ECRAN_0_Vz ;
+
 return ECRAN_2a_ListeIgc ;
 }
 
@@ -1421,6 +1359,12 @@ if ( BoutonDroit() )
     g_GlobalVar.ArchiveIgc() ;
     return ECRAN_2a_ListeIgc ;
     }
+
+if ( BoutonGaucheDoubleAppui() )
+    return ECRAN_1_Histo ;
+
+if ( BoutonGaucheLong() )
+    return ECRAN_0_Vz ;
 
 return ECRAN_2b_ConfirmArchIgc ;
 }
@@ -1529,7 +1473,120 @@ display.setFont(&FreeMonoBold12pt7b);
     }
 display.display(true);
 
+if ( BoutonGaucheDoubleAppui() )
+    return ECRAN_4_CfgFch ;
+
+if ( BoutonGaucheLong() )
+    return ECRAN_0_Vz ;
+
 return ECRAN_5_TmaDessous ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/// \brief Cette fonction affiche les informations de l'ecran sys, orienté systeme.
+/// \return l'etat suivant de l'automate
+CGestEcrans::EtatsAuto CScreen154::EcranSys()
+{
+// date
+char TmpCharDate[35] ;
+int secondes_date = g_GlobalVar.m_HeureSec ;
+sprintf( TmpCharDate ,"%02d%02d%02d-%02d:%02d" ,
+    (int)(g_GlobalVar.m_Annee - 2000) ,
+    g_GlobalVar.m_Mois ,
+    g_GlobalVar.m_Jour ,
+    (int) (secondes_date/3600) ,   // heure
+    (int)((secondes_date/60)%60)   // minutes
+    ) ;
+
+// v batterie
+char TmpCharVB[30] ;
+sprintf( TmpCharVB , "%1.2fv", g_GlobalVar.GetVoltage() ) ;
+
+// cap magnetique
+char TmpCharCM[30] ;
+sprintf( TmpCharCM , "Cap m :   %3dd", (int)g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
+
+// alti baro
+char TmpAltiBaro[30] ;
+sprintf( TmpAltiBaro , "Al bar:  %4.0fm", g_GlobalVar.m_MS5611.GetAltiMetres() ) ;
+
+// temperature
+char TmpCharTemp[30] ;
+sprintf( TmpCharTemp , "Temp  :  %4.1fd", g_GlobalVar.m_MS5611.GetTemperatureDegres() ) ;
+
+// memoire
+char TmpCharMem[30] ;
+
+// pourcentage utilisation cpu
+g_GlobalVar.m_MutexCore.PrendreMutex() ;
+ int cpu0 = g_GlobalVar.m_PercentCore0 ;
+ int cpu1 = g_GlobalVar.m_PercentCore1 ;
+g_GlobalVar.m_MutexCore.RelacherMutex() ;
+
+display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+display.setFont(&FreeMonoBold12pt7b);
+
+// date et heure
+display.setCursor(12, 15);
+display.print(TmpCharDate) ;
+
+// alti baro
+display.setCursor(0, 38);
+display.print(TmpAltiBaro);
+
+// Cap Magnetique
+display.setCursor(0, 58);
+display.print(TmpCharCM);
+
+// temperature
+display.setCursor(0, 78);
+display.print(TmpCharTemp);
+
+// core 0 usage
+display.setCursor(0, 98);
+display.print("core 0:    ");
+display.print(cpu0) ;
+display.print("%");
+
+// core 1 usage
+display.setCursor(0,118);
+display.print("core 1:    ");
+display.print(cpu1) ;
+display.print("%");
+
+// memory
+display.setCursor(0,138);
+sprintf( TmpCharMem , "f mem :%6db", (int) esp_get_free_heap_size() ) ;
+display.print(TmpCharMem);
+
+// batterie
+display.setCursor(0,158);
+display.print("V bat :  ");
+display.print(TmpCharVB);
+
+// firmware
+display.setCursor(0, 195);
+display.print("fir:");
+display.print(NumVer);
+
+display.display(true) ;
+
+// si time out ecran
+unsigned long Temps = millis() - m_MillisEcran0 ;
+if ( (Temps/1000) > m_SecRetourEcran0 )
+    return ECRAN_0_Vz ;
+
+// si changement d'ecran
+if ( BoutonCentre() )
+    return ECRAN_0_Vz ;
+
+if ( BoutonGaucheLong() )
+    return ECRAN_0_Vz ;
+
+if ( BoutonGaucheDoubleAppui() )
+    return ECRAN_5_TmaDessous ;
+
+return ECRAN_6_Sys ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
