@@ -963,8 +963,11 @@ if ( ((Temps/1000) > m_SecRetourEcran0) && (iChamps == -1) )
 if ( BoutonDroitDoubleAppui() && !Modif )
     iChamps = g_GlobalVar.m_Config.m_LinesVect.size()-1 ;
 
-if ( BoutonGaucheDoubleAppui() && !Modif )
+bool GaucheDoubleAppui = BoutonGaucheDoubleAppui() ;
+if ( GaucheDoubleAppui && !Modif && iChamps > 0)
     iChamps = 0 ;
+if ( GaucheDoubleAppui && !Modif && iChamps == -1 )
+    return ECRAN_3a_TmaAll ;
 
 // retour page Vz
 if ( BoutonGaucheLong() && !Modif )

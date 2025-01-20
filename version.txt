@@ -1,4 +1,8 @@
 le 20250120g :
+ - modification double appui page cfg file.
+ - modification timing double appui et rando.
+
+le 20250120g :
  - hamonisation gestion touche tma/cfg file.
 
 le 20250120f :
