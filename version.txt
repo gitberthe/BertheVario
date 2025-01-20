@@ -1,5 +1,8 @@
+le 20250120f :
+ - modofication timing double appui et rando.
+
 le 20250120e :
- - Double appui gauche page precedente. Appui gauche long page Vz.
+ - double appui gauche page precedente. Appui gauche long page Vz.
 
 le 20250120d :
  - fuite memoire mode rando.

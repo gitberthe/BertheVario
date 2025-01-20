@@ -1642,8 +1642,6 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
     if ( g_GlobalVar.IsGpsOk() )
         g_GlobalVar.m_EtatRando = CRandoVol::InitAfficheMenu ;
 
-    // pour vide le bouton droit
-    g_GlobalVar.BoutonDroit() ;
     return ;
     }
 
@@ -1659,7 +1657,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     g_GlobalVar.LireFichiersGpx() ;
     g_GlobalVar.m_EtatRando = CRandoVol::AfficheMenu ;
     // pour vide le bouton droit
-    g_GlobalVar.BoutonDroit() ;
+    g_GlobalVar.RazBoutons() ;
     return ;
     }
 
@@ -1670,12 +1668,12 @@ static int selection = 0 ;
 if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     {
     // defilement du menu
-    if ( g_GlobalVar.BoutonDroit() && selection < (g_GlobalVar.m_VecGpx.size()-1) )
+    if ( g_GlobalVar.BoutonDroitTousAppui() && selection < (g_GlobalVar.m_VecGpx.size()-1) )
         {
         NbMenu = 0 ;
         selection++ ;
         }
-    if ( g_GlobalVar.BoutonGauche() && selection > 0 )
+    if ( g_GlobalVar.BoutonGaucheTousAppui() && selection > 0 )
         {
         NbMenu = 0 ;
         selection-- ;
@@ -1688,9 +1686,8 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     display.setFont(&FreeMonoBold9pt7b);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 
-    char TmpChar[50] ;
     // nom trace des traces proches
-
+    char TmpChar[50] ;
     for ( int it = 0 ; it < 10 ; it++ )
         {
         if ( it == selection )
@@ -1947,11 +1944,9 @@ else
     if ( g_GlobalVar.BoutonGauche() )
         Slope *= 2. ;
     // modification orientation carte
-    if ( g_GlobalVar.BoutonGaucheLong() || g_GlobalVar.BoutonDroitLong() )
-        {
-        g_GlobalVar.BeepOk() ;
+    if ( g_GlobalVar.BoutonGaucheLong() || g_GlobalVar.BoutonDroitLong() ||
+         g_GlobalVar.BoutonGaucheDoubleAppui() || g_GlobalVar.BoutonDroitDoubleAppui() )
         g_GlobalVar.m_OrientationCapGps = !g_GlobalVar.m_OrientationCapGps ;
-        }
     }
 
 display.display(true);
