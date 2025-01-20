@@ -110,7 +110,7 @@ if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_r
     }
 else
     {
-    //char c = 2 ; //219 ;
+    /*//char c = 2 ; //219 ;
     char c = '#';
     char TmpChar[15] = {0} ;
     for ( int i = 0 ; i < 14 ; i++ )
@@ -120,17 +120,17 @@ else
     int ib = 0 ;
     while( ib++ < 10 )
         display.println( TmpChar );
-    display.display(true) ;
-    /*int ib = 0 ;
-    while( ib++ < 5 )
+    display.display(true) ;*/
+    int hauteur = 500 ;
+    for ( int y = 0 ; y < 200 ; y += hauteur )
         {
-        display.print( "" );
-        display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+        //display.print( "" );
+        display.fillRect(0,y, 200, hauteur, GxEPD_BLACK ); // x y w h
         display.display(true) ;
-        display.print( "" );
-        display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+        //display.print( "" );
+        display.fillRect(0,y, 200, hauteur, GxEPD_WHITE ); // x y w h
         display.display(true) ;
-        }*/
+        }
     }
 
 /*display.setFullWindow() ;

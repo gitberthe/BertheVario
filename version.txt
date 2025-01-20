@@ -1,3 +1,6 @@
+le 20250120c :
+ - modification raz ecran temps froid.
+
 le 20250120b :
  - en mode rando, appui long G/D orientation carte au cap gps.
 
