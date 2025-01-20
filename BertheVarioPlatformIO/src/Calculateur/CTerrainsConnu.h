@@ -43,6 +43,8 @@ class CTerrainsConnu : public CSortArray<CLocTerrain>
 {
 public :
 
+    ~CTerrainsConnu() ;
+
     void  LireFichierTerrains( const char * NameFch ) ;
     void  CalcTerrainPlusProche() ;
     const CLocTerrain * GetTerrainProche( float & Finesse ) ;

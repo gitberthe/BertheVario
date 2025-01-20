@@ -10,6 +10,19 @@
 #include "../BertheVario.h"
 
 ////////////////////////////////////////////////////////////////////////////////
+/// \brief
+CTerrainsConnu::~CTerrainsConnu()
+{
+if ( m_pTerrainsArr != NULL )
+    {
+    for ( int it = 0 ; it < CSortArray::m_Size ; it++ )
+        if ( m_pTerrainsArr[it] != & g_GlobalVar.m_TerrainPosDeco )
+            delete m_pTerrainsArr[it] ;
+    delete [] m_pTerrainsArr ;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 /// \brief Positionne la finesse par rapport a la position courante.
 /// Ainsi que du gisement.distance.
 void CLocTerrain::CalcFinesse()
@@ -118,19 +131,21 @@ for ( int i = 0 ; i < VecLigne.size() ; i++ )
         }
     }
 
-// ajout des terrains au tableau local
+// liberation terrain
 if ( m_pTerrainsArr != NULL )
     {
     for ( int it = 0 ; it < CSortArray::m_Size ; it++ )
-        delete m_pTerrainsArr[it] ;
+        if ( m_pTerrainsArr[it] != & g_GlobalVar.m_TerrainPosDeco )
+            delete m_pTerrainsArr[it] ;
     delete [] m_pTerrainsArr ;
     }
+// ajout des terrains au tableau local
 m_pTerrainsArr = new CLocTerrain* [VecTerrain.size() + 1] ;
-int iter = 0 ;
-for ( ; iter < VecTerrain.size() ; iter++ )
+CSortArray::m_Size = VecTerrain.size() + 1  ;
+for ( int iter = 0 ; iter < VecTerrain.size() ; iter++ )
     m_pTerrainsArr[iter] = VecTerrain[iter] ;
-m_pTerrainsArr[iter++] = & g_GlobalVar.m_TerrainPosDeco ;
-CSortArray::m_Size = iter ;
+// ajout pos deco
+m_pTerrainsArr[VecTerrain.size()] = & g_GlobalVar.m_TerrainPosDeco ;
 
 // liberation memoire des lignes
 for ( int i = 0 ; i < VecLigne.size() ; i++ )

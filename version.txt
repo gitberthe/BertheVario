@@ -1,3 +1,6 @@
+le 20250120d :
+ - fuite meoire mode rando.
+
 le 20250120c :
  - modification raz ecran temps froid.
 

@@ -1,10 +1,10 @@
-////////////////////////////////////////////////////////////////////////////////
+////////////Ķ////////////////////////////////////////////////////////////////////
 /// \file CGlobalVar.cpp
 ///
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 20/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -49,6 +49,11 @@ g_GlobalVar.m_PileVit.ResetVit() ;
 
 // on ne refait pas la stabilisation gps
 g_GlobalVar.m_StabGps.SetAlwaysStable() ;
+
+// raz deco
+g_GlobalVar.m_TerrainPosDeco.m_Lat =
+g_GlobalVar.m_TerrainPosDeco.m_Lon =
+g_GlobalVar.m_TerrainPosDeco.m_AltiBaro = 0 ;
 
 // demande d'arret des taches
 g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run = false ;
