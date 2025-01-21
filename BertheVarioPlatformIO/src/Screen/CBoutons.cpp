@@ -31,7 +31,7 @@ xTaskCreatePinnedToCore(TacheScanButton, "ScanButton", SCAN_BUTTON_STACK_SIZE, t
 /// \brief Lecture bouton gauche.
 bool CBoutons::BoutonGauche()
 {
-if ( m_BoutonGauche )
+if ( m_BoutonGauche && ! g_GlobalVar.m_StopLoop )
     {
     m_BoutonGauche = false ;
     return true ;
@@ -43,7 +43,7 @@ return false ;
 /// \brief Lecture bouton gauche long.
 bool CBoutons::BoutonGaucheLong()
 {
-if ( m_BoutonGaucheLong )
+if ( m_BoutonGaucheLong && ! g_GlobalVar.m_StopLoop )
     {
     m_BoutonGaucheLong = false ;
     return true ;
@@ -55,7 +55,7 @@ return false ;
 /// \brief Lecture bouton gauche double appui.
 bool CBoutons::BoutonGaucheDoubleAppui()
 {
-if ( m_BoutonGaucheDoubleAppui )
+if ( m_BoutonGaucheDoubleAppui && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonGaucheDoubleAppui = false ;
     return true ;
@@ -67,7 +67,7 @@ return false ;
 /// \brief Lecture bouton centre double appui.
 bool CBoutons::BoutonCentreDoubleAppui()
 {
-if ( m_BoutonCentreDoubleAppui )
+if ( m_BoutonCentreDoubleAppui && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonCentreDoubleAppui = false ;
     return true ;
@@ -79,7 +79,7 @@ return false ;
 /// \brief Lecture bouton droit double appui.
 bool CBoutons::BoutonDroitDoubleAppui()
 {
-if ( m_BoutonDroitDoubleAppui )
+if ( m_BoutonDroitDoubleAppui && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonDroitDoubleAppui = false ;
     return true ;
@@ -119,7 +119,7 @@ return false ;
 /// \brief Lecture reset bouton centre.
 bool CBoutons::BoutonCentre()
 {
-if ( m_BoutonCentre )
+if ( m_BoutonCentre && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonCentre = false ;
     return true ;
@@ -131,7 +131,7 @@ return false ;
 /// \brief Lecture reset bouton centre.
 bool CBoutons::BoutonCentreLong()
 {
-if ( m_BoutonCentreLong )
+if ( m_BoutonCentreLong && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonCentreLong = false ;
     return true ;
@@ -143,7 +143,7 @@ return false ;
 /// \brief Lecture reset bouton droit.
 bool CBoutons::BoutonDroit()
 {
-if ( m_BoutonDroit )
+if ( m_BoutonDroit && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonDroit = false ;
     return true ;
@@ -155,7 +155,7 @@ return false ;
 /// \brief Lecture reset bouton droit long.
 bool CBoutons::BoutonDroitLong()
 {
-if ( m_BoutonDroitLong )
+if ( m_BoutonDroitLong && ! g_GlobalVar.m_StopLoop)
     {
     m_BoutonDroitLong = false ;
     return true ;
@@ -267,32 +267,40 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             if ( digitalRead(BUTTON_A_PIN) )
                 break ;
             }
-        g_GlobalVar.m_StopLoop = false ;
-        unsigned long time = millis()-DebutAppui ;
         // appui long
-        if ( time >= DELAY_APPUI_LONG )
+        if ( (millis()-DebutAppui) >= DELAY_APPUI_LONG )
             {
             pThis->m_BoutonGaucheLong = true ;
             g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
             CGlobalVar::BeepOk() ;
             }
-        else if ( (millis()-pThis->m_BoutonGaucheDernierAppui) < DELAY_DOUBLE_APPUI )
+        // double appui
+        else if ( (millis()-DebutAppui) < DELAY_DOUBLE_APPUI )
             {
-            pThis->m_BoutonGaucheDoubleAppui = true ;
-            CGlobalVar::beeper( 8000 , 300 ) ;
-            pThis->m_BoutonGauchePrisEnCompte = true ;
+            delay( DELAY_INTER_DOUBLE_APPUI ) ;
+            while ( (millis()-DebutAppui) < DELAY_DOUBLE_APPUI )
+                {
+                if ( !digitalRead(BUTTON_A_PIN) )
+                    {
+                    pThis->m_BoutonGaucheDoubleAppui = true ;
+                    CGlobalVar::beeper( 8000 , 300 ) ;
+                    while ( !digitalRead(BUTTON_A_PIN) )
+                        delay( 1 ) ;
+                    goto end_a ;
+                    }
+                }
+            pThis->m_BoutonGauche = true ;
+            CGlobalVar::BeepOk() ;
+            end_a:
+                {
+                }
             }
         else
-            pThis->m_BoutonGauchePrisEnCompte = false ;
-        pThis->m_BoutonGaucheDernierAppui = millis() ;
-        }
-    else if ( (millis()-pThis->m_BoutonGaucheDernierAppui) > DELAY_DOUBLE_APPUI && !pThis->m_BoutonGauchePrisEnCompte )
-        {
-        CGlobalVar::BeepOk() ;
-        pThis->m_BoutonGauche = true ;
-        pThis->m_BoutonGaucheDoubleAppui = false ;
-        pThis->m_BoutonGaucheLong = false ;
-        pThis->m_BoutonGauchePrisEnCompte = true ;
+            {
+            pThis->m_BoutonGauche = true ;
+            CGlobalVar::BeepOk() ;
+            }
+        g_GlobalVar.m_StopLoop = false ;
         }
 
     // si bouton centre
@@ -316,34 +324,42 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             if ( digitalRead(BUTTON_B_PIN) )
                 break ;
             }
-        g_GlobalVar.m_StopLoop = false ;
-        unsigned long time = millis()-DebutAppui ;
         // appui long
-        if ( time >= DELAY_APPUI_LONG )
+        if ( (millis()-DebutAppui) >= DELAY_APPUI_LONG )
             {
             //pThis->m_BoutonCentreLong = true ;
             g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
             CGlobalVar::BeepOk() ;
             g_GlobalVar.ScreenRaz() ;
             }
-        else if ( (millis()-pThis->m_BoutonCentreDernierAppui) < DELAY_DOUBLE_APPUI )
+        // double appui
+        else if ( (millis()-DebutAppui) < DELAY_DOUBLE_APPUI )
             {
-            //pThis->m_BoutonCentreDoubleAppui = true ;
-            CGlobalVar::beeper( 8000 , 300 ) ;
-            g_GlobalVar.ScreenRaz(true) ;
-            pThis->m_BoutonCentrePrisEnCompte = true ;
+            delay( DELAY_INTER_DOUBLE_APPUI ) ;
+            while ( (millis()-DebutAppui) < DELAY_DOUBLE_APPUI )
+                {
+                if ( !digitalRead(BUTTON_B_PIN) )
+                    {
+                    //pThis->m_BoutonCentreDoubleAppui = true ;
+                    CGlobalVar::beeper( 8000 , 300 ) ;
+                    g_GlobalVar.ScreenRaz(true) ;
+                    while ( !digitalRead(BUTTON_B_PIN) )
+                        delay( 1 ) ;
+                    goto end_b ;
+                    }
+                }
+            pThis->m_BoutonCentre = true ;
+            CGlobalVar::BeepOk() ;
+            end_b:
+                {
+                }
             }
         else
-            pThis->m_BoutonCentrePrisEnCompte = false ;
-        pThis->m_BoutonCentreDernierAppui = millis() ;
-        }
-    else if ( (millis()-pThis->m_BoutonCentreDernierAppui) > DELAY_DOUBLE_APPUI && !pThis->m_BoutonCentrePrisEnCompte )
-        {
-        CGlobalVar::BeepOk() ;
-        pThis->m_BoutonCentre = true ;
-        pThis->m_BoutonCentreDoubleAppui = false ;
-        pThis->m_BoutonCentreLong = false ;
-        pThis->m_BoutonCentrePrisEnCompte = true ;
+            {
+            pThis->m_BoutonCentre = true ;
+            CGlobalVar::BeepOk() ;
+            }
+        g_GlobalVar.m_StopLoop = false ;
         }
 
     // si bouton droit
@@ -367,34 +383,41 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             if ( digitalRead(BUTTON_C_PIN) )
                 break ;
             }
-        g_GlobalVar.m_StopLoop = false ;
-        unsigned long time = millis()-DebutAppui ;
         // appui long
-        if ( time >= DELAY_APPUI_LONG )
+        if ( (millis()-DebutAppui) >= DELAY_APPUI_LONG )
             {
             pThis->m_BoutonDroitLong = true ;
             g_GlobalVar.m_DelayPurgeMs = DELAY_PURGE_LONG ;
             CGlobalVar::BeepOk() ;
             }
-        else if ( (millis()-pThis->m_BoutonDroitDernierAppui) < DELAY_DOUBLE_APPUI )
+        // double appui
+        else if ( (millis()-DebutAppui) < DELAY_DOUBLE_APPUI )
             {
-            pThis->m_BoutonDroitDoubleAppui = true ;
-            CGlobalVar::beeper( 8000 , 300 ) ;
-            pThis->m_BoutonDroitPrisEnCompte = true ;
+            delay( DELAY_INTER_DOUBLE_APPUI ) ;
+            while ( (millis()-DebutAppui) < DELAY_DOUBLE_APPUI )
+                {
+                if ( !digitalRead(BUTTON_C_PIN) )
+                    {
+                    pThis->m_BoutonDroitDoubleAppui = true ;
+                    CGlobalVar::beeper( 8000 , 300 ) ;
+                    while ( !digitalRead(BUTTON_C_PIN) )
+                        delay( 1 ) ;
+                    goto end_c ;
+                    }
+                }
+            pThis->m_BoutonDroit = true ;
+            CGlobalVar::BeepOk() ;
+            end_c:
+                {
+                }
             }
         else
-            pThis->m_BoutonDroitPrisEnCompte = false ;
-        pThis->m_BoutonDroitDernierAppui = millis() ;
+            {
+            pThis->m_BoutonDroit = true ;
+            CGlobalVar::BeepOk() ;
+            }
+        g_GlobalVar.m_StopLoop = false ;
         }
-    else if ( (millis()-pThis->m_BoutonDroitDernierAppui) > DELAY_DOUBLE_APPUI && !pThis->m_BoutonDroitPrisEnCompte )
-        {
-        CGlobalVar::BeepOk() ;
-        pThis->m_BoutonDroit = true ;
-        pThis->m_BoutonDroitDoubleAppui = false ;
-        pThis->m_BoutonDroitLong = false ;
-        pThis->m_BoutonDroitPrisEnCompte = true ;
-        }
-
     }
 
 g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Stopped = true ;

@@ -1,3 +1,7 @@
+le 20250121d :
+  - refonte gestion boutons.
+  - mise a jour librairies.
+
 le 20250121c :
  - ajustement Raz ecran.
  - reduction temps double appui.

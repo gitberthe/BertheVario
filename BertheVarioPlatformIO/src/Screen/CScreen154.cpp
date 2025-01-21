@@ -101,6 +101,8 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 /// \brief Raz de l'ecran suivant temperature boitier
 void CScreen154::ScreenRaz(  bool Froid )
 {
+g_GlobalVar.RazBoutons() ;
+
 g_GlobalVar.m_StopLoop = true ;
 
 if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_raz_screen && !Froid )
