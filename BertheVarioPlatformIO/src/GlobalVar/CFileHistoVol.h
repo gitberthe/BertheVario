@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 22/03/2024
-/// \date modification : 08/08/2024
+/// \date modification : 21/01/2025
 ///
 
 #ifndef _FILE_HISTO_
@@ -25,7 +25,7 @@ public :
     float m_VzMin =  10. ;      ///< Vz Min
     float m_VsMax = 0. ;        ///< Vs Max
     float m_DistanceKm = 0. ;   ///< distance
-    int   m_TempsDeVol = 0. ;   ///< temps de vol
+    float m_TempsDeVol = 0. ;   ///< temps de vol
 
     float m_LastLat = 0. ;  ///< pour calcul de distance
     float m_LastLon  = 0. ; ///< pour calcul de distance

@@ -380,7 +380,7 @@ else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_STABILITE_GPS )
 else if ( g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL )
     sprintf( TmpCharDV , "%2dV" , g_GlobalVar.GetNbSat()) ;
 else
-    sprintf( TmpCharDV , "%3d", g_GlobalVar.m_DureeVolMin ) ;
+    sprintf( TmpCharDV , "%3d", ((int)g_GlobalVar.m_DureeVolMin) ) ;
 
 // cap
 int Cap = g_GlobalVar.m_CapGpsDeg ;
@@ -692,8 +692,11 @@ if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
     goto fin_histo ;
     }
 
-char TmpCharNomFchIgc[20] ;
-sprintf( TmpCharNomFchIgc , "%s", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_NomIgc ) ;
+char NomFchIgc[20] ;
+strcpy( NomFchIgc , g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_NomIgc ) ;
+strtok( NomFchIgc , "." ) ;
+char TmpCharAffVol[40] ;
+sprintf( TmpCharAffVol , "%d/%d %s", ivol+1 , g_GlobalVar.m_HistoVol.m_HistoDir.size() , NomFchIgc ) ;
 
 char TmpCharAltiDeco[20] ;
 sprintf( TmpCharAltiDeco , "%4dm", (int)g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_ZDeco ) ;
@@ -715,13 +718,13 @@ sprintf( TmpCharDistMax , "%5.1f", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_Dis
 
 // temps de vol
 char TmpCharTV[20] ;
-sprintf( TmpCharTV , " %3d'", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_TempsDeVol ) ;
+sprintf( TmpCharTV , "% 4.1f'", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_TempsDeVol ) ;
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
 // nom fch igc
 display.setCursor(0, y);
-display.print(TmpCharNomFchIgc);
+display.print(TmpCharAffVol);
 
 // alti decollage
 y += 40 ;
@@ -1271,7 +1274,7 @@ return ECRAN_3a_TmaAll ;
 CGestEcrans::EtatsAuto CScreen154::EcranListeIgcFch()
 {
 static std::vector<std::string> VecNomIgc ;
-static std::vector<int> VecTempsIgc ;
+static std::vector<float> VecTempsIgc ;
 
 if ( IsPageChanged() )
     {
@@ -1281,10 +1284,14 @@ if ( IsPageChanged() )
 // lecture de fichier
 g_GlobalVar.ListeIgc(VecNomIgc,VecTempsIgc) ;
 
-int TotalMin = 0 ;
+float TotalMin = 0 ;
 int y_cursor ;
 for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
-    TotalMin += VecTempsIgc[ifch] ;
+    {
+    float temps = VecTempsIgc[ifch] ;
+    if ( temps >= 0.5 )
+        TotalMin += temps ;
+    }
 
 char TmpChar[25] ;
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
@@ -1295,14 +1302,14 @@ int ivec = 0 ;
 y_cursor = 10 ;
 for ( ; ivec < VecNomIgc.size() ; ivec++ )
     {
-    sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , VecTempsIgc[ivec] ) ;
+    sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , ((int)VecTempsIgc[ivec]) ) ;
     y_cursor += 16 ;
     display.setCursor( 0, y_cursor );
     display.print( TmpChar ) ;
     }
 
 display.setFont(&FreeMonoBold12pt7b);
-sprintf( TmpChar , "tot. igc:%03dm", TotalMin ) ;
+sprintf( TmpChar , "tot. igc:%03dm", ((int)TotalMin) ) ;
 display.setCursor( 0, y_cursor + 25 );
 display.print( TmpChar ) ;
 display.display(true);

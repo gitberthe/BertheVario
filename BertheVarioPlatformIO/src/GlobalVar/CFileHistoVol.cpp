@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 22/03/2024
-/// \date modification : 04/09/2024
+/// \date modification : 21/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -81,7 +81,7 @@ while( true )
         else if ( !strcmp( pNomParam , "[VsMax]" ) )
             HistoVol.m_VsMax = atof(pValParam) ;
         else if ( !strcmp( pNomParam , "[temps_vol]" ) )
-            HistoVol.m_TempsDeVol = atoi(pValParam) ;
+            HistoVol.m_TempsDeVol = atof(pValParam) ;
         else if ( !strcmp( pNomParam , "[IgcAnnee]" ) )
             HistoVol.m_AnneeDuVol = atoi(pValParam) ;
         else if ( !strcmp( pNomParam , "[distance]" ) )
@@ -134,15 +134,15 @@ if (!m_File)
 m_File.seek(0) ;
 
 // ecritude fichier
-m_File.print("[IgcNom] ") ; m_File.println( NomFichierIgc ) ;
+m_File.print("[IgcNom] ") ;   m_File.println( NomFichierIgc ) ;
 m_File.print("[IgcAnnee] ") ; m_File.println( g_GlobalVar.m_Annee ) ;
-m_File.print("[VzMax] ") ; m_File.println( m_VzMax ) ;
-m_File.print("[VzMin] ") ; m_File.println( m_VzMin ) ;
-m_File.print("[VsMax] ") ; m_File.println( m_VsMax ) ;
-m_File.print("[temps_vol] ") ; m_File.println( m_TempsDeVol ) ;
+m_File.print("[VzMax] ") ;    m_File.println( m_VzMax ) ;
+m_File.print("[VzMin] ") ;    m_File.println( m_VzMin ) ;
+m_File.print("[VsMax] ") ;    m_File.println( m_VsMax ) ;
+m_File.print("[temps_vol] "); m_File.println( m_TempsDeVol , 1 ) ;
 m_File.print("[distance] ") ; m_File.println( m_DistanceKm ) ;
-m_File.print("[z_deco] ") ; m_File.println( m_ZDeco ) ;
-m_File.print("[z_max] ") ; m_File.println( m_ZMax ) ;
+m_File.print("[z_deco] ") ;   m_File.println( m_ZDeco ) ;
+m_File.print("[z_max] ") ;    m_File.println( m_ZMax ) ;
 m_File.println(" ") ;
 
 // fermeture fichier

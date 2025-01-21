@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 04/09/2024
+/// \date modification : 21/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -34,7 +34,7 @@ delay( 100 ) ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief liste des fichiers IGC avec leur temps respectif en secondes
-void CSDCard::ListeIgc( std::vector<std::string> & VecNomIgc , std::vector<int> & VecTempsIgc )
+void CSDCard::ListeIgc( std::vector<std::string> & VecNomIgc , std::vector<float> & VecTempsIgc )
 {
 // raz vecteur in out
 VecNomIgc.clear() ;

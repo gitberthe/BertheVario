@@ -130,7 +130,7 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     #endif // TMA_DEBUG
 
     // declenchement du vol par bouton droit si ecran 0_Vz
-    if ( g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz && g_GlobalVar.BoutonDroitTousAppui() )
+    if ( (g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz) && g_GlobalVar.BoutonDroitTousAppui() )
         {
         // raz difference altitude presion/wgs84 = altitude affichée est barometrique pure
         if ( ! g_GlobalVar.m_StabGps.IsGpsStable() )
@@ -184,8 +184,8 @@ while ( g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run )
     if ( g_GlobalVar.m_PileVit.IsStartFlight() )
         break ;
 
-    // si vitesse verticale depassee pendant x secondes declenchement igc
-    if ( fabs(g_GlobalVar.m_VitVertMS) >= g_GlobalVar.m_Config.m_vz_igc_ms )
+    // si vitesse verticale depassee declenchement igc
+    if ( (g_GlobalVar.GetEtatAuto() == CGestEcrans::ECRAN_0_Vz) && (fabs(g_GlobalVar.m_VitVertMS) >= g_GlobalVar.m_Config.m_vz_igc_ms) )
         {
         //iVz++ ;
         //if ( iVz >= g_GlobalVar.m_Config.m_temps_igc_sec/2 )
@@ -236,21 +236,18 @@ CGlobalVar::beeper( 7000 , 100 ) ;
 g_GlobalVar.m_FinDeVol.InitFinDeVol() ;
 
 // mise a jour du temps de vol toutes les secondes
-// mise a jour histo toutes les 2 secondes
-int iboucleHistoVol = 0 ;
+// et mise a jour histo
 while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
     {
     // a 1 hz
     delay( 1000 ) ;
 
-    // toutes les secondes
-
     // temps de vol en minutes
     unsigned long TempsCourant = millis() ;
     TempsCourant -= g_GlobalVar.m_MillisDebutVol ;
 
-    TempsCourant /= 1000 * 60 ;
-    g_GlobalVar.m_DureeVolMin = TempsCourant ;
+    float DureeVolMinutes = ((float)TempsCourant) / (1000 * 60) ;
+    g_GlobalVar.m_DureeVolMin = DureeVolMinutes ;
 
     // histo vol
     float Distance = g_GlobalVar.m_HistoVol.PushHistoVol() ;
@@ -258,10 +255,8 @@ while (g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Run)
     // pour la finesse sol
     g_GlobalVar.PushDistAlti( Distance , g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
 
-    // historique du vol toutes les 2 sec
-    if ( !(iboucleHistoVol%2) )
-        g_GlobalVar.m_HistoVol.EcritureFichier( g_GlobalVar.GetIgcFileName() ) ;
-    iboucleHistoVol++ ;
+    // historique du vol
+    g_GlobalVar.m_HistoVol.EcritureFichier( g_GlobalVar.GetIgcFileName() ) ;
     }
 
 g_GlobalVar.m_TaskArr[TEMPS_NUM_TASK].m_Stopped = true ;
