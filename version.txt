@@ -1,3 +1,8 @@
+le 20250121c :
+ - ajustement Raz ecran.
+ - reduction temps double appui.
+ - raz ecran appui long different de double appui/temps froid.
+
 le 20250121b :
  - temps de vol en float.
  - numero du vol en page histo.

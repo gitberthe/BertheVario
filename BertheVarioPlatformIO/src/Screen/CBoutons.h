@@ -11,7 +11,7 @@
 #define _BOUTONS_
 
 //#define DELAY_ATTENTE_APRES_APPUI   15
-#define DELAY_DOUBLE_APPUI          400
+#define DELAY_DOUBLE_APPUI          300
 #define DELAY_APPUI_LONG            1500
 #define DELAY_PURGE_LONG            2000
 

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 15/03/2024
-/// \date modification : 09/08/2024
+/// \date modification : 21/01/2025
 ///
 
 #ifndef _SCREEN290_
@@ -21,7 +21,7 @@ public :
     void AfficheConnectWifi() ;
     void AfficheWifi(char * IpAdress) ;
     void AfficheCalibreMag() ;
-    void ScreenRaz() ;
+    void ScreenRaz( bool Froid = false ) ;
     void ScreenOff() ;
     void DoRect( int x , int y , int w , int h , bool Black ) ;
     void DoChar( int x , int y , const char * pChar ) ;

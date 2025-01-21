@@ -99,14 +99,18 @@ display.setPartialWindow( 0, 0, 200 , 200 );
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Raz de l'ecran suivant temperature boitier
-void CScreen154::ScreenRaz()
+void CScreen154::ScreenRaz(  bool Froid )
 {
 g_GlobalVar.m_StopLoop = true ;
 
-if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_raz_screen )
+if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_raz_screen && !Froid )
     {
+    display.setCursor( 0 , 0 ) ;
     display.print( "" );
-    display.display(false) ;
+    display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
+    display.display(true) ;
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    display.display(true) ;
     }
 else
     {
@@ -121,10 +125,11 @@ else
     while( ib++ < 10 )
         display.println( TmpChar );
     display.display(true) ;*/
-    int hauteur = 500 ;
-    for ( int y = 0 ; y < 200 ; y += hauteur )
+    display.setCursor( 0 , 0 ) ;
+    display.print( "" );
+    int hauteur = 40 ;
+    for ( int y = 0 ; y <= 200 ; y += hauteur )
         {
-        //display.print( "" );
         display.fillRect(0,y, 200, hauteur, GxEPD_BLACK ); // x y w h
         display.display(true) ;
         //display.print( "" );
@@ -143,6 +148,8 @@ display.display(true) ;
 display.setPartialWindow( 0, 0, 200 , 200 ); */
 
 g_GlobalVar.m_StopLoop = false ;
+
+g_GlobalVar.m_MillisEcran0 = millis() ;
 
 //display.powerOff();
 //display.refresh() ;

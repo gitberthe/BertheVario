@@ -330,7 +330,7 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             {
             //pThis->m_BoutonCentreDoubleAppui = true ;
             CGlobalVar::beeper( 8000 , 300 ) ;
-            g_GlobalVar.ScreenRaz() ;
+            g_GlobalVar.ScreenRaz(true) ;
             pThis->m_BoutonCentrePrisEnCompte = true ;
             }
         else
