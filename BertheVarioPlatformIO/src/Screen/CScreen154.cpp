@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 21/01/2025
+/// \date modification : 22/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -1098,10 +1098,14 @@ display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeWe
 
 // si zone protegee
 if ( pZone->IsProtect() )
-display.setCursor(0,180);
-display.print( "hau sol: ");
-display.print( pZone->GetHauteurSolZoneProtect() );
+    {
+    display.setCursor(0,180);
+    display.print( "hau sol: ");
+    display.print( pZone->GetHauteurSolZoneProtect() );
+    }
+
 display.display(true);
+
 
 // si time out ecran
 unsigned long Temps = millis() - m_MillisEcran0 ;

@@ -1,3 +1,6 @@
+le 20250122a :
+ - correction affichage tma hauteur sol.
+
 le 20250121d :
   - refonte gestion boutons.
   - mise a jour librairies.
@@ -20,7 +23,7 @@ le 20250120g :
  - modification timing double appui et rando.
 
 le 20250120g :
- - hamonisation gestion touche tma/cfg file.
+ - harmonisation gestion touche tma/cfg file.
 
 le 20250120f :
  - modification timing double appui et rando.
