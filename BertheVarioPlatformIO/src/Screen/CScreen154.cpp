@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 20/01/2025
+/// \date modification : 21/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -296,6 +296,11 @@ CLocTermic LocTermic ;
 #ifdef _LG_DEBUG_
     Serial.println("Affichage de screen");
 #endif
+
+if ( IsPageChanged() )
+    {
+    g_GlobalVar.RazBoutons() ;
+    }
 
 // vitesses verticale
 float VitVert = g_GlobalVar.m_VitVertMS ;
@@ -666,16 +671,22 @@ int y = 20 ;
 // lecture des histo
 g_GlobalVar.m_HistoVol.LectureFichiers() ;
 
+if ( IsPageChanged() )
+    {
+    g_GlobalVar.RazBoutons() ;
+    ivol = g_GlobalVar.m_HistoVol.m_HistoDir.size() - 1 ;
+    if ( ivol < 0 )
+        ivol = 0 ;
+    }
+
 // si pas de fichiers histo
 if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
     {
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     display.setFont(&FreeMonoBold12pt7b);
-        {
-        // message
-        display.setCursor(0, 20);
-        display.print("0 histo");
-        }
+    // message
+    display.setCursor(0, 20);
+    display.print("0 histo");
     display.display(true);
 
     goto fin_histo ;
@@ -708,60 +719,58 @@ sprintf( TmpCharTV , " %3d'", g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_TempsDeV
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-    {
-    // nom fch igc
-    display.setCursor(0, y);
-    display.print(TmpCharNomFchIgc);
+// nom fch igc
+display.setCursor(0, y);
+display.print(TmpCharNomFchIgc);
 
-    // alti decollage
-    y += 40 ;
-    display.setCursor(0, y);
-    display.print("Z deco:");
-    display.setCursor(110, y);
-    display.print(TmpCharAltiDeco);
+// alti decollage
+y += 40 ;
+display.setCursor(0, y);
+display.print("Z deco:");
+display.setCursor(110, y);
+display.print(TmpCharAltiDeco);
 
-    // alti max
-    y += 20 ;
-    display.setCursor(0, y);
-    display.print("Z max :");
-    display.setCursor(110, y);
-    display.print(TmpCharAltiMax);
+// alti max
+y += 20 ;
+display.setCursor(0, y);
+display.print("Z max :");
+display.setCursor(110, y);
+display.print(TmpCharAltiMax);
 
-    // Vz max
-    y += 20 ;
-    display.setCursor(0, y);
-    display.print("Vz max:");
-    display.setCursor(110, y);
-    display.print(TmpCharVzMax);
+// Vz max
+y += 20 ;
+display.setCursor(0, y);
+display.print("Vz max:");
+display.setCursor(110, y);
+display.print(TmpCharVzMax);
 
-    // Vz min
-    y += 20 ;
-    display.setCursor(0, y);
-    display.print("Vz min:");
-    display.setCursor(110, y);
-    display.print(TmpCharVzMin);
+// Vz min
+y += 20 ;
+display.setCursor(0, y);
+display.print("Vz min:");
+display.setCursor(110, y);
+display.print(TmpCharVzMin);
 
-    // distance max
-    y += 20 ;
-    display.setCursor(0, y);
-    display.print("Dist. :");
-    display.setCursor(110, y);
-    display.print(TmpCharDistMax);
+// distance max
+y += 20 ;
+display.setCursor(0, y);
+display.print("Dist. :");
+display.setCursor(110, y);
+display.print(TmpCharDistMax);
 
-    // Vs max
-    y += 20 ;
-    display.setCursor(0, y);
-    display.print("Vs max:");
-    display.setCursor(110, y);
-    display.print(TmpCharVsMax);
+// Vs max
+y += 20 ;
+display.setCursor(0, y);
+display.print("Vs max:");
+display.setCursor(110, y);
+display.print(TmpCharVsMax);
 
-    // Dure vol
-    y += 20 ;
-    display.setCursor(0,y);
-    display.print("t vol :");
-    display.setCursor(110, y);
-    display.print(TmpCharTV);
-    }
+// Dure vol
+y += 20 ;
+display.setCursor(0,y);
+display.print("t vol :");
+display.setCursor(110, y);
+display.print(TmpCharTV);
 display.display(true);
 
 // fin de la fonction
@@ -835,7 +844,12 @@ static int iChamps = -1 ;
 
 // si nouvelle page
 if ( IsPageChanged() )
+    {
     g_GlobalVar.m_Config.ConstructVect() ;
+    g_GlobalVar.RazBoutons() ;
+    iChamps = -1 ;
+    }
+
 
 // sortie
 if ( iChamps == -1 )
@@ -851,17 +865,15 @@ else
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-    {
-    // Mod
-    display.setCursor(0, 20);
-    display.print(TmpMod) ;
-    // NomVar
-    display.setCursor(0, 60);
-    display.print(Name.c_str()) ;
-    // ValNomVar
-    display.setCursor(0, 140);
-    display.print(Value.c_str()) ;
-    }
+// Mod
+display.setCursor(0, 20);
+display.print(TmpMod) ;
+// NomVar
+display.setCursor(0, 60);
+display.print(Name.c_str()) ;
+// ValNomVar
+display.setCursor(0, 140);
+display.print(Value.c_str()) ;
 display.display(true);
 
 bool BoutonCent = BoutonCentre() ;
@@ -989,6 +1001,11 @@ CGestEcrans::EtatsAuto CScreen154::EcranTmaMod()
 {
 static int NumTmaCtr = 0 ;
 
+if ( IsPageChanged() )
+    {
+    g_GlobalVar.RazBoutons() ;
+    }
+
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
 
@@ -1022,62 +1039,56 @@ if ( NumTmaCtr >= 0 && NumTmaCtr < VecAffZones.size() )
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-    {
-        {
-        // num tma/ctr
-        display.setCursor(0, 15);
-        display.print(NumTmaCtr);
-        display.print(":");
-        // nom
-        //display.setCursor(0, 35);
-        CZoneAer * pZone = VecAffZones[NumTmaCtr] ;
-        display.print(pZone->m_pNomAff);
-        // activation
-        display.setCursor(0, 60);
-        display.print( "Active:");
-        if ( pZone->m_Activee )
-            display.print( "1");
-        else
-            display.print( "0");
-        if ( pZone->m_DansFchActivation )
-            display.print( " mod.");
-        else
-            display.print( " const");
-        // altibasse
-        display.setCursor(0, 80);
-        display.print( "A bas : ");
-        display.print( pZone->m_AltiBasse );
+// num tma/ctr
+display.setCursor(0, 15);
+display.print(NumTmaCtr);
+display.print(":");
+// nom
+//display.setCursor(0, 35);
+CZoneAer * pZone = VecAffZones[NumTmaCtr] ;
+display.print(pZone->m_pNomAff);
+// activation
+display.setCursor(0, 60);
+display.print( "Active:");
+if ( pZone->m_Activee )
+    display.print( "1");
+else
+    display.print( "0");
+if ( pZone->m_DansFchActivation )
+    display.print( " mod.");
+else
+    display.print( " const");
+// altibasse
+display.setCursor(0, 80);
+display.print( "A bas : ");
+display.print( pZone->m_AltiBasse );
 
-        // periode
-        display.setCursor(0,100);
-        display.print( "p.de. : ");
-        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeDebutJour : -1 );
-        display.print( "-" );
-        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeDebutMois : -1 );
-        display.setCursor(0,120);
-        display.print( "p.fi. : ");
-        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeFinJour : -1 );
-        display.print( "-" );
-        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeFinMois : -1 );
+// periode
+display.setCursor(0,100);
+display.print( "p.de. : ");
+display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeDebutJour : -1 );
+display.print( "-" );
+display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeDebutMois : -1 );
+display.setCursor(0,120);
+display.print( "p.fi. : ");
+display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeFinJour : -1 );
+display.print( "-" );
+display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_PeriodeFinMois : -1 );
 
-        // altisemaine
-        display.setCursor(0,140);
-        display.print( "A sem. : ");
-        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeSemaine : -1 );
-        // altiweekend
-        display.setCursor(0,160);
-        display.print( "A week : ");
-        display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeWeekEnd : -1 );
+// altisemaine
+display.setCursor(0,140);
+display.print( "A sem. : ");
+display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeSemaine : -1 );
+// altiweekend
+display.setCursor(0,160);
+display.print( "A week : ");
+display.print( (pZone->HavePeriod()) ? pZone->m_pDerogFfvl->m_AltiBassePeriodeWeekEnd : -1 );
 
-        // si zone protegee
-        if ( pZone->IsProtect() )
-            {
-            display.setCursor(0,180);
-            display.print( "hau sol: ");
-            display.print( pZone->GetHauteurSolZoneProtect() );
-            }
-        }
-    }
+// si zone protegee
+if ( pZone->IsProtect() )
+display.setCursor(0,180);
+display.print( "hau sol: ");
+display.print( pZone->GetHauteurSolZoneProtect() );
 display.display(true);
 
 // si time out ecran
@@ -1159,6 +1170,11 @@ CGestEcrans::EtatsAuto CScreen154::EcranTmaAll()
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
 
+if ( IsPageChanged() )
+    {
+    g_GlobalVar.RazBoutons() ;
+    }
+
 // construction du tableau des zones
 std::vector<CZoneAer*> VecZonesMod ;
 const int NbZones = g_GlobalVar.m_ZonesAerAll.GetNbZones() ;
@@ -1184,37 +1200,35 @@ char TmpTitre[15] ;
 sprintf( TmpTitre , "%2d B. Cen. Mo." , g_GlobalVar.m_ZonesAerAll.GetNbZones() ) ;
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+// titre
+display.setFont(&FreeMonoBold12pt7b);
+display.setCursor( 0, 20 );
+display.print( TmpTitre ) ;
+
+// zones active
+long xcol = 0 ;
+long yligne = 15 ;
+display.setFont(&FreeMonoBold9pt7b);
+for ( int iz = 0 ; iz < VecZonesMod.size() ; iz++ )
     {
-    // titre
-    display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor( 0, 20 );
-    display.print( TmpTitre ) ;
+    if ( !VecZonesMod[iz]->m_DansFchActivation )
+        continue ;
+    display.setCursor(0+xcol, 40 + yligne );
 
-    // zones active
-    long xcol = 0 ;
-    long yligne = 15 ;
-    display.setFont(&FreeMonoBold9pt7b);
-    for ( int iz = 0 ; iz < VecZonesMod.size() ; iz++ )
+    if ( VecZonesMod[iz]->m_Activee )
+        display.print( VecZonesMod[iz]->m_pNomAff ) ;
+    else
         {
-        if ( !VecZonesMod[iz]->m_DansFchActivation )
-            continue ;
-        display.setCursor(0+xcol, 40 + yligne );
-
-        if ( VecZonesMod[iz]->m_Activee )
-            display.print( VecZonesMod[iz]->m_pNomAff ) ;
-        else
-            {
-            char TmpChar[25] ;
-            sprintf( TmpChar , "-%s" ,  VecZonesMod[iz]->m_pNomAff ) ;
-            TmpChar[9] = 0 ;
-            display.print( TmpChar  ) ;
-            }
-        yligne += 17 ;
-        if ( iz == 8 )
-            {
-            xcol = 110 ;
-            yligne = 15 ;
-            }
+        char TmpChar[25] ;
+        sprintf( TmpChar , "-%s" ,  VecZonesMod[iz]->m_pNomAff ) ;
+        TmpChar[9] = 0 ;
+        display.print( TmpChar  ) ;
+        }
+    yligne += 17 ;
+    if ( iz == 8 )
+        {
+        xcol = 110 ;
+        yligne = 15 ;
         }
     }
 display.display(true);
@@ -1259,6 +1273,11 @@ CGestEcrans::EtatsAuto CScreen154::EcranListeIgcFch()
 static std::vector<std::string> VecNomIgc ;
 static std::vector<int> VecTempsIgc ;
 
+if ( IsPageChanged() )
+    {
+    g_GlobalVar.RazBoutons() ;
+    }
+
 // lecture de fichier
 g_GlobalVar.ListeIgc(VecNomIgc,VecTempsIgc) ;
 
@@ -1269,25 +1288,23 @@ for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
 
 char TmpChar[25] ;
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+display.setFont(&FreeMonoBold12pt7b);
+
+display.setFont(&FreeMonoBold9pt7b);
+int ivec = 0 ;
+y_cursor = 10 ;
+for ( ; ivec < VecNomIgc.size() ; ivec++ )
     {
-    display.setFont(&FreeMonoBold12pt7b);
-
-    display.setFont(&FreeMonoBold9pt7b);
-    int ivec = 0 ;
-    y_cursor = 10 ;
-    for ( ; ivec < VecNomIgc.size() ; ivec++ )
-        {
-        sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , VecTempsIgc[ivec] ) ;
-        y_cursor += 16 ;
-        display.setCursor( 0, y_cursor );
-        display.print( TmpChar ) ;
-        }
-
-    display.setFont(&FreeMonoBold12pt7b);
-    sprintf( TmpChar , "tot. igc:%03dm", TotalMin ) ;
-    display.setCursor( 0, y_cursor + 25 );
+    sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , VecTempsIgc[ivec] ) ;
+    y_cursor += 16 ;
+    display.setCursor( 0, y_cursor );
     display.print( TmpChar ) ;
     }
+
+display.setFont(&FreeMonoBold12pt7b);
+sprintf( TmpChar , "tot. igc:%03dm", TotalMin ) ;
+display.setCursor( 0, y_cursor + 25 );
+display.print( TmpChar ) ;
 display.display(true);
 
 // si time out ecran
@@ -1334,12 +1351,10 @@ CGestEcrans::EtatsAuto CScreen154::EcranConfimeArchIgcFch()
 char TmpChar[] = "\n\n   Confirme\n   Archivage\n     Igc\n  Bouton GD" ;
 
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-    {
-    // titre
-    display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor( 0, 20 );
-    display.print( TmpChar ) ;
-    }
+// titre
+display.setFont(&FreeMonoBold12pt7b);
+display.setCursor( 0, 20 );
+display.print( TmpChar ) ;
 display.display(true);
 
 // si time out ecran
@@ -1349,11 +1364,21 @@ if ( (Temps/1000) > m_SecRetourEcran0 )
 
 // si changement d'ecran
 if ( BoutonCentre() )
+    {
+    display.setCursor(0,70);
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    display.print( "Annulation" );
+    display.display(true);
     return ECRAN_2a_ListeIgc ;
+    }
 
 // si changement d'ecran
 if ( BoutonGauche() )
     {
+    display.setCursor(0,70);
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    display.print( "Archivage" );
+    display.display(true);
     m_MillisEcran0 = millis() ;
     g_GlobalVar.ArchiveIgc() ;
     return ECRAN_2a_ListeIgc ;
@@ -1362,6 +1387,10 @@ if ( BoutonGauche() )
 // si confirme delete igc
 if ( BoutonDroit() )
     {
+    display.setCursor(0,70);
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    display.print( "Archivage" );
+    display.display(true);
     m_MillisEcran0 = millis() ;
     g_GlobalVar.ArchiveIgc() ;
     return ECRAN_2a_ListeIgc ;
@@ -1385,7 +1414,10 @@ static int NbAppButGD = 0 ;
 std::string NomZone = "" ;
 
 if ( IsPageChanged() )
+    {
+    g_GlobalVar.RazBoutons() ;
     NbAppButGD = 0 ;
+    }
 
 // zone au dessus
 g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
@@ -1406,6 +1438,10 @@ if ( BoutonCentre() )
     {
     if ( NbAppButGD == 0 )
         return ECRAN_6_Sys ;
+    display.setCursor(0,70);
+    display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
+    display.print( "Annulation" );
+    display.display(true);
     m_MillisEcran0 = millis() ;
     NbAppButGD=0 ;
     }
@@ -1434,10 +1470,8 @@ if ( NbAppButGD == 1 )
     {
     display.setFont(&FreeMonoBold12pt7b);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        {
-        display.setCursor(0,70);
-        display.print( "Confirmation enregistrement point gps GD" );
-        }
+    display.setCursor(0,70);
+    display.print( "Confirmation enregistrement point gps GD" );
     display.display(true);
     return ECRAN_5_TmaDessous ;
     }
@@ -1479,10 +1513,8 @@ if ( NbAppButGD >= 2  )
     // affichage
     display.setFont(&FreeMonoBold12pt7b);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        {
-        display.setCursor(0,70);
-        display.print( "Enregistrement point gps" );
-        }
+    display.setCursor(0,70);
+    display.print( "Enregistrement point gps" );
     display.display(true);
     return ECRAN_5_TmaDessous ;
     }
@@ -1490,18 +1522,16 @@ if ( NbAppButGD >= 2  )
 // affichage zone et coordonnees
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 display.setFont(&FreeMonoBold12pt7b);
-    {
-    // nom zone
-    display.setCursor(0,20);
-    display.print( "Tma Dessus:\n" );
-    display.println( NomZone.c_str() );
-    display.print( "lat: " ) ;
-    display.println( g_GlobalVar.m_TerrainPosCur.m_Lat , 5 ) ;
-    display.print( "lon:  " ) ;
-    display.println( g_GlobalVar.m_TerrainPosCur.m_Lon , 5 ) ;
-    display.print( "alt:" ) ;
-    display.println( g_GlobalVar.m_TerrainPosCur.m_AltiBaro , 0 ) ;
-    }
+// nom zone
+display.setCursor(0,20);
+display.print( "Tma Dessus:\n" );
+display.println( NomZone.c_str() );
+display.print( "lat: " ) ;
+display.println( g_GlobalVar.m_TerrainPosCur.m_Lat , 5 ) ;
+display.print( "lon:  " ) ;
+display.println( g_GlobalVar.m_TerrainPosCur.m_Lon , 5 ) ;
+display.print( "alt:" ) ;
+display.println( g_GlobalVar.m_TerrainPosCur.m_AltiBaro , 0 ) ;
 display.display(true);
 
 return ECRAN_5_TmaDessous ;
@@ -1629,10 +1659,8 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitRando )
     display.setFont(&FreeMonoBold12pt7b);
     display.setCursor(20, 75);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        {
-        // message
-        display.print("Acquisition\n      Gps");
-        }
+    // message
+    display.print("Acquisition\n      Gps");
     display.display(true);
 
     #ifdef DEBUG_RANDO_VOl
@@ -1676,7 +1704,7 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
     // message
     display.setCursor(5, 75);
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-        display.print("Lecture *.gpx");
+    display.print("Lecture *.gpx");
     display.display(true);
     // lecture fichiers
     g_GlobalVar.LireFichiersGpx() ;

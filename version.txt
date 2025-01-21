@@ -1,3 +1,7 @@
+le 20250121a :
+ - mise a jour documentation pdf.
+ - messages plus complet actions boutons.
+
 le 20250120g :
  - modification double appui page cfg file.
  - modification timing double appui et rando.

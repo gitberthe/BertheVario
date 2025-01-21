@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 20/01/2025
+/// \date modification : 21/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -213,7 +213,7 @@ CBoutons * pThis = (CBoutons*) param ;
 // a 100 hz
 while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
     {
-    delay( 3 ) ;
+    delay( 1 ) ;
 
     // delait d'attente
     if ( g_GlobalVar.m_DelayAttenteMs != 0 )
