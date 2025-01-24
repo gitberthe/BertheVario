@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 22/01/2025
+/// \date modification : 23/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -130,7 +130,7 @@ else
     display.setCursor( 0 , 0 ) ;
     display.print( "" );
     int hauteur = 40 ;
-    for ( int y = 0 ; y <= 200 ; y += hauteur )
+    for ( int y = 0 ; y < 200 ; y += hauteur )
         {
         display.fillRect(0,y, 200, hauteur, GxEPD_BLACK ); // x y w h
         display.display(true) ;
@@ -349,7 +349,16 @@ const float DeriveMilieu = 41. ;
 float DeriveAngle = g_GlobalVar.GetDeriveDeg() ;
 char TmpCharAngleDerive[15] ;
 if ( fabsf(DeriveAngle) >= 90. )
+    {
     sprintf( TmpCharAngleDerive , " \\R/" ) ;
+    // alarme sonore
+    if ( g_GlobalVar.m_BeepAttenteGVZone && g_GlobalVar.m_Config.m_alarme_reculade && g_GlobalVar.m_FinDeVol.IsInFlight() )
+        {
+        CGlobalVar::beeper( 7000 , 150 ) ;
+        CGlobalVar::beeper( SOUND_DELAY_ONLY , 100 ) ;
+        CGlobalVar::beeper( 6000 , 150 ) ;
+        }
+    }
 else if ( DeriveAngle >= DeriveMilieu )
     sprintf( TmpCharAngleDerive , "  %1d>>", ((int)(fabsf(DeriveAngle)/10)) ) ;
 else if ( DeriveAngle <= -DeriveMilieu )
@@ -674,6 +683,7 @@ return ECRAN_0_Vz ;
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranHisto()
 {
+char * pCharNomFch = NULL ;
 static int ivol = 0 ;
 int y = 20 ;
 
@@ -703,9 +713,9 @@ if ( g_GlobalVar.m_HistoVol.m_HistoDir.size() == 0 )
 
 char NomFchIgc[20] ;
 strcpy( NomFchIgc , g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_NomIgc ) ;
-strtok( NomFchIgc , "." ) ;
+pCharNomFch = strtok( NomFchIgc , "/." ) ;
 char TmpCharAffVol[40] ;
-sprintf( TmpCharAffVol , "%d/%d %s", ivol+1 , g_GlobalVar.m_HistoVol.m_HistoDir.size() , NomFchIgc ) ;
+sprintf( TmpCharAffVol , "%d/%d %s", ivol+1 , g_GlobalVar.m_HistoVol.m_HistoDir.size() , pCharNomFch ) ;
 
 char TmpCharAltiDeco[20] ;
 sprintf( TmpCharAltiDeco , "%4dm", (int)g_GlobalVar.m_HistoVol.m_HistoDir[ivol].m_ZDeco ) ;
@@ -1297,6 +1307,7 @@ if ( IsPageChanged() )
 // lecture de fichier
 g_GlobalVar.ListeIgc(VecNomIgc,VecTempsIgc) ;
 
+// calcul du toatal des temps
 float TotalMin = 0 ;
 int y_cursor ;
 for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
@@ -1308,11 +1319,15 @@ for ( int ifch = 0 ; ifch < VecNomIgc.size() ; ifch++ )
 
 char TmpChar[25] ;
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-display.setFont(&FreeMonoBold12pt7b);
-
 display.setFont(&FreeMonoBold9pt7b);
+
+// total igc
+y_cursor = 15 ;
+sprintf( TmpChar , "total igc:%03dm", ((int)TotalMin) ) ;
+display.setCursor( 0, y_cursor );
+display.print( TmpChar ) ;
+
 int ivec = 0 ;
-y_cursor = 10 ;
 for ( ; ivec < VecNomIgc.size() ; ivec++ )
     {
     sprintf( TmpChar , "%s %03d", (const char*)VecNomIgc[ivec].c_str() , ((int)VecTempsIgc[ivec]) ) ;
@@ -1321,10 +1336,6 @@ for ( ; ivec < VecNomIgc.size() ; ivec++ )
     display.print( TmpChar ) ;
     }
 
-display.setFont(&FreeMonoBold12pt7b);
-sprintf( TmpChar , "tot. igc:%03dm", ((int)TotalMin) ) ;
-display.setCursor( 0, y_cursor + 25 );
-display.print( TmpChar ) ;
 display.display(true);
 
 // si time out ecran

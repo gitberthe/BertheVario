@@ -1,3 +1,7 @@
+le 20250123a :
+ - alarme sonore en cas de reculade configurable mini editeur.
+ - affichage temps igc different.
+
 le 20250122a :
  - correction affichage tma hauteur sol.
 

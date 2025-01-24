@@ -4,14 +4,14 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 21/01/2025
+/// \date modification : 23/01/2025
 ///
 
 #ifndef _BOUTONS_
 #define _BOUTONS_
 
-#define DELAY_INTER_DOUBLE_APPUI    100
-#define DELAY_DOUBLE_APPUI          300
+#define DELAY_INTER_DOUBLE_APPUI    50
+#define DELAY_DOUBLE_APPUI          700
 #define DELAY_APPUI_LONG            1500
 #define DELAY_PURGE_LONG            2000
 

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 19/01/2025
+/// \date modification : 23/01/2025
 ///
 
 #ifndef _CCONFIGFILE_
@@ -48,7 +48,8 @@ public :
     int   m_dtu          = 2 ;              ///< diff heure TU
     int   m_AltiMargin   = 40 ;             ///< marge en altitude de zone TMA CTR en metres
     int   m_XYMargin     = 10 ;             ///< marge en xy de zone TMA CTR en metres
-    int   m_temp_raz_screen= 5 ;              ///< temperature ou la Raz screen est differante
+    int   m_temp_raz_screen= 5 ;            ///< temperature ou la Raz screen est differante
+    bool  m_alarme_reculade = true ;         ///< alarme sonore en cas de reculade
 
     std::string m_Ssid ;     ///< identifiant wifi
     std::string m_Passwd ;   ///< mot de passe wifi

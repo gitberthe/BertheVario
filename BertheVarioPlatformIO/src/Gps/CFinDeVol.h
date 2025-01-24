@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 24/08/2024
-/// \date modification : 26/10/2024
+/// \date modification : 23/01/2024
 ///
 
 #ifndef _FINDEVOL_
@@ -12,6 +12,8 @@
 
 #define TAILLE_PILE_FE 12
 #define VITESSE_FAIBLE 5.
+#define ALTI_DESSUS_DECO   5.
+#define	VZ_PETITE   0.4
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Determine une fin de vol.
@@ -22,6 +24,7 @@ public :
     void InitFinDeVol() ;
     bool IsFlightEnd() ;
     bool IsFlightLocked() const ;
+    bool IsInFlight() const ;
 
 private :
     float GetDistance( float x , float y ) ;

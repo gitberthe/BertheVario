@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 24/08/2024
-/// \date modification : 13/01/2025
+/// \date modification : 23/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -69,7 +69,7 @@ for ( int ip = 0 ; ip < TAILLE_PILE_FE ; ip++ )
 // calcul petite vitesse verticale
 bool VitesseVerPetite = true ;
 for ( int ip = 0 ; ip < TAILLE_PILE_FE ; ip++ )
-    if ( fabsf(m_PosArr[ip].m_VitVer) > 0.4 )
+    if ( fabsf(m_PosArr[ip].m_VitVer) > VZ_PETITE )
         {
         VitesseVerPetite = false ;
         break ;
@@ -84,6 +84,16 @@ if ( DistXY < 30. && DistAlti < 3. && VitesseHorPetite && VitesseVerPetite )
     CGlobalVar::BeepOk() ;
     return true ;
     }
+
+return false ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Si en vol .
+bool CFinDeVol::IsInFlight() const
+{
+if ( g_GlobalVar.m_DureeVolMin >= 0. )
+    return true ;
 
 return false ;
 }
