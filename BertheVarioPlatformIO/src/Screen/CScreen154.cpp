@@ -660,7 +660,7 @@ if ( BoutonCentre() )
     return ECRAN_1_Histo ;
 
 if ( BoutonGaucheLong() )
-    return ECRAN_3a_TmaAll ;
+    return ECRAN_6_Sys ;
 
 // si activation / desactivation beep attente Gps / Vitesse
 if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
@@ -668,9 +668,6 @@ if ( /*(g_GlobalVar.m_DureeVolMin == ATTENTE_VITESSE_VOL ||
       g_GlobalVar.m_DureeVolMin == ATTENTE_MESSAGE_GPS ) &&*/
       BoutonGauche() )
     g_GlobalVar.m_BeepAttenteGVZone = ! g_GlobalVar.m_BeepAttenteGVZone ;
-
-if ( BoutonGaucheDoubleAppui() )
-    return ECRAN_6_Sys ;
 
 return ECRAN_0_Vz ;
 
@@ -841,7 +838,7 @@ if ( BoutonCentre() )
     return ECRAN_2a_ListeIgc ;
     }
 
-if ( BoutonGaucheDoubleAppui() )
+if ( BoutonGaucheLong() )
     {
     g_GlobalVar.m_HistoVol.m_HistoDir.clear() ;
     return ECRAN_0_Vz ;
@@ -867,7 +864,6 @@ static int iChamps = -1 ;
 // si nouvelle page
 if ( IsPageChanged() )
     {
-    g_GlobalVar.m_Config.ConstructVect() ;
     g_GlobalVar.RazBoutons() ;
     iChamps = -1 ;
     }
@@ -878,6 +874,8 @@ if ( iChamps == -1 )
     {
     strcpy( TmpMod , "" ) ;
     Name = " Editeur Cfg" ;
+    g_GlobalVar.m_Config.EcritureFichier() ;
+    g_GlobalVar.m_Config.ConstructVect() ;
     }
 else
     {
@@ -904,8 +902,6 @@ bool BoutonDroi = BoutonDroit() ;
 // sortie ecran
 if ( BoutonCent && !Modif && iChamps == -1 )
     {
-    g_GlobalVar.m_Config.EcritureFichier() ;
-    g_GlobalVar.m_Config.LectureFichier() ;
     iChamps = -1 ;
     return ECRAN_5_TmaDessous ;
     }
@@ -968,7 +964,7 @@ if ( BoutonDroi && Modif )
         }
     }
 
-// defilement
+// defilement -
 if ( BoutonGau && !Modif )
     {
     if ( iChamps > -1 )
@@ -976,7 +972,7 @@ if ( BoutonGau && !Modif )
     else
         iChamps = 0 ;
     }
-
+// defilement +
 if ( BoutonDroi && !Modif  )
     {
     int size = (g_GlobalVar.m_Config.m_LinesVect.size()-1) ;
@@ -984,32 +980,28 @@ if ( BoutonDroi && !Modif  )
         iChamps++ ;
     }
 
-// si time out ecran en premeire page
+// si time out ecran en premiere page
 unsigned long Temps = millis() - m_MillisEcran0 ;
 if ( ((Temps/1000) > m_SecRetourEcran0) && (iChamps == -1) )
     {
     g_GlobalVar.m_Config.EcritureFichier() ;
-    g_GlobalVar.m_Config.LectureFichier() ;
     iChamps = -1 ;
     return ECRAN_0_Vz ;
     }
 
-if ( BoutonDroitDoubleAppui() && !Modif )
+// fin variables
+if ( BoutonDroitLong() && !Modif )
     iChamps = g_GlobalVar.m_Config.m_LinesVect.size()-1 ;
 
-bool GaucheDoubleAppui = BoutonGaucheDoubleAppui() ;
-if ( GaucheDoubleAppui && !Modif && iChamps > 0)
+// debut variable
+bool GaucheLong = BoutonGaucheLong() ;
+if ( GaucheLong && !Modif && iChamps >= 0)
     iChamps = 0 ;
-if ( GaucheDoubleAppui && !Modif && iChamps == -1 )
-    return ECRAN_3a_TmaAll ;
-
-// retour page Vz
-if ( BoutonGaucheLong() && !Modif )
+// retour page
+if ( GaucheLong && !Modif && iChamps < 0 )
     {
-    g_GlobalVar.m_Config.EcritureFichier() ;
-    g_GlobalVar.m_Config.LectureFichier() ;
     iChamps = -1 ;
-    return ECRAN_0_Vz ;
+    return ECRAN_3a_TmaAll ;
     }
 
 return ECRAN_4_CfgFch ;
@@ -1176,13 +1168,10 @@ if ( BoutonDroit() )
         NumTmaCtr = 0 ;
     }
 
-if ( BoutonGaucheDoubleAppui() )
-    {
+if ( BoutonGaucheLong() )
     NumTmaCtr = 0 ;
-    return ECRAN_3b_TmaMod ;
-    }
 
-if ( BoutonDroitDoubleAppui() )
+if ( BoutonDroitLong() )
     NumTmaCtr = VecAffZones.size()-1 ;
 
 return ECRAN_3b_TmaMod ;
@@ -1282,11 +1271,8 @@ if ( BoutonGauche() )
 if ( BoutonCentre() )
     return ECRAN_4_CfgFch ;
 
-if ( BoutonGaucheDoubleAppui() )
-    return ECRAN_2a_ListeIgc ;
-
 if ( BoutonGaucheLong() )
-    return ECRAN_0_Vz ;
+    return ECRAN_2a_ListeIgc ;
 
 return ECRAN_3a_TmaAll ;
 }
@@ -1361,11 +1347,8 @@ if ( BoutonGauche() )
 if ( BoutonCentre() )
     return ECRAN_3a_TmaAll ;
 
-if ( BoutonGaucheDoubleAppui() )
-    return ECRAN_1_Histo ;
-
 if ( BoutonGaucheLong() )
-    return ECRAN_0_Vz ;
+    return ECRAN_1_Histo ;
 
 return ECRAN_2a_ListeIgc ;
 }
@@ -1427,11 +1410,8 @@ if ( BoutonDroit() )
     return ECRAN_2a_ListeIgc ;
     }
 
-if ( BoutonGaucheDoubleAppui() )
-    return ECRAN_1_Histo ;
-
-if ( BoutonGaucheLong() )
-    return ECRAN_0_Vz ;
+//if ( BoutonGaucheLong() )
+//    return ECRAN_1_Histo ;
 
 return ECRAN_2b_ConfirmArchIgc ;
 }
@@ -1484,16 +1464,10 @@ if ( BoutonGauche() || BoutonDroit() )
     NbAppButGD++ ;
     }
 
-if ( BoutonGaucheDoubleAppui() )
-    {
-    NbAppButGD = 0 ;
-    return ECRAN_4_CfgFch ;
-    }
-
 if ( BoutonGaucheLong() )
     {
     NbAppButGD = 0 ;
-    return ECRAN_0_Vz ;
+    return ECRAN_4_CfgFch ;
     }
 
 // demande confirmation enregistrement point
@@ -1667,9 +1641,6 @@ if ( BoutonCentre() )
     return ECRAN_0_Vz ;
 
 if ( BoutonGaucheLong() )
-    return ECRAN_0_Vz ;
-
-if ( BoutonGaucheDoubleAppui() )
     return ECRAN_5_TmaDessous ;
 
 return ECRAN_6_Sys ;
@@ -2028,8 +1999,7 @@ else
     if ( g_GlobalVar.BoutonGauche() )
         Slope *= 2. ;
     // modification orientation carte
-    if ( g_GlobalVar.BoutonGaucheLong() || g_GlobalVar.BoutonDroitLong() ||
-         g_GlobalVar.BoutonGaucheDoubleAppui() || g_GlobalVar.BoutonDroitDoubleAppui() )
+    if ( g_GlobalVar.BoutonGaucheLong() || g_GlobalVar.BoutonDroitLong() )
         g_GlobalVar.m_OrientationCapGps = !g_GlobalVar.m_OrientationCapGps ;
     }
 

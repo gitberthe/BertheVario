@@ -1,3 +1,7 @@
+le 20250127a :
+ - suppression du double appui boutons.
+ - [alarme_reculade] desactive par defaut.
+
 le 20250123a :
  - alarme sonore en cas de reculade configurable mini editeur.
  - affichage temps igc different.
