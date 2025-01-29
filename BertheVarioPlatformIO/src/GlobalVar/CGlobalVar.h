@@ -85,6 +85,9 @@ public :
     static void  TacheRelanceIgc(void *param);
 
     friend class CSimuVol ;
+
+private :
+    CSoundSvr::StSoundRequest m_Req ;   ///< pour le son
 } ;
 
 #endif

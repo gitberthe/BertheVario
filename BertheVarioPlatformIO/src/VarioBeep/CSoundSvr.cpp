@@ -53,6 +53,13 @@ const int resolution = 8; // Résolution de 8 bits, 256 valeurs possibles
 
 // boucle du serveur
 StSoundRequest SoundRequest ;
+#ifdef TASMOTA
+// init par defaut sinon bug
+g_GlobalVar.m_MutexI2c.PrendreMutex() ;
+ ledcAttachChannel(SPEAKER_PIN, SoundRequest.m_Frequence , resolution , channel );
+ ledcDetach(SPEAKER_PIN) ;
+g_GlobalVar.m_MutexI2c.RelacherMutex() ;
+#endif
 while (g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Run)
     {
     // attente 5 millisecondes

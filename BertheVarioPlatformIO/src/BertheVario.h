@@ -238,10 +238,10 @@
 #define RELANCE_IGC_PRIORITY   0
 #define RELANCE_IGC_CORE       1
 
-// serveur de son, priorite tres haute non interruptible
+// serveur de son, priorite moyenne
 #define SOUNDSVR_NUM_TASK   9
 #define SOUNDSVR_STACK_SIZE 1500
-#define SOUNDSVR_PRIORITY   19
+#define SOUNDSVR_PRIORITY   9
 #define SOUNDSVR_CORE       1
 
 // nombre total de taches

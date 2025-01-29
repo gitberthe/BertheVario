@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 20/01/2025
+/// \date modification : 28/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -172,11 +172,10 @@ void CGlobalVar::beeper( int frequence , int DurationMs , int Volume )
  tone(SPEAKER_PIN, frequence, DurationMs ) ;
 g_GlobalVar.m_MutexI2c.RelacherMutex() ; */
 
-CSoundSvr::StSoundRequest Req ;
-Req.m_Frequence = frequence ;
-Req.m_DelayMs = DurationMs ;
-Req.m_Cycle = Volume ;
-g_GlobalVar.PostSoundRequest( & Req ) ;
+g_GlobalVar.m_Req.m_Frequence = frequence ;
+g_GlobalVar.m_Req.m_DelayMs = DurationMs ;
+g_GlobalVar.m_Req.m_Cycle = Volume ;
+g_GlobalVar.PostSoundRequest( & g_GlobalVar.m_Req ) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

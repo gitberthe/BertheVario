@@ -7,7 +7,7 @@
 /// \date modification : 28/01/2025
 ///
 
-char NumVer[] = "20250128b" ;
+char NumVer[] = "20250128c" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -44,13 +44,13 @@ Serial.println("Setup") ;
   //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
 //#endif
 
-// init alim
-g_GlobalVar.InitAlim() ;
-
 // beeper init
 g_GlobalVar.LanceTacheSound() ;
-//delay( 300 ) ;
-//CGlobalVar::BeepOk() ;
+delay( 300 ) ;
+CGlobalVar::BeepOk() ;
+
+// init alim
+g_GlobalVar.InitAlim() ;
 
 // init ecran
 g_GlobalVar.InitScreen() ;
@@ -200,9 +200,6 @@ g_GlobalVar.LancerTacheCalcul() ;
 // tache de mesure % utilisation cpu
 perfmon_start() ;
 
-// beep demarrage
-CGlobalVar::BeepOk() ;
-
 #ifdef _LG_DEBUG_
   Serial.println("setup done");
 #endif
@@ -247,9 +244,9 @@ if ( g_GlobalVar.m_ModeRandoVol )
 if ( once )
     {
     once = false ;
-    /*CGlobalVar::BeepOk() ;
+    CGlobalVar::BeepOk() ;
     CGlobalVar::beeper( SOUND_DELAY_ONLY , 200 );
-    CGlobalVar::BeepOk() ;*/
+    CGlobalVar::BeepOk() ;
 
     // puy de dome pour test fichier hgt
     float Lat = 45.772396 ;

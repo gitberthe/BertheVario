@@ -1,3 +1,6 @@
+le 20250128c :
+ - modification beep demmarrage.
+
 le 20250128b :
  - platform https://github.com/tasmota/platform-espressif32/releases/download/2024.12.30/platform-espressif32.zip
 
