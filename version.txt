@@ -1,3 +1,6 @@
+le 20250129a :
+ - bouton gauche et centre bloques en vol pour rester sur la page Vz.
+
 le 20250128c :
  - modification beep demmarrage.
 
