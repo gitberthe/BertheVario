@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/10/2024
-/// \date modification : 13/01/2025
+/// \date modification : 28/01/2025
 ///
 
 #ifndef _CSOUNDSVR_
@@ -13,7 +13,7 @@
 #define SOUND_BUFFER_SIZE 10
 #define SOUND_DELAY_ONLY  -1
 
-#define VOLUME_MOYEN       200
+#define VOLUME_MOYEN       127
 #define VOLUME_MAX_CYCLE   255
 #define VOLUME_BAS         50
 

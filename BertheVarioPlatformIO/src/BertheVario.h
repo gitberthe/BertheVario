@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 27/01/2025
+/// \date modification : 28/01/2025
 ///
 
 //////////////////
@@ -19,10 +19,9 @@
 #include <FS.h>
 #include <MS5611.h>
 #include <MPU9250.h>
+#include <NimBLEDevice.h>
+
 #include <ESPFMfGK.h>
-#include <freertos/queue.h>
-//#include <soc/dac_channel.h>
-//#include <driver/dac.h>
 
 #include <math.h>
 #include <map>
@@ -41,6 +40,9 @@
 ////////////////////////////////////
 // platform de la version precedente
 // platform = https://github.com/tasmota/platform-espressif32/releases/download/2024.01.01/platform-espressif32.zip
+// platform = https://github.com/tasmota/platform-espressif32/releases/download/2024.12.30/platform-espressif32.zip
+// platform = https://github.com/tasmota/platform-espressif32/releases/download/2024.04.11/platform-espressif32.zip
+// platform = espressif32@6.10.0
 
 ////////////////
 // si mode debug
@@ -170,6 +172,8 @@
 #include "FileMgr/FileMgr.h"
 #include "RandoVol/CFileGpx.h"
 #include "RandoVol/CRandoVol.h"
+
+//#include "Bluetooth/VarioBle.h"
 
 ///////////////////////////
 // taches plus affichage //

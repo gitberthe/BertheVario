@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/10/2024
-/// \date modification : 13/01/2025
+/// \date modification : 28/01/2025
 ///
 
 #include "../BertheVario.h"
@@ -32,6 +32,8 @@ g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Run = true ;
 g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Stopped = false ;
 xTaskCreatePinnedToCore(TacheSoundSvr, "SoundSvr", SOUNDSVR_STACK_SIZE , this, SOUNDSVR_PRIORITY, NULL, SOUNDSVR_CORE);
 }
+
+#define TASMOTA
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Tache pour jouer les sons qui sont dans la file d'attente.
@@ -65,10 +67,14 @@ while (g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Run)
         {
         // configuration led
         g_GlobalVar.m_MutexI2c.PrendreMutex() ;
+        #ifdef TASMOTA
+         ledcAttachChannel(SPEAKER_PIN, SoundRequest.m_Frequence , resolution , channel );
+         ledcWrite(SPEAKER_PIN, SoundRequest.m_Cycle );
+        #else
          ledcSetup( channel , SoundRequest.m_Frequence , resolution ) ;
-         ledcAttachPin(SPEAKER_PIN, channel);
-         //ledcWrite(channel,127);    // son cycle 255
+         ledcAttachPin(SPEAKER_PIN, channel );
          ledcWrite(channel, SoundRequest.m_Cycle );
+        #endif
         g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
         // attente
@@ -76,7 +82,11 @@ while (g_GlobalVar.m_TaskArr[SOUNDSVR_NUM_TASK].m_Run)
 
         // raz led
         g_GlobalVar.m_MutexI2c.PrendreMutex() ;
+        #ifdef TASMOTA
+         ledcDetach(SPEAKER_PIN) ;
+        #else
          ledcDetachPin(SPEAKER_PIN) ;
+        #endif
         g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
         /*g_GlobalVar.m_MutexI2c.PrendreMutex() ;

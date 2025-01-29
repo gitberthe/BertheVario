@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 27/01/2025
+/// \date modification : 28/01/2025
 ///
 
-char NumVer[] = "20250127a" ;
+char NumVer[] = "20250128b" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -22,10 +22,13 @@ CGlobalVar g_GlobalVar ;
 // the size is increased in setPartialWindow() if x or w are not multiple of 8 for even rotation, y or h for odd rotation
 // see also comment in GxEPD2_BW.h, GxEPD2_3C.h or GxEPD2_GFX.h for method setPartialWindow()
 
+//VarioBle VBle ;
+
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief fonction setup de demmarrage.
 void setup()
 {
+//VBle.init( "BerteVario" ) ;
 
 // init port serie de console
 Serial.begin(115200);
@@ -41,14 +44,13 @@ Serial.println("Setup") ;
   //display.epd2.selectSPI(hspi, SPISettings(4000000, MSBFIRST, SPI_MODE0));
 //#endif
 
-// beeper init
-//g_GlobalVar.InitSpeaker() ;
-g_GlobalVar.LanceTacheSound() ;
-delay(300) ;
-CGlobalVar::BeepOk() ;
-
 // init alim
 g_GlobalVar.InitAlim() ;
+
+// beeper init
+g_GlobalVar.LanceTacheSound() ;
+//delay( 300 ) ;
+//CGlobalVar::BeepOk() ;
 
 // init ecran
 g_GlobalVar.InitScreen() ;
@@ -193,6 +195,14 @@ g_GlobalVar.LanceTacheGps(true) ;
 // lancement tache beep
 g_GlobalVar.LanceTacheVarioBeep() ;
 
+// screen tache de fond calcul
+g_GlobalVar.LancerTacheCalcul() ;
+// tache de mesure % utilisation cpu
+perfmon_start() ;
+
+// beep demarrage
+CGlobalVar::BeepOk() ;
+
 #ifdef _LG_DEBUG_
   Serial.println("setup done");
 #endif
@@ -237,18 +247,14 @@ if ( g_GlobalVar.m_ModeRandoVol )
 if ( once )
     {
     once = false ;
-    CGlobalVar::BeepOk() ;
+    /*CGlobalVar::BeepOk() ;
     CGlobalVar::beeper( SOUND_DELAY_ONLY , 200 );
-    CGlobalVar::BeepOk() ;
-
-    // screen tache de fond calcul
-    g_GlobalVar.LancerTacheCalcul() ;
-    // tache de mesure % utilisation cpu
-    perfmon_start() ;
+    CGlobalVar::BeepOk() ;*/
 
     // puy de dome pour test fichier hgt
     float Lat = 45.772396 ;
     float Lon = 2.964061  ;
+    //Lon = 0 ;  Lat = 39 ; // pour test
     g_GlobalVar.m_Hgt2Agl.GetGroundZ( Lon , Lat ) ;
 
     // simu vol
@@ -270,22 +276,23 @@ g_GlobalVar.AfficheAll();
 while ( (millis() - TimeAvAff) < 500 )
     delay( 10 ) ;
 
-/*// animation attente gps
-if ( g_GlobalVar.m_AltiGps == 0 )
-    g_GlobalVar.m_AltiGps = -1 ;
-else if ( g_GlobalVar.m_AltiGps == -1 )
-    g_GlobalVar.m_AltiGps = 0 ; */
+/*
+// pression hPascal, altitude meters ,vario cm/s, temperature C, battery voltage, *checksum
+char Sentence[500] ;
+sprintf( Sentence , "LK8EX1,999999,%f,99,99,999",g_GlobalVar.m_TerrainPosCur.m_AltiBaro ) ;
+int Len = strlen( Sentence ) ;
+unsigned int checksum , ai, bi;                                               // Calculating checksum for data string
+for (checksum = 0, ai = 0; ai < Len ; ai++)
+    {
+    bi = (unsigned char)Sentence[ai];
+    checksum ^= bi;
+    }
 
-/*// augmentation valeur vitesse verticale
-static float AngleDeg = 0. ;
-g_GlobalVar.m_VitVertMS = 9 * cos( AngleDeg / 180. * 3.1416 ) ;
-AngleDeg += 40. ;
-
-g_GlobalVar.m_dureeVolMin+= 5 ;
-g_GlobalVar.m_CapGpsDeg  += 10 ;
-g_GlobalVar.m_AltiGps    += 100 ;
-g_GlobalVar.m_VitesseKmh += 0.5 ;*/
-
-// beep
-//g_GlobalVar.beeper( 5000 , 200 ) ;
+char Sentence2[500] ; // = "$LK8EX1,98974,197,0,99,999*32\r\n" ;
+sprintf( Sentence2 , "$%s*%X\r\n" , Sentence , checksum ) ;
+int Len2 = strlen( Sentence2 ) ;
+for ( int ic = 0 ; ic < Len2 ; ic++ )
+    VBle.write( Sentence2[ic] ) ;
+VBle.flush() ;
+*/
 }
