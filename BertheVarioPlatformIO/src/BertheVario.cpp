@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 02/02/2025
+/// \date modification : 03/02/2025
 ///
 
-char NumVer[] = "20250202a" ;
+char NumVer[] = "20250203a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD

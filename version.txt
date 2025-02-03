@@ -1,3 +1,7 @@
+le 20250203a :
+ - modification initialisation hauteur sol zone protegée fonction de la denomination 
+    (variable et plus 1000/500/300/150/50m ex: "PROTECT reserve annecy 200m/sol")
+
 le 20250202a :
  - suppression de [temp_raz_screen] inutile.
  - introduction de DELAY_ATTENTE_COURT

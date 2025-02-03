@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 12/01/2025
+/// \date modification : 03/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -201,17 +201,25 @@ bool IsProtect = ( (*pChar == 'P') && (strstr( pChar , "PROTECT" ) != NULL)) ||
                  ( (*pChar == 'F') && (strstr( pChar , "FFVL-Prot" ) != NULL)) ;
 if ( IsProtect )
     {
-    // detertimation plafond zone proetegee
-    if ( strstr( pChar , "1000m/sol" ) != NULL )
-        pZone->m_HauteurSolZoneProtege = 1000 ;
-    else if ( strstr( pChar , "500m/sol" ) != NULL )
-        pZone->m_HauteurSolZoneProtege = 500 ;
-    else if ( strstr( pChar , "300m/sol" ) != NULL )
-        pZone->m_HauteurSolZoneProtege = 300 ;
-    else if ( strstr( pChar , "150m/sol" ) != NULL )
-        pZone->m_HauteurSolZoneProtege = 150 ;
-    else if ( strstr( pChar , "50m/sol" ) != NULL )
-        pZone->m_HauteurSolZoneProtege = 50 ;
+    // si m/sol trouve
+    char * pCharFin = strstr( pChar , "m/sol" ) ;
+    if ( pCharFin != NULL )
+        {
+        char TmpBuff[500] ;
+        strcpy( TmpBuff , pChar ) ;
+        *pCharFin = 0 ;
+        // on recule jusqu'a l'espace
+        while( *pCharFin != ' ' && *pCharFin != '(' && pCharFin != pChar )
+            pCharFin-- ;
+        // on ravance d'un coup
+        pCharFin++ ;
+        // hauteur sol
+        pZone->m_HauteurSolZoneProtege = atoi( pCharFin ) ;
+        // si probleme de conversion hauteur max
+        if ( pZone->m_HauteurSolZoneProtege == 0 )
+            pZone->m_HauteurSolZoneProtege = 1000 ;
+        }
+    // 1000 metres par defaut
     else
         pZone->m_HauteurSolZoneProtege = 1000 ;
     }
