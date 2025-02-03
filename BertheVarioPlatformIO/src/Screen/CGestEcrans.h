@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 21/01/2025
+/// \date modification : 02/02/2025
 ///
 
 #ifndef _GESTECRANS_
@@ -55,7 +55,7 @@ protected :
     virtual EtatsAuto EcranListeIgcFch() = 0 ;
     virtual EtatsAuto EcranConfimeArchIgcFch() = 0 ;
     virtual EtatsAuto EcranTmaDessous() = 0 ;
-    virtual void ScreenRaz( bool Froid = false ) = 0 ;
+    virtual void ScreenRaz() = 0 ;
     virtual void ScreenOff() = 0 ;
 
     EtatsAuto Erreur() ;

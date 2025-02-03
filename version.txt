@@ -1,3 +1,8 @@
+le 20250202a :
+ - suppression de [temp_raz_screen] inutile.
+ - introduction de DELAY_ATTENTE_COURT
+ - meilleur menu selection rando glissant
+ 
 le 20250129a :
  - bouton gauche et centre bloques en vol pour rester sur la page Vz.
 

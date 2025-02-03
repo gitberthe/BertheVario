@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 27/01/2025
+/// \date modification : 02/02/2025
 ///
 
 #ifndef _BOUTONS_
@@ -14,6 +14,7 @@
 //#define DELAY_DOUBLE_APPUI          700
 #define DELAY_APPUI_LONG            1500
 #define DELAY_PURGE_LONG            2000
+#define DELAY_ATTENTE_COURT          400
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Permet l'utilisation des boutons. Scan 10hz avec beep.

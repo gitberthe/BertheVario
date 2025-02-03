@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 29/01/2025
+/// \date modification : 02/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -95,17 +95,19 @@ display.setRotation(0) ;
 //delay(SCREEN_DELAY) ;
 
 display.setPartialWindow( 0, 0, 200 , 200 );
+
+ScreenRaz() ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-/// \brief Raz de l'ecran suivant temperature boitier
-void CScreen154::ScreenRaz(  bool Froid )
+/// \brief Raz de l'ecran qui fonctionne bien.
+void CScreen154::ScreenRaz()
 {
 g_GlobalVar.RazBoutons() ;
 
 g_GlobalVar.m_StopLoop = true ;
 
-if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_raz_screen && !Froid )
+//if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_raz_screen && !Froid )
     {
     display.setCursor( 0 , 0 ) ;
     display.print( "" );
@@ -114,19 +116,8 @@ if ( g_GlobalVar.m_MS5611.GetTemperatureDegres() > g_GlobalVar.m_Config.m_temp_r
     display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
     display.display(true) ;
     }
-else
+/*else
     {
-    /*//char c = 2 ; //219 ;
-    char c = '#';
-    char TmpChar[15] = {0} ;
-    for ( int i = 0 ; i < 14 ; i++ )
-        TmpChar[i] = c ;
-    display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor( 0 , 0 ) ;
-    int ib = 0 ;
-    while( ib++ < 10 )
-        display.println( TmpChar );
-    display.display(true) ;*/
     display.setCursor( 0 , 0 ) ;
     display.print( "" );
     int hauteur = 40 ;
@@ -138,16 +129,7 @@ else
         display.fillRect(0,y, 200, hauteur, GxEPD_WHITE ); // x y w h
         display.display(true) ;
         }
-    }
-
-/*display.setFullWindow() ;
-
-display.fillRect(0,0, 200, 200, GxEPD_BLACK ); // x y w h
-display.display(true) ;
-display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
-display.display(true) ;
-
-display.setPartialWindow( 0, 0, 200 , 200 ); */
+    } */
 
 g_GlobalVar.m_StopLoop = false ;
 
@@ -1720,23 +1702,30 @@ if ( g_GlobalVar.m_EtatRando == CRandoVol::InitAfficheMenu )
 
 // si affichage menu
 static CFileGpx * pFileGpx = NULL ;
-static int NbMenu = 0 ;
+static int NbMenuScreen = 0 ;
 static int selection = 0 ;
-if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
+static int glissant = 0 ;
+const int NbAffLigneMenu = 10 ;
+if ( NbMenuScreen++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
     {
     // defilement du menu
     if ( g_GlobalVar.BoutonDroitTousAppui() && selection < (g_GlobalVar.m_VecGpx.size()-1) )
         {
-        NbMenu = 0 ;
+        NbMenuScreen = 0 ;
         selection++ ;
+        if ( selection > NbAffLigneMenu/2 )
+            glissant++ ;
         }
     if ( g_GlobalVar.BoutonGaucheTousAppui() && selection > 0 )
         {
-        NbMenu = 0 ;
+        NbMenuScreen = 0 ;
         selection-- ;
+        glissant-- ;
+        if ( selection == 0 )
+            glissant = 0 ;
         }
     if ( g_GlobalVar.BoutonCentre() )
-        NbMenu = 10 ;
+        NbMenuScreen = 10 ;
 
     // affichage nom de piste
     display.setCursor(0,20);
@@ -1745,7 +1734,7 @@ if ( NbMenu++ < 8 && g_GlobalVar.m_EtatRando == CRandoVol::AfficheMenu )
 
     // nom trace des traces proches
     char TmpChar[50] ;
-    for ( int it = 0 ; it < 10 ; it++ )
+    for ( int it = 0 + glissant ; it < NbAffLigneMenu + glissant ; it++ )
         {
         if ( it == selection )
             sprintf(TmpChar,">%s",g_GlobalVar.GetTrackName(it)) ;

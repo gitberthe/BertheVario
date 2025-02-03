@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 08/03/2024
-/// \date modification : 23/01/2025
+/// \date modification : 02/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -24,23 +24,11 @@ FreeVect() ;
 
 st_line * pLine ;
 
-/*pLine = new st_line ;
-pLine->m_NomVar = "[termic]" ;
-pLine->m_pVar = (void*) & m_Termic  ;
-pLine->m_Type = TYPE_VAR_BOOL ;
-m_LinesVect.push_back( pLine ) ;*/
-
 pLine = new st_line ;
 pLine->m_NomVar = "[coef_filtre_alti_baro]" ;
 pLine->m_pVar = (void*) & m_coef_filtre_alti_baro  ;
 pLine->m_Type = TYPE_VAR_FLOAT ;
 m_LinesVect.push_back( pLine ) ;
-
-/*pLine = new st_line ;
-pLine->m_NomVar = "[periode_integration_sec]" ;
-pLine->m_pVar = (void*) & m_periode_integration_sec ;
-pLine->m_Type = TYPE_VAR_INT ;
-m_LinesVect.push_back( pLine ) ;*/
 
 pLine = new st_line ;
 pLine->m_NomVar = "[vitesse_igc_kmh]" ;
@@ -94,12 +82,6 @@ pLine = new st_line ;
 pLine->m_NomVar = "[vz_seuil_max]" ;
 pLine->m_pVar = (void*) & m_vz_seuil_max ;
 pLine->m_Type = TYPE_VAR_FLOAT ;
-m_LinesVect.push_back( pLine ) ;
-
-pLine = new st_line ;
-pLine->m_NomVar = "[temp_raz_screen]" ;
-pLine->m_pVar = (void*) & m_temp_raz_screen  ;
-pLine->m_Type =  TYPE_VAR_INT;
 m_LinesVect.push_back( pLine ) ;
 
 pLine = new st_line ;

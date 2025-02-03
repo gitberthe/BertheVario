@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 27/01/2025
+/// \date modification : 02/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -291,7 +291,10 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
                     }
                 }*/
         else
+            {
             pThis->m_BoutonGauche = true ;
+            g_GlobalVar.m_DelayAttenteMs = DELAY_ATTENTE_COURT ;
+            }
         CGlobalVar::BeepOk() ;
         g_GlobalVar.m_StopLoop = false ;
         }
@@ -326,7 +329,10 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             }
         // double appui
         else
+            {
             pThis->m_BoutonCentre = true ;
+            g_GlobalVar.m_DelayAttenteMs = DELAY_ATTENTE_COURT ;
+            }
         CGlobalVar::BeepOk() ;
         g_GlobalVar.m_StopLoop = false ;
         }
@@ -360,7 +366,10 @@ while( g_GlobalVar.m_TaskArr[SCAN_BUTON_NUM_TASK].m_Run )
             }
         // double appui
         else
+            {
             pThis->m_BoutonDroit = true ;
+            g_GlobalVar.m_DelayAttenteMs = DELAY_ATTENTE_COURT ;
+            }
         CGlobalVar::BeepOk() ;
         g_GlobalVar.m_StopLoop = false ;
         }
