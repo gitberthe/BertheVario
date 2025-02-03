@@ -1,6 +1,7 @@
 # Projet BertheVario
 Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-website/).
 - Code C++ Visual Studio/PlateformIO pour alti-vario gps parapente (avec gestion des TMA CTR...).
+- Compatible bluetooth/XC_Track si nécessaire.
 - Plateforme Espressif EPS32 Dev Module, TTGO T5, Lilygo v2.4, Arduino (processeur 32bits, bi-core 240mhz).
 
 **GnuVario/BertheVario mode vol :**
@@ -30,3 +31,4 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 - fichier version.txt pour modification apportées aux differentes versions.
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/ESP32 File Manager for Generation Klick ESPFMfGK/src/ESPFMfGKGa.cpp" ligne 6 : crc32.h => CRC32.h
 - modifier "BertheVarioPlatformIO/.pio/libdeps/esp32dev/MPU9250/MPU9250.h" ligne 85 : 0x06 => 0x02
+- voir le #define XC_TRACK à désactiver si non utilisé car consomme 40ko de memoire.

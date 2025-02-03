@@ -61,7 +61,7 @@ g_MS5611.read() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Renvoie la pression en mb.
+/// \brief Renvoie la pression en mb ou hPa.
 float CMS5611::GetPressureMb()
 {
 return g_MS5611.getPressure() ;

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 28/01/2025
+/// \date modification : 03/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -83,10 +83,20 @@ xTaskCreatePinnedToCore( TacheScreenCalcul, "ScreenCalc", CALCUL_STACK_SIZE, thi
 /// \brief Fonction static de calcul d'arrier plan basse priorite 2hz.
 void CGestEcrans::TacheScreenCalcul(void * param)
 {
-int iboucle = 0 ;
+int iboucle10hz = 0 ;
 while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
     {
-    delay( 500 ) ;
+    iboucle10hz++ ;
+
+    #ifdef XC_TRACK
+    // envoi bluetooth Xc-Track a 10hz
+    if ( g_GlobalVar.m_Config.m_xc_track )
+        {
+        if ( g_GlobalVar.m_BleXct.IsInitialised() )
+            g_GlobalVar.m_BleXct.Send() ;
+        }
+    #endif
+    delay( 100 ) ;
 
     // si on n'est pas en ecran 0
     //if ( g_GlobalVar.m_EtatAuto != ECRAN_0_Vz )
@@ -95,12 +105,11 @@ while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
     // calcul du termic
     //g_TermicMap.CalcTermicProche() ;
 
-    // 1hz
-    if ( iboucle++%2 )
-        // calcul du terrain le plus proche en finesses
+    // calcul du terrain le plus proche en finesses 1hz
+    if ( !(iboucle10hz%10) )
         g_GlobalVar.m_TerrainArr.CalcTerrainPlusProche() ;
-    else
-        // calcul de la zone aerienne courante / proche
+    // calcul de la zone aerienne courante / proche 1hz
+    if ( !((iboucle10hz+5)%10) )
         g_GlobalVar.m_ZonesAerAll.CalcZone() ;
     }
 

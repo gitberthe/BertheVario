@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 13/01/2025
+/// \date modification : 03/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -49,6 +49,11 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     bool NotActive = g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone == ZONE_DEDANS ||
                      g_GlobalVar.m_ZonesAerAll.m_LimiteZone == ZONE_LIMITE_ALTI ||
                      g_GlobalVar.m_ZonesAerAll.m_LimiteZone == ZONE_LIMITE_FRONTIERE ;
+
+    #ifdef XC_TRACK
+    if ( g_GlobalVar.m_Config.m_xc_track )
+        break ;
+    #endif
 
     // si alarme zone desactivé => son vario active
     if ( !g_GlobalVar.m_BeepAttenteGVZone )

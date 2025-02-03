@@ -36,6 +36,7 @@
 //#define TYPE_SCREEN 290       ///< si ecran 290 a implementer
 #define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
 //#define VARIO_CAP_MAG_A_PLAT  1
+#define XC_TRACK                ///< si besoin de memoire et pas de xc_track desactiver (40ko de gagner)
 
 ////////////////////////////////////
 // platform de la version precedente
@@ -172,8 +173,7 @@
 #include "FileMgr/FileMgr.h"
 #include "RandoVol/CFileGpx.h"
 #include "RandoVol/CRandoVol.h"
-
-//#include "Bluetooth/VarioBle.h"
+#include "Bluetooth/CBleXct.h"
 
 ///////////////////////////
 // taches plus affichage //

@@ -1,3 +1,7 @@
+le 20250203b :
+ - ajout de [xc_track] pour envoi de la pression par bluetooth à XC-Track.
+   voir le #define XC_TRACK dans BertheVario.h qui consomme 40ko de memoire.
+
 le 20250203a :
  - modification initialisation hauteur sol zone protegée fonction de la denomination 
     (variable et plus 1000/500/300/150/50m ex: "PROTECT reserve annecy 200m/sol")

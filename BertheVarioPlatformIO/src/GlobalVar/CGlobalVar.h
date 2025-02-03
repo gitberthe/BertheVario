@@ -4,7 +4,7 @@
 /// \brief Variable globale du projet
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 19/01/2025
+/// \date modification : 03/02/2025
 ///
 
 #ifndef _GLOBALVAR_
@@ -35,6 +35,7 @@ public :
     CZonesFch   m_ZonesAerAll ;///< tableau des zones aeriennes pris en compte
     CHgt2Agl    m_Hgt2Agl ; ///< pour determiner la hauteur sol
     CPileVit    m_PileVit ; ///< pour lancement vol suivant la vitesse gps
+    CBleXct     m_BleXct ;  ///< bluetooth Xc-Track
 
     bool m_ModeHttp ;                   ///< si mode http wifi
     bool m_ModeRandoVol ;               ///< si mode rando-vol

@@ -36,6 +36,8 @@
 		</Compiler>
 		<Unit filename="../BertheVarioPlatformIO/src/BertheVario.cpp" />
 		<Unit filename="../BertheVarioPlatformIO/src/BertheVario.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Bluetooth/CBleXct.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Bluetooth/CBleXct.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CFinSol.cpp" />
 		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CFinSol.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CSortArray.h" />
