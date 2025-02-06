@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 03/02/2025
+/// \date modification : 06/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -106,10 +106,10 @@ while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
     //g_TermicMap.CalcTermicProche() ;
 
     // calcul du terrain le plus proche en finesses 1hz
-    if ( !(iboucle10hz%10) )
+    if ( !(iboucle10hz%5) )
         g_GlobalVar.m_TerrainArr.CalcTerrainPlusProche() ;
     // calcul de la zone aerienne courante / proche 1hz
-    if ( !((iboucle10hz+5)%10) )
+    if ( !((iboucle10hz+2)%5) )
         g_GlobalVar.m_ZonesAerAll.CalcZone() ;
     }
 

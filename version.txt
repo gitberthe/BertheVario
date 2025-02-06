@@ -1,3 +1,6 @@
+le 20250206a :
+ - calcul penetration zone et terrain proche à 2hz.
+
 le 20250203b :
  - ajout de [xc_track] pour envoi de la pression par bluetooth à XC-Track.
    voir le #define XC_TRACK dans BertheVario.h qui consomme 40ko de memoire.

@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 03/02/2025
+/// \date modification : 06/02/2025
 ///
 
 //////////////////
@@ -31,11 +31,11 @@
 //////////////////////////
 // definitions materielles
 
-#define GNU_VARIO_GRIS        ///< decommenter pour ecran original 1.54
+//#define GNU_VARIO_GRIS        ///< decommenter pour ecran original 1.54
 #define TYPE_SCREEN 154         ///< si ecran 154
 //#define TYPE_SCREEN 290       ///< si ecran 290 a implementer
-#define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
-//#define VARIO_CAP_MAG_A_PLAT  1
+//#define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
+#define VARIO_CAP_MAG_A_PLAT  1
 #define XC_TRACK                ///< si besoin de memoire et pas de xc_track desactiver (40ko de gagner)
 
 ////////////////////////////////////
