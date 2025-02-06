@@ -4,7 +4,7 @@
 /// \brief Fichier du capteur de pression
 ///
 /// \date creation     : 07/03/2024
-/// \date modification : 18/01/2025
+/// \date modification : 06/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -87,8 +87,9 @@ return Alti ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction static qui donne la VZ de la pression/altitude capteur filtree
-/// a 5hz.
-/// Met a jour aussi le cap magnetique.
+/// a 3hz.
+/// Met a jour aussi le cap magnetique à une frequence plus haute pour ne pas bloquer le
+/// capteur.
 /// Modifier le fichier ./Projects/BertheVario/.pio/libdeps/esp32dev/MPU9250/MPU9250.h,
 /// ligne 85, static constexpr uint8_t MAG_MODE {0x02}; pour une lecture basse frequence
 /// du capteur (mais proche de 8hz).
@@ -108,7 +109,6 @@ float AltiPressForVzArr[DIV_SECONDES+1] ;
 // init des variables alti pression integree
 g_GlobalVar.m_MutexI2c.PrendreMutex() ;
  g_GlobalVar.m_MS5611.Read() ;
- //delay( 5 ) ;   // delais pour bug altitude tres negative ???
  g_GlobalVar.m_MS5611.m_AltiPressionFiltree = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres() ;
  for ( int i = 0 ; i <= DIV_SECONDES ; i++ )
     AltiPressForVzArr[i] = g_GlobalVar.m_MS5611.m_AltiPressionFiltree ;
@@ -132,7 +132,6 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     // mesures du capteur de pression
     g_GlobalVar.m_MutexI2c.PrendreMutex() ;
      g_GlobalVar.m_MS5611.Read() ;
-     //delay( 5 ) ;   // delais pour bug altitude tres negative ???
      float AltiMesCapteur = g_GlobalVar.m_MS5611.GetAltiPressionCapteurMetres()  ;
     g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 
@@ -144,15 +143,14 @@ while (g_GlobalVar.m_TaskArr[VZ_MAG_NUM_TASK].m_Run)
     //Serial.print("altipress:") ;
     //Serial.println(g_GlobalVar.CMS5611::m_AltiPressionFiltree);
 
-    // decalage du tableau alti fifo par 0 sur x secondes
+    // decalage du tableau alti fifo par 0 sur 1 secondes
     for ( int i = DIV_SECONDES ; i>0 ; i-- )
         AltiPressForVzArr[ i ] = AltiPressForVzArr[ i - 1 ] ;
 
     AltiPressForVzArr[ 0 ] = AltiPressionFiltree ;
 
-    // calcul VZ sur x secondes
+    // calcul VZ sur 1 secondes
     float VitVert = AltiPressForVzArr[ 0 ] - AltiPressForVzArr[ DIV_SECONDES ] ;
-    //g_GlobalVar.m_MutexI2c.RelacherMutex() ;    // Vz fausse et declenchement de faux vols non resolus
     #ifndef SIMU_VOL
      g_GlobalVar.m_VitVertMS = VitVert ;
     #endif
