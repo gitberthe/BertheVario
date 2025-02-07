@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 06/02/2025
+/// \date modification : 07/02/2025
 ///
 
-char NumVer[] = "20250206a" ;
+char NumVer[] = "20250207a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -88,6 +88,10 @@ if ( BoutonCentreAppuye || BoutonDroitAppuye || BoutonGaucheAppuye )
     {
     // lecture fichier de configuration
     g_GlobalVar.m_Config.LectureFichier() ;
+
+    // lecture fichier zones aeriennes
+    if ( BoutonCentreAppuye )
+        g_GlobalVar.m_ZonesAerAll.LectureFichiers() ;
     }
 else
     {
@@ -108,6 +112,11 @@ g_GlobalVar.InitI2C() ;
 // si mode http wifi
 if ( BoutonCentreAppuye )
     {
+    // desactive ble
+    g_GlobalVar.m_Config.m_xc_track = false ;
+    esp_bt_controller_disable();
+    esp_bt_controller_deinit();
+
     // mode ftp pour loop
     g_GlobalVar.m_ModeHttp = true ;
 
@@ -182,6 +191,11 @@ g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 #endif
 if ( BoutonDroitAppuye )
     {
+    // desactive ble
+    g_GlobalVar.m_Config.m_xc_track = false ;
+    esp_bt_controller_disable();
+    esp_bt_controller_deinit();
+
     g_GlobalVar.m_Config.LectureFichier() ;
     g_GlobalVar.m_ModeRandoVol = true ;
     return ;

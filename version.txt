@@ -1,3 +1,7 @@
+le 20250207a :
+ - correction bug  CDistFront::IsNearFront() vecteurs colineaire.
+ - correction bug valid zone aerienne wifi.
+
 le 20250206a :
  - calcul penetration zone et terrain proche à 2hz.
 

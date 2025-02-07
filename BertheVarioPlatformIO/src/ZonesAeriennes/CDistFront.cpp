@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 28/03/2024
-/// \date modification : 10/04/2024
+/// \date modification : 07/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -54,8 +54,8 @@ for ( int ipts = 0 ; ipts < NbPts ; ipts++ )
     CVecteur2D VecProjDroite( PtA , PtProj ) ;
     CVecteur2D VecPerDroite( PtProj , PtC ) ;
 
-    // si point projete est dans le segment de droite (norme plus petite)
-    if ( VecProjDroite.GetNorm() <= VecDir.GetNorm() )
+    // si point projete est dans le segment de droite (norme plus petite et colineaire)
+    if ( VecProjDroite.GetNorm() <= VecDir.GetNorm() && VecProjDroite.GetAngleDeg( VecDir ) < 90. )
         {
         // si distance au point
         if ( (VecPerDroite.GetNorm() * 60. * UnMileEnMetres) <= g_GlobalVar.m_Config.m_XYMargin )
