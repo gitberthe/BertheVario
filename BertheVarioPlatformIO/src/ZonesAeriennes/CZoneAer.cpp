@@ -15,6 +15,7 @@ CZoneAer::TriPar CZoneAer::ms_TriPar = CZoneAer::TriParAltitude ;
 /// \brief Destructeur, liberation des points
 CZoneAer::~CZoneAer()
 {
+// points non compressés
 if ( m_PolygoneArr != NULL )
     {
     for ( int ip = 0 ; ip < m_NbPts ; ip++ )
@@ -22,6 +23,12 @@ if ( m_PolygoneArr != NULL )
     delete [] m_PolygoneArr ;
     m_PolygoneArr = NULL ;
     m_NbPts = 0 ;
+    }
+// point compressés
+if ( m_LowResShortArr != NULL )
+    {
+    delete [] m_LowResShortArr ;
+    m_LowResShortArr = NULL ;
     }
 }
 
