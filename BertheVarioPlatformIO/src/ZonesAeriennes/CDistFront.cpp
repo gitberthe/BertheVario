@@ -11,20 +11,17 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoie true si on est proche de la frontiere.
-bool CDistFront::IsNearFront( CZoneAer::st_coord_poly ** PolygoneArr , int NbPts , CZoneAer::st_coord_poly PtEnCours )
+float CDistFront::IsNearFront( CZoneAer::st_coord_poly ** PolygoneArr , int NbPts , CZoneAer::st_coord_poly PtEnCours )
 {
+float DistanceMin = 9E20 ;
 
-// verification distance de tous les points
+// calcul distance de tous les points
 for ( int ipts = 0 ; ipts < NbPts ; ipts++ )
     {
     const CZoneAer::st_coord_poly & pts = *PolygoneArr[ipts] ;
     float dist = sqrtf( powf(pts.m_Lat-PtEnCours.m_Lat,2) + powf(pts.m_Lon-PtEnCours.m_Lon,2) ) ;
     dist *= 60 * UnMileEnMetres ;
-    if ( dist <= g_GlobalVar.m_Config.m_XYMargin )
-        {
-        //Serial.println("ici") ;
-        return true ;
-        }
+    DistanceMin = std::min( DistanceMin , dist ) ;
     }
 
 // pour toutes les droites des points 2 a 2
@@ -58,13 +55,9 @@ for ( int ipts = 0 ; ipts < NbPts ; ipts++ )
     if ( VecProjDroite.GetNorm() <= VecDir.GetNorm() && VecProjDroite.GetAngleDeg( VecDir ) < 90. )
         {
         // si distance au point
-        if ( (VecPerDroite.GetNorm() * 60. * UnMileEnMetres) <= g_GlobalVar.m_Config.m_XYMargin )
-            {
-            //Serial.println("la") ;
-            return true ;
-            }
+        DistanceMin = std::min( DistanceMin , (float)(VecPerDroite.GetNorm() * 60. * UnMileEnMetres) ) ;
         }
     }
 
-return false ;
+return DistanceMin ;
 }

@@ -4,12 +4,12 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 26/11/2024
+/// \date modification : 07/02/2025
 ///
 
 #include "../BertheVario.h"
 
-bool CZoneAer::ms_TriParNom = false ;
+CZoneAer::TriPar CZoneAer::ms_TriPar = CZoneAer::TriParAltitude ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Destructeur, liberation des points
@@ -29,8 +29,10 @@ if ( m_PolygoneArr != NULL )
 /// \brief Tri par nom ou alti basse
 bool CZoneAer::operator > ( const CZoneAer & Zone ) const
 {
-if ( ms_TriParNom )
+if ( ms_TriPar == TriParNom )
     return (strcmp( m_pNomAff , Zone.m_pNomAff ) > 0 ) ;
+else if ( ms_TriPar == TriParDistance )
+    return m_DistanceFrontiere > Zone.m_DistanceFrontiere ;
 
 //return m_Area > Zone.m_Area ;
 return GetAltiBasse() > Zone.GetAltiBasse() ;
@@ -40,8 +42,10 @@ return GetAltiBasse() > Zone.GetAltiBasse() ;
 /// \brief Tri par nom ou alti basse
 bool CZoneAer::operator < ( const CZoneAer & Zone ) const
 {
-if ( ms_TriParNom )
+if ( ms_TriPar == TriParNom )
     return ( strcmp( m_pNomAff , Zone.m_pNomAff ) < 0 ) ;
+else if ( ms_TriPar == TriParDistance )
+    return m_DistanceFrontiere < Zone.m_DistanceFrontiere ;
 
 //return m_Area < Zone.m_Area ;
 return GetAltiBasse() < Zone.GetAltiBasse() ;

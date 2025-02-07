@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 04/12/2024
+/// \date modification : 07/02/2025
 ///
 
 #ifndef _ZONE_AR_
@@ -56,8 +56,16 @@ public :
         float m_Lon ;   ///< longitude en degres
         } ;
 
-    static  void TriParNom( bool Tri )
-                { ms_TriParNom = Tri ; } ;
+    /// \brief pour le tri
+    enum TriPar
+        {
+        TriParNom ,
+        TriParAltitude ,
+        TriParDistance
+        } ;
+
+    static  void TrierPar( TriPar Tri )
+                { ms_TriPar = Tri ; } ;
     int     GetAltiBasse() const ;
     bool    HavePeriod() const
                 { return m_pDerogFfvl != NULL ; } ;
@@ -89,11 +97,12 @@ private :
 
     st_coord_poly   m_Barycentre ;      ///< pour une recherche rapide
     float           m_RayonMetre ;      ///< pour une recherche rapide
+    float           m_DistanceFrontiere;///< pour in tri de distance frontiere
 
     short           m_ResolutionMetre ;             ///< resolution en metre de la zone lors de compression short
     short           m_HauteurSolZoneProtege = -1 ;  ///< hauteur de la zone protegee
 
-    static bool     ms_TriParNom ;  ///< pour un tri par nom
+    static TriPar   ms_TriPar ;  ///< pour un tri par nom/distance/altitude
 } ;
 
 /*////////////////////////////////////////////////////////////////////////////////

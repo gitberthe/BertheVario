@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 28/03/2024
-/// \date modification : 28/03/2024
+/// \date modification : 07/02/2025
 ///
 
 #ifndef _DISTFRONT_
@@ -16,7 +16,7 @@
 class CDistFront
 {
 public :
-    bool IsNearFront( CZoneAer::st_coord_poly ** PolygoneArr , int NbPts, CZoneAer::st_coord_poly PtEnCours ) ;
+    float IsNearFront( CZoneAer::st_coord_poly ** PolygoneArr , int NbPts, CZoneAer::st_coord_poly PtEnCours ) ;
 } ;
 
 #endif

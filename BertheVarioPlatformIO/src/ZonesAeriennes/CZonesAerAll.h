@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 10/01/2025
+/// \date modification : 07/02/2025
 ///
 
 #ifndef _ZONE_AR_ALL_
@@ -34,7 +34,6 @@ public :
     void EcritureFichierZonesActive() ;
     void CalcZone() ;
     void TriZonesNom() ;
-    void TriZonesAltitude (std::vector< const CZoneAer * > &VecZones) ;
 
     void SetDatePeriode() ;
 
@@ -60,12 +59,15 @@ protected :
     CZoneAer * Find( const char * NomOri ) ;
 
 private :
-    void LectureFichierZonesAer() ;
-    CZoneAer * TraiteBufferZoneAer( char * buff ) ;
-    void LectureFichierZonesPeriode() ;
-    void TraiteBufferZonePeriode( char * buff ) ;
-    void LectureFichierZonesActive() ;
-    void TraiteBufferZoneActive( char * buff ) ;
+    void        LectureFichierZonesAer() ;
+    CZoneAer *  TraiteBufferZoneAer( char * buff ) ;
+    void        LectureFichierZonesPeriode() ;
+    void        TraiteBufferZonePeriode( char * buff ) ;
+    void        LectureFichierZonesActive() ;
+    void        TraiteBufferZoneActive( char * buff ) ;
+
+    void        TriZonesParAltitude(std::vector< const CZoneAer * > &VecZones) ;
+    void        ClasseZoneRetenueAltitude( std::vector< const CZoneAer * > &VecZones ) ;
 
 
 } ;

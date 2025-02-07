@@ -1,4 +1,7 @@
 le 20250207b :
+ - modification algorithme calcul de zone pour premisse distance altitude frontiere zone.
+ 
+le 20250207b :
  - correction bug important zone activable masquée par zone avec derogation.
  
 le 20250207a :
