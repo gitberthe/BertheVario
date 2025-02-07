@@ -34,3 +34,5 @@
 48;sancy-chaudefour;2024,07,14;300;Zp Chaudefour al: 300m;DedansUneZone;
 50;sancy-pail;2024,07,14;2590;Be TMA CFD 5 al:2590m;DessousUneZone;
 51;sancy-pail;2024,07,14;0;In R 368 B al:   0m;DedansUneZone;
+53;olby-pdd;2025,8,8;0;In R 368 B al:   0m;DedansUneZone;
+54;olby-pdd;2025,8,8;3500;Be TMA CLERMONT 5.1 al:3500m;DessousUneZone;
