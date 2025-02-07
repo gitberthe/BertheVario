@@ -1,4 +1,4 @@
-le 20250207b :
+le 20250207c :
  - modification algorithme calcul de zone pour premisse distance altitude frontiere zone.
  
 le 20250207b :
