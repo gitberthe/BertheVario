@@ -6,7 +6,7 @@ Firmware récent du GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-websi
 
 **GnuVario/BertheVario mode vol :**
 
-<img src="./GnuVario-Firmware-BertheVario.jpg" width="250"/>
+<img src="./GnuVario-BertheVario-Vz.jpg" width="250"/>
 
 **GnuVario/BertheVario mode randonnée :**
 

@@ -1,8 +1,14 @@
+le 20250208b :
+ - pas de prise en compte des zones proteges pour l'altitude/distance/cap 
+   de la zone la plus proche (alarme marge Z et XY toujours active)
+ 
 le 20250208a :
  - supression de la direction/distance du terrain proche en page Vz.
  - alternance affichage terrain proche/finesse avec altitude/distance/cap 
-   jusqu'a la prochaine zone TMA/CTR... rencontrée, en metres. 999m maximum
- - penetration zone TMA activement testeé à clermont. altitude/distance/cap moin testé.
+   jusqu'a la prochaine zone TMA/CTR... rencontrée, à l'altitude ou l'on est,
+   en metres. 999m maximum.
+ - penetration zone TMA activement testeé à clermont. altitude/distance/cap zone 
+   prochemoin testé.
 
 le 20250207d :
  - corection fuite memoire ~CZoneAer(). Meilleur fonctionnement fileManager.

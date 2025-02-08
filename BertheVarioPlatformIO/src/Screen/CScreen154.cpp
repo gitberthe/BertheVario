@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 02/02/2025
+/// \date modification : 08/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -501,7 +501,7 @@ else
     // bandeaux 1
     // terrain finesse
     const int y1 = 30 ;
-    if ( (AffTerrainFront++/4)%2 )
+    if ( (AffTerrainFront++/3)%2 )
         {
         display.setFont(&FreeMonoBold12pt7b);
         display.setCursor(0, y1);
@@ -513,7 +513,7 @@ else
     // dist/alt/cap frontiere zone
     else
         {
-        display.setCursor(0, y1);
+        display.setCursor(2, y1);
         char TmpCharFront[25] ;
         char TmpCharCap[25] ;
         GetCapChar( CapFrontDeg , TmpCharCap ) ;

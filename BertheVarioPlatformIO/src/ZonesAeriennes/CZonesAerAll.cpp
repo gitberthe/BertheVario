@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 03/02/2025
+/// \date modification : 08/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -950,9 +950,10 @@ for ( int iz = 0 ; iz < m_NbZones; iz++ )
         continue ;
 
     // prise en compte de l'altitude
-    bool IsNearFrontAlti ;
+    bool IsNearFrontAlti = false ;
     if ( pZoneXY->IsProtect() )
-        IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro <= (PlafondZoneProtegee+g_GlobalVar.m_Config.m_AltiMargin) ;
+        //IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro <= (PlafondZoneProtegee+g_GlobalVar.m_Config.m_AltiMargin) ;
+        continue ;
     else
         IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro >= (pZoneXY->GetAltiBasse()-g_GlobalVar.m_Config.m_AltiMargin) ;
 
