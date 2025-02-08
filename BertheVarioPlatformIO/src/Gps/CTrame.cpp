@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 25/10/2024
+/// \date modification : 08/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -104,6 +104,14 @@ if ( !strcmp(pChar,"--GGA" ) )
             #ifdef _LG_DEBUG_
              Serial.print( "heure gps sec : " ) ;
              Serial.println( heure ) ;
+            #endif
+
+            #ifdef DEBUG_512
+            m_MillisPremierGGA = millis() ;
+            g_GlobalVar.m_TerrainPosCur.m_Lon = 3.257269 ; // thuret
+            g_GlobalVar.m_TerrainPosCur.m_Lat = 45.982155 ;
+            g_GlobalVar.m_AltitudeSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
+            g_GlobalVar.m_TerrainPosCur.m_AltiBaro = 1500 ;
             #endif
             }
         // latitude valeur

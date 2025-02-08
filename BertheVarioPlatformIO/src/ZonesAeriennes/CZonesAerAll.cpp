@@ -882,33 +882,6 @@ else
 VecZoneInArea.clear() ;
 VecZoneInArea.shrink_to_fit() ;
 
-/*// pour toutes les zones activables recherche dedans si pas deja dedans une comme TMA
-for ( int iz = 0 ; iz < VecZoneInAreaActivee.size() && RetNbrIn != ZONE_DEDANS ; iz++ )
-    {
-    const CZoneAer & Zone = *VecZoneInAreaActivee[iz] ;
-    int PlafondZone = Zone.GetAltiBasse() ;
-
-    // si dedans
-    if ( g_GlobalVar.m_TerrainPosCur.m_AltiBaro >= PlafondZone )
-        {
-        RetNbrIn = ZONE_DEDANS ;
-        // construction nom + altitude
-        char TmpChar[50] ;
-        m_Plafond4Valid=PlafondZone ;
-        sprintf( TmpChar , "In %s al:%4dm" , Zone.m_pNomAff , m_Plafond4Valid ) ;
-        RetStrIn = TmpChar ;
-        break ;
-        }
-    // si limite altitude
-    else if ( (PlafondZone-g_GlobalVar.m_Config.m_AltiMargin) < g_GlobalVar.m_TerrainPosCur.m_AltiBaro )
-        {
-        m_Plafond4Valid = PlafondZone ;
-        sprintf( TmpChar , "Al %s al:%4dm" , Zone.m_pNomAff , m_Plafond4Valid ) ;
-        RetNbrLimite = ZONE_LIMITE_ALTI ;
-        RetStrLimite = TmpChar ;
-        }
-    }*/
-
 // si zone protege et pas deja dedans une comme TMA ou activable verification hauteur sol
 int HauteurSolZoneProtegee = 1000 ;
 int PlafondZoneProtegee = g_GlobalVar.m_AltitudeSolHgt+HauteurSolZoneProtegee ;
@@ -944,8 +917,17 @@ m_Mutex.PrendreMutex() ;
  m_NomZoneDansDessous = RetStrIn ;
 m_Mutex.RelacherMutex() ;
 
-// determination des zones proches et à l'altitude de croisement
-const int DistanceMaxProcheXY = 1000 ;
+// raz des variables distance prochaine zone et mise a jour distance altitude
+if ( pZoneIn != NULL )
+    {
+    int DistAltCurZone = pZoneIn->GetAltiBasse() - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
+    m_DistAltCurZone = DistAltCurZone ;
+    }
+else
+    m_DistAltCurZone = 9999 ;
+
+// determination des zones proches et à l'altitude de croisement dans les 3 km
+const int DistanceMaxProcheXY = 3000 ;
 std::vector<CZoneAer *> VecZoneProchesXY ;   // zones proches
 for ( int iz = 0 ; iz < m_NbZones; iz++ )
     {
@@ -979,7 +961,8 @@ for ( int iz = 0 ; iz < m_NbZones; iz++ )
         {
         VecZoneProchesXY.push_back( pZoneXY ) ;
         pZoneXY->UnCompressZone() ;
-        pZoneXY->m_DistanceFrontiere = CDistFront::IsNearFront( pZoneXY->m_PolygoneArr , pZoneXY->m_NbPts , PtsEnCours ) ;
+        // distance et point frontiere proche
+        pZoneXY->m_DistanceFrontiere = CDistFront::IsNearFront( pZoneXY->m_PolygoneArr , pZoneXY->m_NbPts , PtsEnCours , pZoneXY->m_PtFrontProche ) ;
         pZoneXY->FreeFloat() ;
         }
     }
@@ -992,6 +975,11 @@ std::sort(VecZoneProchesXY.begin(), VecZoneProchesXY.end(),MySortFunction);
 if ( VecZoneProchesXY.size() )
     {
     const CZoneAer * pZoneProche = VecZoneProchesXY[0] ;
+
+    // distance et point prochaine zone
+    m_DistXYNextZone = pZoneProche->m_DistanceFrontiere ;
+    m_PtFrontProche  = pZoneProche->m_PtFrontProche ;
+
     // si marge distance atteinte
     if ( pZoneProche->m_DistanceFrontiere <= g_GlobalVar.m_Config.m_XYMargin )
         {
@@ -1004,6 +992,12 @@ if ( VecZoneProchesXY.size() )
         sprintf( TmpChar , "Bo %s al:%4dm" , pZoneProche->m_pNomAff , m_Plafond4Valid ) ;
         RetStrLimite = TmpChar ;
         }
+    }
+else
+    {
+    m_DistXYNextZone = 9999 ;
+    m_PtFrontProche.m_Lat = 90 ;
+    m_PtFrontProche.m_Lon = 0 ;
     }
 
 /*

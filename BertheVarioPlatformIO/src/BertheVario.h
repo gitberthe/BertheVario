@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 07/02/2025
+/// \date modification : 08/02/2025
 ///
 
 //////////////////
@@ -59,6 +59,7 @@
 //#define TMA_DEBUG
 //#define REBOOT_DEBUG
 //#define DEBUG_RANDO_VOl
+//#define DEBUG_512
 
 //#define SIMU_VOL      ///< attention pour le progamme validation simulateur de vol
 

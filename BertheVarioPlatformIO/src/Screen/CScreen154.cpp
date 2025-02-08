@@ -282,7 +282,7 @@ if ( disp )
 /// \return l'etat suivant de l'automate
 CGestEcrans::EtatsAuto CScreen154::EcranVz()
 {
-CLocTermic LocTermic ;
+//CLocTermic LocTermic ;
 
 #ifdef _LG_DEBUG_
     Serial.println("Affichage de screen");
@@ -384,25 +384,9 @@ else
 
 // cap
 int Cap = g_GlobalVar.m_CapGpsDeg ;
-int CapMarge = 45/2 + 1 ;
 char TmpCharCap[15] ;
 char TmpCharNomCap[] = "  " ;
-if ( Cap < CapMarge || Cap > (360-CapMarge) )
-    strcpy( TmpCharNomCap, "N " ) ;
-else if ( labs(Cap-45) < CapMarge )
-    strcpy( TmpCharNomCap, "NE" ) ;
-else if ( labs(Cap-90) < CapMarge )
-    strcpy( TmpCharNomCap, "E " ) ;
-else if ( labs(Cap-135) < CapMarge )
-    strcpy( TmpCharNomCap, "SE" ) ;
-else if ( labs(Cap-180) < CapMarge )
-    strcpy( TmpCharNomCap, "S " ) ;
-else if ( labs(Cap-225) < CapMarge )
-    strcpy( TmpCharNomCap, "SW" ) ;
-else if ( labs(Cap-270) < CapMarge )
-    strcpy( TmpCharNomCap, "W " ) ;
-else if ( labs(Cap-315) < CapMarge )
-    strcpy( TmpCharNomCap, "NW" ) ;
+GetCapChar( Cap , TmpCharNomCap ) ;
 sprintf( TmpCharCap , "%2d", (int)(Cap/10) ) ;
 
 // nom/finesse du site le plus proche
@@ -428,29 +412,36 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
  int DansUneZone            = g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone ;
  std::string NomZoneLimite  = g_GlobalVar.m_ZonesAerAll.m_NomZoneEnLimite ;
  int LimiteZone             = g_GlobalVar.m_ZonesAerAll.m_LimiteZone ;
+ int DistFront      = g_GlobalVar.m_ZonesAerAll.m_DistXYNextZone ;
+ int AltFront       = g_GlobalVar.m_ZonesAerAll.m_DistAltCurZone ;
+ int CapFrontDeg    = atan2f( g_GlobalVar.m_ZonesAerAll.m_PtFrontProche.m_Lat - g_GlobalVar.m_TerrainPosCur.m_Lat ,
+                              g_GlobalVar.m_ZonesAerAll.m_PtFrontProche.m_Lon - g_GlobalVar.m_TerrainPosCur.m_Lon ) *
+                              -180. / PI + 90 + 360 ;
+ CapFrontDeg %= 360 ;
+ static int AffTerrainFront = 0 ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 
+// limitations frontiere zone
+if ( DistFront > 999 )
+    DistFront = 999 ;
+if ( AltFront > 999 )
+    AltFront = 999 ;
+
+/*
 // termic/terrain le plus proche
 float CapTermic ;
 float DistanceTermic ;
-/*if ( g_GlobalVar.m_Config.m_Termic )
+if ( pTerrain == NULL )
     {
-    CapTermic = CGlobalVar::GetDiffAngle( g_TermicMap.m_GisementDeg , g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
-    DistanceTermic = g_TermicMap.m_DistanceMetres ;
+    CapTermic = -1 ;
+    DistanceTermic = -1 ;
     }
-else*/
+else
     {
-    if ( pTerrain == NULL )
-        {
-        CapTermic = -1 ;
-        DistanceTermic = -1 ;
-        }
-    else
-        {
-        CapTermic = CGlobalVar::GetDiffAngle( pTerrain->m_GisementDeg , g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
-        DistanceTermic = pTerrain->m_DistanceMetres ;
-        }
+    CapTermic = CGlobalVar::GetDiffAngle( pTerrain->m_GisementDeg , g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
+    DistanceTermic = pTerrain->m_DistanceMetres ;
     }
+*/
 
 // raz page precedente
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
@@ -499,21 +490,44 @@ else if ( LimiteZone == ZONE_LIMITE_FRONTIERE )
     }
 else
     {
-    // thermique
+    /*// thermique
     if ( DistanceTermic != -1 )
         LocTermic.Affiche( CapTermic , DistanceTermic ) ;
     else
         LocTermic.Affiche( -180. , DistanceMaxMetres ) ;
+        */
 
     /////////////
     // bandeaux 1
-    const int y1 = 46 ;
-    display.setFont(&FreeMonoBold12pt7b);
-    display.setCursor(0, y1);
-    display.print(TmpCharNomSite);
-    display.setFont(&FreeMonoBold18pt7b);
-    display.setCursor(155, y1);
-    display.print(TmpCharFinesseSite);
+    // terrain finesse
+    const int y1 = 30 ;
+    if ( (AffTerrainFront++/4)%2 )
+        {
+        display.setFont(&FreeMonoBold12pt7b);
+        display.setCursor(0, y1);
+        display.print(TmpCharNomSite);
+        display.setFont(&FreeMonoBold18pt7b);
+        display.setCursor(155, y1);
+        display.print(TmpCharFinesseSite);
+        }
+    // dist/alt/cap frontiere zone
+    else
+        {
+        display.setCursor(0, y1);
+        char TmpCharFront[25] ;
+        char TmpCharCap[25] ;
+        GetCapChar( CapFrontDeg , TmpCharCap ) ;
+        display.setFont(&FreeMonoBold18pt7b);       // altitude
+        sprintf( TmpCharFront , "%3d", AltFront ) ;
+        display.print(TmpCharFront);
+        display.setFont(&FreeMonoBold12pt7b);
+        display.print("A ");
+        display.setFont(&FreeMonoBold18pt7b);       // distance
+        sprintf( TmpCharFront , "%3d", DistFront ) ;
+        display.print(TmpCharFront);
+        display.setFont(&FreeMonoBold12pt7b);       // nom cap
+        display.print( TmpCharCap ) ;
+        }
     }
 
 /////////////

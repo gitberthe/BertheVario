@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 02/02/2025
+/// \date modification : 08/02/2025
 ///
 
 #ifndef _GESTECRANS_
@@ -59,6 +59,7 @@ protected :
     virtual void ScreenOff() = 0 ;
 
     EtatsAuto Erreur() ;
+    void      GetCapChar( int CapDeg , char * NomCap ) ;
 
     static void TacheScreenCalcul(void * param) ;
 

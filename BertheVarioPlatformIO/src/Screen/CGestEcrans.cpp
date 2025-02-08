@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 06/02/2025
+/// \date modification : 08/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -38,6 +38,31 @@ delay(2000) ;
 CGlobalVar::BeepError() ;
 
 return ERREUR ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Renvoi le nom du cap en 2 lettres
+void CGestEcrans::GetCapChar( int CapDeg , char * NomCap )
+{
+int CapMarge = 45/2 + 1 ;
+if ( CapDeg < CapMarge || CapDeg > (360-CapMarge) )
+    strcpy( NomCap, "N " ) ;
+else if ( abs(CapDeg-45) < CapMarge )
+    strcpy( NomCap, "NE" ) ;
+else if ( abs(CapDeg-90) < CapMarge )
+    strcpy( NomCap, "E " ) ;
+else if ( abs(CapDeg-135) < CapMarge )
+    strcpy( NomCap, "SE" ) ;
+else if ( abs(CapDeg-180) < CapMarge )
+    strcpy( NomCap, "S " ) ;
+else if ( abs(CapDeg-225) < CapMarge )
+    strcpy( NomCap, "SW" ) ;
+else if ( abs(CapDeg-270) < CapMarge )
+    strcpy( NomCap, "W " ) ;
+else if ( abs(CapDeg-315) < CapMarge )
+    strcpy( NomCap, "NW" ) ;
+else
+    strcpy( NomCap, "  " ) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
