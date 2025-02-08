@@ -1,3 +1,6 @@
+le 20250208c :
+ - reprise en compte des zones proteges pour l'altitude/distance/cap et alarmes.
+ 
 le 20250208b :
  - pas de prise en compte des zones proteges pour l'altitude/distance/cap 
    de la zone la plus proche (alarme marge Z et XY toujours active)

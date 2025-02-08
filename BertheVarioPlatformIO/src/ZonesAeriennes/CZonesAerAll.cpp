@@ -926,8 +926,8 @@ if ( pZoneIn != NULL )
 else
     m_DistAltCurZone = 9999 ;
 
-// determination des zones proches et à l'altitude de croisement dans les 3 km
-const int DistanceMaxProcheXY = 3000 ;
+// determination des zones proches et à l'altitude de croisement dans les 1.5 km
+const int DistanceMaxProcheXY = 1500 ;
 std::vector<CZoneAer *> VecZoneProchesXY ;   // zones proches
 for ( int iz = 0 ; iz < m_NbZones; iz++ )
     {
@@ -941,7 +941,7 @@ for ( int iz = 0 ; iz < m_NbZones; iz++ )
     if ( pZoneIn == pZoneXY )
         continue ;
 
-    // dans le rayon de 1 km
+    // dans le rayon de 1.5 km
     float DistBaryMetres = sqrtf( powf(pZoneXY->m_Barycentre.m_Lat-PtsEnCours.m_Lat,2) + powf(pZoneXY->m_Barycentre.m_Lon-PtsEnCours.m_Lon,2) )  * 60. * UnMileEnMetres ;
     bool DansLeRayonProche = DistBaryMetres < ( pZoneXY->m_RayonMetre + DistanceMaxProcheXY ) ;
 
@@ -952,8 +952,8 @@ for ( int iz = 0 ; iz < m_NbZones; iz++ )
     // prise en compte de l'altitude
     bool IsNearFrontAlti = false ;
     if ( pZoneXY->IsProtect() )
-        //IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro <= (PlafondZoneProtegee+g_GlobalVar.m_Config.m_AltiMargin) ;
-        continue ;
+        IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro <= (PlafondZoneProtegee+g_GlobalVar.m_Config.m_AltiMargin) ;
+        //continue ;
     else
         IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro >= (pZoneXY->GetAltiBasse()-g_GlobalVar.m_Config.m_AltiMargin) ;
 
