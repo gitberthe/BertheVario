@@ -1,3 +1,9 @@
+le 20250208a :
+ - supression de la direction/distance du terrain proche en page Vz.
+ - alternance affichage terrain proche/finesse avec altitude/distance/cap 
+   jusqu'a la prochaine zone TMA/CTR... rencontrée, en metres. 999m maximum
+ - penetration zone TMA activement testeé à clermont. altitude/distance/cap moin testé.
+
 le 20250207d :
  - corection fuite memoire ~CZoneAer(). Meilleur fonctionnement fileManager.
 
