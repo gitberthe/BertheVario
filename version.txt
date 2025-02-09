@@ -1,3 +1,7 @@
+le 20250209c :
+ - remise a true des beep alarme zone, au debut du vol, lors desactivation
+   attente gps.
+
 le 20250209b :
  - apparition conditionnelle de l'altitude proche <500m et distance proche <= 999m.
    ex : _________ ou 455A _____ ou _____ 687NE ou 499A 999SE.
