@@ -927,7 +927,6 @@ else
     m_DistAltCurZone = 9999 ;
 
 // determination des zones proches et à l'altitude de croisement dans les 1.5 km
-const int DistanceMaxProcheXY = 1500 ;
 std::vector<CZoneAer *> VecZoneProchesXY ;   // zones proches
 for ( int iz = 0 ; iz < m_NbZones; iz++ )
     {
@@ -943,7 +942,7 @@ for ( int iz = 0 ; iz < m_NbZones; iz++ )
 
     // dans le rayon de 1.5 km
     float DistBaryMetres = sqrtf( powf(pZoneXY->m_Barycentre.m_Lat-PtsEnCours.m_Lat,2) + powf(pZoneXY->m_Barycentre.m_Lon-PtsEnCours.m_Lon,2) )  * 60. * UnMileEnMetres ;
-    bool DansLeRayonProche = DistBaryMetres < ( pZoneXY->m_RayonMetre + DistanceMaxProcheXY ) ;
+    bool DansLeRayonProche = DistBaryMetres < ( pZoneXY->m_RayonMetre + DISTANCE_PROCHE_XY ) ;
 
     // si pas dans le rayon proche
     if ( !DansLeRayonProche )

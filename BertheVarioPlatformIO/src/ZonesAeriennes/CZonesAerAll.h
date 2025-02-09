@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 07/02/2025
+/// \date modification : 09/02/2025
 ///
 
 #ifndef _ZONE_AR_ALL_
@@ -22,6 +22,8 @@
 #define ZONE_DESSOUS            4
 #define ZONE_LIMITE_FRONTIERE   5
 #define ZONE_DESSUS             6
+
+#define DISTANCE_PROCHE_XY      1500
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Classe regoupant et calculant les zones aeriennes du fichier zonesaer.txt

@@ -501,7 +501,7 @@ else
             display.setFont(&FreeMonoBold12pt7b);
             display.print("A ");
             }
-        // distance frontiere
+        // distance frontiere < DISTANCE_PROCHE_XY
         if ( DistFront > 999 )
             {
             display.setFont(&FreeMonoBold18pt7b);

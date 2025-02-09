@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 20/10/2024
+/// \date modification : 09/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -273,6 +273,11 @@ void CGps::TacheGpsIgc(void *param)
 #ifdef _LG_DEBUG_
  Serial.println("tache igc lancee");
 #endif
+
+// remise a true des beep zone aerienne si desactive lors attente gps
+g_GlobalVar.m_BeepAttenteGVZone = true ;
+
+g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Stopped = false ;
 
 // init fichier IGC
 g_GlobalVar.InitCurentIgc() ;
