@@ -418,15 +418,6 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
  int CapFrontDeg    = g_GlobalVar.m_ZonesAerAll.m_CapFrontProche ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 
-// limitations frontiere zone
-if ( DistFront > 999 )
-    {
-    DistFront = 999 ;
-    CapFrontDeg = -1 ;
-    }
-if ( AltFront > 999 )
-    AltFront = 999 ;
-
 // raz page precedente
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 
@@ -494,14 +485,34 @@ else
         char TmpCharFront[25] ;
         char TmpCharCap[25] ;
         GetCapChar( CapFrontDeg , TmpCharCap ) ;
-        display.setFont(&FreeMonoBold18pt7b);       // altitude
-        sprintf( TmpCharFront , "%3d", AltFront ) ;
-        display.print(TmpCharFront);
-        display.setFont(&FreeMonoBold12pt7b);
-        display.print("A ");
-        display.setFont(&FreeMonoBold18pt7b);       // distance
-        sprintf( TmpCharFront , "%3d%s", DistFront , TmpCharCap ) ;
-        display.print(TmpCharFront);
+        // altitude frontiere
+        if ( AltFront > 500 )
+            {
+            display.setFont(&FreeMonoBold18pt7b);
+            display.print("___");
+            display.setFont(&FreeMonoBold12pt7b);
+            display.print("__");
+            }
+        else
+            {
+            display.setFont(&FreeMonoBold18pt7b);
+            sprintf( TmpCharFront , "%3d", AltFront ) ;
+            display.print(TmpCharFront);
+            display.setFont(&FreeMonoBold12pt7b);
+            display.print("A ");
+            }
+        // distance frontiere
+        if ( DistFront > 999 )
+            {
+            display.setFont(&FreeMonoBold18pt7b);
+            display.print("_____");
+            }
+        else
+            {
+            display.setFont(&FreeMonoBold18pt7b);
+            sprintf( TmpCharFront , "%3d%s", DistFront , TmpCharCap ) ;
+            display.print(TmpCharFront);
+            }
         }
     }
 

@@ -1,3 +1,7 @@
+le 20250209b :
+ - apparition conditionnelle de l'altitude proche <500m et distance proche <= 999m.
+   ex : _________ ou 455A _____ ou _____ 687NE ou 499A 999m.
+
 le 20250209a :
  - modification ihm altitude/distance/cap zone proche
  - introduction de /valid/zonfront.txt pour la validation des 
