@@ -1,3 +1,5 @@
+!!!! projet non fonctionnel !!!!
+
 - script python pour extraire les notams du site sofia-briefing
 - en colaboration avec christophe.joyez@ektro.fr
 
