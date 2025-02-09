@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 08/02/2025
+/// \date modification : 09/02/2025
 ///
 
 #ifndef _GESTECRANS_
@@ -45,6 +45,8 @@ public :
     bool IsPageChanged() const      ///< renvoie si l'on vient de chabger de page
         { return m_PageChanged ; } ;
 
+    static void  GetCapChar( int CapDeg , char * NomCap ) ;
+
 protected :
     virtual EtatsAuto EcranVz()      = 0 ;
     virtual EtatsAuto EcranHisto()   = 0 ;
@@ -59,7 +61,6 @@ protected :
     virtual void ScreenOff() = 0 ;
 
     EtatsAuto Erreur() ;
-    void      GetCapChar( int CapDeg , char * NomCap ) ;
 
     static void TacheScreenCalcul(void * param) ;
 

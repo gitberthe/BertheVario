@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 08/02/2025
+/// \date modification : 09/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -45,7 +45,9 @@ return ERREUR ;
 void CGestEcrans::GetCapChar( int CapDeg , char * NomCap )
 {
 int CapMarge = 45/2 + 1 ;
-if ( CapDeg < CapMarge || CapDeg > (360-CapMarge) )
+if ( CapDeg < 0 )
+    strcpy( NomCap, "--" ) ;
+else if ( CapDeg < CapMarge || CapDeg > (360-CapMarge) )
     strcpy( NomCap, "N " ) ;
 else if ( abs(CapDeg-45) < CapMarge )
     strcpy( NomCap, "NE" ) ;
@@ -62,7 +64,7 @@ else if ( abs(CapDeg-270) < CapMarge )
 else if ( abs(CapDeg-315) < CapMarge )
     strcpy( NomCap, "NW" ) ;
 else
-    strcpy( NomCap, "  " ) ;
+    strcpy( NomCap, "--" ) ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

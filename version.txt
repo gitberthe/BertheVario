@@ -1,3 +1,9 @@
+le 20250209a :
+ - modification ihm altitude/distance/cap zone proche
+ - introduction de /valid/zonfront.txt pour la validation des 
+   altitude/distance/cap zones proches (au boot wifi).
+ - modification de CDistFront::IsNearFront().
+
 le 20250208c :
  - reprise en compte des zones proteges pour l'altitude/distance/cap et alarmes.
  

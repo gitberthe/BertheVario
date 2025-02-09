@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 08/02/2025
+/// \date modification : 09/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -407,6 +407,7 @@ char TmpCharFinesseSite[5] ;
 sprintf( TmpCharFinesseSite , "%2d" , (int)FinesseTerrainMinimum ) ;
 
 // zone aerienne
+static int AffTerrainFront = 0 ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
  std::string NomZoneDessous = g_GlobalVar.m_ZonesAerAll.m_NomZoneDansDessous ;
  int DansUneZone            = g_GlobalVar.m_ZonesAerAll.m_DansDessousUneZone ;
@@ -414,34 +415,17 @@ g_GlobalVar.m_ZonesAerAll.m_Mutex.PrendreMutex() ;
  int LimiteZone             = g_GlobalVar.m_ZonesAerAll.m_LimiteZone ;
  int DistFront      = g_GlobalVar.m_ZonesAerAll.m_DistXYNextZone ;
  int AltFront       = g_GlobalVar.m_ZonesAerAll.m_DistAltCurZone ;
- int CapFrontDeg    = atan2f( g_GlobalVar.m_ZonesAerAll.m_PtFrontProche.m_Lat - g_GlobalVar.m_TerrainPosCur.m_Lat ,
-                              g_GlobalVar.m_ZonesAerAll.m_PtFrontProche.m_Lon - g_GlobalVar.m_TerrainPosCur.m_Lon ) *
-                              -180. / PI + 90 + 360 ;
- CapFrontDeg %= 360 ;
- static int AffTerrainFront = 0 ;
+ int CapFrontDeg    = g_GlobalVar.m_ZonesAerAll.m_CapFrontProche ;
 g_GlobalVar.m_ZonesAerAll.m_Mutex.RelacherMutex() ;
 
 // limitations frontiere zone
 if ( DistFront > 999 )
+    {
     DistFront = 999 ;
+    CapFrontDeg = -1 ;
+    }
 if ( AltFront > 999 )
     AltFront = 999 ;
-
-/*
-// termic/terrain le plus proche
-float CapTermic ;
-float DistanceTermic ;
-if ( pTerrain == NULL )
-    {
-    CapTermic = -1 ;
-    DistanceTermic = -1 ;
-    }
-else
-    {
-    CapTermic = CGlobalVar::GetDiffAngle( pTerrain->m_GisementDeg , g_GlobalVar.m_Mpu9250.m_CapMagnetique ) ;
-    DistanceTermic = pTerrain->m_DistanceMetres ;
-    }
-*/
 
 // raz page precedente
 display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
@@ -490,13 +474,6 @@ else if ( LimiteZone == ZONE_LIMITE_FRONTIERE )
     }
 else
     {
-    /*// thermique
-    if ( DistanceTermic != -1 )
-        LocTermic.Affiche( CapTermic , DistanceTermic ) ;
-    else
-        LocTermic.Affiche( -180. , DistanceMaxMetres ) ;
-        */
-
     /////////////
     // bandeaux 1
     // terrain finesse
@@ -523,10 +500,8 @@ else
         display.setFont(&FreeMonoBold12pt7b);
         display.print("A ");
         display.setFont(&FreeMonoBold18pt7b);       // distance
-        sprintf( TmpCharFront , "%3d", DistFront ) ;
+        sprintf( TmpCharFront , "%3d%s", DistFront , TmpCharCap ) ;
         display.print(TmpCharFront);
-        display.setFont(&FreeMonoBold12pt7b);       // nom cap
-        display.print( TmpCharCap ) ;
         }
     }
 

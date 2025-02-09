@@ -1,32 +1,43 @@
 ////////////////////////////////////////////////////////////////////////////////
-/// \file CZonesFch.cpp
+/// \file CZonesFchValid.cpp
 ///
 /// \brief
 ///
 /// \date creation     : 30/03/2024
-/// \date modification : 10/01/2025
+/// \date modification : 09/02/2025
 ///
 
 #include "../BertheVario.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Procedure de validation de zone fichier txt in/out.
-void CZonesFch::Valid()
+/// \brief Procedure de validation de zone fichier txt in/front/out.
+void CZonesFchValid::Valid()
 {
 const int TaillMaxChar = 3000 ; // taille buffer en concurence memoire avec g_Termic
 char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ;
 
-// ouverture fichier out
-m_FileOut = SD.open(ZONE_VALID_OUT_FCH, FILE_WRITE , true );
-if (!m_FileOut)
+// ouverture fichier out valid
+m_FileOutValid = SD.open(ZONE_VALID_OUT_FCH, FILE_WRITE , true );
+if (!m_FileOutValid)
     {
     Serial.print( "erreur creation fichier ZONE_VALID_OUT_FCH" ) ;
     delete [] TmpChar ;
     return ;
     }
 // debut de fichier
-m_FileOut.seek(0) ;
+m_FileOutValid.seek(0) ;
+
+// ouverture fichier out front
+m_FileOutFront = SD.open(ZONE_FRONT_OUT_FCH, FILE_WRITE , true );
+if (!m_FileOutFront)
+    {
+    Serial.print( "erreur creation fichier ZONE_FRONT_OUT_FCH" ) ;
+    delete [] TmpChar ;
+    return ;
+    }
+// debut de fichier
+m_FileOutFront.seek(0) ;
 
 // ouverture fichier in
 File FileIn = SD.open(ZONE_VALID_IN_FCH);
@@ -61,15 +72,17 @@ while(FileIn.available())
 // pour la derniere zone
 TraiteBufferValidZoneIn( TmpChar ) ;
 
+// fermeture des fichiers
 FileIn.close();
-m_FileOut.close();
+m_FileOutValid.close();
+m_FileOutFront.close();
 
 delete [] TmpChar ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Procedure de validation de zone fichier txt in/out.
-void CZonesFch::TraiteBufferValidZoneIn( char * buff )
+void CZonesFchValid::TraiteBufferValidZoneIn( char * buff )
 {
 if ( buff == NULL || *buff == 0 || *buff == '#' || *buff == '\n' )
     {
@@ -145,78 +158,121 @@ while ( pChar != NULL )
 
 CalcZone() ;
 
+//////////////////
+// fichier zone in
 // ecriture numero de ligne
-m_FileOut.print(m_Ligne) ;
-m_FileOut.print(";") ;
+m_FileOutValid.print(m_Ligne) ;
+m_FileOutValid.print(";") ;
 
 // ecriture nom lieux
-m_FileOut.print(Nom.c_str()) ;
-m_FileOut.print(";") ;
+m_FileOutValid.print(Nom.c_str()) ;
+m_FileOutValid.print(";") ;
 
 // ecriture date
-m_FileOut.print(annee.c_str()) ;
-m_FileOut.print(",") ;
-m_FileOut.print(mois.c_str()) ;
-m_FileOut.print(",") ;
-m_FileOut.print(jour.c_str()) ;
-m_FileOut.print(";") ;
+m_FileOutValid.print(annee.c_str()) ;
+m_FileOutValid.print(",") ;
+m_FileOutValid.print(mois.c_str()) ;
+m_FileOutValid.print(",") ;
+m_FileOutValid.print(jour.c_str()) ;
+m_FileOutValid.print(";") ;
 
 // ecriture plafond
-m_FileOut.print(m_Plafond4Valid) ;
-m_FileOut.print(";") ;
+m_FileOutValid.print(m_Plafond4Valid) ;
+m_FileOutValid.print(";") ;
 
 // ecriture alarm
 if ( m_DansDessousUneZone == ZONE_DEDANS )
     {
-    m_FileOut.print(m_NomZoneDansDessous.c_str()) ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("DedansUneZone") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print(m_NomZoneDansDessous.c_str()) ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("DedansUneZone") ;
+    m_FileOutValid.print(";") ;
     }
 else if ( m_LimiteZone == ZONE_LIMITE_ALTI )
     {
-    m_FileOut.print(m_NomZoneEnLimite.c_str()) ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("LimiteAltitude") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print(m_NomZoneEnLimite.c_str()) ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("LimiteAltitude") ;
+    m_FileOutValid.print(";") ;
     }
 else if ( m_LimiteZone == ZONE_LIMITE_FRONTIERE )
     {
-    m_FileOut.print(m_NomZoneEnLimite.c_str()) ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("LimiteFrontiere") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print(m_NomZoneEnLimite.c_str()) ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("LimiteFrontiere") ;
+    m_FileOutValid.print(";") ;
     }
 else if ( m_DansDessousUneZone == ZONE_DESSOUS )
     {
-    m_FileOut.print(m_NomZoneDansDessous.c_str()) ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("DessousUneZone") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print(m_NomZoneDansDessous.c_str()) ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("DessousUneZone") ;
+    m_FileOutValid.print(";") ;
     }
 else if ( m_DansDessousUneZone == ZONE_DESSUS )
     {
-    m_FileOut.print(m_NomZoneDansDessous.c_str()) ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("DessusUneZone") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print(m_NomZoneDansDessous.c_str()) ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("DessusUneZone") ;
+    m_FileOutValid.print(";") ;
     }
 else if ( m_DansDessousUneZone == ZONE_EN_DEHORS && m_LimiteZone == ZONE_EN_DEHORS )
     {
-    m_FileOut.print("-") ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("AucuneAlarm") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print("-") ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("AucuneAlarm") ;
+    m_FileOutValid.print(";") ;
     }
 else
     {
-    m_FileOut.print("-") ;
-    m_FileOut.print(";") ;
-    m_FileOut.print("ErreurProgramme") ;
-    m_FileOut.print(";") ;
+    m_FileOutValid.print("-") ;
+    m_FileOutValid.print(";") ;
+    m_FileOutValid.print("ErreurProgramme") ;
+    m_FileOutValid.print(";") ;
     }
 
-m_FileOut.println("") ;
+m_FileOutValid.println("") ;
+
+/////////////////////
+// fichier zone front
+// ecritude numero de ligne
+m_FileOutFront.print(m_Ligne) ;
+m_FileOutFront.print("\t") ;
+
+// ecriture nom lieux
+m_FileOutFront.print(Nom.c_str()) ;
+m_FileOutFront.print(";") ;
+// ecriture date
+m_FileOutFront.print(annee.c_str()) ;
+m_FileOutFront.print(",") ;
+m_FileOutFront.print(mois.c_str()) ;
+m_FileOutFront.print(",") ;
+m_FileOutFront.print(jour.c_str()) ;
+m_FileOutFront.print(";") ;
+// ecriture plafond
+m_FileOutFront.print((int)g_GlobalVar.m_TerrainPosCur.m_AltiBaro) ;
+m_FileOutFront.print("\t") ;
+
+// si pas d'alarmes
+if ( (m_DansDessousUneZone == ZONE_EN_DEHORS || m_DansDessousUneZone == ZONE_DESSOUS ) && m_LimiteZone == ZONE_EN_DEHORS )
+    {
+    // reste alti
+    m_FileOutFront.print( ( m_DistAltCurZone >= 999 ) ? 999 : m_DistAltCurZone ) ;
+    m_FileOutFront.print("A\t") ;
+
+    // reste distance
+    m_FileOutFront.print( ( m_DistXYNextZone >= 999 ) ? 999 : m_DistXYNextZone ) ;
+    m_FileOutFront.print("\t") ;
+
+    // cap point front
+    char TmpNomCap[5] ;
+    CGestEcrans::GetCapChar( (m_DistXYNextZone>= 999) ? -1 : m_CapFrontProche , TmpNomCap ) ;
+    m_FileOutFront.print(TmpNomCap) ;
+    }
+else
+    m_FileOutFront.print( "Alarme zone penetration/limite" ) ;
+
+m_FileOutFront.println("") ;
 
 *buff = 0 ;
 }

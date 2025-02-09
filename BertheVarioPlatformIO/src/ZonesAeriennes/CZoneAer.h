@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 08/02/2025
+/// \date modification : 09/02/2025
 ///
 
 #ifndef _ZONE_AR_
@@ -98,7 +98,7 @@ private :
     st_coord_poly   m_Barycentre ;      ///< pour une recherche rapide
     float           m_RayonMetre ;      ///< pour une recherche rapide
     float           m_DistanceFrontiere;///< pour in tri de distance frontiere
-    st_coord_poly   m_PtFrontProche ;   ///< pour le point de la frontiere proche
+    int             m_CapFrontProche ;  ///< pour le point de la frontiere proche
 
     short           m_ResolutionMetre ;             ///< resolution en metre de la zone lors de compression short
     short           m_HauteurSolZoneProtege = -1 ;  ///< hauteur de la zone protegee

@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 28/03/2024
-/// \date modification : 08/02/2025
+/// \date modification : 09/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -12,8 +12,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoie true si on est proche de la frontiere.
 float CDistFront::IsNearFront( CZoneAer::st_coord_poly ** PolygoneArr , int NbPts , CZoneAer::st_coord_poly PtEnCours ,
-                                CZoneAer::st_coord_poly & PtFrontProche )
+                                int & CapFrontProche )
 {
+CZoneAer::st_coord_poly PtFrontProche ;
 float DistanceMin = 9E20 ;
 
 // calcul distance de tous les points
@@ -70,6 +71,12 @@ for ( int ipts = 0 ; ipts < NbPts ; ipts++ )
             }
         }
     }
+
+// determination cap pint frontiere proche
+CapFrontProche = atan2f( PtFrontProche.m_Lat - PtEnCours.m_Lat ,
+                      PtFrontProche.m_Lon - PtEnCours.m_Lon ) *
+                              -180. / PI + 90 + 360 ;
+CapFrontProche %= 360 ;
 
 return DistanceMin ;
 }
