@@ -1,3 +1,6 @@
+le 20250210a :
+   - ihm ligne vide si pas de zone TMA/CTR proche alti <=500m et dist <=999m.
+   
 le 20250209c :
  - remise a true des beep alarme zone, au debut du vol, lors desactivation
    attente gps.
