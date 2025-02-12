@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 09/02/2025
+/// \date modification : 12/02/2025
 ///
 
 #ifndef _ZONE_AR_
@@ -64,6 +64,13 @@ public :
         TriParDistance
         } ;
 
+    // type de zone
+    enum TypeZone
+        {
+        ZoneGeneric ,
+        ZoneCorent
+        } ;
+
     static  void TrierPar( TriPar Tri )
                 { ms_TriPar = Tri ; } ;
     int     GetAltiBasse() const ;
@@ -73,6 +80,9 @@ public :
                 { return m_HauteurSolZoneProtege > 0 ; } ;
     short   GetHauteurSolZoneProtect() const
                 { return m_HauteurSolZoneProtege ; } ;
+
+    TypeZone GetTypeZone() const ;
+    int      GetAltiSolZone( TypeZone TZ ) const ;
 
     char *              m_pNomAff ;                 ///< nom court de la zone a afficher
     bool                m_Activee = true ;          ///< zone activee

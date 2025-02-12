@@ -808,17 +808,16 @@ else
 
     // variables de zone
     int  PlafondZone = pZoneIn->GetAltiBasse() ;
-    bool Corent = ( PlafondZone == 822 ) ;
 
     ////////////
     // si corent
-    if ( Corent )
+    if ( pZoneIn->GetTypeZone() == CZoneAer::ZoneCorent )
         {
         m_Plafond4Valid = PlafondZone ;
 
         // si dedans
         if ( (g_GlobalVar.m_TerrainPosCur.m_AltiBaro > m_Plafond4Valid) &&
-             (g_GlobalVar.m_TerrainPosCur.m_AltiBaro > (g_GlobalVar.m_AltitudeSolHgt+300)) )
+             (g_GlobalVar.m_TerrainPosCur.m_AltiBaro > (g_GlobalVar.m_AltitudeSolHgt + pZoneIn->GetAltiSolZone(CZoneAer::ZoneCorent))) )
             {
             sprintf( TmpChar , "In %s al:%4dm" , pZoneIn->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrIn = ZONE_DEDANS ;
@@ -839,7 +838,7 @@ else
         Serial.print( "," ) ;
         Serial.println( g_GlobalVar.m_Config.m_AltiMargin ) ;*/
         if ( ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > m_Plafond4Valid) &&
-             ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > (g_GlobalVar.m_AltitudeSolHgt+300)) )
+             ((g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > (g_GlobalVar.m_AltitudeSolHgt + pZoneIn->GetAltiSolZone(CZoneAer::ZoneCorent))) )
             {
             sprintf( TmpChar , "Al %s al:%4dm" , pZoneIn->m_pNomAff , m_Plafond4Valid ) ;
             RetNbrLimite = ZONE_LIMITE_ALTI ;
@@ -922,11 +921,11 @@ if ( pZoneIn != NULL )
     {
     int PlafondZone = pZoneIn->GetAltiBasse() ;
     int DistAltCurZone = PlafondZone - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
-    bool Corent = ( PlafondZone == 822 ) ;
+
     // si corent prise en compte de l'altitude sol
-    if ( Corent )
+    if ( pZoneIn->GetTypeZone() == CZoneAer::ZoneCorent )
         {
-        int AltitudeSolPlus300 = g_GlobalVar.m_AltitudeSolHgt + 300 ;
+        int AltitudeSolPlus300 = g_GlobalVar.m_AltitudeSolHgt + pZoneIn->GetAltiSolZone(CZoneAer::ZoneCorent) ;
         int DistAltSol = AltitudeSolPlus300 - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
         m_DistAltCurZone = std::max( DistAltSol , DistAltCurZone ) ;
         }

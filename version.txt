@@ -1,3 +1,6 @@
+le 20250212b :
+ - Modification de CZoneAer.
+ 
 le 20250212a :
  - prise en compte de la hauteur sol pour la marge altitude zone à Corent.
 

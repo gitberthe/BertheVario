@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 07/02/2025
+/// \date modification : 12/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -56,6 +56,24 @@ else if ( ms_TriPar == TriParDistance )
 
 //return m_Area < Zone.m_Area ;
 return GetAltiBasse() < Zone.GetAltiBasse() ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Retourne le type de zone ex : corent
+CZoneAer::TypeZone CZoneAer::GetTypeZone() const
+{
+if ( GetAltiBasse() == 822 )
+    return CZoneAer::ZoneCorent ;
+return CZoneAer::ZoneGeneric ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Reourne la hauteur sol admissible pour cette zone.
+int CZoneAer::GetAltiSolZone( CZoneAer::TypeZone TZ ) const
+{
+if ( TZ == CZoneAer::ZoneCorent )
+    return 300 ;
+return 0 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
