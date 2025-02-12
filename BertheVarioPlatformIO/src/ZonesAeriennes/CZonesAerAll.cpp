@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 09/02/2025
+/// \date modification : 12/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -920,8 +920,18 @@ m_Mutex.RelacherMutex() ;
 // raz des variables distance prochaine zone et mise a jour distance altitude
 if ( pZoneIn != NULL )
     {
-    int DistAltCurZone = pZoneIn->GetAltiBasse() - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
-    m_DistAltCurZone = DistAltCurZone ;
+    int PlafondZone = pZoneIn->GetAltiBasse() ;
+    int DistAltCurZone = PlafondZone - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
+    bool Corent = ( PlafondZone == 822 ) ;
+    // si corent prise en compte de l'altitude sol
+    if ( Corent )
+        {
+        int AltitudeSolPlus300 = g_GlobalVar.m_AltitudeSolHgt + 300 ;
+        int DistAltSol = AltitudeSolPlus300 - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
+        m_DistAltCurZone = std::max( DistAltSol , DistAltCurZone ) ;
+        }
+    else
+        m_DistAltCurZone = DistAltCurZone ;
     }
 else
     m_DistAltCurZone = 9999 ;
