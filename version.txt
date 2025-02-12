@@ -1,3 +1,6 @@
+le 20250212a :
+ - prise en compte de la hauteur sol pour la marge altitude zone à Corent.
+
 le 20250210a :
   - ihm ligne vide si pas de zone TMA/CTR proche alti <=500m et dist <=999m.
    
