@@ -1,3 +1,6 @@
+le 20250212b2 :
+ - changement mail notam.
+
 le 20250212b :
  - Modification de CZoneAer.
  
