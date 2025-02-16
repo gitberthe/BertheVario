@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 09/02/2025
+/// \date modification : 16/02/2025
 ///
 
-char NumVer[] = "20250212b" ;
+char NumVer[] = "20250216a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -112,10 +112,12 @@ g_GlobalVar.InitI2C() ;
 // si mode http wifi
 if ( BoutonCentreAppuye )
     {
-    // desactive ble
-    g_GlobalVar.m_Config.m_xc_track = false ;
-    esp_bt_controller_disable();
-    esp_bt_controller_deinit();
+    #ifdef XC_TRACK
+     // desactive ble
+     g_GlobalVar.m_Config.m_xc_track = false ;
+     esp_bt_controller_disable();
+     esp_bt_controller_deinit();
+    #endif
 
     // mode ftp pour loop
     g_GlobalVar.m_ModeHttp = true ;
@@ -182,7 +184,6 @@ if ( BoutonGaucheAppuye )
 // lancement tache de calcul de la Vz et acquisition cap magnetique
 g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 
-
 /////////////////////
 // si mode vol-rando
 #ifdef DEBUG_RANDO_VOl
@@ -191,10 +192,12 @@ g_GlobalVar.m_MS5611.LancerTacheCalculVzCapMag() ;
 #endif
 if ( BoutonDroitAppuye )
     {
-    // desactive ble
-    g_GlobalVar.m_Config.m_xc_track = false ;
-    esp_bt_controller_disable();
-    esp_bt_controller_deinit();
+    #ifdef XC_TRACK
+     // desactive ble
+     g_GlobalVar.m_Config.m_xc_track = false ;
+     esp_bt_controller_disable();
+     esp_bt_controller_deinit();
+    #endif
 
     g_GlobalVar.m_Config.LectureFichier() ;
     g_GlobalVar.m_ModeRandoVol = true ;
@@ -219,11 +222,11 @@ perfmon_start() ;
 if ( g_GlobalVar.m_Config.m_xc_track )
     g_GlobalVar.m_BleXct.Init( BLE_NAME ) ;
 else
-#endif
     {
     esp_bt_controller_disable();
     esp_bt_controller_deinit();
     }
+#endif
 
 #ifdef _LG_DEBUG_
   Serial.println("setup done");

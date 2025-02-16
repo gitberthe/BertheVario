@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 10/02/2025
+/// \date modification : 16/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -227,11 +227,18 @@ display.fillRect(0,0, 200, 200, GxEPD_WHITE ); // x y w h
 
 // voltage
 display.setFont(&FreeMonoBold24pt7b);
-display.setCursor(30, 75);
+display.setCursor(30, 60);
 display.print(TmpChar);
 
+// pourcentage
+float Pourcent = (Voltage-3.7)/(4.3-3.7) * 100. ;
+sprintf( TmpChar , "%3d%c", (int)Pourcent, '%' ) ;
+display.setCursor(45, 110);
+display.print(TmpChar);
+
+// vserion
 display.setFont(&FreeMonoBold18pt7b);
-display.setCursor(5, 150);
+display.setCursor(5, 160);
 display.print(NumVer);
 
 display.display(true);

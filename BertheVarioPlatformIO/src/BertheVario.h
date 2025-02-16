@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 12/02/2025
+/// \date modification : 16/02/2025
 ///
 
 //////////////////
@@ -19,8 +19,6 @@
 #include <FS.h>
 #include <MS5611.h>
 #include <MPU9250.h>
-#include <NimBLEDevice.h>
-
 #include <ESPFMfGK.h>
 
 #include <math.h>
@@ -37,6 +35,10 @@
 #define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
 //#define VARIO_CAP_MAG_A_PLAT  1
 #define XC_TRACK                ///< si besoin de memoire et pas de xc_track desactiver (40ko de gagner)
+
+#ifdef XC_TRACK
+ #include <NimBLEDevice.h>
+#endif
 
 ////////////////////////////////////
 // platform de la version precedente
@@ -174,7 +176,9 @@
 #include "FileMgr/FileMgr.h"
 #include "RandoVol/CFileGpx.h"
 #include "RandoVol/CRandoVol.h"
-#include "Bluetooth/CBleXct.h"
+#ifdef XC_TRACK
+ #include "Bluetooth/CBleXct.h"
+#endif
 
 ///////////////////////////
 // taches plus affichage //

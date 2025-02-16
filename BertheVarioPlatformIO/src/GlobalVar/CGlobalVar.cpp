@@ -209,12 +209,14 @@ float Voltage = 0. ;
 // mesure du voltage
 for (int i = 0; i < 10; i++)
     Voltage += analogRead(VOLTAGE_DIVISOR_PIN);
-Voltage /= 10;
-Voltage /= 1000 / 2 ;
+Voltage /= 10;        // 10 mesures
+Voltage /= 1000 / 2 ; // pont diviseur par 2
 
-#ifdef GNU_VARIO_GRIS
- Voltage -= 0.5 ;
-#endif
+Voltage *= 4.3 / 4.62 ;  // tension lipo 1S à 4.3 v max
+
+//#ifdef GNU_VARIO_GRIS
+// Voltage -= 0.5 ;
+//#endif
 
 return Voltage ;
 }
