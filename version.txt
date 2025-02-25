@@ -1,3 +1,7 @@
+le 20250225a :
+ - bouton gauche page tma mod.
+ - bug periodes tma st-yan. 
+
 le 20250216a :
  - pourcentage batterie ou boot.
 

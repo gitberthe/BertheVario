@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 16/02/2025
+/// \date modification : 25/02/2025
 ///
 
 #include "../BertheVario.h"
@@ -1147,7 +1147,7 @@ if ( BoutonGauche() )
     NumTmaCtr-- ;
     if ( NumTmaCtr < 0 )
         {
-        NumTmaCtr = 0 ;
+        NumTmaCtr = VecAffZones.size()-1 ;
         return ECRAN_3a_TmaAll ;
         }
     }
