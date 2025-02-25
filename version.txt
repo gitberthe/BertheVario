@@ -1,5 +1,5 @@
 le 20250225b :
-  - modif plantage si mauvais zonesper.txt.
+ - modif plantage si mauvais zonesper.txt.
   
 le 20250225a :
  - bouton gauche page tma mod.
