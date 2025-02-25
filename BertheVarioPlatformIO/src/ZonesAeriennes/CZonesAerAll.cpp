@@ -401,9 +401,18 @@ delete [] TmpChar ;
 /// \brief Traite ligne periode de zone
 void CZonesAerAll::TraiteBufferZonePeriode( char * buff )
 {
+// comptage des champs pour le plantage strtok
+int countpv = 0 ;
+int len = strlen( buff ) ;
+for ( int ic = 0 ; buff != NULL && ic < len ; ic++ )
+    {
+    if ( buff[ic] == ';' )
+        countpv++ ;
+    }
+
 // test fin de ligne ou commentaire
 char * pChar = strtok( buff , ";" ) ;
-if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' )
+if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' || countpv < 5 )
     {
     *buff = 0 ;
     return ;
