@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 12/02/2025
+/// \date modification : 01/03/2025
 ///
 
 #include "../BertheVario.h"
@@ -59,20 +59,33 @@ return GetAltiBasse() < Zone.GetAltiBasse() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Retourne le type de zone ex : corent
-CZoneAer::TypeZone CZoneAer::GetTypeZone() const
+/// \brief Positionne le type de zone ex : corent, st-yan
+void CZoneAer::SetTypeZone()
 {
+// determination corent
 if ( GetAltiBasse() == 822 )
-    return CZoneAer::ZoneCorent ;
-return CZoneAer::ZoneGeneric ;
+    {
+    m_TypeZone = ZoneCorent ;
+    return;
+    }
+// determination zone saint yan
+if ( ! strcmp( "TMA SAINT-YAN" , m_pNomAff ) )
+    {
+    m_TypeZone = ZoneStYan ;
+    return;
+    }
+
+m_TypeZone = ZoneGeneric ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Reourne la hauteur sol admissible pour cette zone.
-int CZoneAer::GetAltiSolZone( CZoneAer::TypeZone TZ ) const
+int CZoneAer::GetAltiSolZone() const
 {
-if ( TZ == CZoneAer::ZoneCorent )
+if ( m_TypeZone == ZoneCorent )
     return 300 ;
+if ( m_TypeZone == ZoneStYan )
+    return 610 ;
 return 0 ;
 }
 

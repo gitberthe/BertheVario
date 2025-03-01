@@ -1,3 +1,6 @@
+le 20250301a :
+ - meilleur prise en compte zone st-yan
+
 le 20250225b :
  - modif plantage si mauvais zonesper.txt.
   
