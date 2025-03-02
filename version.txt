@@ -1,3 +1,6 @@
+le 20250301a2 :
+ - une variable en trop dans calczone.
+
 le 20250301a :
  - meilleur prise en compte zone st-yan
 
