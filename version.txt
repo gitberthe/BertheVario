@@ -1,5 +1,6 @@
-le 20250301a2 :
+le 20250303a :
  - une variable en trop dans calczone.
+ - correction bug frontiere alti st yan.
 
 le 20250301a :
  - meilleur prise en compte zone st-yan

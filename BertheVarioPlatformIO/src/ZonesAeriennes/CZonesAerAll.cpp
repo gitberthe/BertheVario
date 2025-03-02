@@ -987,7 +987,7 @@ if ( pZoneIn != NULL )
         }
     //////////////////////////////////////////////
     // si st yan prise en compte de l'altitude sol
-    else if ( pZoneIn->GetTypeZone() == CZoneAer::ZoneCorent )
+    else if ( pZoneIn->GetTypeZone() == CZoneAer::ZoneStYan )
         {
         int AltitudeSolPlus610 = g_GlobalVar.m_AltitudeSolHgt + pZoneIn->GetAltiSolZone() ;
         int DistAltSol = AltitudeSolPlus610 - g_GlobalVar.m_TerrainPosCur.m_AltiBaro ;
