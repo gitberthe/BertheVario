@@ -797,7 +797,7 @@ for ( long iz = 0 ; iz < m_NbZones ; iz++ )
     Zone.UnCompressZone() ;
 
     // dedans la surface
-    bool IsInArea = DansLeRayon && CPolygone::IsIn( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
+    bool IsInArea = CPolygone::IsIn( Zone.m_PolygoneArr , Zone.m_NbPts , PtsEnCours ) ;
 
     // liberation des float
     Zone.FreeFloat() ;
