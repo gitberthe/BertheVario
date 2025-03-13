@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 04/03/2024
-/// \date modification : 03/02/2025
+/// \date modification : 13/03/2025
 ///
 
 #include "../BertheVario.h"
@@ -52,7 +52,10 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
 
     #ifdef XC_TRACK
     if ( g_GlobalVar.m_Config.m_xc_track )
-        break ;
+        {
+        delay( 500 ) ;
+        continue ;
+        }
     #endif
 
     // si alarme zone desactivé => son vario active

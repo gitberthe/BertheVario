@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 09/03/2024
-/// \date modification : 09/02/2025
+/// \date modification : 13/03/2025
 ///
 
 #include "../BertheVario.h"
@@ -117,11 +117,8 @@ while( g_GlobalVar.m_TaskArr[CALCUL_NUM_TASK].m_Run )
 
     #ifdef XC_TRACK
     // envoi bluetooth Xc-Track a 10hz
-    if ( g_GlobalVar.m_Config.m_xc_track )
-        {
-        if ( g_GlobalVar.m_BleXct.IsInitialised() )
-            g_GlobalVar.m_BleXct.Send() ;
-        }
+     if ( g_GlobalVar.m_BleXct.IsInitialised() )
+         g_GlobalVar.m_BleXct.Send() ;
     #endif
     delay( 100 ) ;
 
