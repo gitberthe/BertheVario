@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 23/03/2024
-/// \date modification : 01/03/2025
+/// \date modification : 15/03/2025
 ///
 
 #include "../BertheVario.h"
@@ -1025,13 +1025,20 @@ for ( int iz = 0 ; iz < m_NbZones; iz++ )
     if ( !DansLeRayonProche )
         continue ;
 
-    // prise en compte de l'altitude
+    // prise en compte de l'altitude de la zone proche
     bool IsNearFrontAlti = false ;
     if ( pZoneXY->IsProtect() )
+        // zone proche protege
         IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro <= (PlafondZoneProtegee+g_GlobalVar.m_Config.m_AltiMargin) ;
-        //continue ;
     else
+        {
+        // zone proche generique
         IsNearFrontAlti = g_GlobalVar.m_TerrainPosCur.m_AltiBaro >= (pZoneXY->GetAltiBasse()-g_GlobalVar.m_Config.m_AltiMargin) ;
+        // si saint sandoux proche CTR Corent alors prise en compte hauteur sol
+        if ( pZoneXY->GetTypeZone() == CZoneAer::ZoneCorent )
+            // altitude majoree marge alti > altitude sol plus 300m
+            IsNearFrontAlti &= (g_GlobalVar.m_TerrainPosCur.m_AltiBaro+g_GlobalVar.m_Config.m_AltiMargin) > (g_GlobalVar.m_AltitudeSolHgt + pZoneXY->GetAltiSolZone())  ;
+        }
 
     // si a l'altitude de croisement
     if ( IsNearFrontAlti )

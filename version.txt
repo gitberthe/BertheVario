@@ -1,3 +1,6 @@
+le 20250315a :
+ - prise en compte de la hauteur sol pour pre-alarme frontiere XY à Saint-Sandoux.
+ 
 le 20250313a :
  - emmission message xc_track determiné uniquement par #define XC_TRACK 
  - son vario toujours determiné par [xc_track] == 0 
