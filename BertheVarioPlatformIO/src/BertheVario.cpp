@@ -4,10 +4,10 @@
 /// \brief Fichier principal du projet GNU-Vario de Berthe
 ///
 /// \date creation     : 02/03/2024
-/// \date modification : 15/03/2025
+/// \date modification : 25/03/2025
 ///
 
-char NumVer[] = "20250315a" ;
+char NumVer[] = "20250325a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -216,9 +216,6 @@ perfmon_start() ;
 #ifdef XC_TRACK
 // blue tooth
  g_GlobalVar.m_BleXct.Init( BLE_NAME ) ;
-#else
- esp_bt_controller_disable();
- esp_bt_controller_deinit();
 #endif
 
 #ifdef _LG_DEBUG_

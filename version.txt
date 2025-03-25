@@ -1,3 +1,9 @@
+le 20250325a :
+ - [vz_igc_ms] à 0.7 m/s par defaut.
+ - arret du vol bouton droit et Vz < g_GlobalVar.m_Config.m_vz_igc_ms et plus 0.4 m/s.
+ - arret du vol automatique à Vz < g_GlobalVar.m_Config.m_vz_igc_ms et plus 0.4 m/s.
+ - correction non compilation si pas de #define XC_TRACK
+ 
 le 20250315a2 :
  - modification doc utilisateur
  
