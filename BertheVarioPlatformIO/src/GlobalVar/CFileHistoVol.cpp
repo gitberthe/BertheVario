@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date creation     : 22/03/2024
-/// \date modification : 21/01/2025
+/// \date modification : 27/03/2025
 ///
 
 #include "../BertheVario.h"
@@ -13,7 +13,8 @@
 /// \brief Lecture du fichier histo au debut du programme
 void CFilesHistoVols::LectureFichiers()
 {
-char * TmpChar = new char [5000] ;
+const int SiseMax = 500 ;
+char * TmpChar = new char [SiseMax+1] ;
 
 // dextruction dernier histo
 m_HistoDir.clear() ;
@@ -43,7 +44,7 @@ while( true )
 
     // lecture fichier
     int ic = 0 ;
-    while(m_File.available())
+    while(m_File.available() && ic < SiseMax )
         TmpChar[ic++] = m_File.read();
     TmpChar[ic++] = 0 ;
 
@@ -53,13 +54,15 @@ while( true )
     // decoupage en ligne
     std::vector<char*> VecLigne ;
     char * pChar = strtok( TmpChar , "\n" ) ;
-    while ( pChar != NULL )
+    int SizeLine = (pChar!=NULL) ? strlen(pChar)+1 : 1 ;
+    while ( pChar != NULL && VecLigne.size() < 20 )
         {
         // recopie
-        char * pLigne = new char[100] ;
+        char * pLigne = new char[SizeLine] ;
         strcpy( pLigne , pChar ) ;
         VecLigne.push_back( pLigne ) ;
         pChar = strtok( NULL , "\n" ) ;
+        SizeLine = (pChar!=NULL) ? strlen(pChar)+1 : 1 ;
         }
 
     // analyse des champs
@@ -68,9 +71,13 @@ while( true )
     for ( int i = 0 ; i < VecLigne.size() ; i++ )
         {
         char * pLigne = VecLigne[i] ;
+        if ( pLigne == NULL )
+            continue ;
         char * pNomParam = strtok( pLigne , Separ ) ;
+        if ( pNomParam == NULL )
+            continue ;
         char * pValParam = strtok( NULL , Separ ) ;
-        if ( pNomParam == NULL || pValParam == NULL )
+        if ( pValParam == NULL )
             continue ;
         if ( !strcmp( pNomParam , "[IgcNom]" ) )
             strcpy( HistoVol.m_NomIgc , pValParam ) ;
