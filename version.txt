@@ -1,3 +1,6 @@
+le 20250327a :
+ - priorite tache fichier igc et fichier histo 19 (priorite tres haute non interruptible).
+
 le 20250325a :
  - [vz_igc_ms] à 0.7 m/s par defaut.
  - arret du vol bouton droit et Vz < g_GlobalVar.m_Config.m_vz_igc_ms et plus 0.4 m/s.

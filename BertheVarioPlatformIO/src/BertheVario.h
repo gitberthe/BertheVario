@@ -4,7 +4,7 @@
 /// \brief Include global du projet
 ///
 /// \date creation     : 03/03/2024
-/// \date modification : 25/03/2025
+/// \date modification : 27/03/2025
 ///
 
 //////////////////
@@ -29,12 +29,12 @@
 //////////////////////////
 // definitions materielles
 
-#define GNU_VARIO_GRIS        ///< decommenter pour ecran original 1.54
+//#define GNU_VARIO_GRIS        ///< decommenter pour ecran original 1.54
 #define TYPE_SCREEN 154         ///< si ecran 154
 //#define TYPE_SCREEN 290       ///< si ecran 290 a implementer
-#define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
-//#define VARIO_CAP_MAG_A_PLAT  1
-#define XC_TRACK                ///< si besoin de memoire et pas de xc_track desactiver (40ko de gagner)
+//#define VARIO_CAP_MAG_A_PLAT  2 ///< si vario cap magnetique a plat 1 , ou sur suspente droite 2 , ou sur suspente gauche 3
+#define VARIO_CAP_MAG_A_PLAT  1
+//#define XC_TRACK                ///< si besoin de memoire et pas de xc_track desactiver (40ko de gagner)
 
 #ifdef XC_TRACK
  #include <NimBLEDevice.h>
@@ -219,16 +219,16 @@
 #define SERIAL_GPS_PRIORITY     19
 #define SERIAL_GPS_CORE         1
 
-// ecriture igc, priorite moyenne
+// ecriture igc, priorite tres haute non interruptible
 #define IGC_NUM_TASK    5
 #define IGC_STACK_SIZE  4000
-#define IGC_PRIORITY    10
+#define IGC_PRIORITY    19
 #define IGC_CORE        1
 
-// temps de vol / histo, basse priorite
+// temps de vol / histo, priorite tres haute non interruptible
 #define TEMPS_NUM_TASK   6
 #define TEMPS_STACK_SIZE 4000
-#define TEMPS_PRIORITY   5
+#define TEMPS_PRIORITY   19
 #define TEMPS_CORE       1
 
 // scan des boutons, basse priorite
