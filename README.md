@@ -13,6 +13,7 @@
 - documentation pas a jour, le plus abouti des 3 vario.
 
 **Photo des 3 vario :**
+
 <img src="./photos/20260220_083439.jpg" width="250"/>
 
 **Logiciels annexes :**
