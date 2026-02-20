@@ -11,7 +11,7 @@ Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::B
 - documentation pas a jour, un peut lourd pour voler, pieces disponibles.
 
 **BertheVario213 :**
-- Vario et coque 3d a base de GDEM0213T5BN.
+- Vario et coque 3d a base de Lilygo GDEM0213T5BN.
 - documentation pas a jour, le plus abouti des 3 vario.
 
 **Photo des 3 vario :**
