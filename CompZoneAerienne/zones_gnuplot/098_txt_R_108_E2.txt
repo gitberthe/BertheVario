@@ -1,0 +1,8 @@
+num :  98
+ nom : R 108 E2
+ alti. min: 1981 m
+ compression:  6/   6 pts
+ delta max:    40.6 km
+ resol delta: 1.3 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

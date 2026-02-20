@@ -1,0 +1,8 @@
+num :  59
+ nom : RTBA 46 N2 (MILOPS / SeeNotam)
+ alti. min: 0 m
+ compression:  9/   9 pts
+ delta max:    45.2 km
+ resol delta: 1.4 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

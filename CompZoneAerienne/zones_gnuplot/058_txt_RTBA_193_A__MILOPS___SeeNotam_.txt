@@ -1,0 +1,8 @@
+num :  58
+ nom : RTBA 193 A (MILOPS / SeeNotam)
+ alti. min: 802 m
+ compression:  7/   7 pts
+ delta max:    16.9 km
+ resol delta: 0.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

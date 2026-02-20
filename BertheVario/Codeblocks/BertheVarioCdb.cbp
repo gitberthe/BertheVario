@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BertheVarioCdb" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="BertheVarioCdb" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="BertheVarioCdb" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-DESP32" />
+			<Add option="-DNO_SIMU_VOL" />
+		</Compiler>
+		<Unit filename="../BertheVarioPlatformIO/src/BertheVario.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/BertheVario.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CTerrainsConnu.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CTerrainsConnu.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/FileMgr/FileMgr.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/FileMgr/FileMgr.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CDroite2D.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CDroite2D.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CDroite3D.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CDroite3D.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CMatrice3D.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CMatrice3D.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CVecteur2D.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CVecteur2D.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CVecteur3D.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CVecteur3D.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/Segments.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/Segments.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CConfigFile.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CConfigFile.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CFileHistoVol.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CFileHistoVol.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CGlobalVar.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CGlobalVar.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CMutex.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CMutex.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CNumTaskArr.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/GlobalVar/CNumTaskArr.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CFinDeVol.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CFinDeVol.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CGps.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CGps.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CHgt2Agl.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CHgt2Agl.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CIgc.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CIgc.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CPileVit.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CPileVit.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CSimuVol.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CSimuVol.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CTrame.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Gps/CTrame.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGArray.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGArray_inl.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGCoGeneral.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGCoGeneral.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGQuickSort.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGString.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGString.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGStringEx.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGString_inl.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGTObjets.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/CLGTObjets_inl.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/MPU9250/CMpu9250.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/MPU9250/CMpu9250.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/MS5611/CMS5611Pression.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/MS5611/CMS5611Pression.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Perfmon/esp32_perfmon.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Perfmon/perfmon.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CFileGpx.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CFileGpx.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CRandoVol.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/RandoVol/CRandoVol.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/SDCard/CSDCard.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/SDCard/CSDCard.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/SDCard/SdFirmare.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/CBoutons.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/CBoutons.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/CGestEcrans.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/CGestEcrans.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/CScreen154.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/CScreen154.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_display_selection.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_display_selection_added.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_display_selection_new_style.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_selection_check.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/Screen/GxEPD2_wiring_examples.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CSoundSvr.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CSoundSvr.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CVarioBeep.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/VarioBeep/CVarioBeep.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CDate.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CDate.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CDistFront.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CDistFront.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CPolygone.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CPolygone.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CRectIn.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CRectIn.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CZoneAer.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CZoneAer.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CZonesAerAll.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CZonesAerAll.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CZonesFchValid.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/ZonesAeriennes/CZonesFchValid.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

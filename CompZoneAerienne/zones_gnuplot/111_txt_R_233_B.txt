@@ -1,0 +1,8 @@
+num : 111
+ nom : R 233 B
+ alti. min: 0 m
+ compression:  5/   5 pts
+ delta max:    4.5 km
+ resol delta: 0.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

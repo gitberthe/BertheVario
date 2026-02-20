@@ -1,0 +1,8 @@
+num :   3
+ nom : PROTECT Rocher de la Jacquette (300m/sol) (FAUNA)
+ alti. min: 0 m
+ compression:  249/  66 pts
+ delta max:    1.0 km
+ resol delta: 0.0 metres
+ err moyenne:  0.8 m
+ err maxi:  2.9 m

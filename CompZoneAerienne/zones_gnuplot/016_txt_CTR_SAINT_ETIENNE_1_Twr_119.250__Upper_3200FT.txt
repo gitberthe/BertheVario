@@ -1,0 +1,8 @@
+num :  16
+ nom : CTR SAINT ETIENNE 1 Twr(119.250) Upper(3200FT AMSL-1000FT AGL)
+ alti. min: 0 m
+ compression:  61/  25 pts
+ delta max:    20.6 km
+ resol delta: 0.7 metres
+ err moyenne:  6.9 m
+ err maxi:  14.1 m

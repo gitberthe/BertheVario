@@ -1,0 +1,7 @@
+[VzMax] 2.2
+[VzMin] -2.1
+[VsMax] 45.2
+[temps_vol] 13
+[distance] 23.5
+[z_deco] 501
+[z_max] 602

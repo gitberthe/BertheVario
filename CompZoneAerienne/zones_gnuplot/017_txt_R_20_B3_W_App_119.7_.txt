@@ -1,0 +1,8 @@
+num :  17
+ nom : R 20 B3 W App(119.7)
+ alti. min: 914 m
+ compression:  81/  45 pts
+ delta max:    59.9 km
+ resol delta: 1.9 metres
+ err moyenne:  4.9 m
+ err maxi:  12.4 m

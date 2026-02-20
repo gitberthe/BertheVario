@@ -1,0 +1,8 @@
+num :  52
+ nom : R 217 /5
+ alti. min: 1981 m
+ compression:  10/  10 pts
+ delta max:    66.6 km
+ resol delta: 2.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

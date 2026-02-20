@@ -1,0 +1,8 @@
+num :   5
+ nom : CTR RODEZ Twr(118.125) (FFVL-Prot / SeeNotam)
+ alti. min: 0 m
+ compression:  144/  41 pts
+ delta max:    22.0 km
+ resol delta: 0.7 metres
+ err moyenne:  7.4 m
+ err maxi:  14.0 m

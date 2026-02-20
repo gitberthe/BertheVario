@@ -1,0 +1,606 @@
+le 20260125a :
+ - modification TacheGpsAttenteVol() et MiseAJourAltitudesSolEtBaroRec().
+ - correction demmarrage hauteur sol CPileVit::IsStartFlight() m_CountFixAltiBaro > 1.
+ - modification CPileVit::InitPile() en CPileVit()
+ - probleme avec firmware carte sd
+
+
+le 20260124a :
+ - update du firmware par carte sd.
+ - reprise des modifications de puis 20260109a.
+
+le 20260109a ,
+le 20260108a/b :
+ - mise en commun de fichier
+
+le 20260107a :
+  - liberation de float zone si pas assez de memoire
+  - modification TacheGpsIgcTempsHistoCalcul() test run a la fin.
+  - modification TacheGpsAttenteVol() run a la fin de lancement de igc
+  - modification PushLoc2Igc() buffer initialise a 0
+
+le 20260106a :
+ - liberation de float zone periodique
+ - IsAtGround() dans TacheGpsIgcTempsHistoCalcul
+ - #ifdef _BERTHE_VARIO_TAC_ pour les zones
+
+le 20260105a :
+ - synchro du code 3 vario
+ - modification de CVirtCaptPress::SetAltiSolMetres()
+ - ajout de HAUTEUR_LOIN_SOL_METRE
+ - ajout de m_FinDeVol.IsAtGround() et inclusion dans TacheGpsAttenteVol et isr B C
+ 
+le 20260104c :
+ - refonte CTrame::TraiteBuffer()
+ - bug appel de CalcZone() et CalcTerrainPlusProche() en attente vitesse vol
+ - a StopAll attente fin des taches
+ - mise en place de TaskHandle_t dans les taches
+ - suppression de STATIONNARITE_XY_METRE remplace par m_Config.m_vitesse_igc_kmh
+ 
+le 20260101a :
+ - SOUNDSVR_CORE et SCAN_BUTTON_CORE sur core 0
+ - histo vol enregistrement toutes les 30 sec
+ - file.write() histo vol et igc
+ - igc ecriture toutes les 15 sec
+
+le 20251231b :
+ - ajout/deplacement TestPddGroundZ
+ - modification MiseAJourAltitudesSolEtBaroRec() plus de rando
+
+le 20251231a :
+ - MiseAJourAltitudesSolEtBaroRec au rythme de 1 sec.
+   Gps et RandoVol (beeper aussi).
+ - tache stack ajuste
+ - modif CHgt2Agl::GetGroundZ
+ - suppression MutexCore cpu %
+ - modification nom m_MutexLatLonGps
+ - attente serial gps 2 ms
+
+le 20251230b :
+ - attente serial gps 5ms
+ - ctrame gps buffer 500 octets
+ - gps serial et gps igc stack 3700
+ - m_BuffWrite CHistoVol  400 octets
+
+le 20251230a :
+ - STATIONNARITE_XY_METRE a 7m/s
+ - tache TacheGpsIgcTempsHistoCalcul calee a 1 seconde
+   et reprend la tache calcul.
+   
+le 20251229a/b :
+ - modification son gps en randovol
+ - modification tache perfmon
+
+le 20251228a :
+ - hdop page sys
+
+le 20251227b :
+ - refonte tache gps attente debut du vol et igc
+ - refonte beep fin de vol
+ - tache stack ajuste
+
+le 20251225a :
+ - tache stack releve de 500 octets
+ - modification 2 beep au demarrage.
+ 
+le 20251127a :
+ - Vz a 0.6 par defaut
+ - Plus de bips zerotage ni au lancement par defaut (Gps Standby Vitesse)
+
+
+le 20251027a :
+ - Remplacement de m_RayonMetre par CRectIn.
+ - doIntersect parametre avec & .
+
+le 20251026b :
+ - CZoneAer st_coord_poly union * m_PolygoneArr.
+ - float CZoneAer::m_ResolutionMetre et plus short.
+ - MakeEmptySound()
+
+le 20251026a :
+ - optimisation de IsFlightEnd().
+
+le 20251025a :
+ - essai de ota huge.csv.
+
+le 20251024a :
+ - CTrame::TraiteBuffer() break a parametre de fin.
+ - CFilesHistoVols OnceDir pour la creation et nom de fichier histo.
+ - TacheScreenCalcul() frequence 1hz
+ - TacheScanButton() 10hz
+ - raz screen a relance igc
+ 
+le 20251023a/b :
+ - suppression de fabsf dans PushHistoVol.
+ - stationnarite XY.
+  - loin du deco supprimer XY.
+
+le 20251022c :
+ - enregistrement du fichier histo vol toutes les 60sec ou a la fin.
+
+le 20251022a/b :
+ - amelioration loin deco XY avec hdop.
+
+le 20251021a :
+ - refonte CPileVit pour utilisation uniquement HDop.
+
+le 20251019 :
+ - recallage alti baro 10min.
+
+le 20251018a : 
+ - modification attente tache Vz en millis().
+ - modification pile vitesse.
+ - ajout histo ZMin.
+ - condition hauteur sol demmarrage / arret du vol.
+ - modification de CMS5611::TacheVzCapMag().
+ - changement sur CNbSatDelay::GetNbSatDelay(). 
+ - modification son de debut de vol.
+ - debut de vol avec alti et positions xy.
+ - utilisation d'un mutex pour le XQueue de SoundSrv.
+ - suppression de Gps/CStabGps.h.
+ - refonte Gps attente debut de vol.
+
+
+le 20250925a :
+ - suppression de l'alarme sonore fichier altitude terrain.
+
+le 20250921a :
+ - modification affichage TmaAll
+
+le 20250919c :
+ - Plus d'attente de son si pile presque pleine.
+
+le 20250919a :
+ - plus de float ou long dans LibGeneral.
+
+le 20250918a :
+ - passage a 4Mb de memoire infructueux.
+
+le 20250916a :
+ - verification zone aerienne en auto-test et modification affichage wifi.
+ - LibGeneral maintenant.
+ 
+le 20250828b : 
+ - m_stab_gps_metre = 300 et m_stab_gps_sec = 3 par defautr dans fichier de configuration.
+ 
+le 20250828a :
+ - modification variable vario beep. Vario toujours actif et beep zone.
+
+le 20250709a :
+ - modification variable vario beep
+
+le 20250708a :
+ - suppression xc_track et limite zone xy alti lz4
+ - changement priorite tache fichier
+
+le 20250320a :
+ - prise en compte de la hauteur sol pour pre-alarme frontiere XY à Saint-Sandoux.
+ - emmission message xc_track determiné uniquement par #define XC_TRACK 
+ - son vario toujours determiné par [xc_track] == 0 
+ - declenchement debut de vol par 2 Vz minimales consecutives. 
+
+le 20250301a :
+ - meilleur prise en compte zone st-yan
+ 
+le 20250225b :
+ - modif plantage si mauvais zonesper.txt.
+
+le 20250225a :
+ - bug periodes tma st-yan. 
+
+le 20250213a2 :
+ - version documentation.
+
+le 20250213a :
+ - Modification de CZoneAer.
+ - prise en compte de la hauteur sol pour la marge altitude zone à Corent.
+
+le 20250210a :
+   - ihm ligne vide si pas de zone TMA/CTR proche alti <=500m et dist <=999m.
+   
+le 20250209b :
+ - remise a true des beep alarme zone, au debut du vol, lors desactivation
+   attente gps.
+
+le 20250209a :
+ - apparition conditionnelle de l'altitude proche <500m et distance proche <= 999m.
+   ex : _________ ou 455A _____ ou _____ 687NE ou 499A 999SE.
+ - modification de CDistFront::IsNearFront().
+
+le 20250208a :
+ - alternance affichage terrain proche/finesse avec altitude/distance/cap 
+   jusqu'a la prochaine zone TMA/CTR... rencontrée, à l'altitude ou l'on est,
+   en metres. 999m maximum.
+ - penetration zone TMA activement testeé à clermont. altitude/distance/cap zone 
+   proche moin testé.
+
+le 20250207c :
+ - corection fuite memoire ~CZoneAer(). Meilleur fonctionnement fileManager.
+
+le 20250207b :
+ - correction bug important zone activable masquée par zone avec derogation.
+
+le 20250207a :
+ - gain memoire wifi ota bluetooth.
+ - correction bug CDistFront::IsNearFront() vecteurs colineaire.
+
+le 20250206a :
+ - calcul penetration zone et terrain proche à 2hz.
+
+le 20250204a :
+ - menu deroulant mode rando.
+ - ajout de #define XC_TRACK dans BertheVarioTac.h pour eviter une consommation memoire si inutilise.
+ 
+le 20250203a :
+ - modification initialisation hauteur sol zone protegée fonction de la denomination 
+    (variable et plus 1000/500/300/150/50m ex: "PROTECT reserve annecy 200m/sol")
+
+le 20250130a :
+ - ajout de [xc_track] pour envoi de la pression par bluetooth à XC-Track.
+
+le 20250129a :
+ - platform https://github.com/tasmota/platform-espressif32/releases/download/2024.12.30/platform-espressif32.zip
+ - CSoundSvr changé.
+
+le 20250125c :
+ - page tma dessous, enregistrement point gps dans fichier terconnu.txt.
+ 
+le 20250125b :
+ - gestion de la luminosite de l'ecran differente au sol.
+ - [lum_seconde] à la place de [luminosite] dans fichier de config.
+
+le 20250125a :
+ - offset temperature a froid.
+ - Modification tma activation/desactivation.
+
+le 20250124c :
+ - screen epd text.
+
+le 20250124b :
+ - ecran histo en minutes decimale.
+ - alarme sonore reculade.
+ - alarme sonore frontiere zone et limite altitude.
+ - son zerotage.
+ - [alarme_reculade] dans fichier de config.
+ - zone protege mieux determine
+
+le 20250124a :
+ - correction pt-decollage menu rando
+ - confirmation reboot info/rando.
+ - [coef_filtre_alti_baro] à 0.85 par defaut.
+ 
+le 20250123a2 :
+ - mise a jour documentation utilisateur.
+
+le 20250123a :
+ - mode rando utilisable.
+ 
+le 20250122c :
+ - modification doc concepteur.
+ - ebauche mode rando.
+
+le 20250122b :
+ - update de librairie.
+ - ebauche mode rando.
+
+le 20250122a :
+ - ajout affichage tma hauteur sol pour zone protect.
+ - mise en conformite/import BertheVario
+  . tache gps
+  . tache son
+  . temps de vol en float
+  . [vz_igc_ms] à 0,5 par défaut.
+  . [vitesse_igc_kmh] à 14 par defaut.
+  - modification GetAltiMetres(). Plus de reset m_DiffAltiFchAgl.
+
+le 20250121a :
+ - mise a jour doc concepteur.
+ - ajout d'un fichier de modif BertheVario à importer dans BertheVarioTac.
+
+le 20241209a :
+ - CompZoneAerienne.exe windows 10, zonesaer.txt inchangé.
+
+le 20241205a :
+ - structuration CompZoneAerienne, zonesaer.txt inchangé.
+ 
+le 20241204a :
+ - bug zone meme nom dans CompZoneAerienne. zonesaer.txt nouveau.
+ 
+le 20241203a :
+ - Gain memoire nom de CZoneAer string => char*.
+ 
+le 20241202c :
+ - Gain memoire doublon nom de CZoneAer.
+ 
+le 20241202b :
+ - Modification buffer de points CZoneAer.
+ 
+le 20241202a :
+ - Modification affichage CompZoneAerienne.
+ - Modification determination zone protegee CZoneAer.
+ - [coef_filtre_alti_baro] à 0,9 par défaut.
+
+le 20241201d :
+ - resolution variable dans la compression de zone en short firmware.
+   resolution entiere de 1 à 7 metres pour les zones en presence, 1.95metre en moyenne.
+
+le 20241201c :
+ - simplification calcul dans zone et modification fichier de validation zone.
+
+le 20241201b :
+ - calcul rayon maxi/resolution mini zone dans CompZoneAerienne.
+ - Modification resolution compression zone à 10. metres.
+
+le 20241201a2 :
+ - bug ligne de commande vide CompZoneAerienne.
+ 
+le 20241201a :
+ - correction calcul erreur moyenne pour CompZoneAerienne.
+ - CompZoneAerienne genere les zones à partir de terconnu.txt.
+ - modification buffer calcul zone pour zone 1000 pts cevennes.
+ - prise en compte hauteur sol zone protege 1000/500/300/150/50m.
+ 
+le 20241130c :
+ - correction calcul erreur moyenne pour CompZoneAerienne.
+ 
+le 20241130b :
+ - augmentation des decimales et precision dans zonesaer.txt.
+
+le 20241130a :
+ - Erreur moyenne des courbes pour CompZoneAerienne.
+
+le 20241129b :
+ - enfin beton sur CompZoneAerienne et zonesaer.txt. Compression
+   iterative 3 points distance droite < 4.5m. 
+ - la resolution firmware des zones reste à 18m.
+
+le 20241129a :
+ - essai algorithme CompZoneAerienne.
+ - zonesaer.txt inchangé.
+ - CompZoneAerienne.exe Windows 10.
+ 
+le 20241128d :
+ - reorganisation fichier/commentaires CompZoneAerienne.
+ 
+le 20241128c :
+ - modification CompZoneAerienne, reduction zone par droite proche 
+   de nuage de points.
+ 
+le 20241128b :
+ - mise a jour documentation.
+
+le 20241128a :
+ - CompZoneAerienne.exe Windows 10 avec ses dll.
+ 
+le 20241127a :
+ - modification BVTZoneAerienne en CompZoneAerienne.
+ - deplacement de CVecZoneReduce.h/cpp.
+ - l'algorithme de CompZoneAerienne de reduction de zone est desormais la 
+   distance à la droite < 7 metres, distance entre points < 40 metres et
+   angle entre points < 5 degres.
+
+le 20241126d :
+ - ota en pointeur.
+
+le 20241126c :
+ - verification si compression lz4 efficace.
+ 
+le 20241126b :
+ - correction bug fuite memoire decompression zone.
+
+le 20241126a :
+ - modification dans Screen/lv_conf.h
+
+le 20241125c2 :
+ - modification doc utilisateur.
+
+le 20241125c :
+ - ajout de la compression des float 32 bit en short 16 bits pour les CZoneAer.
+   Resolution de 18m et zone imperativement dans le cercle de rayon 589km (sinon reboot)
+ - ajout de compression lz4 pour tableau des short 16bits de CZoneAer.
+
+le 20241125b :
+ - la creation du fichier de zone aeriennes se fait desormais avec BVTZoneAerienne.
+ - la reduction du nombre de points de zone ce fait desormais dans BVTZoneAerienne.
+ - dans BVTZoneAerienne 2 methodes de reduction de zone, par distance entre points
+   de 50 metres, et angle plat de 6 degres.
+ - format de zonesaer.txt inchangé.
+ 
+le 20241125a :
+ - modification Screen/lv_conf.h
+ - modification CText2Screen
+ - modification CDate
+ 
+le 20241124a :
+ - modification methode calcul Vz.
+ - [sat_sec] à 12 par défaut.
+ - [vitesse_igc_kmh] à 16 km/h par défaut.
+ - [coef_filtre_alti_baro] à 0,8 par défaut.
+ - suppression [periode_integration_sec].
+
+le 20241121a :
+ - pose d'une batterie 4000mah modele 965068.
+
+le 20241101c :
+ - modification ihm.
+
+le 20241101b :
+ - optimisation affichage page Vz.
+ - bug ecran/carte sd.
+
+le 20241101a :
+ - vbat max 4.25v pour barregraphe autonomie.
+ - grosse amelioration temps de reponse ihm à 10 hz et consommation CPU.
+ 
+le 20241030c4 :
+ - vbat max 4.3v pour barregraphe autonomie.
+
+le 20241030c3 :
+ - abaissement frequences calcul et affichage pour eco energie.
+ - abaissement frequences scan serveur de son pour eco energie.
+
+le 20241030c2 :
+ - luminosite = 1 pour plein soleil.
+ - seuil jaune 40% barregraphe tension batterie.
+
+le 20241030c :
+ - taille barregraphe batterie.
+ - de init wifi.
+ - mode economie d'ebergie
+
+le 20241030b :
+ - changement luminosite division.
+ - barregraphe tension batterie.
+
+ le 20241030a2 :
+ - changement OTA.
+
+le 20241030a :
+ - changement luminosite minumum/maximum.
+ 
+le 20241026a2 :
+ - ajout procedure de reglage potentiometre dans documentation concepteur.
+
+le 20241026a :
+ - changement luminosite maximum.
+ - pile CFinDeVol passe à 12 secondes.
+ - [sat_sec] 12s par defaut pour 4 satellites.
+ 
+le 20241025b2 :
+ - changement de batterie pour une 4000mah 124065.
+
+le 20241025b :
+ - memorisation cap si non present.
+
+le 20241025a :
+ - ecartement du pcb batterie.
+
+le 20241023b :
+ - ajout vbatt en premiere page.
+ - fonctionnement sur batterie ok (charge ok).
+
+le 20241023a :
+ - photos en plus dans documentation concepteur.
+
+le 20241021a :
+ - suppression fichier documentation obsolete.
+
+le 20241020a :
+ - [sat_sec] 0 pour 30 satellites.
+
+ le 20241019a :
+ - [sat_sec] 11s par defaut pour 4 satellites, 0 pour 28 satellites.
+ 
+le 20241017a :
+ - modification fonction luminosite.
+
+le 20241016b :
+ - optimisation memoire (suppression de taches et reduction buffer/stack).
+
+le 20241016a :
+ - correction bug ecran par mutex.
+ - prise en compte du capteur de luminosite (à isoler des led de l'ecran).
+
+le 20241015a :
+ - [sat-sec] passe à 10s par defaut.
+
+le 20241014a :
+ - telechargement firmware par wifi ok.
+
+le 20241012b :
+ - validation capteur MS5611.
+
+le 20241012a :
+ - [temps_igc_sec] passe à 3s par defaut.
+ - Vz declenclement de vol pendant [temps_igc_sec].
+ - [sat_sec] 9s par defaut pour 4 satellites (puis 0s pour 26 satellites).
+ - correction bug editeur cfg file.
+ 
+le 20241010b :
+ - essai mesure luminosite.
+
+le 20241010a :
+ - mise à jour documentation utilisateur et concepteur.
+ - ajout numero de firmware en page sys.
+ - pcb en commande.
+
+le 20241009b :
+ - ajout resistances Sda Scl pcb.
+
+le 20241009a :
+ - purge des boutons non bloquant.
+
+le 20241008a :
+ - [vz_igc_ms] pendant 3s pour déclenchement de vol.
+ - modification pcb.
+
+le 20241007b :
+ - intergation logiciel pour capteur de pression MS5611 plus precis.
+
+le 20241007a :
+ - pcb a tester, compatible MS5611.
+
+le 20241006a :
+ - essai pcb.
+
+le 20241005d :
+ - modification conditions "EnVol".
+
+le 20241005c :
+ - doc utilisateur et modification code.
+ 
+le 20241005b :
+ - correction bug reboot systematique en wifi.
+
+le 20241005a :
+ - fonctionnement capteur magnetique ok.
+
+le 20241003a :
+ - fonctionnement gps + baro + son ok.
+
+le 20241002a :
+ - optimisation memoire globale;
+ 
+le 20240928a :
+ - correction bug zone limite alti XY
+
+ le 20240927b :
+ - modification zone limite alti XY
+
+le 20240927a :
+ - modification IHM zones hgt.
+
+le 20240926a :
+ - shema electrique kicad.
+ - refonte ihm.
+
+le 20240925c :
+ - ihm selection de pages.
+
+le 20240925b :
+ - optimization int/long.
+ 
+le 20240925a :
+ - refonte calcul zones aeriennes.
+
+le 20240924b :
+le 20240924a :
+ - modification IHM.
+
+le 20240923c :
+ - mesure de tension ok.
+
+le 20240923a :
+ - Wifi ok.
+ 
+le 20240922b :
+ - ok pages ihm sans bug carte SD.
+
+le 20240921a :
+ - trame gps fonctionnelle avec carte SD.
+ 
+le 20240921a :
+ - reorganisation CScreen
+
+le 20240920a :
+ - debut du projet BertheVarioTac

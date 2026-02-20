@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BertheVarioTac" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Codeblocks" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="Codeblocks" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-DNO_BMP180_PRESS" />
+			<Add option="-D_BERTHE_VARIO_TAC_" />
+		</Compiler>
+		<Unit filename="../BertheVarioTacPlatformIO/src/BertheVarioTac.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/BertheVarioTac.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Bluetooth/CBleXct.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Bluetooth/CBleXct.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Calculateur/CTerrainsConnu.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Calculateur/CTerrainsConnu.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/FileMgr/FileMgr.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/FileMgr/FileMgr.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CDroite2D.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CDroite2D.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CDroite3D.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CDroite3D.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CMatrice3D.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CMatrice3D.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CVecteur2D.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CVecteur2D.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CVecteur3D.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/CVecteur3D.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/Segments.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Geometrie/Segments.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CConfigFile.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CConfigFile.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CFileHistoVol.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CFileHistoVol.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CGlobalVar.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CGlobalVar.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CMutex.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CMutex.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CNumTaskArr.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/GlobalVar/CNumTaskArr.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CFinDeVol.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CFinDeVol.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CGps.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CGps.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CHgt2Agl.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CHgt2Agl.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CIgc.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CIgc.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CPileVit.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CPileVit.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CSimuVol.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CSimuVol.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CTrame.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Gps/CTrame.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGArray.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGArray_inl.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGCoGeneral.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGCoGeneral.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGQuickSort.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGString.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGString.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGStringEx.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGString_inl.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGTObjets.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/CLGTObjets_inl.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/LibGeneral/LibGeneral.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/MS5611/CMS5611Pression.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/MS5611/CMS5611Pression.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Perfmon/esp32_perfmon.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Perfmon/perfmon.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/QMC5883L/CQMC5883Mag.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/QMC5883L/CQMC5883Mag.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/RandoVol/CFileGpx.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/RandoVol/CFileGpx.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/RandoVol/CRandoVol.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/RandoVol/CRandoVol.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/SDCard/CSDCard.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/SDCard/CSDCard.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/SDCard/SdFirmare.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CAutoPages.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CAutoPages.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CBrightness.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CBrightness.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CLGFX.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CLGFX.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CScreen.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CScreen.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CText2Screen.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CText2Screen.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CTouchButtons.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/CTouchButtons.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/User_Setup.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Screen/lv_conf.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/VarioCapBeep/CSoundSvr.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/VarioCapBeep/CSoundSvr.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/VarioCapBeep/CVarioCapBeep.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/VarioCapBeep/CVarioCapBeep.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Wifi/WifiFileMgr.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/Wifi/WifiOta.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDate.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDate.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDistFront.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDistFront.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CPolygone.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CPolygone.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CRectIn.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CRectIn.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CZoneAer.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CZoneAer.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CZonesAerAll.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CZonesAerAll.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CZonesFchValid.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CZonesFchValid.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

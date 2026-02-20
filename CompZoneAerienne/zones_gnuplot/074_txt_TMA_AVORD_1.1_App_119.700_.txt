@@ -1,0 +1,8 @@
+num :  74
+ nom : TMA AVORD 1.1 App(119.700)
+ alti. min: 640 m
+ compression:  82/  82 pts
+ delta max:    68.8 km
+ resol delta: 2.2 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

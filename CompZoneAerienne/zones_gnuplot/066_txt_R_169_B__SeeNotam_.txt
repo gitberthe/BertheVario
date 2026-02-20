@@ -1,0 +1,8 @@
+num :  66
+ nom : R 169 B (SeeNotam)
+ alti. min: 3200 m
+ compression:  9/   9 pts
+ delta max:    10.3 km
+ resol delta: 0.3 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

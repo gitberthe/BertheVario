@@ -1,0 +1,8 @@
+num : 100
+ nom : R 108 E3
+ alti. min: 2286 m
+ compression:  5/   5 pts
+ delta max:    16.6 km
+ resol delta: 0.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,0 +1,8 @@
+num :  42
+ nom : TMA MONTPELLIER 4 App(130.855)
+ alti. min: 1371 m
+ compression:  10/   9 pts
+ delta max:    36.7 km
+ resol delta: 1.2 metres
+ err moyenne:  0.4 m
+ err maxi:  4.5 m

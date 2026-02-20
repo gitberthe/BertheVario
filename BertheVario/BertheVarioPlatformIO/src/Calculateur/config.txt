@@ -1,0 +1,16 @@
+[coef_filtre_alti_baro] 0.85 #
+[vitesse_igc_kmh] 14 #
+[sat_sec] 12 #
+[temps_igc_sec] 4 #
+[vz_igc_ms] 0.70 #
+[stab_gps_metre] 30 #
+[stab_gps_sec] 10 #
+[vz_seuil_haut] 0.20 #
+[vz_seuil_bas] -2.60 #
+[vz_seuil_max] 3.50 #
+[alarme_reculade] 0 #
+[dtu] 2 #
+[ssid_ru] Galaxy_XCover6_Pro_B80B #
+[passwd_ru] mot-de-passe-ap-xcover #
+[pilote_ru] Spin_Berthe #
+[voile_ru] Nova_Mentor #

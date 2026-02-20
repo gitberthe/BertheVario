@@ -1,0 +1,8 @@
+num :  64
+ nom : TMA TOULOUSE 3 App(123.850)
+ alti. min: 1981 m
+ compression:  18/  18 pts
+ delta max:    133.1 km
+ resol delta: 4.3 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

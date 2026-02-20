@@ -1,0 +1,8 @@
+num :   4
+ nom : TMA CLERMONT 9 App(122.225) Lower(1000FT AGL-4000FT AMSL)
+ alti. min: 1219 m
+ compression:  193/  41 pts
+ delta max:    41.6 km
+ resol delta: 1.3 metres
+ err moyenne:  7.5 m
+ err maxi:  14.1 m

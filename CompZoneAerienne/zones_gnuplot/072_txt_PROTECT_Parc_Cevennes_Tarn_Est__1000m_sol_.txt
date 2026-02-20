@@ -1,0 +1,8 @@
+num :  72
+ nom : PROTECT Parc Cevennes Tarn Est (1000m/sol) (FAUNA)
+ alti. min: 0 m
+ compression:  45/  45 pts
+ delta max:    3.0 km
+ resol delta: 0.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

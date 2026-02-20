@@ -1,0 +1,38 @@
+prix moyen sur aliexpess :
+
+- resistance 3.6 ohms           recup
+- resistances x2 4.7k           recup
+- potentiometre 10k             recup
+- resistance 100 ohms      1.18 non utilisées
+- haut parleur x5          5.43
+- convert. logique x 10    2.67 non utilisés
+- fils rigide 20awg 5m     4.63
+- pcb 5*7cm                1    changement de conception
+- prises jst 1.25 x 60     5.38 
+- epoxy boitier 450g      19.89 
+- sd card 4g               8.57
+- batterie 2000mah 103450 10.43 pas assez d'autonomie
+- batterie 4000mah 124065 11.30 changement de conception
+- batterie 4000mah 965068 10.90 (12h sans problemes)
+- interrupteur x10         3.40
+- fil souple 28awg 5m      7.36
+- convert. 1S to 5v        4.49
+- chargeur lipo            2.92
+- bmp180 pression          1.22 changement de conception
+- ms5611 pression          6.73
+- ESP32-2432S028          10.99
+- gps neo6mv2              3.11
+- QMC5883L magnet.         2.21
+- pcb jlpcb x 5            4.53
+- vis pcb x 4 
+- vis boitier x 3
+- durite silicone pcb      1
+- moule boitier            3.99 non utilisé
+- moule boitier            1    non utilisé
+- cagette                       recup
+- acetone 
+- pinceau seringues
+- scratch 1m              5
+- fibre de verre 1m      12
+------------------------------
+                  total 140.43

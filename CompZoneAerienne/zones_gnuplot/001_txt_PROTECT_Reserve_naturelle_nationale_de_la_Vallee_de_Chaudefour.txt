@@ -1,0 +1,8 @@
+num :   1
+ nom : PROTECT Reserve naturelle nationale de la Vallee de Chaudefour 300m/sol (FAUNA)
+ alti. min: 0 m
+ compression:  1510/ 140 pts
+ delta max:    4.3 km
+ resol delta: 0.1 metres
+ err moyenne:  4.8 m
+ err maxi:  12.7 m

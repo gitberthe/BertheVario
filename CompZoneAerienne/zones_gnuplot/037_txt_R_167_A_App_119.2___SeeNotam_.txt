@@ -1,0 +1,8 @@
+num :  37
+ nom : R 167 A App(119.2) (SeeNotam)
+ alti. min: 0 m
+ compression:  46/  44 pts
+ delta max:    16.1 km
+ resol delta: 0.5 metres
+ err moyenne:  0.3 m
+ err maxi:  6.2 m

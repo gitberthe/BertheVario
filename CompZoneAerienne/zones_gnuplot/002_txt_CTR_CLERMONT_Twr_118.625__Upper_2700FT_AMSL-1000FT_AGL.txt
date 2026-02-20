@@ -1,0 +1,8 @@
+num :   2
+ nom : CTR CLERMONT Twr(118.625) Upper(2700FT AMSL-1000FT AGL)
+ alti. min: 0 m
+ compression:  274/  79 pts
+ delta max:    24.2 km
+ resol delta: 0.8 metres
+ err moyenne:  6.6 m
+ err maxi:  14.1 m

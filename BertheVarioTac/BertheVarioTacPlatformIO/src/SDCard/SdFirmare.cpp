@@ -1,0 +1,1 @@
+/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/SDCard/SdFirmare.cpp

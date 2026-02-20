@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-CTA BORDEAUX</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.927778,46.255556,200
+2.936389,46.177778,200
+2.99,45.812222,200
+2.993333,45.789167,200
+2.995833,45.737222,200
+3.002778,45.599722,200
+3.006389,45.515556,200
+3.021111,45.223333,200
+2.604722,45.166667,200
+2.5,45.166667,200
+2.5,46.229444,200
+2.588889,46.259722,200
+2.927778,46.255556,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

@@ -1,0 +1,464 @@
+
+Value = 348.94
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.94
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 348.93
+Temperature : 14.79
+Accel : -0.20
+Kalman Update
+VarioData Update
+Alti : 348.93
+Temperature : 14.79
+Accel : -0.20
+Velocity : -0.09
+Calibrated alti : 348.94
+Baro Alti : 348.93
+Temperature : 14.79
+accelerateur : -0.20
+Kalman Alti : 348.94
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.94, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.94
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.94
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.94
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2334
+VarioState : 0
+Compas : 253 - W
+ScreenDigit : setValue
+Value = 253.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+varioscreenObjects_154.cpp:635: value = 253.00
+ScreenText : setValue
+Value = W
+Height : 348.94
+ScreenDigit : setValue
+Value = 348.94
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.94
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 349.09
+Temperature : 14.79
+Accel : -0.18
+Kalman Update
+VarioData Update
+Alti : 349.09
+Temperature : 14.79
+Accel : -0.18
+Velocity : -0.09
+Calibrated alti : 348.95
+Baro Alti : 349.09
+Temperature : 14.79
+accelerateur : -0.18
+Kalman Alti : 348.95
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.95, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.95
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.95
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.95
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2331
+VarioState : 0
+Compas : 253 - W
+ScreenDigit : setValue
+Value = 253.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+varioscreenObjects_154.cpp:635: value = 253.00
+ScreenText : setValue
+Value = W
+Height : 348.95
+ScreenDigit : setValue
+Value = 348.95
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.95
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 349.17
+Temperature : 14.79
+Accel : -0.20
+Kalman Update
+VarioData Update
+Alti : 349.17
+Temperature : 14.79
+Accel : -0.20
+Velocity : -0.09
+Calibrated alti : 348.95
+Baro Alti : 349.17
+Temperature : 14.79
+accelerateur : -0.20
+Kalman Alti : 348.95
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.95, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.95
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.95
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.95
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2287
+VarioState : 0
+Compas : 253 - W
+ScreenDigit : setValue
+Value = 253.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+ScreenText : setValue
+Value = W
+Height : 348.95
+ScreenDigit : setValue
+Value = 348.95
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.95
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 349.08
+Temperature : 14.79
+Accel : -0.22
+Kalman Update
+VarioData Update
+Alti : 349.08
+Temperature : 14.79
+Accel : -0.22
+Velocity : -0.09
+Calibrated alti : 348.96
+Baro Alti : 349.08
+Temperature : 14.79
+accelerateur : -0.22
+Kalman Alti : 348.96
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.96, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.96
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2346
+VarioState : 0
+Compas : 252 - W
+ScreenDigit : setValue
+Value = 252.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+varioscreenObjects_154.cpp:635: value = 252.00
+ScreenText : setValue
+Value = W
+Height : 348.96
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 348.90
+Temperature : 14.79
+Accel : -0.18
+Kalman Update
+VarioData Update
+Alti : 348.90
+Temperature : 14.79
+Accel : -0.18
+Velocity : -0.09
+Calibrated alti : 348.96
+Baro Alti : 348.90
+Temperature : 14.79
+accelerateur : -0.18
+Kalman Alti : 348.96
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.96, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.96
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2326
+VarioState : 0
+Compas : 252 - W
+ScreenDigit : setValue
+Value = 252.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+varioscreenObjects_154.cpp:635: value = 252.00
+ScreenText : setValue
+Value = W
+Height : 348.96
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 348.98
+Temperature : 14.79
+Accel : -0.20
+Kalman Update
+VarioData Update
+Alti : 348.98
+Temperature : 14.79
+Accel : -0.20
+Velocity : -0.09
+Calibrated alti : 348.96
+Baro Alti : 348.98
+Temperature : 14.79
+accelerateur : -0.20
+Kalman Alti : 348.96
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.96, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.96
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2332
+VarioState : 0
+Compas : 252 - W
+ScreenDigit : setValue
+Value = 252.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+ScreenText : setValue
+Value = W
+Height : 348.96
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 348.86
+Temperature : 14.79
+Accel : -0.16
+Kalman Update
+VarioData Update
+Alti : 348.86
+Temperature : 14.79
+Accel : -0.16
+Velocity : -0.09
+Calibrated alti : 348.96
+Baro Alti : 348.86
+Temperature : 14.79
+accelerateur : -0.16
+Kalman Alti : 348.96
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.96, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.96
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2335
+VarioState : 0
+Compas : 253 - W
+ScreenDigit : setValue
+Value = 253.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+varioscreenObjects_154.cpp:635: value = 253.00
+ScreenText : setValue
+Value = W
+Height : 348.96
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 349.03
+Temperature : 14.79
+Accel : -0.22
+Kalman Update
+VarioData Update
+Alti : 349.03
+Temperature : 14.79
+Accel : -0.22
+Velocity : -0.09
+Calibrated alti : 348.96
+Baro Alti : 349.03
+Temperature : 14.79
+accelerateur : -0.22
+Kalman Alti : 348.96
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.96, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.96
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90
+varioscreenObjects_154.cpp:635: value = -0.09
+Beeper - setTone : BEEP_TYPE_GLIDING
+tone - frequence : 0
+AUDIO_AMP_ENABLE / pin : 19
+AUDIO_AMP_ENABLE HIGH
+ToneESP32 volume : 3
+Sat : 0
+ScreenDigit : setValue
+Value = 0.00
+varioscreenObjects_154.cpp:626: valueMax = 99.00
+varioscreenObjects_154.cpp:2019: voltage = 2323
+VarioState : 0
+Compas : 251 - W
+ScreenDigit : setValue
+Value = 251.00
+varioscreenObjects_154.cpp:626: valueMax = 999.00
+varioscreenObjects_154.cpp:635: value = 251.00
+ScreenText : setValue
+Value = W
+Height : 348.96
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+displayStep
+displaystep - objectCount  : 32
+loop
+VarioImuTwoWire UpdateAlti : 349.10
+Temperature : 14.79
+Accel : -0.16
+Kalman Update
+VarioData Update
+Alti : 349.10
+Temperature : 14.79
+Accel : -0.16
+Velocity : -0.09
+Calibrated alti : 348.96
+Baro Alti : 349.10
+Temperature : 14.79
+accelerateur : -0.16
+Kalman Alti : 348.96
+Kalman Vario : -0.09
+ComputeHeight Alti : 348.96, Lat : -1.00, Long :-1.00
+AGL Directory exists : 0
+AGL Height 348.96
+Beeper - setvelocity : -0.09
+Beeper - BEEP_TYPE_GLIDING
+ScreenDigit : setValue
+Value = 348.96
+varioscreenObjects_154.cpp:626: valueMax = 9999.00
+varioscreenObjects_154.cpp:635: value = 348.96
+ScreenDigit : setValue
+Value = -0.09
+varioscreenObjects_154.cpp:626: valueMax = 9.90

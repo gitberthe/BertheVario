@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 3203</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+4.434167,46.145556,100
+4.546944,45.853611,100
+4.318889,45.87,100
+4.203611,46.086111,100
+4.434167,46.145556,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

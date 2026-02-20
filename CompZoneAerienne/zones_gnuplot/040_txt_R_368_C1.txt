@@ -1,0 +1,8 @@
+num :  40
+ nom : R 368 C1
+ alti. min: 0 m
+ compression:  53/  52 pts
+ delta max:    92.7 km
+ resol delta: 3.0 metres
+ err moyenne:  0.2 m
+ err maxi:  10.8 m

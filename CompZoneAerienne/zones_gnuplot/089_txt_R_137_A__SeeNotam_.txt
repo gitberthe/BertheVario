@@ -1,0 +1,8 @@
+num :  89
+ nom : R 137 A (SeeNotam)
+ alti. min: 914 m
+ compression:  7/   7 pts
+ delta max:    12.6 km
+ resol delta: 0.4 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

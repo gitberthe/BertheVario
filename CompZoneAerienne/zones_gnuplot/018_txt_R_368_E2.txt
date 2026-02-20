@@ -1,0 +1,8 @@
+num :  18
+ nom : R 368 E2
+ alti. min: 4724 m
+ compression:  54/  19 pts
+ delta max:    40.1 km
+ resol delta: 1.3 metres
+ err moyenne:  7.2 m
+ err maxi:  14.6 m

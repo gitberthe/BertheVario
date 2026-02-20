@@ -1,0 +1,8 @@
+num :  88
+ nom : TMA LYON 05 App(133.150)
+ alti. min: 2590 m
+ compression:  9/   9 pts
+ delta max:    47.9 km
+ resol delta: 1.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

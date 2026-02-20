@@ -1,0 +1,8 @@
+num :  39
+ nom : CTA TOULOUSE 3
+ alti. min: 3505 m
+ compression:  8/   7 pts
+ delta max:    57.8 km
+ resol delta: 1.9 metres
+ err moyenne:  1.3 m
+ err maxi:  10.6 m

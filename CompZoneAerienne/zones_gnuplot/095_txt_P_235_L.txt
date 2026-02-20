@@ -1,0 +1,8 @@
+num :  95
+ nom : P 235 L
+ alti. min: 0 m
+ compression:  5/   5 pts
+ delta max:    0.8 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

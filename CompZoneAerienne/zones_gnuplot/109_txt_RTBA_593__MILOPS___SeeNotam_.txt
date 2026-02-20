@@ -1,0 +1,8 @@
+num : 109
+ nom : RTBA 593 (MILOPS / SeeNotam)
+ alti. min: 1197 m
+ compression:  10/  10 pts
+ delta max:    48.8 km
+ resol delta: 1.6 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

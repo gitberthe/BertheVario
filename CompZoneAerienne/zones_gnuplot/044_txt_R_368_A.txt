@@ -1,0 +1,8 @@
+num :  44
+ nom : R 368 A
+ alti. min: 0 m
+ compression:  12/  11 pts
+ delta max:    103.3 km
+ resol delta: 3.3 metres
+ err moyenne:  0.1 m
+ err maxi:  1.4 m

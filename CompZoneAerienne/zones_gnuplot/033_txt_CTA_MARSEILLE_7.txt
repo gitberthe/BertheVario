@@ -1,0 +1,8 @@
+num :  33
+ nom : CTA MARSEILLE 7
+ alti. min: 4419 m
+ compression:  155/ 152 pts
+ delta max:    549.8 km
+ resol delta: 17.6 metres
+ err moyenne:  0.0 m
+ err maxi:  2.3 m

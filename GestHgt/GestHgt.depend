@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1768922669 source:/home/internet/Documents/PlatformIO/Projects/GestHgt/src/GestHgt.cpp
+	<stdlib.h>
+	<string.h>
+	<iostream>
+	<filesystem>
+	<string>
+	<vector>
+

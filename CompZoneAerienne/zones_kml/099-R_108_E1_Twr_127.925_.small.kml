@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 108 E1 Twr(127.925)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.245833,43.614722,100
+3.9,43.483333,100
+4.078333,43.443611,100
+4.283333,43.363889,100
+4.283333,43.205833,100
+4,43.25,100
+3.325,43,100
+3.183333,43.05,100
+3.24,43.550278,100
+3.245833,43.614722,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

@@ -1,0 +1,8 @@
+num :  24
+ nom : R 20 B2 N App(119.7)
+ alti. min: 914 m
+ compression:  79/  65 pts
+ delta max:    36.4 km
+ resol delta: 1.2 metres
+ err moyenne:  1.0 m
+ err maxi:  6.0 m

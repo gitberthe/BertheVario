@@ -1,0 +1,8 @@
+num :  75
+ nom : RTBA 145 A (MILOPS / SeeNotam)
+ alti. min: 0 m
+ compression:  5/   5 pts
+ delta max:    43.3 km
+ resol delta: 1.4 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

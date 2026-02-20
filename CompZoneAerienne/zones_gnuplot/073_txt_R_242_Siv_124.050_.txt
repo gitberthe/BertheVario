@@ -1,0 +1,8 @@
+num :  73
+ nom : R 242 Siv(124.050)
+ alti. min: 0 m
+ compression:  40/  40 pts
+ delta max:    0.7 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

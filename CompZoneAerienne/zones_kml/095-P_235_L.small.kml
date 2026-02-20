@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-P 235 L</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.347778,46.547778,100
+3.355833,46.541111,100
+3.348611,46.537778,100
+3.345,46.544167,100
+3.347778,46.547778,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

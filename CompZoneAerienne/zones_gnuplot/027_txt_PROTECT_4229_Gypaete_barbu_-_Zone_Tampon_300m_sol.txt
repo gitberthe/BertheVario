@@ -1,0 +1,8 @@
+num :  27
+ nom : PROTECT 4229 Gypaete barbu - Zone Tampon 300m/sol (BIRD)
+ alti. min: 0 m
+ compression:  47/  39 pts
+ delta max:    2.1 km
+ resol delta: 0.1 metres
+ err moyenne:  0.5 m
+ err maxi:  5.8 m

@@ -1,0 +1,8 @@
+num :  71
+ nom : PROTECT ParcCevennes Combe Centre (1000m/sol) (FAUNA)
+ alti. min: 0 m
+ compression:  27/  27 pts
+ delta max:    2.1 km
+ resol delta: 0.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

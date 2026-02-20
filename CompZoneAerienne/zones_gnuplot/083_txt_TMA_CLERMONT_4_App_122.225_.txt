@@ -1,0 +1,8 @@
+num :  83
+ nom : TMA CLERMONT 4 App(122.225)
+ alti. min: 2590 m
+ compression:  10/  10 pts
+ delta max:    62.9 km
+ resol delta: 2.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

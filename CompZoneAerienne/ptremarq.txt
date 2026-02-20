@@ -1,0 +1,13 @@
+# nom alti lat lon
+wc-belleriv    254    46.1170    3.4103
+
+h2o-angl-mo   1130    45.5541    2.8662
+h2o-angl-ne   1149    45.5566    2.8574
+
+h2o-md-lech   1082    45.5664    2.8118
+h2o-md-gene    944    45.5894    2.7766
+h2o-md-paill  1070    45.5918    2.8106
+h2o-md-manc   1166    45.5569    2.8131
+
+wc-md-liber   1048    45.5722    2.8085  
+

@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1712005252 source:/home/internet/Documents/PlatformIO/Projects/Hgt2Agl/src/main.cpp
+	<iostream>
+	"CHgt2Agl.h"
+
+1712001764 /home/internet/Documents/PlatformIO/Projects/Hgt2Agl/src/CHgt2Agl.h
+	<stdio.h>
+	<math.h>
+	<iostream>
+
+1712005949 source:/home/internet/Documents/PlatformIO/Projects/Hgt2Agl/src/CHgt2Agl.cpp
+	"CHgt2Agl.h"
+
+1739008757 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/Hgt2Agl/src/main.cpp
+	<iostream>
+	"CHgt2Agl.h"
+
+1739008757 /home/internet/Documents/PlatformIO/Projects/BertheVario/Hgt2Agl/src/CHgt2Agl.h
+	<stdio.h>
+	<math.h>
+	<iostream>
+

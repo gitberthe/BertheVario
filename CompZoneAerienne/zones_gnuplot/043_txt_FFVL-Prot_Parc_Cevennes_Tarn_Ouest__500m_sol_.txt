@@ -1,0 +1,8 @@
+num :  43
+ nom : FFVL-Prot Parc Cevennes Tarn Ouest (500m/sol) (PARAGLIDER)
+ alti. min: 0 m
+ compression:  18/  17 pts
+ delta max:    2.1 km
+ resol delta: 0.1 metres
+ err moyenne:  0.3 m
+ err maxi:  5.8 m

@@ -1,0 +1,8 @@
+num :  45
+ nom : FFVL-Prot Parc Cevennes Combe Ouest (500m/sol) (PARAGLIDER)
+ alti. min: 0 m
+ compression:  42/  41 pts
+ delta max:    3.3 km
+ resol delta: 0.1 metres
+ err moyenne:  0.1 m
+ err maxi:  6.2 m

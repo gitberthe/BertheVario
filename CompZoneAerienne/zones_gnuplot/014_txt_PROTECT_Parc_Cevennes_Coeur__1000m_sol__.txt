@@ -1,0 +1,8 @@
+num :  14
+ nom : PROTECT Parc Cevennes Coeur (1000m/sol) (FAUNA)
+ alti. min: 0 m
+ compression:  950/ 903 pts
+ delta max:    34.6 km
+ resol delta: 1.1 metres
+ err moyenne:  0.4 m
+ err maxi:  14.7 m

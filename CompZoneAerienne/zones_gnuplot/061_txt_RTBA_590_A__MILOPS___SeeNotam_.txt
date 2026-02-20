@@ -1,0 +1,8 @@
+num :  61
+ nom : RTBA 590 A (MILOPS / SeeNotam)
+ alti. min: 1345 m
+ compression:  5/   5 pts
+ delta max:    22.4 km
+ resol delta: 0.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

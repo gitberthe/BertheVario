@@ -1,0 +1,8 @@
+num :  31
+ nom : R 368 B
+ alti. min: 0 m
+ compression:  56/  52 pts
+ delta max:    170.0 km
+ resol delta: 5.4 metres
+ err moyenne:  0.3 m
+ err maxi:  6.4 m

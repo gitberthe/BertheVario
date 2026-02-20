@@ -1,0 +1,8 @@
+num :  47
+ nom : PROTECT Puy D'Anzelles / Plateau des Vaugondieres 2 (300m/sol) (FAUNA)
+ alti. min: 0 m
+ compression:  14/  13 pts
+ delta max:    0.4 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.4 m

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 137 A (SeeNotam)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.566667,46.333333,200
+3.633333,46.308333,200
+3.633333,46.2,200
+3.594444,46.198889,200
+3.448056,46.218333,200
+3.488611,46.333333,200
+3.566667,46.333333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

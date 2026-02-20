@@ -1,0 +1,8 @@
+num :   7
+ nom : CTR SAINT ETIENNE 2 Twr(119.250)
+ alti. min: 0 m
+ compression:  98/  21 pts
+ delta max:    13.8 km
+ resol delta: 0.4 metres
+ err moyenne:  6.9 m
+ err maxi:  12.2 m

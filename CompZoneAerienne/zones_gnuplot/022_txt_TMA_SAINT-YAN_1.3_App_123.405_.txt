@@ -1,0 +1,8 @@
+num :  22
+ nom : TMA SAINT-YAN 1.3 App(123.405)
+ alti. min: 861 m
+ compression:  75/  54 pts
+ delta max:    29.3 km
+ resol delta: 0.9 metres
+ err moyenne:  3.4 m
+ err maxi:  14.1 m

@@ -1,0 +1,1 @@
+/home/internet/.platformio/packages/framework-arduinoespressif32/tools/espota.py

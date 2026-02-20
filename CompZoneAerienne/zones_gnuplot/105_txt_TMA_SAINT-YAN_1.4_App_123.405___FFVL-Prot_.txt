@@ -1,0 +1,8 @@
+num : 105
+ nom : TMA SAINT-YAN 1.4 App(123.405) (FFVL-Prot) Upper(FL055-2500FT AGL)
+ alti. min: 933 m
+ compression:  10/  10 pts
+ delta max:    74.1 km
+ resol delta: 2.4 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

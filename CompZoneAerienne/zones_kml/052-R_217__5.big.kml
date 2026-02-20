@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 217 /5</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.776667,44.466944,200
+3.833333,44.425,200
+4.183333,44.233333,200
+4.516667,44.15,200
+4.520597,44.031425,200
+4.336353,44.033311,200
+4.24625,44.033306,200
+3.883056,43.864167,200
+3.453333,44.407222,200
+3.776667,44.466944,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

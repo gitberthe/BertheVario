@@ -1,0 +1,8 @@
+num :  19
+ nom : TMA LYON 04 App(133.150)
+ alti. min: 1981 m
+ compression:  76/  41 pts
+ delta max:    125.5 km
+ resol delta: 4.0 metres
+ err moyenne:  1.4 m
+ err maxi:  4.1 m

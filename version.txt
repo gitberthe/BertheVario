@@ -1,0 +1,5 @@
+le 20260220a :
+ - creation de https://github.com/gitberthe/BertheVario pour les 3 varios : 
+  . BertheVario/GnuVario
+  . BertheVarioTac
+  . BertheVario213

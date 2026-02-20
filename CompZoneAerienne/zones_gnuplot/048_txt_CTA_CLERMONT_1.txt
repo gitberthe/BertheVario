@@ -1,0 +1,8 @@
+num :  48
+ nom : CTA CLERMONT 1
+ alti. min: 3505 m
+ compression:  16/  15 pts
+ delta max:    105.0 km
+ resol delta: 3.4 metres
+ err moyenne:  0.6 m
+ err maxi:  9.7 m

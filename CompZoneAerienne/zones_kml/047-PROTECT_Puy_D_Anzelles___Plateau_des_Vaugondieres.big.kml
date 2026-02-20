@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-PROTECT Puy D'Anzelles / Plateau des Vaugondieres 2 (300m/sol) (FAUNA)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.170623,45.759139,200
+3.169987,45.758844,200
+3.170714,45.758233,200
+3.170682,45.758042,200
+3.170753,45.757641,200
+3.170699,45.757212,200
+3.172357,45.757045,200
+3.174592,45.756811,200
+3.17496,45.757889,200
+3.173773,45.758402,200
+3.172527,45.758634,200
+3.171575,45.758973,200
+3.171103,45.758636,200
+3.170623,45.759139,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

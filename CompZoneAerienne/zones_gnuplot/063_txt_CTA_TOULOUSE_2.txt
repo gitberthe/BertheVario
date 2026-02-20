@@ -1,0 +1,8 @@
+num :  63
+ nom : CTA TOULOUSE 2
+ alti. min: 3505 m
+ compression:  8/   8 pts
+ delta max:    124.0 km
+ resol delta: 4.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

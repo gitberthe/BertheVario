@@ -1,0 +1,8 @@
+num :  68
+ nom : TMA MONTPELLIER 5 App(130.855)
+ alti. min: 1981 m
+ compression:  8/   8 pts
+ delta max:    51.0 km
+ resol delta: 1.6 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

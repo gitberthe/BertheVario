@@ -1,0 +1,8 @@
+num :  49
+ nom : PROTECT 5516 Gypaete barbu - Zone Tampon 300m/sol (BIRD)
+ alti. min: 0 m
+ compression:  33/  32 pts
+ delta max:    3.7 km
+ resol delta: 0.1 metres
+ err moyenne:  0.2 m
+ err maxi:  6.8 m

@@ -1,0 +1,8 @@
+num : 108
+ nom : R 68 C
+ alti. min: 3505 m
+ compression:  11/  11 pts
+ delta max:    83.3 km
+ resol delta: 2.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

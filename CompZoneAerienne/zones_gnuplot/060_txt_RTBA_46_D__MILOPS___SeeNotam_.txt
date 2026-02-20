@@ -1,0 +1,8 @@
+num :  60
+ nom : RTBA 46 D (MILOPS / SeeNotam)
+ alti. min: 870 m
+ compression:  8/   8 pts
+ delta max:    36.6 km
+ resol delta: 1.2 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

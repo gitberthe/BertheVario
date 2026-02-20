@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1770459976 source:/home/internet/Documents/PlatformIO/Projects/IgcRead/src/IgcRead.cpp
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<iostream>
+	<filesystem>
+	<string>
+	<vector>
+	<fstream>
+
+1770449121 source:/home/internet/tmp/igc/IgcRead/src/IgcRead.cpp
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<iostream>
+	<filesystem>
+	<string>
+	<vector>
+	<fstream>
+

@@ -1,0 +1,8 @@
+num : 107
+ nom : R 217 /6 Twr(127.925)
+ alti. min: 4419 m
+ compression:  6/   6 pts
+ delta max:    31.1 km
+ resol delta: 1.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,0 +1,8 @@
+num :  34
+ nom : TMA CLERMONT 5 App(122.225)
+ alti. min: 2590 m
+ compression:  13/  11 pts
+ delta max:    68.8 km
+ resol delta: 2.2 metres
+ err moyenne:  1.1 m
+ err maxi:  10.0 m

@@ -1,0 +1,8 @@
+num :  70
+ nom : CTA CLERMONT 2
+ alti. min: 3505 m
+ compression:  22/  22 pts
+ delta max:    199.6 km
+ resol delta: 6.4 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

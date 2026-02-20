@@ -1,0 +1,8 @@
+num :  12
+ nom : RTBA 139 A (MILOPS / SeeNotam)
+ alti. min: 444 m
+ compression:  78/  21 pts
+ delta max:    29.7 km
+ resol delta: 1.0 metres
+ err moyenne:  6.8 m
+ err maxi:  12.0 m

@@ -1,0 +1,8 @@
+num :  25
+ nom : PROTECT Reserve naturelle nationale de Chastreix-Sancy 300m/sol (FAUNA)
+ alti. min: 0 m
+ compression:  33/  24 pts
+ delta max:    0.6 km
+ resol delta: 0.0 metres
+ err moyenne:  0.2 m
+ err maxi:  1.8 m

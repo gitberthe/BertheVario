@@ -1,0 +1,8 @@
+num :  36
+ nom : CTA BORDEAUX
+ alti. min: 4419 m
+ compression:  13/  11 pts
+ delta max:    68.8 km
+ resol delta: 2.2 metres
+ err moyenne:  1.1 m
+ err maxi:  10.0 m

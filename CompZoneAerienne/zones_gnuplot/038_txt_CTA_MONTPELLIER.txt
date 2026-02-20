@@ -1,0 +1,8 @@
+num :  38
+ nom : CTA MONTPELLIER
+ alti. min: 3505 m
+ compression:  32/  30 pts
+ delta max:    143.2 km
+ resol delta: 4.6 metres
+ err moyenne:  0.3 m
+ err maxi:  5.9 m

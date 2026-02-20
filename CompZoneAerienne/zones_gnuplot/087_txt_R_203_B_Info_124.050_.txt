@@ -1,0 +1,8 @@
+num :  87
+ nom : R 203 B Info(124.050)
+ alti. min: 0 m
+ compression:  6/   6 pts
+ delta max:    21.0 km
+ resol delta: 0.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

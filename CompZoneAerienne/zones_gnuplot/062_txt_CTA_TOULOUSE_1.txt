@@ -1,0 +1,8 @@
+num :  62
+ nom : CTA TOULOUSE 1
+ alti. min: 3505 m
+ compression:  18/  18 pts
+ delta max:    133.1 km
+ resol delta: 4.3 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

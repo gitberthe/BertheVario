@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-FFVL-Prot Parc Cevennes Tarn Ouest (500m/sol) (PARAGLIDER)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.228611,44.198333,100
+3.221111,44.204167,100
+3.221111,44.206111,100
+3.225556,44.211667,100
+3.225556,44.215556,100
+3.223333,44.218889,100
+3.223889,44.221667,100
+3.23,44.224167,100
+3.228889,44.225278,100
+3.230833,44.233889,100
+3.234722,44.233056,100
+3.242222,44.228056,100
+3.242222,44.224722,100
+3.238611,44.2225,100
+3.240556,44.219167,100
+3.235556,44.205833,100
+3.228611,44.198333,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

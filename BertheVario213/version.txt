@@ -1,0 +1,342 @@
+le 20260219a :
+ - refonte ihm page Vz
+
+le 20260218a/b :
+ - affichage R68, R368...
+ - pourcentage batterie en page Vz
+ - sol pour hauteur sol
+ 
+le 20260217a/b :
+ - regroupement activation/desactivation R68, R368...
+
+le 20260210a/b :
+ - taille font ttf Futura petite. (Adafruit GFX Library/fontconvert)
+ - mise en commun de CMS5611Pression.
+
+le 20260208a :
+ - mutex i2c pour CMS5611Pression::MesureAltitudeCapteur()
+
+le 20260125a :
+ - modification TacheGpsAttenteVol() et MiseAJourAltitudesSolEtBaroRec().
+ - correction demmarrage hauteur sol CPileVit::IsStartFlight() m_CountFixAltiBaro > 1.
+ - suppression CMS5611Pression::GetAltiPressionCapteurMetres
+ - modification CPileVit::InitPile() en CPileVit()
+ - CScreen213::EcranHisto() debut de vol hauteur sol "hs"
+
+le 20260124c :
+ - ajustement % batterie.
+ 
+le 20260124b :
+ - tache gps recalage atitude sol dans la boucle attente vitesse.
+
+le 20260124a :
+ - update du firmware par carte sd.
+
+le 20260122b :
+ - reprise des modification du BertheVario
+
+le 20260115a :
+ - son alerte dans une zone.
+
+le 20260114a :
+ - TAILLE_PILE_VITESSE passe de 3 a 4 sec
+
+le 20260109a ,
+le 20260108a/b :
+ - mise en commun de fichier
+
+le 20260107a :
+ - liberation de float zone si pas assez de memoire
+ - modification TacheGpsIgcTempsHistoCalcul() test run a la fin.
+ - modification TacheGpsAttenteVol() run a la fin de lancement de igc
+ - modification PushLoc2Igc() buffer initialise a 0
+ - modification delay attente purge appuy long
+ - modification TestReboot() et DoReboot() dans loop() aussi uniquement wifi
+
+
+le 20260106a :
+ - liberation de float zone periodique
+ - IsAtGround() dans TacheGpsIgcTempsHistoCalcul
+ - #ifdef _BERTHE_VARIO_213_ pour les zones
+
+le 20260105a :
+ - modification de CVirtCaptPress::SetAltiSolMetres()
+ - ajout de HAUTEUR_LOIN_SOL_METRE
+ - ajout de m_FinDeVol.IsAtGround() et inclusion dans TacheGpsAttenteVol et isr B C
+ 
+le 20260104a :
+ - bug appel de CalcZone() et CalcTerrainPlusProche() en attente vitesse vol
+ - refonte CTrame::TraiteBuffer()
+ - bug glissant-- en rando vol
+ - pas de ScreenRaz() en vol.
+ - ScreenRaz() et plus d'attente dans loop()
+ - isr et pas thread pour boutons A B C et plus de m_MutexI2c
+ 
+le 20260102a :
+ - verif buffer trame plein
+ - a StopAll attente fin des taches
+ - mise en place de TaskHandle_t dans les taches
+ - plus de m_StopLoop
+ - suppression de STATIONNARITE_XY_METRE remplace par m_Config.m_vitesse_igc_kmh
+ 
+le 20260101a :
+ - SOUNDSVR_CORE et SCAN_BUTTON_CORE sur core 0
+ - histo vol enregistrement toutes les 30 sec
+ - file.write() histo vol et igc
+ - igc ecriture toutes les 15 sec
+
+
+le 20251231b :
+ - ajout/deplacement TestPddGroundZ
+ - modification MiseAJourAltitudesSolEtBaroRec() plus de rando
+
+le 20251231a :
+ - MiseAJourAltitudesSolEtBaroRec au rythme de 1 sec.
+   Gps et RandoVol (beeper aussi).
+ - tache stack ajuste
+ - modif CHgt2Agl::GetGroundZ
+ - suppression MutexCore cpu %
+ - modification nom m_MutexLatLonGps
+ - attente serial gps 2 ms
+ 
+le 20251230b :
+ - attente serial gps 5ms
+ - ctrame gps buffer 500 octets
+ - gps serial et gps igc stack 3700
+ - m_BuffWrite CHistoVol  400 octets
+
+le 20251230a :
+ - STATIONNARITE_XY_METRE a 7m/s
+ - tache TacheGpsIgcTempsHistoCalcul calee a 1 seconde
+   et reprend la tache calcul.
+
+le 20251229a/b :
+ - mode randonnee ecran info et son gps
+ - modification tache perfmon
+ 
+le 20251227b :
+ - refonte tache gps attente debut du vol et igc
+ - refonte beep fin de vol
+ - tache stack ajuste
+
+le 20251225a :
+ - tache stack releve de 500 octets
+
+le 20251224a :
+ - modification 2 beep au demarrage.
+ - SoundSrv g_GlobalVar.m_MutexI2c moins restructif
+ - refonte CBoutons et DELAY_ATTENTE_IDLE 50 ms
+ - tache son et bouton 19 non interruptible
+ - tache son pile 2000
+ - tache variobeep pile 1500
+ - tache scan bouton pile 1500
+
+le 20251127a :
+ - Vz a 0.6 par defaut
+ - Plus de bips zerotage
+ - Plus de bip lors d'appui sur les boutons
+ - m_MutexI2c lors des digitalRead() des boutons
+ - plus qu'un seul TestReboot() dans la boucle des scan
+ - plus de beep vario au demmarrage. Mais toujours en recalage altibaro.
+   beep zone aerienne toujours a true apres le decollage.
+ - delais appuy long passe a 1000ms.
+ 
+le 20251027a :
+ - Remplacement de m_RayonMetre par CRectIn.
+ - doIntersect parametre avec & .
+
+le 20251026b :
+ - CZoneAer st_coord_poly union * m_PolygoneArr et plus **.
+ - float CZoneAer::m_ResolutionMetre et plus short.
+ - MakeEmptySound()
+
+le 20251026a :
+ - optimisation de IsFlightEnd().
+
+le 20251024a :
+ - CTrame::TraiteBuffer() break a parametre de fin.
+ - CFilesHistoVols OnceDir pour la creation et nom de fichier histo.
+ - CalcZone() et CalcTerrainPlusProche() frequence 1hz
+
+le 20251023a/b :
+ - suppression de fabsf dans PushHistoVol.
+ - stationnarite XY.
+ - loin du deco supprimer XY.
+
+le 20251022c :
+ - enregistrement du fichier histo vol toutes les 60sec ou a la fin.
+
+le 20251022a/b :
+ - amelioration loin deco XY avec hdop.
+
+le 20251021 :
+ - refonte CPileVit sur HDop uniquement.
+
+le 20251019 :
+ - recallage alti baro 10min.
+
+le 20251018a :
+ - modification tension batterie
+ - modification attente tache Vz en millis().
+
+le 20251017a :
+ - modification pile vitesse.
+ - ajout histo ZMin.
+ - condition hauteur sol demmarrage / arret du vol.
+ - modification de CMS5611::TacheVzCapMag().
+ - changement sur CNbSatDelay::GetNbSatDelay(). 
+ - modification son de debut de vol.
+ - debut de vol avec alti et positions xy.
+ - utilisation d'un mutex pour le XQueue de SoundSrv.
+ - suppression de Gps/CStabGps.h.
+ - refonte Gps attente debut de vol.
+
+le 20250925a :
+ - suppression de l'alarme sonore fichier altitude terrain.
+
+le 20250921a :
+ - modification affichage TmaAll
+ 
+le 20250919c :
+ - Plus d'attente de son si pile presque pleine.
+ 
+le 20250919a :
+ - plus de float ou long dans LibGeneral.
+
+le 20250918a :
+ - passage a 4Mb de memoire.
+ - optimisation CZonesAerAll::CalcZone() en variables membre
+
+le 20250916a :
+ - test des zones aeriennes sol.
+
+le 20250828b : 
+ - m_stab_gps_metre = 300 et m_stab_gps_sec = 3 par defautr dans fichier de configuration.
+
+le 20250828a :
+ - modification variable vario beep. Vario toujours actif et beep zone.
+
+le 20250709a :
+ - suppression xc_track et limite zone xy alti
+ - changement priorite tache fichier
+ - modification variable vario beep
+
+le 20250322b :
+ - affichage altitude restante/distance/cap de la zone aerienne proche ok.
+ - ihm mode randonnee ok.
+
+le 20250322a :
+ - emmission message xc_track determiné uniquement par #define XC_TRACK 
+ - son vario toujours determiné par [xc_track] == 0 
+ - declenchement debut de vol par 2 Vz minimales consecutives. 
+ - prise en compte de la hauteur sol pour pre-alarme frontiere XY à Saint-Sandoux.
+ - meilleur prise en compte zone st-yan
+ - ajout du projet CompZoneAerienne
+  
+le 20250321c :
+ - recadrage caracteres toutes pages.
+ 
+le 20250321b :
+ - recadrage caracteres page Sys.
+
+le 20250321a :
+ - recadrage caracteres page Vz.
+
+le 20250320d :
+ - correction bug bloquage mode ota (firmware wifi).
+ - a faire recadrage des caracteres dans les pages.
+
+le 20250320c :
+ - quelques modifications de documentation.
+
+le 20250320b :
+ - correction bug cap magnetique.
+ - ajout vitesse/cap trame RMC Gps (si vitesse faible)
+
+le 20250320a :
+ - mode ota ok (firmware wifi).
+ - bug cap/vitesse gps trame VTG manquante.
+ - bug cap magnetique
+
+le 20250319a :
+ - pcb ok. reste a faire le boitier et la mise au point logicielle.
+
+le 20250225c :
+ - modif plantage si mauvais zonesper.txt.
+
+le 20250225b :
+ - bug periode zone st-yan.
+
+le 20250225a2 :
+ - pcb en production mais pas testé.
+
+le 20250225a :
+ - modif pcb
+
+le 20250224b :
+ - init variables comme vitesse sol gps.
+ 
+le 20250224a :
+ - pcb ok a verifier. 
+
+le 20250223a :
+ - correction alti baro filtrée.
+
+le 20250222a :
+ - mise a jour pcb.
+ 
+le 20250221b :
+ - taille caracteres pages.
+ 
+le 20250221a :
+ - mise a jour schema/pcb.
+
+le 20250217a4 :
+ - modification documentation concepteur.
+ - modification pcb
+
+le 20250217a3 :
+ - modification pcb.
+
+le 20250217a2 :
+ - correction type d'ecran dans documentation.
+
+le 20250217a :
+ - progression firmware.
+
+le 20250216a :
+ - progression pcb.
+ - mise au point son.
+ - lecture vbat.
+
+le 20250215a2 :
+ - debut conception pcb.
+
+le 20250215a :
+ - ajout schema FreeCad et Kicad.
+  - rotation ecran.
+  
+le 20250214b :
+ - altitude en bas page Vz.
+
+le 20250214a :
+ - ajustement page Vz.
+
+le 20250213c :
+ - taille ecran
+
+le 20250213b :
+ - reorganisation code
+
+le 20250213a :
+ - reception de la lilygo T5 v2.3.1 GDEM0213T5BN 9102 chip, ecran DEPG0213BN :
+  . test ecran ok.
+  . test carte SD ok.
+  . test wifi ok.
+  . test ble ok.
+ - reste plus qu'a faire tout le reste... gps, boutons, capteur pression, cap magnetique, 
+   alimentation, pcb, boitier.
+ - l'ecran est tres propre et assez rapide 1/2 image/s.
+  
+le 20250206a :
+ - definition materielle d'un BertheVario ecran 2.13 pouces en cours.

@@ -1,0 +1,8 @@
+num :  93
+ nom : RTBA 144 A (MILOPS / SeeNotam)
+ alti. min: 537 m
+ compression:  6/   6 pts
+ delta max:    46.0 km
+ resol delta: 1.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

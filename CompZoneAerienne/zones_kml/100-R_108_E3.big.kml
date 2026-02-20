@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 108 E3</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.431667,44.101667,200
+3.546944,43.955278,200
+3.276389,43.889444,200
+3.3,44.1,200
+3.431667,44.101667,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

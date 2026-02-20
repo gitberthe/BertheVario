@@ -1,0 +1,8 @@
+num :  20
+ nom : CTR SAINT-YAN 2 Twr(122.300)
+ alti. min: 0 m
+ compression:  61/  26 pts
+ delta max:    11.3 km
+ resol delta: 0.4 metres
+ err moyenne:  6.0 m
+ err maxi:  12.7 m
