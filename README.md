@@ -20,4 +20,4 @@
 - CompZoneAerienne : logiciel pour la creation du fichier de zone aerienne (TMA, CTR...).
 - GestHgt : logiciel pour les fichier *.hgt d'altitude sol et creation/verification checksum.
 - IgcReader : logiciel pour relire un fichier igc et le transformer en .kml pour googleearth.
-- igc2kmz : logiciel python disponible sur le web pour creer un fichier .kmz a partir d'un .igc
+- igc2kmz : logiciel python disponible sur le web pour creer un fichier .kmz a partir d'un .igc (couleur fonction de Vz, altitude...)
