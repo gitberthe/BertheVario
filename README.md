@@ -3,12 +3,12 @@ Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::B
 
 **BertheVario/GnuVario :**
 - firmware pour GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-website/0-Accueil.html)
-- pieces indisponibles donc pour mise a jour vario existant uniquement.
+- carte mere indisponible donc pour mise a jour vario existant uniquement.
 - socle pour les fichiers commun des 3 vario.
 
 **BertheVarioTac :**
 - Vario a base de ESP32-2432S028 sans la coque.
-- documentation pas a jour, un peut lourd pour voler, pieces disponibles.
+- documentation pas a jour, un peut lourd pour voler.
 
 **BertheVario213 :**
 - Vario et coque 3d a base de Lilygo GDEM0213T5BN.
