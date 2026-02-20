@@ -19,6 +19,6 @@ Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::B
 
 **Logiciels annexes :**
 - CompZoneAerienne : logiciel pour la creation du fichier de zone aerienne (TMA, CTR...). Visualisation des zones par fichier *.png et .kml.
-- GestHgt : logiciel pour les fichier *.hgt d'altitude sol et creation/verification checksum.
-- IgcReader : logiciel pour relire un fichier igc et le transformer en .kml pour googleearth.
+- GestHgt : logiciel pour les fichier *.hgt d'altitude sol (filtre france) et creation/verification checksum.
+- IgcReader : logiciel pour relire succinctement un fichier igc (Z deco, Z attero ...) et le transformer en .kml pour googleearth.
 - igc2kmz : logiciel python disponible sur le web pour creer un fichier .kmz googleearth, a partir d'un .igc (couleur fonction de Vz, altitude...)
