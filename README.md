@@ -8,7 +8,7 @@ Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::B
 
 **BertheVarioTac :**
 - Vario a base de ESP32-2432S028 sans la coque.
-- documentation pas a jour, un peut lourd pour voler.
+- un peut lourd pour voler et moindre autonomie d'alimentation.
 
 **BertheVario213 :**
 - Vario et coque 3d a base de Lilygo GDEM0213T5BN.
