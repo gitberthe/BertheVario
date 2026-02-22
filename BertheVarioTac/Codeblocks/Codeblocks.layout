@@ -2,19 +2,99 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="../BertheVarioTacPlatformIO/src/SDCard/SdFirmare.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CText2Screen.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1201" topLine="2" />
+			<Cursor1 position="210" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/FileMgr/FileMgr.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CHgt2Agl.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="211" topLine="0" />
+			<Cursor1 position="540" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CSimuVol.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/Geometrie/CDroite2D.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4401" topLine="55" />
+			<Cursor1 position="3119" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/FileMgr/FileMgr.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3554" topLine="42" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CVarioCapBeep.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="559" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CVarioCapBeep.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2141" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CTouchButtons.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="298" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/RandoVol/CFileGpx.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="227" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/BertheVarioTac.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="378" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CGps.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="853" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CScreen.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16051" topLine="444" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/LibGeneral/CLGCoGeneral.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="440" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Calculateur/CTerrainsConnu.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="216" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CSimuVol.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="457" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/LibGeneral/LibGeneral.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1703" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Bluetooth/CBleXct.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="271" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CLGFX.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="604" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/User_Setup.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1711" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CBrightness.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="580" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CConfigFile.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,204 +107,9 @@
 			<Cursor1 position="962" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CScreen.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="16051" topLine="444" />
-		</Cursor>
-	</File>
 	<File name="../BertheVarioTacPlatformIO/src/Gps/CPileVit.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2041" topLine="9" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CLGFX.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="604" topLine="17" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CIgc.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="460" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/QMC5883L/CQMC5883Mag.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="398" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Wifi/WifiOta.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3916" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CTrame.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="464" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CSoundSvr.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="995" topLine="38" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CTrame.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="478" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CAutoPages.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4830" topLine="63" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CGps.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11680" topLine="299" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/SDCard/CSDCard.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="968" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CNumTaskArr.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="237" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CFileHistoVol.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4872" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CText2Screen.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="208" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Calculateur/CTerrainsConnu.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="527" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Wifi/WifiFileMgr.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="549" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CVarioCapBeep.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2141" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CSimuVol.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="457" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CGps.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="853" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/LibGeneral/CLGCoGeneral.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="440" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CVarioCapBeep.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="559" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/lv_conf.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14913" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CTouchButtons.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1165" topLine="2" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Geometrie/CDroite2D.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3119" topLine="28" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CTouchButtons.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="298" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/QMC5883L/CQMC5883Mag.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="459" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CFileHistoVol.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1324" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/main.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2197" topLine="84" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Perfmon/perfmon.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="550" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Geometrie/Segments.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="188" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Bluetooth/CBleXct.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2406" topLine="38" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Perfmon/esp32_perfmon.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="410" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CAutoPages.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1140" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CConfigFile.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="427" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CBrightness.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1508" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CText2Screen.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="210" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Geometrie/Segments.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="171" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/MS5611/CMS5611Pression.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1431" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/RandoVol/CRandoVol.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="614" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="../BertheVarioTacPlatformIO/src/SDCard/CSDCard.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -232,19 +117,24 @@
 			<Cursor1 position="642" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Bluetooth/CBleXct.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/MS5611/CMS5611Pression.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="271" topLine="0" />
+			<Cursor1 position="1431" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CBrightness.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/Calculateur/CTerrainsConnu.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="580" topLine="0" />
+			<Cursor1 position="527" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/RandoVol/CFileGpx.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CSimuVol.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="227" topLine="0" />
+			<Cursor1 position="4401" topLine="55" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/lv_conf.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14913" topLine="21" />
 		</Cursor>
 	</File>
 	<File name="../BertheVarioTacPlatformIO/src/Gps/CFinDeVol.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -252,84 +142,9 @@
 			<Cursor1 position="571" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../BertheVarioTacPlatformIO/src/LibGeneral/LibGeneral.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../BertheVarioTacPlatformIO/src/Wifi/WifiOta.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1703" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CGlobalVar.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1894" topLine="25" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Calculateur/CTerrainsConnu.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="216" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CHgt2Agl.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="623" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CPileVit.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1408" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/BertheVarioTac.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="378" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CIgc.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="865" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/User_Setup.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1711" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Screen/CLGFX.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2295" topLine="30" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/FileMgr/FileMgr.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3554" topLine="42" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CFinDeVol.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="428" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/Gps/CHgt2Agl.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="540" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CSoundSvr.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="362" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CGlobalVar.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="932" topLine="2" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/MS5611/CMS5611Pression.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4589" topLine="78" />
-		</Cursor>
-	</File>
-	<File name="../BertheVarioTacPlatformIO/src/RandoVol/CRandoVol.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2942" topLine="54" />
+			<Cursor1 position="3916" topLine="11" />
 		</Cursor>
 	</File>
 	<File name="../BertheVarioTacPlatformIO/src/Screen/CScreen.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -337,9 +152,194 @@
 			<Cursor1 position="1042" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CFileHistoVol.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4872" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Perfmon/esp32_perfmon.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="410" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CTouchButtons.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1165" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CTrame.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="478" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/MS5611/CMS5611Pression.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4589" topLine="78" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CFinDeVol.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="428" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Geometrie/Segments.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="171" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/SDCard/CSDCard.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="968" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CIgc.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="460" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CAutoPages.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1140" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/QMC5883L/CQMC5883Mag.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="459" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Wifi/WifiFileMgr.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="549" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CHgt2Agl.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="623" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Bluetooth/CBleXct.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2406" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CGlobalVar.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="932" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CFileHistoVol.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1324" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="../BertheVarioTacPlatformIO/src/BertheVarioTac.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="471" topLine="14" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/QMC5883L/CQMC5883Mag.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="398" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CLGFX.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2295" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/RandoVol/CRandoVol.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="614" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/RandoVol/CRandoVol.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2942" topLine="54" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CConfigFile.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="427" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CIgc.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="865" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CNumTaskArr.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="237" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CText2Screen.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="208" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/FileMgr/FileMgr.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="211" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CAutoPages.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4830" topLine="63" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Geometrie/Segments.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="188" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CGps.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11680" topLine="299" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CTrame.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="464" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Perfmon/perfmon.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="550" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Screen/CBrightness.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1508" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CSoundSvr.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="995" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/Gps/CPileVit.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1408" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/SDCard/SdFirmare.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1201" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/main.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2197" topLine="84" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/VarioCapBeep/CSoundSvr.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="362" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../BertheVarioTacPlatformIO/src/GlobalVar/CGlobalVar.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1894" topLine="25" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
