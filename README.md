@@ -1,5 +1,5 @@
-# Projets BertheVario/GnuVario, BertheVarioTac et BertheVario213. Hardware (kicad/freecad) & Software
-Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::Blocks.
+# Projets BertheVario/GnuVario, BertheVarioTac et BertheVario213. 
+Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::Blocks. Hardware (kicad/freecad) & Software.
 
 **BertheVario/GnuVario :**
 - firmware pour GnuVario (https://prunkdump.github.io/GNUVario-TTGO-T5-website/0-Accueil.html)
