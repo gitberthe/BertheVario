@@ -24,5 +24,7 @@ Vario Gps parapente developés en C/C++ sous Platformio/VisualStudioCode/Code::B
 - IgcReader : logiciel pour relire succinctement un fichier igc (Z deco, Z attero ...) et le transformer en .kml pour googleearth.
 - igc2kmz : logiciel python disponible sur le web pour creer un fichier .kmz googleearth, a partir d'un .igc (couleur fonction de Vz, altitude...)
 
+<img src="./photos/pdd-trace.png" width="250"/>
+
 zenodo :
 https://doi.org/10.5281/zenodo.18722633
