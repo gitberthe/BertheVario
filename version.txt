@@ -1,3 +1,7 @@
+le 20260223a :
+ - mise en conformite de BertheVarioTac pour le regroupement de l'activation 
+   de zones.
+
 le 20260220a :
  - creation de https://github.com/gitberthe/BertheVario pour les 3 varios : 
   . BertheVario/GnuVario
