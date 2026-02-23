@@ -766,46 +766,33 @@ g_tft.setCursor( 10, 20 );
 g_tft.print( TmpTitre ) ;
 
 // zones active
+g_tft.setTextSize(1) ;
 int xcol = 0 ;
-int yligne = 15 ;
+int yligne = 25 ;
 char TmpChar[25] ;
+int iza = 0 ;
 for ( int iz = 0 ; iz < VecZonesMod.size() ; iz++ )
     {
     const CZoneAer * pZone = VecZonesMod[iz] ;
     if ( !pZone->m_DansFchActivation )
         continue ;
-    g_tft.setCursor(10+xcol, 40 + yligne );
+    g_tft.setCursor(10+xcol, 20 + yligne );
 
     // nom des zones
     if ( pZone->m_Activee )
         {
-        sprintf( TmpChar , "<%s" ,  pZone->m_pNomAff ) ;
-        TmpChar[9] = 0 ;
-        }
-    else
-        {
-        sprintf( TmpChar , ">%s" ,  pZone->m_pNomAff ) ;
-        TmpChar[9] = 0 ;
-        }
-            // remplacement des espaces
-    int ic = 0 ;
-    while ( TmpChar[ic] != 0 )
-        {
-        if ( TmpChar[ic] == ' ' )
-            TmpChar[ic] = '_' ;
-        ic++ ;
-        }
-
-    if ( pZone->m_Activee )
-        g_tft.setTextColor(TFT_RED) ;
-    else
         g_tft.setTextColor(TFT_WHITE) ;
-    g_tft.print( TmpChar ) ;
-    yligne += 19 ;
-    if ( iz == 10 )
+        g_tft.print( pZone->m_pNomAff ) ;
+        }
+    else
+        continue ;
+
+    yligne += 13 ;
+    iza++ ;
+    if ( iza == 16 )
         {
         xcol = 120 ;
-        yligne = 15 ;
+        yligne = 25 ;
         }
     }
 
@@ -1154,7 +1141,7 @@ return ECRAN_5_TmaDessous ;
 /// \brief Affiche les info d'une zone aerienne. Et permet de l'activer/de-activer
 CAutoPages::EtatsAuto CScreen::EcranTmaMod()
 {
-static int NumTma = -1 ;
+static int NumTma = 0 ;
 
 // tri par nom
 g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
@@ -1162,7 +1149,7 @@ g_GlobalVar.m_ZonesAerAll.TriZonesNom() ;
 if ( IsPageChanged() )
     {
     ScreenRaz() ;
-    NumTma = 0 ;
+    //NumTma = 0 ;
     }
 
 // construction du tableau des zones
@@ -1170,12 +1157,13 @@ std::vector<CZoneAer*> VecAffZones ;
 const int NbZones = g_GlobalVar.m_ZonesAerAll.GetNbZones() ;
 CZoneAer ** pZoneArr = g_GlobalVar.m_ZonesAerAll.GetData() ;
 
-// construction vecteur des zones a afficher
+// construction vecteur des zones a afficher modificable
 for ( int iz = 0 ; iz < NbZones ; iz++ )
     {
     if ( pZoneArr[iz]->m_DansFchActivation )
         VecAffZones.push_back( pZoneArr[iz] ) ;
     }
+// ajout des zones a afficher non modificable
 for ( int iz = 0 ; iz < NbZones ; iz++ )
     {
     if ( !pZoneArr[iz]->m_DansFchActivation )
@@ -1285,7 +1273,7 @@ if ( BCentre && VecZone2Mod.size() )
         CZoneAer * pZone = VecZone2Mod[iz] ;
         if ( pZone->m_DansFchActivation )
             {
-            pZone->m_Activee = !pZone->m_Activee ;
+            g_GlobalVar.m_ZonesAerAll.GestActivationZone( pZone , !pZone->m_Activee ) ;
             g_GlobalVar.m_ZonesAerAll.EcritureFichierZonesActive() ;
             ScreenRaz() ;
             g_tft.setCursor( 10 , 200 ) ;

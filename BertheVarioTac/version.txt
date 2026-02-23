@@ -1,3 +1,6 @@
+le 20260223a :
+ - regroupement activation/desactivation R68, R368...
+
 le 20260125a :
  - modification TacheGpsAttenteVol() et MiseAJourAltitudesSolEtBaroRec().
  - correction demmarrage hauteur sol CPileVit::IsStartFlight() m_CountFixAltiBaro > 1.
