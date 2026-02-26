@@ -43,7 +43,7 @@ void CVarioBeep::TacheVarioBeep(void *param)
 delay(3000) ;
 const float LowFreq = 1100 ;
 const float MinFreq = 1200 ;
-const float MaxFreq = 8000 ;
+const float MaxFreq = 6000 ;
 const float SeuilVzMaxBeep    = g_GlobalVar.m_Config.m_vz_seuil_max ;
 const float SeuilVzMinBeep    = g_GlobalVar.m_Config.m_vz_seuil_haut ;
 const float SeuilVzDeguelante = g_GlobalVar.m_Config.m_vz_seuil_bas ;
@@ -68,7 +68,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
 
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //LocalVitVertMS = 4 ;
+    //LocalVitVertMS = 5 ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
@@ -123,10 +123,10 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     float Freq = MinFreq + Coef01 * ( MaxFreq - MinFreq ) ;
 
     // calcul de la recurrence
-    float RecurrenceMs = 700 - Coef01 * 550 ;
+    float RecurrenceMs = 700 - Coef01 * 650 ;
 
     // calcul de la largeur du beep
-    float LargeurBeepMs = 100 ;
+    float LargeurBeepMs = 250 ;
 
     // attente
     delay(RecurrenceMs) ;

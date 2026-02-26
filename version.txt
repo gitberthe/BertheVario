@@ -1,3 +1,7 @@
+le 20260226a :
+ - hauteur sol attero 90m pour les 3 vario
+ - son vario pour BertheVario213
+
 le 20260223a :
  - mise en conformite de BertheVarioTac pour le regroupement de l'activation 
    de zones.

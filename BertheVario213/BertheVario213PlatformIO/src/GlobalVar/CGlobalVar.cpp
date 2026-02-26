@@ -292,7 +292,7 @@ g_GlobalVar.m_MutexQueue.RelacherMutex() ;
 /// \brief Fonction statique de signalement que tout va bien.
 void CGlobalVar::BeepOk()
 {
-g_GlobalVar.beeper( 7000 , 100 ) ;
+g_GlobalVar.beeper( 7000 , 200 ) ;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,3 +1,6 @@
+le 20260226a :
+ - HAUTEUR_LOIN_SOL_METRE_ATTERO a 90m.
+ 
 le 20260217a :
  - regroupement activation/desactivation R68, R368...
 
