@@ -1,3 +1,7 @@
+le 20260227a :
+ - suite fausse hauteur sol apres vol, plus de compensation 
+   en temperature.
+
 le 20260226a :
  - HAUTEUR_LOIN_SOL_METRE_ATTERO a 90m.
  - modification du son vario.

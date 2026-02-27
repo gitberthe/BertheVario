@@ -5,6 +5,7 @@
 ///
 /// \date creation     : 07/03/2024
 /// \date modification : 30/01/2025
+/// \date 27/02/2026 : setCompensation( false ) suite fausse hauteur sol apres vol.
 ///
 
 #include "../BertheVarioTac.h"
@@ -72,7 +73,8 @@ else
 
 // meilleur resolution de mb
 g_MS5611.setOversampling( OSR_ULTRA_HIGH ) ;
-g_MS5611.setCompensation( true ) ;
+
+g_MS5611.setCompensation( false ) ;
 
 g_MS5611.setTemperatureOffset( -1.6 ) ;
 

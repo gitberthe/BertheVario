@@ -7,6 +7,7 @@
 /// \date 17/10/2025 : modification mutex
 /// \date 18/10/2025 : modification millis() dans TacheVzCapMag()
 /// \date 05/01/2026 : mesure capteur dans SetAltiSolMetres()
+/// \date 27/02/2026 : setCompensation( false ) suite fausse hauteur sol apres vol.
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -69,7 +70,8 @@ else
 
 // meilleur resolution de mb
 g_MS5611.setOversampling( OSR_ULTRA_HIGH ) ;
-g_MS5611.setCompensation( true ) ;
+
+g_MS5611.setCompensation( false ) ;
 
 g_MS5611.setTemperatureOffset( -1.6 ) ;
 
