@@ -68,7 +68,7 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
 
 
     float LocalVitVertMS = g_GlobalVar.m_VitVertMS ;
-    //LocalVitVertMS = 5 ;
+    //LocalVitVertMS = 10 ;
     //float LocalVitVertMS = g_GlobalVar.m_Config.m_vz_seuil_haut ;
     #ifdef SOUND_DEBUG
      LocalVitVertMS = 6 ;
@@ -123,10 +123,10 @@ while (g_GlobalVar.m_TaskArr[VARIOBEEP_NUM_TASK].m_Run)
     float Freq = MinFreq + Coef01 * ( MaxFreq - MinFreq ) ;
 
     // calcul de la recurrence
-    float RecurrenceMs = 700 - Coef01 * 650 ;
+    float RecurrenceMs = 800 - Coef01 * 550 ;
 
     // calcul de la largeur du beep
-    float LargeurBeepMs = 250 ;
+    float LargeurBeepMs = 200 ;
 
     // attente
     delay(RecurrenceMs) ;

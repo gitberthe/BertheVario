@@ -8,6 +8,7 @@
 /// \date 18/10/2025 : modification millis() dans TacheVzCapMag()
 /// \date 05/01/2026 : mesure capteur dans SetAltiSolMetres()
 /// \date 27/02/2026 : setCompensation( false ) suite fausse hauteur sol apres vol.
+/// \date 02/03/2026 : modification MesureAltitudeCapteur()
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -23,7 +24,7 @@
 MS5611 g_MS5611(0x77);
 
 // Store the current sea level pressure at your location in Pascals.
-const float seaLevelPressure = 101325;
+//const float seaLevelPressure = 101325;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Determine la difference du jour entre l'altibaro pure et la hauteur
@@ -71,13 +72,14 @@ else
 // meilleur resolution de mb
 g_MS5611.setOversampling( OSR_ULTRA_HIGH ) ;
 
-g_MS5611.setCompensation( false ) ;
+g_MS5611.setCompensation( true ) ;
 
 g_MS5611.setTemperatureOffset( -1.6 ) ;
 
 g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 }
 
+/*
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Calcul l'altitude en fonction de la pression sans compensation de
 /// temperature.
@@ -85,6 +87,7 @@ float CMS5611Pression::CalcAltitude(float pressure_mb_x100 , float seaLevelPress
 {
 return (44330.0f * (1.0f - powf((float)pressure_mb_x100 / (float)seaLevelPressure, 0.1902949f)));
 }
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Lecture des info du capteur
@@ -160,7 +163,8 @@ return Alti ;
 void CMS5611Pression::MesureAltitudeCapteur()
 {
 Read() ;
-m_AltitudeBaroPure = CalcAltitude( GetPressureMb() * 100. ) ;
+//m_AltitudeBaroPure = CalcAltitude( GetPressureMb() * 100. ) ;
+m_AltitudeBaroPure = g_MS5611.getAltitude() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

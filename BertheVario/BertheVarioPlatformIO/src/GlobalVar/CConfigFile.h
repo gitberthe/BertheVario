@@ -40,8 +40,8 @@ public :
 
     float       m_coef_filtre_alti_baro = 0.85 ;  ///< coefficient de filtrage [0,1[ , 0.99 tres fort filtrage
     int         m_vitesse_igc_kmh = 12 ;          ///< vitesse de declenchement enregistrement
-    float       m_vz_igc_ms = 0.6 ;               ///< vz de vitesse pour declenchement
-    float       m_vz_seuil_max  = 4. ;            ///< seuils de beep
+    float       m_vz_igc_ms = 0.7 ;               ///< vz de vitesse pour declenchement
+    float       m_vz_seuil_max  = 6. ;            ///< seuils de beep
     float       m_vz_seuil_haut = 0.2 ;           ///< seuils de beep
     float       m_vz_seuil_bas  = -2.5 ;          ///< seuils de beep
     int         m_dtu           = 2 ;             ///< diff heure TU
