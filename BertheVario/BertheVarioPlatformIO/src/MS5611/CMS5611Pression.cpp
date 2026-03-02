@@ -13,15 +13,16 @@
 
 #ifdef _BERTHE_VARIO_
  #include "../BertheVario.h"
+ MS5611 g_MS5611(0x77);
 #endif
 #ifdef _BERTHE_VARIO_213_
  #include "../BertheVario213.h"
+ MS5607 g_MS5611(0x77);
 #endif
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
+ MS5611 g_MS5611(0x77);
 #endif
-
-MS5611 g_MS5611(0x77);
 
 // Store the current sea level pressure at your location in Pascals.
 //const float seaLevelPressure = 101325;
@@ -82,10 +83,10 @@ g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Calcul l'altitude en fonction de la pression sans compensation de
 /// temperature.
-float CMS5611Pression::CalcAltitude(float pressure_mb_x100 , float seaLevelPressure)
+float CMS5611Pression::CalcAltitude(float pressure_mb , float seaLevelPressure)
 {
 //return (44330.0f * (1.0f - powf((float)pressure_mb_x100 / (float)seaLevelPressure, 0.1902949f)));
-return   (44307.694f * (1.0f - powf((float)pressure_mb_x100 / (float)seaLevelPressure, 0.190284f)));
+return   (44307.694f * (1.0f - powf((float)pressure_mb / (float)seaLevelPressure, 0.190284f)));
 }
 
 
@@ -163,7 +164,7 @@ return Alti ;
 void CMS5611Pression::MesureAltitudeCapteur()
 {
 Read() ;
-m_AltitudeBaroPure = CalcAltitude( GetPressureMb() * 100. ) ;
+m_AltitudeBaroPure = CalcAltitude( GetPressionhPa() ) ;
 //m_AltitudeBaroPure = g_MS5611.getAltitude() ;
 }
 

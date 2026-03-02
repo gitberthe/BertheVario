@@ -58,7 +58,7 @@ private :
     void  Read() ;
     //float GetAltiPressionCapteurMetres() ;
 
-    float CalcAltitude(float pressure_mb_x100 , float seaLevelPressure = 101325 ) ;
+    float CalcAltitude(float pressure_mb , float seaLevelPressure = 1013.25 ) ;
 
     static void TacheVzCapMag(void *param) ;
 } ;

@@ -8,7 +8,7 @@
 /// \date modification : 18/10/2025
 ///
 
-char NumVer[] = "20260302b" ;
+char NumVer[] = "20260302c" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -142,10 +142,9 @@ g_GlobalVar.m_MS5611Press.InitMs5611() ;
 
 // altitude baro avant recallage gps
 g_GlobalVar.m_MS5611Press.SetAltiSolUndef() ;
-g_GlobalVar.m_AltitudeSolHgt = 0. ;
 g_GlobalVar.m_MS5611Press.MesureAltitudeCapteur() ;
-// ajout arbitraire a altitude home
-g_GlobalVar.m_TerrainPosCur.m_AltiBaroRec = g_GlobalVar.m_MS5611Press.GetAltiBaroPureMetres() - 5648 + 254 ;
+g_GlobalVar.m_AltitudeSolHgt =
+g_GlobalVar.m_TerrainPosCur.m_AltiBaroRec = g_GlobalVar.m_MS5611Press.GetAltiBaroPureMetres() ;
 
 // capteur accelerometrique/cap magnetique
 g_GlobalVar.m_QMC5883Mag.InitMagnetique() ;

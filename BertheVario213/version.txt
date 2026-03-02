@@ -1,4 +1,5 @@
-le 20260302a/b :
+le 20260302a/b/c :
+ - HAUTEUR_LOIN_SOL_METRE_ATTERO a 50m.
  - modification du son.
  - modification du calcul de l'altitude baro pure.
  - modification valeur par defaut m_vz_igc_ms=0.7 et m_vz_seuil_max=6
