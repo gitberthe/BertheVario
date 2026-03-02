@@ -82,15 +82,15 @@ g_MS5611.setTemperatureOffset( -1.6 ) ;
 //g_GlobalVar.m_MutexI2c.RelacherMutex() ;
 }
 
-/*
- * ////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /// \brief Calcul l'altitude en fonction de la pression sans compensation de
 /// temperature.
 float CMS5611Pression::CalcAltitude(float pressure_mb_x100 , float seaLevelPressure)
 {
-return (44330.0f * (1.0f - powf((float)pressure_mb_x100 / (float)seaLevelPressure, 0.1902949f)));
+//return (44330.0f * (1.0f - powf((float)pressure_mb_x100 / (float)seaLevelPressure, 0.1902949f)));
+return   (44307.694f * (1.0f - powf((float)pressure_mb_x100 / (float)seaLevelPressure, 0.190284f)));
 }
-*/
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Lecture des info du capteur
@@ -124,8 +124,8 @@ return g_MS5611.getTemperature() ;
 /// \brief Renvoie la mesure d'altitude pression directe du capteur
 float CMS5611Pression::GetAltiPressionCapteurMetres()
 {
-//return CalcAltitude( GetPressureMb() * 100. ) ;
-return g_MS5611.getAltitude() ;
+return CalcAltitude( GetPressureMb() * 100. ) ;
+//return g_MS5611.getAltitude() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
