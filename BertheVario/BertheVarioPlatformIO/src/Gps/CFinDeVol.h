@@ -21,7 +21,7 @@
 
 #define HAUTEUR_LOIN_DECO_METRE        (4.)    ///< altitude pour toujours en vol
 #define HAUTEUR_LOIN_SOL_METRE_DECO   (20.)   ///< hauteur pour decollage
-#define HAUTEUR_LOIN_SOL_METRE_ATTERO (90.)   ///< hauteur pour attero
+#define HAUTEUR_LOIN_SOL_METRE_ATTERO (50.)   ///< hauteur pour attero
 
 #define VITESSE_FAIBLE_HOR_KMH      (6.)                         ///< pour toujours en vol
 #define STATIONNARITE_Z_METRE       (3.)                         ///< pour fin de vol

@@ -57,6 +57,11 @@ g_GlobalVar.m_Config.FreeVect() ;
 
 // init capteur de pression
 g_GlobalVar.m_pCapteurPression->InitCapteur() ;
+g_GlobalVar.m_pCapteurPression->SetAltiSolUndef() ;
+g_GlobalVar.m_pCapteurPression->MesureAltitudeCapteur() ;
+g_GlobalVar.m_AltitudeSolHgt =
+g_GlobalVar.m_TerrainPosCur.m_AltiBaroRec = g_GlobalVar.m_pCapteurPression->GetAltiBaroPureMetres() ;
+
 
 // init capteur magnetique
 g_GlobalVar.m_QMC5883Mag.InitMagnetique() ;
