@@ -19,7 +19,7 @@
  #define TAILLE_PILE_FE              (5)     ///< taille en secondes pile de calcul
 #endif
 
-#define HAUTEUR_LOIN_DECO_METRE        (4.)    ///< altitude pour toujours en vol
+#define HAUTEUR_LOIN_DECO_METRE       (10.)   ///< altitude pour toujours en vol
 #define HAUTEUR_LOIN_SOL_METRE_DECO   (20.)   ///< hauteur pour decollage
 #define HAUTEUR_LOIN_SOL_METRE_ATTERO (50.)   ///< hauteur pour attero
 

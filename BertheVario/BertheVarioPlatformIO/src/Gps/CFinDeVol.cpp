@@ -197,26 +197,6 @@ if ( m_ipile >= TAILLE_PILE_FE )
     m_ipile = 0 ;
     m_pile_full = true ;
     }
-
-/*
-// detarmination si a deja ete haut ou loin
-if ( !m_ADejaEteLointOuHaut )
-    {
-    // distance au pt de decollage
-    float DeltaLat = g_GlobalVar.m_TerrainPosCur.m_Lat - g_GlobalVar.m_TerrainPosDeco.m_Lat ;
-    float DeltaLon = g_GlobalVar.m_TerrainPosCur.m_Lon - g_GlobalVar.m_TerrainPosDeco.m_Lon ;
-    float DistanceDecoMetres = GetDistanceLatLon( DeltaLat , DeltaLon ) ;
-
-    float HauteurAltiBaroDecoMetres = fabsf( g_GlobalVar.m_TerrainPosCur.m_AltiBaroRec - g_GlobalVar.m_TerrainPosDeco.m_AltiBaroRec ) ;
-
-    // si deja aller loint ou haut on verrouille
-    if ( DistanceDecoMetres > DISTANCE_LOIN_XY_METRE && IsHDopOk() )
-        m_ADejaEteLointOuHaut = true ;
-
-    if ( HauteurAltiBaroDecoMetres > HAUTEUR_LOIN_DECO_METRE )
-        m_ADejaEteLointOuHaut = true ;
-    }
-*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////

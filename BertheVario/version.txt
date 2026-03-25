@@ -1,3 +1,6 @@
+le 20260325a :
+ - HAUTEUR_LOIN_DECO_METRE a 10m. pour repose sommet.
+
 le 20260302a/b/c :
  - HAUTEUR_LOIN_SOL_METRE_ATTERO a 50m.
  - modification du calcul de l'altitude baro pure.
