@@ -16,7 +16,7 @@
 #define HDOP_EXCELLENT (1.4)
 #define HDOP_BON       (3.)
 
-#define TAILLE_BUFFER_TRAME (500)
+#define TAILLE_BUFFER_TRAME (1500)
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Gestion trame Gps et rempissage variables CGlobalVar g_GlobalVar.
