@@ -1,3 +1,6 @@
+le 20260518a :
+ - augmentation de toutes les piles taches de 200 octets.
+
 le 20260325a :
  - HAUTEUR_LOIN_DECO_METRE a 10m. pour repose sommet.
 

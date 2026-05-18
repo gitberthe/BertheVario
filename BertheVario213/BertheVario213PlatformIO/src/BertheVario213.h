@@ -184,13 +184,13 @@ extern "C" {
 
 // son vario priorite tres haute non interruptible (bloque/bug les capteurs sans mutex)
 #define VARIOBEEP_NUM_TASK   0
-#define VARIOBEEP_STACK_SIZE 2100
+#define VARIOBEEP_STACK_SIZE 2300
 #define VARIOBEEP_PRIORITY   19
 #define VARIOBEEP_CORE       0
 
 // simuvol basse priorite
 #define SIMUVOL_NUM_TASK     1
-#define SIMUVOL_STACK_SIZE   3000
+#define SIMUVOL_STACK_SIZE   3200
 #define SIMUVOL_PRIORITY     0
 #define SIMUVOL_CORE         1
 
@@ -201,25 +201,25 @@ extern "C" {
 
 // pression calcul Vz, acquisition cap magnetique, priorite tres haute non interruptible
 #define VZ_MAG_NUM_TASK   2
-#define VZ_MAG_STACK_SIZE 2400
+#define VZ_MAG_STACK_SIZE 2600
 #define VZ_MAG_PRIORITY   20
 #define VZ_MAG_CORE       1
 
 // acquisition gps, priorite haute non interruptible
 #define SERIAL_GPS_NUM_TASK     3
-#define SERIAL_GPS_STACK_SIZE   2700
+#define SERIAL_GPS_STACK_SIZE   2900
 #define SERIAL_GPS_PRIORITY     19
 #define SERIAL_GPS_CORE         1
 
 // ecriture igc, priorite tres haute non interruptible
 #define IGC_NUM_TASK        4
-#define IGC_STACK_SIZE      3400
+#define IGC_STACK_SIZE      3600
 #define IGC_PRIORITY        19
 #define IGC_CORE            1
 
 // temps de vol / histo, priorite tres haute non interruptible
 #define ATTENTE_VOL_NUM_TASK   5
-#define ATTENTE_VOL_STACK_SIZE 3200
+#define ATTENTE_VOL_STACK_SIZE 3400
 #define ATTENTE_VOL_PRIORITY   19
 #define ATTENTE_VOL_CORE       1
 
@@ -233,19 +233,19 @@ extern "C" {
 
 // relance pour cause faux depart de vol, tache fugitive.
 #define RELANCE_IGC_NUM_TASK   6
-#define RELANCE_IGC_STACK_SIZE 3600
+#define RELANCE_IGC_STACK_SIZE 3800
 #define RELANCE_IGC_PRIORITY   0
 #define RELANCE_IGC_CORE       1
 
 // serveur de son, priorite moyenne
 #define SOUNDSVR_NUM_TASK   7
-#define SOUNDSVR_STACK_SIZE 2500
+#define SOUNDSVR_STACK_SIZE 2700
 #define SOUNDSVR_PRIORITY   19
 #define SOUNDSVR_CORE       0
 
 // mesure de processeur
 #define PERF_MON_NUM_TASK   8
-#define PERF_MON_STACK_SIZE 1000
+#define PERF_MON_STACK_SIZE 1200
 #define PERF_MON_PRIORITY   1
 #define PERF_MON_CORE       1
 
