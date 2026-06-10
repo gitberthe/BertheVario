@@ -34,7 +34,7 @@ if ( !SD.begin(SDCARD_CS_PIN, SpiSdCard) )
      Serial.println("SDCard initialization failed!");
     #endif
     }
-delay( 100 ) ;
+delay( 500 ) ;
 
 // si /firmware.bin sur sd card
 #ifdef _BERTHE_VARIO_TAC_
