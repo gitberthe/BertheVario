@@ -1,3 +1,6 @@
+le 20260610a :
+ - allongement delais apres init SDCard.
+
 le 20260518a :
  - augmentation de toutes les piles taches de 200 octets.
 
