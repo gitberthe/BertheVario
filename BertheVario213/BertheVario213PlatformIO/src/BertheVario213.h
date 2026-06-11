@@ -21,7 +21,6 @@
 #include <MS5611.h>
 #include <DFRobot_QMC5883.h>
 #include <ESPFMfGK.h>
-//#include <AsyncTCP.h>
 //#ifndef NO_OTA
  #include <WiFiClient.h>
  //#include <WebServer.h>
@@ -35,6 +34,10 @@
  //#include "esp_sntp.h"
 //#endif
 #include <Update.h>
+
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <EspFileManager.h>
 
 #include <math.h>
 #include <map>

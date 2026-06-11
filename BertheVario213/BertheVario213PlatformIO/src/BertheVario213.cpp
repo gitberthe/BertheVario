@@ -8,7 +8,7 @@
 /// \date modification : 18/10/2025
 ///
 
-char NumVer[] = "20260610a" ;
+char NumVer[] = "20260611a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -17,6 +17,9 @@ char NumVer[] = "20260610a" ;
 
 // variable globale du programme
 CGlobalVar g_GlobalVar ;
+
+AsyncWebServer server(80);
+EspFileManager FileManager;
 
 // note for partial update window and setPartialWindow() method:
 // partial update window size and position is on byte boundary in physical x direction
@@ -106,6 +109,7 @@ if ( BoutonCentreAppuye )
     g_GlobalVar.AfficheConnectWifi() ;
 
     // connection wifi
+    WiFi.mode(WIFI_STA);
     WiFi.begin( g_GlobalVar.m_Config.m_Ssid, g_GlobalVar.m_Config.m_Passwd );
     while (WiFi.status() != WL_CONNECTED)
         {
@@ -126,11 +130,16 @@ if ( BoutonCentreAppuye )
     sprintf(buf, "%d.%d.%d.%d", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3] );
     g_GlobalVar.AfficheWifi( buf ) ;
 
-    // creation init file manager
+    /*// creation init file manager
     pfilemgr = new ESPFMfGK( 8080 ) ;
 
     addFileSystems();
-    setupFilemanager();
+    setupFilemanager();*/
+
+    FileManager.initSDCard( &SD, SDCARD_CS_PIN );
+    FileManager.setServer( &server );
+
+    server.begin() ;
 
     return ;
     }
@@ -330,7 +339,7 @@ if ( g_GlobalVar.m_ModeHttp )
     // pour le test reboot
     g_GlobalVar.m_DureeVolMin = ATTENTE_MESSAGE_GPS ;
     // http client
-    pfilemgr->handleClient();
+    //pfilemgr->handleClient();
     return ;
     }
 
