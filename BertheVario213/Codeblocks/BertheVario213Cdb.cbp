@@ -39,6 +39,10 @@
 		<Unit filename="../BertheVario213PlatformIO/src/Bluetooth/CBleXct.h" />
 		<Unit filename="../BertheVario213PlatformIO/src/Calculateur/CTerrainsConnu.cpp" />
 		<Unit filename="../BertheVario213PlatformIO/src/Calculateur/CTerrainsConnu.h" />
+		<Unit filename="../BertheVario213PlatformIO/src/EspFileManager/src/ArDebugger.h" />
+		<Unit filename="../BertheVario213PlatformIO/src/EspFileManager/src/EspFileManager.cpp" />
+		<Unit filename="../BertheVario213PlatformIO/src/EspFileManager/src/EspFileManager.h" />
+		<Unit filename="../BertheVario213PlatformIO/src/EspFileManager/src/webPage.h" />
 		<Unit filename="../BertheVario213PlatformIO/src/FileMgr/FileMgr.cpp" />
 		<Unit filename="../BertheVario213PlatformIO/src/FileMgr/FileMgr.h" />
 		<Unit filename="../BertheVario213PlatformIO/src/Geometrie/CDroite2D.cpp" />

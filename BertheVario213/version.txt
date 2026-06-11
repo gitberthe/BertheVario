@@ -1,3 +1,6 @@
+le 20260611a :
+ - changement de file manager plus rapide.
+
 le 20260610a :
  - allongement delais apres init SDCard.
 
