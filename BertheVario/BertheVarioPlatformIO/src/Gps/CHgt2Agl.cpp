@@ -5,6 +5,7 @@
 ///
 /// \date creation     : 01/04/2024
 /// \date 15/01/2026 : correction bug lat ouest et cache map
+/// \date 13/06/2026 : erreur fichier hgt
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -171,6 +172,10 @@ float CHgt2Agl::GetGroundZ( float LonDeg , float LatDeg )
 #ifdef TIME_GROUND_Z
 unsigned long time_gz = millis() ;
 #endif // TIME_ZONE
+
+// si erreur fichier hgt
+if ( m_ErreurFichier )
+    return 0 ;
 
 // memorisation pour le cache (independement du fichier)
 // il n'y a pas de *W000.hgt (coin bas gauche SO du fichier)

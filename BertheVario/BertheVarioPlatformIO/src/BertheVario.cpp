@@ -11,7 +11,7 @@
 /// \date modification : 18/09/2025
 ///
 
-char NumVer[] = "20260610a" ;
+char NumVer[] = "20260613a" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -21,6 +21,8 @@ char NumVer[] = "20260610a" ;
 // variable globale du programme
 CGlobalVar g_GlobalVar ;
 
+void EssDprslt() ;
+
 // note for partial update window and setPartialWindow() method:
 // partial update window size and position is on byte boundary in physical x direction
 // the size is increased in setPartialWindow() if x or w are not multiple of 8 for even rotation, y or h for odd rotation
@@ -28,39 +30,6 @@ CGlobalVar g_GlobalVar ;
 
 //VarioBle VBle ;
 
-// site du pdd et certificat
-const char*  server = "pdd.dprslt.fr" ; // /spaces/notams";  // Server URL
-
-const char* test_root_ca= \
-"-----BEGIN CERTIFICATE-----\n" \
-"MIIFBjCCAu6gAwIBAgIRAMISMktwqbSRcdxA9+KFJjwwDQYJKoZIhvcNAQELBQAw\n" \
-"TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh\n" \
-"cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMjQwMzEzMDAwMDAw\n" \
-"WhcNMjcwMzEyMjM1OTU5WjAzMQswCQYDVQQGEwJVUzEWMBQGA1UEChMNTGV0J3Mg\n" \
-"RW5jcnlwdDEMMAoGA1UEAxMDUjEyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB\n" \
-"CgKCAQEA2pgodK2+lP474B7i5Ut1qywSf+2nAzJ+Npfs6DGPpRONC5kuHs0BUT1M\n" \
-"5ShuCVUxqqUiXXL0LQfCTUA83wEjuXg39RplMjTmhnGdBO+ECFu9AhqZ66YBAJpz\n" \
-"kG2Pogeg0JfT2kVhgTU9FPnEwF9q3AuWGrCf4yrqvSrWmMebcas7dA8827JgvlpL\n" \
-"Thjp2ypzXIlhZZ7+7Tymy05v5J75AEaz/xlNKmOzjmbGGIVwx1Blbzt05UiDDwhY\n" \
-"XS0jnV6j/ujbAKHS9OMZTfLuevYnnuXNnC2i8n+cF63vEzc50bTILEHWhsDp7CH4\n" \
-"WRt/uTp8n1wBnWIEwii9Cq08yhDsGwIDAQABo4H4MIH1MA4GA1UdDwEB/wQEAwIB\n" \
-"hjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwEgYDVR0TAQH/BAgwBgEB\n" \
-"/wIBADAdBgNVHQ4EFgQUALUp8i2ObzHom0yteD763OkM0dIwHwYDVR0jBBgwFoAU\n" \
-"ebRZ5nu25eQBc4AIiMgaWPbpm24wMgYIKwYBBQUHAQEEJjAkMCIGCCsGAQUFBzAC\n" \
-"hhZodHRwOi8veDEuaS5sZW5jci5vcmcvMBMGA1UdIAQMMAowCAYGZ4EMAQIBMCcG\n" \
-"A1UdHwQgMB4wHKAaoBiGFmh0dHA6Ly94MS5jLmxlbmNyLm9yZy8wDQYJKoZIhvcN\n" \
-"AQELBQADggIBAI910AnPanZIZTKS3rVEyIV29BWEjAK/duuz8eL5boSoVpHhkkv3\n" \
-"4eoAeEiPdZLj5EZ7G2ArIK+gzhTlRQ1q4FKGpPPaFBSpqV/xbUb5UlAXQOnkHn3m\n" \
-"FVj+qYv87/WeY+Bm4sN3Ox8BhyaU7UAQ3LeZ7N1X01xxQe4wIAAE3JVLUCiHmZL+\n" \
-"qoCUtgYIFPgcg350QMUIWgxPXNGEncT921ne7nluI02V8pLUmClqXOsCwULw+PVO\n" \
-"ZCB7qOMxxMBoCUeL2Ll4oMpOSr5pJCpLN3tRA2s6P1KLs9TSrVhOk+7LX28NMUlI\n" \
-"usQ/nxLJID0RhAeFtPjyOCOscQBA53+NRjSCak7P4A5jX7ppmkcJECL+S0i3kXVU\n" \
-"y5Me5BbrU8973jZNv/ax6+ZK6TM8jWmimL6of6OrX7ZU6E2WqazzsFrLG3o2kySb\n" \
-"zlhSgJ81Cl4tv3SbYiYXnJExKQvzf83DYotox3f0fwv7xln1A2ZLplCb0O+l/AK0\n" \
-"YE0DS2FPxSAHi0iwMfW2nNHJrXcY3LLHD77gRgje4Eveubi2xxa+Nmk/hmhLdIET\n" \
-"iVDFanoCrMVIpQ59XWHkzdFmoHXHBV7oibVjGSO7ULSQ7MJ1Nz51phuDJSgAIU7A\n" \
-"0zrLnOrAj/dfrlEWRhCvAgbuwLZX1A2sjNjXoPOHbsPiy+lO1KF8/XY7\n" \
-"-----END CERTIFICATE-----\n" ;
 
 // wifi client secure
 WiFiClientSecure client;
@@ -78,85 +47,6 @@ while( true )
     vTaskDelete(NULL) ;
 }
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-/// \brief Connection a pdd.dprslt.fr pout recuperation page Notam
-/// recuperation par :
-/// openssl s_client -showcerts -servername pdd.dprslt.fr  -connect pdd.dprslt.fr:443 </dev/null
-void EssDprslt()
-{
-return ; // on ne faite plus rien
-
-// certificat
-client.setCACert(test_root_ca);
-
-int count = 0 ;
-while ( ! client.connected() && count++ < 5 )
-    {
-    if (!client.connect(server, 443))
-        {
-        Serial.print( "not connected\n") ;
-        g_GlobalVar.BeepError() ;
-        }
-    else
-        {
-        Serial.print( "connected to pdd.dprslt.fr !!!\n") ;
-        break ;
-        }
-    }
-
-// Make a HTTP request:
-client.println("GET https://pdd.dprslt.fr/spaces/notams HTTP/1.0");
-client.print("Host: ");
-client.println(server);
-client.println("Connection: close");
-client.println();
-
-  while (client.connected()) {
-      String line = client.readStringUntil('\n');
-      if (line == "\r") {
-        Serial.println("headers received");
-        break;
-      }
-    }
-
-
-//If there are incoming bytes available
-    //from the server, read them and put into the 'response' char array
-    while (client.connected()) {
-
-      if (client.available()) {
-        char c = client.read();
-        Serial.print( c ) ;
-        }
-    }
-
-client.stop() ;
-
-/*client.println("Host: pdd.dprslt.fr");
-client.println("Connection: close");
-client.println();
-
-while (client.connected())
-    {
-    String line = client.readStringUntil('\n');
-    if (line == "\r")
-        {
-        Serial.println("headers received");
-        break;
-        }
-    }
-
-// if there are incoming bytes available
-// from the server, read them and print them:
-while (client.available())
-    {
-    char c = client.read();
-    Serial.write(c);
-    }
-
-client.stop(); */
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief fonction setup de demmarrage.

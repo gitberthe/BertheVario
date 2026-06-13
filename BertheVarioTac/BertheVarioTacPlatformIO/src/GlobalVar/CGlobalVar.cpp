@@ -6,6 +6,7 @@
 /// \date creation   : 20/09/2024
 /// \date 19/10/2025 : introduction du HDop
 /// \date 26/10/2025 : MakeEmptySound()
+/// \date 13/06/2026 : erreur fichier hgt
 ///
 
 #include "../BertheVarioTac.h"
@@ -51,7 +52,7 @@ if ( hauteur < 1440. || hauteur > 1460. )
 void CGlobalVar::MiseAJourAltitudesSolEtBaroRec()
 {
 // mise a jour altitude sol pas en ihm. rando vol dans main loop()
-if ( m_Screen.GetEtatAuto() == CAutoPages::ECRAN_0_Vz )
+if ( m_Screen.GetEtatAuto() == CAutoPages::ECRAN_0_Vz && !m_Hgt2Agl.m_ErreurFichier )
     m_AltitudeSolHgt = m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
 
 // mise a jour altitude baro recalee sans mesure capteur faite par TacheVzCapMag()

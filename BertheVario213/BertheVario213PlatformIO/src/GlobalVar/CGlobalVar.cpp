@@ -8,6 +8,7 @@
 /// \date 17/10/2025 : modification mutex
 /// \date 19/10/2024 : modification refonte HDop
 /// \date 26/10/2025 : MakeEmptySound() .
+/// \date 13/06/2026 : erreur fichier hgt
 ///
 
 #include "../BertheVario213.h"
@@ -46,7 +47,7 @@ if ( hauteur < 1440. || hauteur > 1460. )
 void CGlobalVar::MiseAJourAltitudesSolEtBaroRec( ) // bool AvecAltiSol )
 {
 // mise a jour altitude sol (pas en ihm mais rando vol)
-if ( GetEtatAuto() == ECRAN_0_Vz ) // && AvecAltiSol )
+if ( GetEtatAuto() == ECRAN_0_Vz && ! m_Hgt2Agl.m_ErreurFichier ) // && AvecAltiSol )
     m_AltitudeSolHgt = m_Hgt2Agl.GetGroundZ( m_TerrainPosCur.m_Lon , m_TerrainPosCur.m_Lat ) ;
 
 // mise a jour altitude baro recalee sans mesure capteur faite par TacheVzCapMag()
