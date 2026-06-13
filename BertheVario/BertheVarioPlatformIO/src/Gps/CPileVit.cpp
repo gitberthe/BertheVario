@@ -3,8 +3,8 @@
 ///
 /// \brief
 ///
-/// \date creation     : 02/09/2024
-/// \date modification : 17/10/2024
+/// \date 02/09/2024 : creation
+/// \date 13/06/2026 : erreur fichier hgt
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -115,6 +115,14 @@ return false ;
 /// Un recallage toutes les 30 sec min minimum
 bool CPileVit::CanFixAltiBaro()
 {
+
+// si erreur fichier hgt
+if ( g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )
+    {
+    CGlobalVar::BeepError(true) ;
+    return false ;
+    }
+
 // toutes les 30 sec au plus
 unsigned long DeltaTMilli = millis() - m_LastFixAltiBaro ;
 if ( (DeltaTMilli/1000) < (m_CountFixAltiBaro*LAST_FIX_ALTIBARO_SEC) )

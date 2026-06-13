@@ -1,3 +1,10 @@
+le 20260613a
+ - erreur fichier *.hgt non penalisant pour le vol (moins bonne precision)
+    . plus de recalage (MiseAJourAltitudesSolEtBaroRec())
+    . plus de calcul hauteur sol (GetGroundZ())
+    . son erreur a la place de recalage sol (CanFixAltiBaro())
+ - fichier dprslt.cpp
+
 le 20260610a :
  - allongement delais apres init SDCard.
 
