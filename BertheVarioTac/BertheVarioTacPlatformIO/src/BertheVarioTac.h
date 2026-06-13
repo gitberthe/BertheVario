@@ -56,6 +56,10 @@
 #include <algorithm>
 #include <limits>
 
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <EspFileManager.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 // platform precedente
 // bad : platform = espressif32

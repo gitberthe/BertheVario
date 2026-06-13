@@ -10,7 +10,7 @@
 extern WiFiClientSecure client;
 
 // site du pdd et certificat
-const char*  server = "pdd.dprslt.fr" ; // /spaces/notams";  // Server URL
+const char*  server_dprslt = "pdd.dprslt.fr" ; // /spaces/notams";  // Server URL
 
 const char* test_root_ca= \
 "-----BEGIN CERTIFICATE-----\n" \
@@ -57,7 +57,7 @@ client.setCACert(test_root_ca);
 int count = 0 ;
 while ( ! client.connected() && count++ < 5 )
     {
-    if (!client.connect(server, 443))
+    if (!client.connect(server_dprslt, 443))
         {
         Serial.print( "not connected\n") ;
         g_GlobalVar.BeepError() ;
@@ -72,7 +72,7 @@ while ( ! client.connected() && count++ < 5 )
 // Make a HTTP request:
 client.println("GET https://pdd.dprslt.fr/spaces/notams HTTP/1.0");
 client.print("Host: ");
-client.println(server);
+client.println(server_dprslt);
 client.println("Connection: close");
 client.println();
 

@@ -1,3 +1,6 @@
+le 20260613b :
+ - pas de fichier igc si erreur fichier fichier *.hgt.
+
 le 20260613a
  - erreur fichier *.hgt non penalisant pour le vol (moins bonne precision)
     . plus de recalage (MiseAJourAltitudesSolEtBaroRec())

@@ -212,7 +212,7 @@ display.setFont(&FreeMonoBold12pt7b);
 display.setCursor(0, 75);
 display.print("http://");
 display.print(IpAdress);
-display.print(":8080");
+display.print("/file");
 
 display.display(true);
 }

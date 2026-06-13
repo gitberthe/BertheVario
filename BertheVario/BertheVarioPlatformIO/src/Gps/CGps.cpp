@@ -12,6 +12,7 @@
 /// \date 26/10/2025 : MakeEmptySound()
 /// \date 27/11/2025 : toujours beep recalage altibaro mais plus de bip au demmarage.
 /// \date 30/12/2025 : TacheGpsIgcTempsHistoCalcul
+/// \date 13/06/2026 : erreur fichier hgt
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -354,7 +355,8 @@ while (g_GlobalVar.m_TaskArr[IGC_NUM_TASK].m_Run)
     #ifdef _BERTHE_VARIO_TAC_
     g_GlobalVar.m_Screen.m_MutexTft.PrendreMutex() ;
     #endif
-     g_GlobalVar.PushLoc2Igc() ;
+    if ( ! g_GlobalVar.m_Hgt2Agl.m_ErreurFichier )
+        g_GlobalVar.PushLoc2Igc() ;
     #ifdef _BERTHE_VARIO_TAC_
     g_GlobalVar.m_Screen.m_MutexTft.RelacherMutex() ;
     #endif

@@ -11,7 +11,7 @@
 /// \date modification : 18/09/2025
 ///
 
-char NumVer[] = "20260613a" ;
+char NumVer[] = "20260613b" ;
 
 // uncomment next line to use HSPI for EPD (and e.g VSPI for SD), e.g. with Waveshare ESP32 Driver Board
 //#define USE_HSPI_FOR_EPD
@@ -20,6 +20,9 @@ char NumVer[] = "20260613a" ;
 
 // variable globale du programme
 CGlobalVar g_GlobalVar ;
+
+AsyncWebServer server(80);
+EspFileManager FileManager;
 
 void EssDprslt() ;
 
@@ -165,11 +168,16 @@ if ( BoutonCentreAppuye )
 
     EssDprslt() ;
 
+    FileManager.initSDCard( &SD, SDCARD_CS_PIN );
+    FileManager.setServer( &server );
+
+    server.begin() ;
+
     // creation init file manager
-    pfilemgr = new ESPFMfGK( 8080 ) ;
+    /*pfilemgr = new ESPFMfGK( 8080 ) ;
 
     addFileSystems();
-    setupFilemanager();
+    setupFilemanager(); */
 
     return ;
     }
@@ -330,7 +338,7 @@ if ( g_GlobalVar.m_StopLoop )
 if ( g_GlobalVar.m_ModeHttp )
     {
     g_GlobalVar.m_DureeVolMin = ATTENTE_MESSAGE_GPS ;
-    pfilemgr->handleClient();
+    //pfilemgr->handleClient();
     return ;
     }
 
