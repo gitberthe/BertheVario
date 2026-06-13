@@ -4,10 +4,13 @@
 /// \brief
 ///
 /// \date creation     : 14/10/2024
-/// \date modification : 16/09/2025
+/// \date modification : 13/06/2026
 ///
 
 #include "../BertheVarioTac.h"
+
+AsyncWebServer server(80);
+EspFileManager FileManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief init du Wifi du file manager
@@ -55,7 +58,7 @@ Serial.println(WiFi.localIP());
 
 // adresse wifi
 char buf[50];
-sprintf(buf, "FileManager IP:\nhttp://%d.%d.%d.%d:8080", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3] );
+sprintf(buf, "FileManager IP:\nhttp://%d.%d.%d.%d/file", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3] );
 g_GlobalVar.m_Screen.ScreenRaz() ;
 g_tft.setCursor( 0 , 50 ) ;
 g_tft.print( buf ) ;
@@ -63,8 +66,14 @@ g_tft.setCursor( 50 , 100 ) ;
 g_tft.print( "touch/reboot" ) ;
 
 // creation init file manager
-g_pfilemgr = new ESPFMfGK( 8080 ) ;
+//g_pfilemgr = new ESPFMfGK( 8080 ) ;
 
-addFileSystems();
-setupFilemanager();
+//addFileSystems();
+//setupFilemanager();
+
+FileManager.initSDCard( &SD, SDCARD_CS_PIN );
+FileManager.setServer( &server );
+
+server.begin() ;
+
 }

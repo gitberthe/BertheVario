@@ -38,6 +38,10 @@
 		<Unit filename="../BertheVarioPlatformIO/src/BertheVario.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CTerrainsConnu.cpp" />
 		<Unit filename="../BertheVarioPlatformIO/src/Calculateur/CTerrainsConnu.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/EspFileManager/src/ArDebugger.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/EspFileManager/src/EspFileManager.cpp" />
+		<Unit filename="../BertheVarioPlatformIO/src/EspFileManager/src/EspFileManager.h" />
+		<Unit filename="../BertheVarioPlatformIO/src/EspFileManager/src/webPage.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/FileMgr/FileMgr.cpp" />
 		<Unit filename="../BertheVarioPlatformIO/src/FileMgr/FileMgr.h" />
 		<Unit filename="../BertheVarioPlatformIO/src/Geometrie/CDroite2D.cpp" />

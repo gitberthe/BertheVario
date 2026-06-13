@@ -30,6 +30,10 @@
 #include <vector>
 #include <algorithm>
 
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include <EspFileManager.h>
+
 //////////////////////////
 // definitions materielles
 

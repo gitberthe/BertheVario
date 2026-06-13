@@ -47,7 +47,6 @@ m_FaibleVitesseVert = true ;
 /// horizontale et distance XY / Altitude.
 bool CFinDeVol::IsFlightEnd()
 {
-
 // si au dessus du deco pas de fin de vol
 float AltiDessusDeco = g_GlobalVar.m_TerrainPosCur.m_AltiBaroRec - g_GlobalVar.m_TerrainPosDeco.m_AltiBaroRec ;
 if ( AltiDessusDeco > HAUTEUR_LOIN_DECO_METRE )

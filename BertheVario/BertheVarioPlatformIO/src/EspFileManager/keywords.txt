@@ -1,0 +1,4 @@
+esp32-file-manager    KEYWORD1
+webserver             KEYWORD2
+file                  KEYWORD3
+manager               KEYWORD4

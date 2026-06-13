@@ -119,7 +119,7 @@ if ( g_GlobalVar.m_ModeHttp )
         WifiInitFileMgr() ;
         }
 
-    g_pfilemgr->handleClient();
+    //g_pfilemgr->handleClient();
 
     // si ecran pressé on reboot
     if ( !(count_10hz++%100) )
