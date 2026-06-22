@@ -1,3 +1,6 @@
+le 20260622a :
+ - modification affichage ecran de debut au boot.
+
 le 20260613b :
  - pas de fichier igc si erreur fichier fichier *.hgt.
 
