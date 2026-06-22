@@ -8,7 +8,7 @@
 /// \date modification : 19/09/2025
 /// \date 18/10/2025 : modification ZMin
 /// \date 26/10/2025 : modification HDop
-
+/// \date 22/06/2026 : modification ecran de debut
 ///
 
 #include "../BertheVario213.h"
@@ -232,7 +232,11 @@ float Pourcent = GetPourcentageVoltage(Voltage) ;
 char TmpChar[10] ;
 sprintf( TmpChar , "%1.2fv", Voltage ) ;
 
+display.fillRect(0,0, LARGEUR_213, HAUTEUR_213, GxEPD_BLACK ); // x y w h
+display.display(true);
+
 display.fillRect(0,0, LARGEUR_213, HAUTEUR_213, GxEPD_WHITE ); // x y w h
+display.display(true);
 
 // voltage
 display.setFont(&FreeMonoBold18pt7b);
@@ -256,7 +260,11 @@ display.display(true);
 /// \brief Cette fonction affiche les boutons de calibration/wifi/rando.
 void CScreen213::AfficheBoutons()
 {
+display.fillRect(0,0, LARGEUR_213, HAUTEUR_213, GxEPD_BLACK ); // x y w h
+display.display(true);
+
 display.fillRect(0,0, LARGEUR_213, HAUTEUR_213, GxEPD_WHITE ); // x y w h
+display.display(true);
 
 display.setFont(&FreeMonoBold12pt7b);
 display.setCursor(20, 55);
