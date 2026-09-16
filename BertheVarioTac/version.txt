@@ -1,3 +1,6 @@
+le 20260622a2 :
+ - changement gestionnaire fichier wifi dans doc concepteur.
+
 le 20260613b :
  - pas de fichier igc si erreur fichier fichier *.hgt.
  - changement gestionnaire de fichier
