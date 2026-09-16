@@ -1,5 +1,6 @@
 le 20260622a2 :
  - agrandissement trous haut parleur boitier (v5).
+ - changement gestionnaire fichier wifi dans doc concepteur.
 
 le 20260622a :
  - modification affichage ecran de debut au boot.
