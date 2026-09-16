@@ -1,6 +1,5 @@
 le 20260622a2 :
  - agrandissement trous haut parleur boitier (v5).
- - modification doc visu niveau batterie.
 
 le 20260622a :
  - modification affichage ecran de debut au boot.
