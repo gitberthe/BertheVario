@@ -27,10 +27,10 @@ public :
     std::vector<CVecZoneReduce::st_coord_poly*> m_VecPtsBig ;   ///< vecteur des points avant compression
     std::vector<CVecZoneReduce::st_coord_poly*> m_VecPtsSmall ; ///< vecteur des points apres compression
 
-    static const double ms_ErreurMaxiAdmiseVerif ;  ///< erreur de rebit
+    static const double ms_ErreurMaxiAdmiseVerif ;  ///< erreur de verification
     static const double ms_ErreurMaxi ;             ///< erreur recherchee maxi
 
-    void    Compress() ;
+    void            Compress() ;
 
     bool operator < ( const CZone & Zone ) const ;
     bool operator > ( const CZone & Zone ) const ;

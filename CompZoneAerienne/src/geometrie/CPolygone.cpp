@@ -6,6 +6,7 @@
 /// \date creation   : 23/03/2024
 /// \date 26/10/2025 : tableau de st_coord_poly et plus *.
 /// \date 27/10/2025 : Remplacement de m_RayonMetre par CRectIn.
+/// \date 10/10/2026 : Prise en compte d'une zone qui ne reboucle pas sur son point de debut dans IsIn().
 ///
 
 #include "../CompZoneAerienne.h"
@@ -41,7 +42,9 @@ for ( int ip = 0 ; ip < NbPts ; ip++ )
         ptB1.x = PtsArr[ip+1].m_Lat ;
         ptB1.y = PtsArr[ip+1].m_Lon ;*/
         }
-    else
+    // si point de fin et de debut different alors un autre segment
+    else if ( (PtsArr[ip]->m_Lat != PtsArr[0]->m_Lat) ||
+              (PtsArr[ip]->m_Lon != PtsArr[0]->m_Lon) )
         {
         if ( doIntersect( * PtsArr[ip] , * PtsArr[0] , PtsToTest , ptLoin ) )
             NbInter++ ;

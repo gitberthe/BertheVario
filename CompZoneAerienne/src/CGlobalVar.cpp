@@ -29,12 +29,12 @@ while ( pChar != NULL )
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief traite les points autour desquelle sont les zones
-long CGlobalVar::TraiteLocaliteAutour(int argc, char *argv[])
+long CGlobalVar::TraiteLocaliteAutour(std::vector<std::string> &LigneDeCommande)
 {
-if ( strcmp(argv[1],"--batch") == 0 )
+if ( LigneDeCommande[0] == "--batch" )
     {
-    ifstream ifs_zprc( argv[2] );
-    double RayonKm = atof( argv[3] ) ;
+    ifstream ifs_zprc( LigneDeCommande[1] ) ;
+    double RayonKm = atof( LigneDeCommande[2].c_str() ) ;
     for( std::string line; getline( ifs_zprc, line ); )
         {
         vector<string> VecMot ;
@@ -62,9 +62,9 @@ else
     {
     CCmdLineParam CmdLineParam ;
 
-    CmdLineParam.m_LatCentreDeg = atof( argv[1] ) ;
-    CmdLineParam.m_LonCentreDeg = atof( argv[2] ) ;
-    CmdLineParam.m_RayonDeg = atof( argv[3] ) * 1000. / UnMilesEnMetres / MilesParDegres ;
+    CmdLineParam.m_LatCentreDeg = atof( LigneDeCommande[0].c_str() ) ;
+    CmdLineParam.m_LonCentreDeg = atof( LigneDeCommande[1].c_str() ) ;
+    CmdLineParam.m_RayonDeg = atof( LigneDeCommande[2].c_str() ) * 1000. / UnMilesEnMetres / MilesParDegres ;
 
     m_VectPtCentreRayon.push_back( CmdLineParam ) ;
     }
@@ -125,41 +125,129 @@ for ( size_t iptcentre = 0 ; iptcentre < m_VectPtCentreRayon.size() ; iptcentre+
             pStPts->m_Lat = (*it)[1] ;
             }
 
-        // si zone deja faite
-        bool ZoneDejaFaite = false ;
-        for ( size_t izdf = 0 ; izdf < m_VecZone.size() ; izdf++ )
-            if ( *m_VecZone[izdf] == *pZone )
-                {
-                ZoneDejaFaite = true ;
-                break ;
-                }
+        // si dans perimetre ou dessous ajout de la zone
+        if ( VerificationZoneAdmissible( pZone, LatCentreDeg, LonCentreDeg, RayonDeg ) )
+            m_VecZone.push_back( pZone ) ;
+        //else
+        //    delete pZone ;
+        }
+    }
 
-        if ( ZoneDejaFaite )
-            continue ;
+return 0 ;
+}
 
-        // calcul dans le perimetre mais pas dessous
-        bool DansPerimetre = false ;
-        for ( long nbc = 0 ; nbc < (long)pZone->m_VecPtsBig.size() ; nbc++ )
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Verification si zone dans le perimetre ou au dessus et pas deja faite.
+bool CGlobalVar::VerificationZoneAdmissible(const CZone* pZone, double LatCentreDeg, double LonCentreDeg, double RayonDeg)
+{
+// si zone deja faite
+for ( size_t izdf = 0 ; izdf < m_VecZone.size() ; izdf++ )
+    if ( *m_VecZone[izdf] == *pZone )
+        return false ;
+
+// calcul dans le perimetre mais pas dessous
+for ( long nbc = 0 ; nbc < (long)pZone->m_VecPtsBig.size() ; nbc++ )
+    {
+    double DistanceAngu = sqrtf( powf( pZone->m_VecPtsBig[nbc]->m_Lon - LonCentreDeg , 2 ) + powf( pZone->m_VecPtsBig[nbc]->m_Lat - LatCentreDeg , 2 ) ) ;
+    if ( DistanceAngu < RayonDeg )
+        return true ;
+    }
+
+// calcul si dessous la zone
+CVecZoneReduce::st_coord_poly StTerrainCourent ;
+StTerrainCourent.m_Lat = LatCentreDeg ;
+StTerrainCourent.m_Lon = LonCentreDeg ;
+if ( CPolygone::IsIn( (const CVecZoneReduce::st_coord_poly **) pZone->m_VecPtsBig.data() , pZone->m_VecPtsBig.size() , StTerrainCourent ) )
+    return true ;
+
+return false ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Lecture repertoire openair pour creation de zones
+long CGlobalVar::TraiteRepertoireOpenAir()
+{
+// tableau des noms de fichier
+std::vector<std::string> NomFchArr ;
+
+// ouverture du repertoire
+DIR * rep = opendir(IN_ZONE_DIR_OPENAIR);
+if (rep == NULL)
+    {
+    cout << "probleme lecture repertoire " << IN_ZONE_DIR_OPENAIR << endl ;
+    exit( 1 ) ;
+    }
+
+// lecture des noms de fichier
+struct dirent * ent;
+while ((ent = readdir(rep)) != NULL)
+    {
+    std::string NomFch = IN_ZONE_DIR_OPENAIR ;
+    NomFch += "/" ;
+    NomFch += ent->d_name ;
+
+    if ( NomFch != "." && NomFch != ".." )
+        NomFchArr.push_back(NomFch) ;
+    }
+closedir(rep);
+
+// pour tous les fichiers
+for ( long iff = 0 ; iff < (long)NomFchArr.size() ; iff++ )
+    {
+    FILE *fp = fopen(NomFchArr[iff].c_str(), "r");
+    if (!fp)
+        {
+        cerr << "**** impossible d'ouvrir : " << NomFchArr[iff] << endl ;
+        exit( 2 ) ;
+        }
+
+    // traitement du fichier
+    COpenAirFile OpenAirFile ;
+    OpenAirFile.TraiteFichier( fp ) ;
+
+    // fermeture du fichier
+    fclose(fp) ;
+
+    // ajout du premier point a la fin pour boucle le dernier segment
+    // pour toutes les zone du fichier en cours
+    for ( long iz = 0 ; iz < (long) OpenAirFile.m_pZoneArr.size() ; iz++ )
+        {
+        CZone * pZone = OpenAirFile.m_pZoneArr[iz] ;
+
+        if ( pZone->m_VecPtsBig.size() == 0 )
             {
-            double DistanceAngu = sqrtf( powf( pZone->m_VecPtsBig[nbc]->m_Lon - LonCentreDeg , 2 ) + powf( pZone->m_VecPtsBig[nbc]->m_Lat - LatCentreDeg , 2 ) ) ;
-            if ( DistanceAngu < RayonDeg )
-                {
-                DansPerimetre = true ;
-                break ;
-                }
+            cerr << "**** zone de taille nulle : " << pZone->m_Name << endl ;
+            continue ;
             }
 
-        // calcul si dessous la zone
-        bool Dessous = false ;
-        CVecZoneReduce::st_coord_poly StTerrainCourent ;
-        StTerrainCourent.m_Lat = LatCentreDeg ;
-        StTerrainCourent.m_Lon = LonCentreDeg ;
-        if ( CPolygone::IsIn( (const CVecZoneReduce::st_coord_poly **) pZone->m_VecPtsBig.data() , pZone->m_VecPtsBig.size() , StTerrainCourent ) )
-            Dessous = true ;
+        CVecZoneReduce::st_coord_poly * pStPts = new CVecZoneReduce::st_coord_poly ;
+        *pStPts = *pZone->m_VecPtsBig[ 0 ] ;
+        pZone->m_VecPtsBig.push_back( pStPts ) ;
+        }
 
-        // si dans perimetre ou dessous ajout de la zone
-        if ( DansPerimetre || Dessous )
-            m_VecZone.push_back( pZone ) ;
+    // pour tout les points centre de recherche
+    for ( size_t iptcentre = 0 ; iptcentre < m_VectPtCentreRayon.size() ; iptcentre++ )
+        {
+        const CCmdLineParam & CmdLineParam = m_VectPtCentreRayon[iptcentre] ;
+        double LonCentreDeg = CmdLineParam.m_LonCentreDeg ;
+        double LatCentreDeg = CmdLineParam.m_LatCentreDeg ;
+        double RayonDeg     = CmdLineParam.m_RayonDeg ;
+
+        // pour toutes les zone du fichier en cours
+        for ( long iz = 0 ; iz < (long) OpenAirFile.m_pZoneArr.size() ; iz++ )
+            {
+            CZone * pZone = OpenAirFile.m_pZoneArr[iz] ;
+
+            if ( pZone == NULL )
+                continue ;
+
+            // si dans perimetre ou dessous ajout de la zone
+            if ( VerificationZoneAdmissible( pZone, LatCentreDeg, LonCentreDeg, RayonDeg ) )
+                m_VecZone.push_back( pZone ) ;
+            // pas de delete car plusieur fichier avec meme zone
+            //else
+            //    delete pZone ;
+            }
         }
     }
 
@@ -223,7 +311,10 @@ char TmpChar[TailleBuffer] ;
 
 // pour gnu plot
 #ifndef WIN32
-cerr << "creation fichier gnuplot dans " << CHEMIN_GNUPLOT << endl ;
+if ( m_OpenAir )
+    cerr << "creation fichier gnuplot dans " << CHEMIN_GNUPLOT_OPENAIR << endl ;
+else
+    cerr << "creation fichier gnuplot dans " << CHEMIN_GNUPLOT_BAZILE << endl ;
 for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
     {
     CZone & Zone = *m_VecZone[iz] ;
@@ -253,7 +344,10 @@ for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
 
     // fichier de zone pour gnuplot avant compression
     // gnuplot> replot "zone_c.txt" with linespoints 6
-    sprintf(NomFichierGnuplotAvecChemin,"./%s/%03ld_avc_%s.txt",CHEMIN_GNUPLOT,iz,NomZoneSansBlanc.c_str()) ;
+    if ( m_OpenAir )
+        sprintf(NomFichierGnuplotAvecChemin,"./%s/%03ld_avc_%s.txt",CHEMIN_GNUPLOT_OPENAIR,iz,NomZoneSansBlanc.c_str()) ;
+    else
+        sprintf(NomFichierGnuplotAvecChemin,"./%s/%03ld_avc_%s.txt",CHEMIN_GNUPLOT_BAZILE,iz,NomZoneSansBlanc.c_str()) ;
     string NomFichierAvc = NomFichierGnuplotAvecChemin ;
     ofstream ofs_znc(NomFichierAvc.c_str(), std::ofstream::out);
     for ( long ip = 0 ; ip < (long)Zone.m_VecPtsBig.size() ; ip++ )
@@ -271,7 +365,10 @@ for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
     ofs_znc.close() ;
 
     // fichier de zone pour gnuplot apres compression
-    sprintf(NomFichierGnuplotAvecChemin,"./%s/%03ld_apc_%s.txt",CHEMIN_GNUPLOT,iz,NomZoneSansBlanc.c_str()) ;
+    if ( m_OpenAir )
+        sprintf(NomFichierGnuplotAvecChemin,"./%s/%03ld_apc_%s.txt",CHEMIN_GNUPLOT_OPENAIR,iz,NomZoneSansBlanc.c_str()) ;
+    else
+        sprintf(NomFichierGnuplotAvecChemin,"./%s/%03ld_apc_%s.txt",CHEMIN_GNUPLOT_BAZILE,iz,NomZoneSansBlanc.c_str()) ;
     string NomFichierApc = NomFichierGnuplotAvecChemin ;
     ofstream ofs_zc(NomFichierApc.c_str(), std::ofstream::out);
     for ( long ip = 0 ; ip < (long)Zone.m_VecPtsSmall.size() ; ip++ )
@@ -283,7 +380,10 @@ for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
         }
     ofs_zc.close() ;
 
-    sprintf(NomFichierGnuplotNomDeZoneSansBlanc,"./%s/%03ld_txt_%s.txt",CHEMIN_GNUPLOT, iz, NomZoneSansBlanc.c_str() ) ;
+    if ( m_OpenAir )
+        sprintf(NomFichierGnuplotNomDeZoneSansBlanc,"./%s/%03ld_txt_%s.txt",CHEMIN_GNUPLOT_OPENAIR, iz, NomZoneSansBlanc.c_str() ) ;
+    else
+        sprintf(NomFichierGnuplotNomDeZoneSansBlanc,"./%s/%03ld_txt_%s.txt",CHEMIN_GNUPLOT_BAZILE, iz, NomZoneSansBlanc.c_str() ) ;
     ofstream ofs_nom_zone(NomFichierGnuplotNomDeZoneSansBlanc, std::ofstream::out);
          ofs_nom_zone   << "num : " << setw(3) << fixed << setfill(' ') << iz << endl
                         << " nom : " << Zone.m_Name << endl
@@ -298,10 +398,10 @@ for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
     // png gnuplot
     cerr << "gnuplot " << NomFichierAvc << endl ;
     sprintf( TmpChar , "%s/%s/gnuplot.sh %s %s %s/%s/%03ld_png_%s.png %c %s => del max: %.1f km, alti min: %ld m, pts: %ld/%ld, resol/e-moy/e-max: %.2f/%.1f/%.1fm %c",
-                        m_path.c_str(), CHEMIN_GNUPLOT,
+                        m_path.c_str(), ((m_OpenAir) ? CHEMIN_GNUPLOT_OPENAIR : CHEMIN_GNUPLOT_BAZILE) ,
                         NomFichierAvc.c_str(),
                         NomFichierApc.c_str(),
-                        m_path.c_str(), CHEMIN_GNUPLOT, iz, NomZoneSansBlanc.c_str() ,
+                        m_path.c_str(), ((m_OpenAir) ? CHEMIN_GNUPLOT_OPENAIR : CHEMIN_GNUPLOT_BAZILE), iz, NomZoneSansBlanc.c_str() ,
                         '"' , Zone.m_Name.c_str() , Zone.m_DeltaLatLonMax , Zone.m_Bottom ,
                         Zone.m_VecPtsBig.size() , Zone.m_VecPtsSmall.size() ,
                         Zone.m_ResolVario , Zone.m_ErreurMoyenneEnMetre, Zone.m_ErreurMaxEnMetre,
@@ -323,10 +423,21 @@ const long TailleBuffer = 10000 ;
 char TmpChar[TailleBuffer] ;
 
 // creation des fichier kml
-cerr << "creation fichier kml dans " << CHEMIN_KML << endl ;
-sprintf( TmpChar , "rm -rf %s/%s/*.kml", m_path.c_str() , CHEMIN_KML ) ;
-if ( system( TmpChar ) )
-    cerr << "impossible de faire le rm de " << CHEMIN_KML << endl ;
+if ( g_GlobalVar.m_OpenAir )
+    {
+    cerr << "creation fichier kml dans " << CHEMIN_KML_OPENAIR << endl ;
+    sprintf( TmpChar , "rm -rf %s/%s/*.kml", m_path.c_str() , CHEMIN_KML_OPENAIR ) ;
+    if ( system( TmpChar ) )
+        cerr << "impossible de faire le rm de " << CHEMIN_KML_OPENAIR << endl ;
+    }
+else
+    {
+    cerr << "creation fichier kml dans " << CHEMIN_KML_BAZIL << endl ;
+    sprintf( TmpChar , "rm -rf %s/%s/*.kml", m_path.c_str() , CHEMIN_KML_BAZIL ) ;
+    if ( system( TmpChar ) )
+        cerr << "impossible de faire le rm de " << CHEMIN_KML_BAZIL << endl ;
+    }
+
 CKmlFile KmlFile ;
 for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
     {

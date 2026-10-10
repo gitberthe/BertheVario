@@ -23,6 +23,7 @@
 #include <filesystem>
 #include <unistd.h>
 #include <string.h>
+#include <dirent.h>
 
 ///////////
 // macro //
@@ -49,6 +50,8 @@
 #define UnMileEnMetres          (1852.)
 #define MilesParDegres          (60.)
 #define UnMilesEnMetres         (1852.)
+#define PiedsVersMetres         (0.3048)
+#define FlVersMetres            (100*0,3048)
 
 // include du projet
 #include "nlohmann/json.hpp"
@@ -63,9 +66,17 @@
 #include "zone/CCompZoneErr.h"
 #include "zone/CZone.h"
 #include "kml/CKmlFile.h"
+#include "openair/COpenAirFile.h"
 #include "CGlobalVar.h"
 
-#define IN_ZONE_FILE_JSON   "data/20250417_ffvl-cfd.geojson"
-#define CHEMIN_GNUPLOT      "zones_gnuplot"
+// noms / repertoires de fichier
+#define IN_ZONE_FILE_JSON           "data/20250417_ffvl-cfd.geojson"
+#define IN_ZONE_DIR_OPENAIR         "data/openair"
+#define CHEMIN_GNUPLOT_BAZILE       "zones_gnuplot_bazile"
+#define CHEMIN_GNUPLOT_OPENAIR      "zones_gnuplot_openair"
+
+using namespace std ;
+
+extern CGlobalVar g_GlobalVar ;
 
 #endif

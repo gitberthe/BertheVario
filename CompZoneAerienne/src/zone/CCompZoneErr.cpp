@@ -10,7 +10,7 @@
 #include "../CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Renvoie l'erreur moyenne en metre entre les 2 courbes.
+/// \brief Renvoie l'erreur moyenne en metres entre les 2 courbes.
 double CCompZoneErr::GetErrMetres( const std::vector<CVecZoneReduce::st_coord_poly*> & BigZone , const std::vector<CVecZoneReduce::st_coord_poly*> & SmallZone , double & ErrMaxMetre )
 {
 ErrMaxMetre = 0 ;

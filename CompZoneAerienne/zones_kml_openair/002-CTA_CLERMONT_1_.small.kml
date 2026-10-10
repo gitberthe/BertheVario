@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-CTA CLERMONT 1 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.5,46.2294444,100
+2.58888889,46.2597222,100
+2.92777778,46.2555556,100
+2.91666667,46.3333333,100
+3.26666667,46.5,100
+3.61666667,46.5,100
+3.63333333,46.3083333,100
+3.63333333,46.2,100
+3.73777778,46,100
+3.89805556,45.9694444,100
+4.10888889,45.5816667,100
+3.02111111,45.2233333,100
+2.60472222,45.1666667,100
+2.5,45.1666667,100
+2.5,46.2294444,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

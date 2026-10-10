@@ -9,6 +9,8 @@
 
 #pragma once
 
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Permet de calculer l'erreur moyenne en metre entre les 2 courbes.
 class CCompZoneErr
 {
 public :
