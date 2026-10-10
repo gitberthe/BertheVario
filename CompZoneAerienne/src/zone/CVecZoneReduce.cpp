@@ -7,7 +7,7 @@
 /// \date modification : 30/11/2024
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Donne la distance du point par rapport au segment de doite

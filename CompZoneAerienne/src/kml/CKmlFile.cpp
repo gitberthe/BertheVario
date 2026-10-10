@@ -7,7 +7,7 @@
 /// \date 09/01/2026 : modification
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 using namespace std;
 

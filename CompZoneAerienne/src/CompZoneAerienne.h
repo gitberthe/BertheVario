@@ -4,7 +4,7 @@
 /// \brief
 ///
 /// \date 26/11/2024 : creation
-/// \date 09/12/2024 : modification
+/// \date 10/10/2026 : ajout de CGlobalVar
 ///
 
 #ifndef _BVTZonesAerienne_
@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <filesystem>
 #include <unistd.h>
+#include <string.h>
 
 ///////////
 // macro //
@@ -44,25 +45,27 @@
 // constantes //
 ////////////////
 
-#define T_PI                   (3.1415926535)
-#define UnMileEnMetres         (1852.)
-#define MilesParDegres         (60.)
+#define T_PI                    (3.1415926535)
+#define UnMileEnMetres          (1852.)
+#define MilesParDegres          (60.)
+#define UnMilesEnMetres         (1852.)
 
 // include du projet
 #include "nlohmann/json.hpp"
-#include "CVecteur2D.h"
-#include "CDroite2D.h"
-#include "CVecZoneReduce.h"
-#include "Segments.h"
-#include "CVecteur3D.h"
-#include "CPolygone.h"
-#include "CNuage2Droite.h"
-#include "CGroupeAligne.h"
-#include "CCompZoneErr.h"
-#include "CZone.h"
-#include "CKmlFile.h"
+#include "geometrie/CVecteur2D.h"
+#include "geometrie/CDroite2D.h"
+#include "zone/CVecZoneReduce.h"
+#include "geometrie/Segments.h"
+#include "geometrie/CVecteur3D.h"
+#include "geometrie/CPolygone.h"
+#include "zone/CNuage2Droite.h"
+#include "zone/CGroupeAligne.h"
+#include "zone/CCompZoneErr.h"
+#include "zone/CZone.h"
+#include "kml/CKmlFile.h"
+#include "CGlobalVar.h"
 
-#define IN_ZONE_FILE    "data/20250417_ffvl-cfd.geojson"
-#define UnMilesEnMetres (1852.)
+#define IN_ZONE_FILE_JSON   "data/20250417_ffvl-cfd.geojson"
+#define CHEMIN_GNUPLOT      "zones_gnuplot"
 
 #endif
