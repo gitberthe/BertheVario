@@ -7,7 +7,7 @@
 /// \date modification : 28/11/2024
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Positionne m_ax et m_b fonction du nuage de ppints.

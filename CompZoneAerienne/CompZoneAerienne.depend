@@ -1036,3 +1036,319 @@
 	"CompZoneAerienne.h"
 	<iostream>
 
+1768048753 source:/home/internet/tmp/openair/CompZoneAerienne/src/CCompZoneErr.cpp
+	"CompZoneAerienne.h"
+
+1791593270 /home/internet/tmp/openair/CompZoneAerienne/src/CompZoneAerienne.h
+	<iostream>
+	<fstream>
+	<vector>
+	<math.h>
+	<map>
+	<vector>
+	<algorithm>
+	<limits>
+	<cfloat>
+	<unistd.h>
+	<filesystem>
+	<unistd.h>
+	<string.h>
+	"nlohmann/json.hpp"
+	"geometrie/CVecteur2D.h"
+	"geometrie/CDroite2D.h"
+	"zone/CVecZoneReduce.h"
+	"geometrie/Segments.h"
+	"geometrie/CVecteur3D.h"
+	"geometrie/CPolygone.h"
+	"zone/CNuage2Droite.h"
+	"zone/CGroupeAligne.h"
+	"zone/CCompZoneErr.h"
+	"zone/CZone.h"
+	"kml/CKmlFile.h"
+	"CGlobalVar.h"
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/nlohmann/json.hpp
+	<algorithm>
+	<cstddef>
+	<functional>
+	<initializer_list>
+	<iosfwd>
+	<iterator>
+	<memory>
+	<string>
+	<utility>
+	<vector>
+	<utility>
+	<algorithm>
+	<array>
+	<forward_list>
+	<iterator>
+	<map>
+	<string>
+	<tuple>
+	<type_traits>
+	<unordered_map>
+	<utility>
+	<valarray>
+	<cstddef>
+	<exception>
+	<numeric>
+	<stdexcept>
+	<string>
+	<vector>
+	<array>
+	<cstddef>
+	<cstdint>
+	<string>
+	<utility>
+	<type_traits>
+	<stdint.h>
+	<stdint.h>
+	<version>
+	<cstdlib>
+	<cassert>
+	<compare>
+	<cstddef>
+	<array>
+	<cstddef>
+	<type_traits>
+	<utility>
+	<limits>
+	<type_traits>
+	<utility>
+	<tuple>
+	<string>
+	<iterator>
+	<cstdint>
+	<map>
+	<memory>
+	<string>
+	<vector>
+	<cstring>
+	<string>
+	<utility>
+	<experimental/filesystem>
+	<filesystem>
+	<algorithm>
+	<iterator>
+	<string>
+	<tuple>
+	<type_traits>
+	<utility>
+	<valarray>
+	<vector>
+	<cstddef>
+	<iterator>
+	<string>
+	<tuple>
+	<utility>
+	<ranges>
+	<cstdint>
+	<tuple>
+	<utility>
+	<cstdint>
+	<cstddef>
+	<functional>
+	<algorithm>
+	<array>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<cstring>
+	<iterator>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<array>
+	<cstddef>
+	<cstring>
+	<iterator>
+	<memory>
+	<numeric>
+	<string>
+	<type_traits>
+	<utility>
+	<cstdio>
+	<istream>
+	<cstddef>
+	<string>
+	<utility>
+	<vector>
+	<array>
+	<clocale>
+	<cstddef>
+	<cstdio>
+	<cstdlib>
+	<initializer_list>
+	<string>
+	<utility>
+	<vector>
+	<cstdint>
+	<utility>
+	<string>
+	<cmath>
+	<cstdint>
+	<functional>
+	<string>
+	<utility>
+	<vector>
+	<cstddef>
+	<limits>
+	<iterator>
+	<type_traits>
+	<cstddef>
+	<iterator>
+	<utility>
+	<type_traits>
+	<algorithm>
+	<cctype>
+	<cerrno>
+	<cstdlib>
+	<iosfwd>
+	<limits>
+	<numeric>
+	<string>
+	<utility>
+	<vector>
+	<initializer_list>
+	<utility>
+	<algorithm>
+	<array>
+	<map>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<string>
+	<utility>
+	<vector>
+	<algorithm>
+	<cstddef>
+	<iterator>
+	<memory>
+	<string>
+	<vector>
+	<ios>
+	<ostream>
+	<algorithm>
+	<array>
+	<clocale>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<limits>
+	<string>
+	<iomanip>
+	<type_traits>
+	<utility>
+	<array>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<type_traits>
+	<functional>
+	<initializer_list>
+	<iterator>
+	<memory>
+	<stdexcept>
+	<type_traits>
+	<utility>
+	<vector>
+	<any>
+	<string_view>
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CVecteur2D.h
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CDroite2D.h
+
+1768287935 /home/internet/tmp/openair/CompZoneAerienne/src/CVecZoneReduce.h
+
+1768243381 /home/internet/tmp/openair/CompZoneAerienne/src/geometrie/Segments.h
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CVecteur3D.h
+
+1768299666 /home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CPolygone.h
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/CNuage2Droite.h
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/CGroupeAligne.h
+
+1768048772 /home/internet/tmp/openair/CompZoneAerienne/src/CCompZoneErr.h
+
+1768287440 /home/internet/tmp/openair/CompZoneAerienne/src/CZone.h
+
+1767977265 /home/internet/tmp/openair/CompZoneAerienne/src/CKmlFile.h
+
+1739008757 source:/home/internet/tmp/openair/CompZoneAerienne/src/CGroupeAligne.cpp
+	"CompZoneAerienne.h"
+
+1768051536 source:/home/internet/tmp/openair/CompZoneAerienne/src/CKmlFile.cpp
+	"CompZoneAerienne.h"
+
+1739008757 source:/home/internet/tmp/openair/CompZoneAerienne/src/CNuage2Droite.cpp
+	"CompZoneAerienne.h"
+
+1791596205 source:/home/internet/tmp/openair/CompZoneAerienne/src/CompZoneAerienne.cpp
+	"CompZoneAerienne.h"
+
+1768288016 source:/home/internet/tmp/openair/CompZoneAerienne/src/CVecZoneReduce.cpp
+	"CompZoneAerienne.h"
+
+1768287839 source:/home/internet/tmp/openair/CompZoneAerienne/src/CZone.cpp
+	"CompZoneAerienne.h"
+
+1791589472 source:/home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CDroite2D.cpp
+	"../CompZoneAerienne.h"
+
+1791589477 source:/home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CPolygone.cpp
+	"../CompZoneAerienne.h"
+
+1791589483 source:/home/internet/tmp/openair/CompZoneAerienne/src/geometrie/Segments.cpp
+	"../CompZoneAerienne.h"
+	<iostream>
+
+1791589488 source:/home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CVecteur2D.cpp
+	"../CompZoneAerienne.h"
+
+1768287935 /home/internet/tmp/openair/CompZoneAerienne/src/zone/CVecZoneReduce.h
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/zone/CNuage2Droite.h
+
+1739008757 /home/internet/tmp/openair/CompZoneAerienne/src/zone/CGroupeAligne.h
+
+1768048772 /home/internet/tmp/openair/CompZoneAerienne/src/zone/CCompZoneErr.h
+
+1768287440 /home/internet/tmp/openair/CompZoneAerienne/src/zone/CZone.h
+
+1767977265 /home/internet/tmp/openair/CompZoneAerienne/src/kml/CKmlFile.h
+
+1791589493 source:/home/internet/tmp/openair/CompZoneAerienne/src/geometrie/CVecteur3D.cpp
+	"../CompZoneAerienne.h"
+
+1791589741 source:/home/internet/tmp/openair/CompZoneAerienne/src/kml/CKmlFile.cpp
+	"../CompZoneAerienne.h"
+
+1791589747 source:/home/internet/tmp/openair/CompZoneAerienne/src/zone/CCompZoneErr.cpp
+	"../CompZoneAerienne.h"
+
+1791589792 source:/home/internet/tmp/openair/CompZoneAerienne/src/zone/CGroupeAligne.cpp
+	"../CompZoneAerienne.h"
+
+1791589797 source:/home/internet/tmp/openair/CompZoneAerienne/src/zone/CNuage2Droite.cpp
+	"../CompZoneAerienne.h"
+
+1791589803 source:/home/internet/tmp/openair/CompZoneAerienne/src/zone/CVecZoneReduce.cpp
+	"../CompZoneAerienne.h"
+
+1791589808 source:/home/internet/tmp/openair/CompZoneAerienne/src/zone/CZone.cpp
+	"../CompZoneAerienne.h"
+
+1791593894 /home/internet/tmp/openair/CompZoneAerienne/src/CGlobalVar.h
+
+1791596429 source:/home/internet/tmp/openair/CompZoneAerienne/src/CGlobalVar.cpp
+	"CompZoneAerienne.h"
+

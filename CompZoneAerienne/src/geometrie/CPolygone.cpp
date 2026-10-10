@@ -8,7 +8,7 @@
 /// \date 27/10/2025 : Remplacement de m_RayonMetre par CRectIn.
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Test si on est dans le polygone de la zone. Methode par droites secantes.

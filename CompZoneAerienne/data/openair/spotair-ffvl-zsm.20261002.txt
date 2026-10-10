@@ -1,0 +1,189 @@
+***************************************************
+* OpenAir ZSM Rapaces France                      *
+* (c) SpotAiR FFVL                                *
+* Version 3.1                                     *
+* 2026-09-02T03:14:20+00:00                       *
+***************************************************
+
+AC ZSM
+AY PROTECT
+AN ZSM Gypaète barbu Coma Dolca
+*ADescr [2023-12-20, update 2024-11-20] Zone de Sensibilité Majeure de protection du rapace Gypaète Barbu. Survol (drône inclus) interdit à moins de 300 mètres au-dessus du point le plus haut de la zone
+*AUID GUId=6139 UId=56953 specie=9 country=fr active=1
+AH 984FT AGL
+AL SFC
+DP 42:23:33 N 002:05:52 E
+DP 42:23:26 N 002:05:50 E
+DP 42:23:19 N 002:05:45 E
+DP 42:23:12 N 002:05:34 E
+DP 42:23:09 N 002:05:28 E
+DP 42:23:08 N 002:05:17 E
+DP 42:23:10 N 002:05:08 E
+DP 42:23:15 N 002:04:59 E
+DP 42:23:16 N 002:04:51 E
+DP 42:23:23 N 002:04:47 E
+DP 42:23:29 N 002:04:46 E
+DP 42:23:33 N 002:04:46 E
+DP 42:23:41 N 002:04:46 E
+DP 42:23:46 N 002:04:46 E
+DP 42:23:50 N 002:04:51 E
+DP 42:23:52 N 002:04:56 E
+DP 42:23:54 N 002:05:02 E
+DP 42:23:56 N 002:05:09 E
+DP 42:23:58 N 002:05:17 E
+DP 42:23:55 N 002:05:28 E
+DP 42:23:51 N 002:05:35 E
+DP 42:23:44 N 002:05:44 E
+DP 42:23:39 N 002:05:49 E
+DP 42:23:33 N 002:05:52 E
+
+AC ZSM
+AY PROTECT
+AN ZSM Gypaète barbu ZSM C-09 SEC 1698 | H3E Ossèse | H3E Ossèse - (6628)
+*ADescr [2026-02-04, update 2026-03-28] Zone de Sensibilité Majeure de protection du rapace Gypaète Barbu. Survol (drône inclus) interdit à moins de 300 mètres au-dessus du point le plus haut de la zone
+*AUID GUId=6628 UId=57964 specie=9 country=fr active=1
+AH 7136FT AMSL
+AL SFC
+DP 42:44:51 N 001:15:11 E
+DP 42:44:47 N 001:15:10 E
+DP 42:44:38 N 001:15:06 E
+DP 42:44:35 N 001:15:05 E
+DP 42:44:32 N 001:14:58 E
+DP 42:44:30 N 001:14:49 E
+DP 42:44:29 N 001:14:45 E
+DP 42:44:29 N 001:14:39 E
+DP 42:44:31 N 001:14:32 E
+DP 42:44:34 N 001:14:26 E
+DP 42:44:37 N 001:14:19 E
+DP 42:44:40 N 001:14:15 E
+DP 42:44:44 N 001:14:11 E
+DP 42:44:47 N 001:14:09 E
+DP 42:44:50 N 001:14:10 E
+DP 42:44:54 N 001:14:10 E
+DP 42:44:58 N 001:14:11 E
+DP 42:45:02 N 001:14:13 E
+DP 42:45:05 N 001:14:16 E
+DP 42:45:07 N 001:14:21 E
+DP 42:45:07 N 001:14:27 E
+DP 42:45:07 N 001:14:32 E
+DP 42:45:07 N 001:14:38 E
+DP 42:45:08 N 001:14:44 E
+DP 42:45:08 N 001:14:50 E
+DP 42:45:07 N 001:14:57 E
+DP 42:45:06 N 001:15:02 E
+DP 42:45:03 N 001:15:05 E
+DP 42:45:01 N 001:15:07 E
+DP 42:44:58 N 001:15:09 E
+DP 42:44:55 N 001:15:11 E
+DP 42:44:51 N 001:15:11 E
+
+AC ZSM
+AY PROTECT
+AN ZSM Gypaète barbu Saussa
+*ADescr [2024-03-07, update 2024-11-22] Zone de Sensibilité Majeure de protection du rapace Gypaète Barbu. Survol (drône inclus) interdit à moins de 300 mètres au-dessus du point le plus haut de la zone
+*AUID GUId=5201 UId=57093 specie=9 country=fr active=1
+AH 984FT AGL
+AL SFC
+DP 42:46:59 N 000:00:56 E
+DP 42:46:43 N 000:00:48 E
+DP 42:46:35 N 000:00:27 E
+DP 42:46:41 N 000:00:05 E
+DP 42:46:57 N 000:00:05 W
+DP 42:47:13 N 000:00:03 E
+DP 42:47:21 N 000:00:24 E
+DP 42:47:15 N 000:00:46 E
+DP 42:46:59 N 000:00:56 E
+
+AC ZSM
+AY PROTECT
+AN ZSM Gypaète barbu Montségur / Frau n°6
+*ADescr [2025-01-14, update 2025-03-27] Zone de Sensibilité Majeure de protection du rapace Gypaète Barbu. Survol (drône inclus) interdit à moins de 300 mètres au-dessus du point le plus haut de la zone
+*AUID GUId=6489 UId=57448 specie=9 country=fr active=1
+AH 6250FT AMSL
+AL SFC
+DP 42:50:34 N 001:52:42 E
+DP 42:50:31 N 001:52:46 E
+DP 42:50:28 N 001:52:48 E
+DP 42:50:23 N 001:52:49 E
+DP 42:50:18 N 001:52:47 E
+DP 42:50:12 N 001:52:45 E
+DP 42:50:08 N 001:52:41 E
+DP 42:50:05 N 001:52:39 E
+DP 42:50:02 N 001:52:26 E
+DP 42:50:00 N 001:52:22 E
+DP 42:49:59 N 001:52:15 E
+DP 42:49:58 N 001:52:04 E
+DP 42:50:03 N 001:51:51 E
+DP 42:50:07 N 001:51:44 E
+DP 42:50:08 N 001:51:42 E
+DP 42:50:11 N 001:51:39 E
+DP 42:50:15 N 001:51:35 E
+DP 42:50:20 N 001:51:34 E
+DP 42:50:25 N 001:51:35 E
+DP 42:50:27 N 001:51:36 E
+DP 42:50:28 N 001:51:39 E
+DP 42:50:29 N 001:51:43 E
+DP 42:50:29 N 001:51:44 E
+DP 42:50:30 N 001:51:48 E
+DP 42:50:31 N 001:51:51 E
+DP 42:50:31 N 001:51:54 E
+DP 42:50:34 N 001:51:59 E
+DP 42:50:35 N 001:52:07 E
+DP 42:50:37 N 001:52:14 E
+DP 42:50:38 N 001:52:20 E
+DP 42:50:39 N 001:52:28 E
+DP 42:50:37 N 001:52:32 E
+DP 42:50:36 N 001:52:38 E
+DP 42:50:34 N 001:52:42 E
+
+AC ZSM
+AY PROTECT
+AN ZSM Gypaète barbu Jonte Les Douzes 1
+*ADescr [2026-02-10, update 2026-02-11] Zone de Sensibilité Majeure de protection du rapace Gypaète Barbu. Survol (drône inclus) interdit à moins de 300 mètres au-dessus du point le plus haut de la zone
+*AUID GUId=6751 UId=57965 specie=9 country=fr active=1
+AH 3953FT AMSL
+AL SFC
+DP 44:12:25 N 003:18:52 E
+DP 44:12:09 N 003:18:43 E
+DP 44:12:03 N 003:18:21 E
+DP 44:12:10 N 003:17:59 E
+DP 44:12:26 N 003:17:49 E
+DP 44:12:42 N 003:17:59 E
+DP 44:12:48 N 003:18:21 E
+DP 44:12:42 N 003:18:43 E
+DP 44:12:25 N 003:18:52 E
+
+AC ZSM
+AY PROTECT
+AN ZSM Gypaète barbu Val d'Isère 4
+*ADescr [2023-12-20, update 2026-01-27] Zone de Sensibilité Majeure de protection du rapace Gypaète Barbu. Survol (drône inclus) interdit à moins de 300 mètres au-dessus du point le plus haut de la zone
+*AUID GUId=3252 UId=56970 specie=9 country=fr active=1
+AH 9826FT AMSL
+AL SFC
+DP 45:27:30 N 007:02:16 E
+DP 45:27:29 N 007:02:18 E
+DP 45:27:30 N 007:02:20 E
+DP 45:27:31 N 007:02:24 E
+DP 45:27:32 N 007:02:28 E
+DP 45:27:34 N 007:02:33 E
+DP 45:27:37 N 007:02:35 E
+DP 45:27:40 N 007:02:35 E
+DP 45:27:44 N 007:02:35 E
+DP 45:27:44 N 007:02:34 E
+DP 45:27:44 N 007:02:32 E
+DP 45:27:44 N 007:02:30 E
+DP 45:27:44 N 007:02:28 E
+DP 45:27:43 N 007:02:26 E
+DP 45:27:41 N 007:02:24 E
+DP 45:27:40 N 007:02:24 E
+DP 45:27:39 N 007:02:23 E
+DP 45:27:38 N 007:02:23 E
+DP 45:27:37 N 007:02:22 E
+DP 45:27:36 N 007:02:20 E
+DP 45:27:35 N 007:02:18 E
+DP 45:27:35 N 007:02:17 E
+DP 45:27:34 N 007:02:15 E
+DP 45:27:33 N 007:02:15 E
+DP 45:27:32 N 007:02:15 E
+DP 45:27:31 N 007:02:15 E
+DP 45:27:30 N 007:02:16 E

@@ -7,7 +7,7 @@
 /// \date modification : 01/12/2024
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoie l'erreur moyenne en metre entre les 2 courbes.

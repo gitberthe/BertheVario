@@ -1,0 +1,6 @@
+https://planeur-net.github.io/airspace/ : pour les zones aeriennes
+
+https://biodiv-sports.fr/api/fr/sensitiveareas/openair?period=ignore : pour les bulles de quitude et autre
+https://biodiv-sports.fr/login/?next=/
+
+https://www.chvd.org/2024/04/26/vol-libre-et-rapace-zsm-et-bulles-de-quietude/ : site des bulles de quietude

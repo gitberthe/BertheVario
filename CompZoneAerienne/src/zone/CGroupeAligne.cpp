@@ -7,7 +7,7 @@
 /// \date modification : 29/11/2024
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Fonction de tri des points par longitude croissante/decroissante

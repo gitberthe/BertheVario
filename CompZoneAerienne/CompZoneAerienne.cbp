@@ -33,30 +33,32 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="src/CCompZoneErr.cpp" />
-		<Unit filename="src/CCompZoneErr.h" />
-		<Unit filename="src/CDroite2D.cpp" />
-		<Unit filename="src/CDroite2D.h" />
-		<Unit filename="src/CGroupeAligne.cpp" />
-		<Unit filename="src/CGroupeAligne.h" />
-		<Unit filename="src/CKmlFile.cpp" />
-		<Unit filename="src/CKmlFile.h" />
-		<Unit filename="src/CNuage2Droite.cpp" />
-		<Unit filename="src/CNuage2Droite.h" />
-		<Unit filename="src/CPolygone.cpp" />
-		<Unit filename="src/CPolygone.h" />
-		<Unit filename="src/CVecZoneReduce.cpp" />
-		<Unit filename="src/CVecZoneReduce.h" />
-		<Unit filename="src/CVecteur2D.cpp" />
-		<Unit filename="src/CVecteur2D.h" />
-		<Unit filename="src/CVecteur3D.cpp" />
-		<Unit filename="src/CVecteur3D.h" />
-		<Unit filename="src/CZone.cpp" />
-		<Unit filename="src/CZone.h" />
+		<Unit filename="src/CGlobalVar.cpp" />
+		<Unit filename="src/CGlobalVar.h" />
 		<Unit filename="src/CompZoneAerienne.cpp" />
 		<Unit filename="src/CompZoneAerienne.h" />
-		<Unit filename="src/Segments.cpp" />
-		<Unit filename="src/Segments.h" />
+		<Unit filename="src/geometrie/CDroite2D.cpp" />
+		<Unit filename="src/geometrie/CDroite2D.h" />
+		<Unit filename="src/geometrie/CPolygone.cpp" />
+		<Unit filename="src/geometrie/CPolygone.h" />
+		<Unit filename="src/geometrie/CVecteur2D.cpp" />
+		<Unit filename="src/geometrie/CVecteur2D.h" />
+		<Unit filename="src/geometrie/CVecteur3D.cpp" />
+		<Unit filename="src/geometrie/CVecteur3D.h" />
+		<Unit filename="src/geometrie/Segments.cpp" />
+		<Unit filename="src/geometrie/Segments.h" />
+		<Unit filename="src/kml/CKmlFile.cpp" />
+		<Unit filename="src/kml/CKmlFile.h" />
+		<Unit filename="src/zone/CCompZoneErr.cpp" />
+		<Unit filename="src/zone/CCompZoneErr.h" />
+		<Unit filename="src/zone/CGroupeAligne.cpp" />
+		<Unit filename="src/zone/CGroupeAligne.h" />
+		<Unit filename="src/zone/CNuage2Droite.cpp" />
+		<Unit filename="src/zone/CNuage2Droite.h" />
+		<Unit filename="src/zone/CVecZoneReduce.cpp" />
+		<Unit filename="src/zone/CVecZoneReduce.h" />
+		<Unit filename="src/zone/CZone.cpp" />
+		<Unit filename="src/zone/CZone.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

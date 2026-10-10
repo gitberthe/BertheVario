@@ -8,7 +8,7 @@
 /// \date 27/10/2025 : passage des parametres &
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 #include <iostream>
 using namespace std;

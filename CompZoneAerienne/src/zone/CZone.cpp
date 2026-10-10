@@ -7,7 +7,7 @@
 /// \date 05/12/2024 : modification
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 const double CZone::ms_ErreurMaxiAdmiseVerif = 50. ;
 const double CZone::ms_ErreurMaxi = 15. ;

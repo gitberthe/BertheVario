@@ -8,7 +8,7 @@
 /// \date 30/11/2024 : Derniere modification.
 ///
 
-#include "CompZoneAerienne.h"
+#include "../CompZoneAerienne.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 /// \brief Addition de 2 vecteurs.
