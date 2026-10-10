@@ -10,7 +10,8 @@
 #ifndef _CKML_FILE_
 #define _CKML_FILE_
 
-#define CHEMIN_KML   "./zones_kml/"
+#define CHEMIN_KML_BAZIL    "./zones_kml_bazile/"
+#define CHEMIN_KML_OPENAIR  "./zones_kml_openair/"
 
 class CKmlFile
 {

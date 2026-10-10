@@ -15,7 +15,7 @@
 
 using namespace std;
 
-char NumVer[]="20261010a" ;
+char NumVer[]="20261010b" ;
 
 CGlobalVar g_GlobalVar ;
 
@@ -33,38 +33,90 @@ if ( getcwd( TmpChar , TailleBuffer ) == NULL )
     cerr << "imposible d'avoir le cwd" << endl ;
 g_GlobalVar.m_path = TmpChar ;
 
-// destruction des png et zone gnuplot
-#ifdef WIN32
- chdir( "./zones_gnuplot" ) ;
- system( "del *.txt" ) ;
- system( "del *.png" ) ;
- chdir( "..") ;
-#else
- sprintf( TmpChar , "rm -rf %s/%s/*.txt %s/%s/*.png", g_GlobalVar.m_path.c_str(), CHEMIN_GNUPLOT, g_GlobalVar.m_path.c_str(), CHEMIN_GNUPLOT ) ;
- if ( system( TmpChar ) )
-    cerr << "impossible de faire le rm de zones_gnuplot" << endl ;
-#endif
-
-// verification ligne de commande
-if ( argc < 2 || (strcmp(argv[1],"--batch") != 0 && argc < 4) || (strcmp(argv[1],"--batch") == 0 && argc < 4) )
+// traitement ligne de commande
+std::vector<std::string> LigneDeCommande ;
+long ilc ;
+if ( argc < 4 )
+    goto erreur ;
+for ( ilc = 1 ; ilc < argc ; ilc++ )
     {
-    cerr << "version du " << NumVer << endl ;
-    cerr << " " << argv[0] << " lat_deg lon_deg rayon_km " << endl ;
-    cerr << " " << argv[0] << " --batch terconnu.txt rayon_km " << endl ;
-    cerr << "    ex pour clermont : ./CompZoneAerienne 45.783329 3.08333 120 > zonesaer.txt" << endl ;
-    cerr << "    ex pour paillaret: ./CompZoneAerienne 45.503415 2.852121 3" << endl ;
-    cerr << "    ex mode batch    : ./CompZoneAerienne --batch terconnu.txt 60 > zonesaer.txt" << endl ;
-    return 1 ;
+    // openair
+    if ( strcmp(argv[ilc],"--openair") == 0 )
+        g_GlobalVar.m_OpenAir = true ;
+    // mode fichier
+    else if ( strcmp(argv[ilc],"--batch") == 0 )
+        {
+        if ( argc < ilc + 3 )
+            goto erreur ;
+        for ( ; ilc < argc ; ilc++ )
+            LigneDeCommande.push_back( argv[ilc] ) ;
+        }
+    // directe 1 point
+    else if ( strcmp(argv[ilc],"--point") == 0 )
+        {
+        if ( argc < ilc + 3 )
+            goto erreur ;
+        for ( ilc++ ; ilc < argc ; ilc++ )
+            LigneDeCommande.push_back( argv[ilc] ) ;
+        }
+    else
+        {
+        erreur :
+        cerr << "version du " << NumVer << endl ;
+        cerr << " " << argv[0] << " lat_deg lon_deg rayon_km " << endl ;
+        cerr << " " << argv[0] << " --batch terconnu.txt rayon_km " << endl ;
+        cerr << " " << argv[0] << " --point latitude longitude rayon_km " << endl ;
+        cerr << " " << argv[0] << " --openair : pour donnees openair" << endl ;
+        cerr << endl ;
+        cerr << "    ex pour clermont : ./CompZoneAerienne --point 45.783329 3.08333 120 > zonesaer.txt" << endl ;
+        cerr << "    ex pour paillaret: ./CompZoneAerienne --point 45.503415 2.852121 5" << endl ;
+        cerr << "    ex mode batch    : ./CompZoneAerienne --batch terconnu.txt 60 > zonesaer.txt" << endl ;
+        return 1 ;
+        }
     }
 
-// fichier batch de rayon/centre terconnu.txt ou point/rayon
-g_GlobalVar.TraiteLocaliteAutour( argc , argv ) ;
+// destruction des png et zone gnuplot
+#ifdef WIN32
+if ( g_GlobalVar.m_OpenAir )
+    {
+    chdir( "./zones_gnuplot_openair" ) ;
+    system( "del *.txt" ) ;
+    system( "del *.png" ) ;
+    chdir( "..") ;
+    }
+else
+    {
+    chdir( "./zones_gnuplot_bazile" ) ;
+    system( "del *.txt" ) ;
+    system( "del *.png" ) ;
+    chdir( "..") ;
+    }
+#else
+if ( g_GlobalVar.m_OpenAir )
+    {
+    sprintf( TmpChar , "rm -rf %s/%s/*.txt %s/%s/*.png", g_GlobalVar.m_path.c_str(), CHEMIN_GNUPLOT_OPENAIR, g_GlobalVar.m_path.c_str(), CHEMIN_GNUPLOT_OPENAIR ) ;
+    if ( system( TmpChar ) )
+        cerr << "impossible de faire le rm de zones_gnuplot_openair" << endl ;
+    }
+else
+    {
+    sprintf( TmpChar , "rm -rf %s/%s/*.txt %s/%s/*.png", g_GlobalVar.m_path.c_str(), CHEMIN_GNUPLOT_BAZILE, g_GlobalVar.m_path.c_str(), CHEMIN_GNUPLOT_BAZILE ) ;
+    if ( system( TmpChar ) )
+        cerr << "impossible de faire le rm de zones_gnuplot_bazile" << endl ;
+    }
+#endif
 
-// ouverture fichier geojson
-g_GlobalVar.TraiteFichierJson() ;
+// fichier batch de rayon/centre terconnu.txt ou point/rayon
+g_GlobalVar.TraiteLocaliteAutour( LigneDeCommande ) ;
+
+// ouverture fichier geojson ou openair
+if ( g_GlobalVar.m_OpenAir )
+    g_GlobalVar.TraiteRepertoireOpenAir() ;
+else
+    g_GlobalVar.TraiteFichierJson() ;
 
 // compression des zones
-cerr << "compression zone" << endl ;
+cerr << "compression des zones" << endl ;
 for ( long iz = g_GlobalVar.m_VecZone.size() -1 ; iz >= 0 ; iz-- )
     {
     g_GlobalVar.m_VecZone[iz]->Compress() ;

@@ -1,3 +1,6 @@
+le 202601010a :
+ - correction bug mineur dans CPolygone::IsIn()
+
 le 20260622a2 :
  - changement gestionnaire fichier wifi dans doc.
 

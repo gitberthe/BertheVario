@@ -24,8 +24,9 @@ public :
 class CGlobalVar
 {
 public :
-    long TraiteLocaliteAutour( int argc, char *argv[] ) ;
+    long TraiteLocaliteAutour( std::vector<std::string> &LigneDeCommande ) ;
     long TraiteFichierJson() ;
+    long TraiteRepertoireOpenAir() ;
     long EcritureFichierZones() ;
     long EcritureFichiersGnuPlot() ;
     long EcritureFichiersKml() ;
@@ -36,6 +37,7 @@ public :
     double m_ErreurMaxiMetres = 0. ;
     double m_ErreurMoyenneMetres = 0. ;
 
+    bool m_OpenAir = false ;    ///< si openair file
 
     std::string                 m_path  ;               ///< repertoire courant
     std::vector<CCmdLineParam>  m_VectPtCentreRayon ;   ///< vecteur des differents points centre/rayon de recherche de zone
@@ -43,5 +45,7 @@ public :
 
 
 private :
+    bool VerificationZoneAdmissible( const CZone * pZone, double LatCentreDeg, double LonCentreDeg, double RayonDeg ) ;
     void split(const std::string &chaine, std::vector<std::string> &elements) ;
+
 } ;

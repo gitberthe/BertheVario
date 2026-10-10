@@ -13,25 +13,25 @@ const double CZone::ms_ErreurMaxiAdmiseVerif = 50. ;
 const double CZone::ms_ErreurMaxi = 15. ;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Compraison de taille VecSmall pour compression GnuVario en premier
 bool CZone::operator < ( const CZone & Zone ) const
 {
-long DeltaThis = m_VecPtsBig.size() - m_VecPtsSmall.size() ;
+/*long DeltaThis = m_VecPtsBig.size() - m_VecPtsSmall.size() ;
 long DeltaZone = Zone.m_VecPtsBig.size() - Zone.m_VecPtsSmall.size() ;
-return DeltaThis < DeltaZone ;
+return DeltaThis < DeltaZone ; */
 
-//return m_VecPtsSmall.size() < Zone.m_VecPtsSmall.size() ;
+return m_VecPtsSmall.size() < Zone.m_VecPtsSmall.size() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Compraison de taille VecSmall pour compression GnuVario en premier
 bool CZone::operator > ( const CZone & Zone ) const
 {
-long DeltaThis = m_VecPtsBig.size() - m_VecPtsSmall.size() ;
+/*long DeltaThis = m_VecPtsBig.size() - m_VecPtsSmall.size() ;
 long DeltaZone = Zone.m_VecPtsBig.size() - Zone.m_VecPtsSmall.size() ;
-return DeltaThis > DeltaZone ;
+return DeltaThis > DeltaZone ; */
 
-//return m_VecPtsSmall.size() > Zone.m_VecPtsSmall.size() ;
+return m_VecPtsSmall.size() > Zone.m_VecPtsSmall.size() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +163,7 @@ return DelataMaxDeg * MilesParDegres * UnMilesEnMetres / 1000. ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoie si une zone non compressee est strictement differente en nom
-/// et dimension
+/// taille et position des points
 bool CZone::operator != ( const CZone & Zone ) const
 {
 // pour toutes les zones deja enregistrées

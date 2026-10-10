@@ -17,7 +17,10 @@ char TmpChar[5000] ;
 string nom_fch_simple = Zone.m_NameSansBlanc ;
 
 // nom avec chemin
-sprintf( TmpChar , "%s/%03ld-%s.big.kml" , CHEMIN_KML , iz , nom_fch_simple.c_str() ) ;
+if ( g_GlobalVar.m_OpenAir )
+    sprintf( TmpChar , "%s/%03ld-%s.big.kml" , CHEMIN_KML_OPENAIR , iz , nom_fch_simple.c_str() ) ;
+else
+    sprintf( TmpChar , "%s/%03ld-%s.big.kml" , CHEMIN_KML_BAZIL , iz , nom_fch_simple.c_str() ) ;
 // ouverture du fichier
 ofstream ofsb( TmpChar , std::ofstream::out);
 
@@ -50,7 +53,10 @@ ofsb << "</coordinates>\n\
 ofsb.close() ;
 
 // nom avec chemin
-sprintf( TmpChar , "%s/%03ld-%s.small.kml" , CHEMIN_KML , iz , nom_fch_simple.c_str() ) ;
+if ( g_GlobalVar.m_OpenAir )
+    sprintf( TmpChar , "%s/%03ld-%s.small.kml" , CHEMIN_KML_OPENAIR , iz , nom_fch_simple.c_str() ) ;
+else
+    sprintf( TmpChar , "%s/%03ld-%s.small.kml" , CHEMIN_KML_BAZIL , iz , nom_fch_simple.c_str() ) ;
 // ouverture du fichier
 ofstream ofss( TmpChar , std::ofstream::out);
 

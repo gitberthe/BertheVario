@@ -6,6 +6,7 @@
 /// \date creation   : 23/03/2024
 /// \date 26/10/2025 : tableau de st_coord_poly et plus *.
 /// \date 27/10/2025 : Remplacement de m_RayonMetre par CRectIn.
+/// \date 10/10/2026 : Prise en compte d'une zone qui ne reboucle pas sur son point de debut dans IsIn().
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -38,7 +39,7 @@ static const CZoneAer::st_coord_poly ptLoin = { 0. , 0. } ;
 //struct Point ptTest = {PtsToTest.m_Lat,PtsToTest.m_Lon} ;
 for ( int ip = 0 ; ip < NbPts ; ip++ )
     {
-    // points du segmant de zone
+    // points du segment de zone
     if ( ip < (NbPts-1) )
         {
         if ( doIntersect( PtsArr[ip] , PtsArr[ip+1] , PtsToTest , ptLoin ) )
@@ -49,7 +50,9 @@ for ( int ip = 0 ; ip < NbPts ; ip++ )
         ptB1.x = PtsArr[ip+1].m_Lat ;
         ptB1.y = PtsArr[ip+1].m_Lon ;*/
         }
-    else
+    // si point de fin et de debut different alors un autre segment
+    else if ( (PtsArr[ip].m_Lat != PtsArr[0].m_Lat) ||
+              (PtsArr[ip].m_Lon != PtsArr[0].m_Lon) )
         {
         if ( doIntersect( PtsArr[ip] , PtsArr[0] , PtsToTest , ptLoin ) )
             NbInter++ ;

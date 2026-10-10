@@ -11,8 +11,9 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--batch terconnu.txt 80" />
+				<Option parameters="--openair 45.503415 2.852121 5 " />
 				<Compiler>
+					<Add option="-ggdb" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -49,6 +50,8 @@
 		<Unit filename="src/geometrie/Segments.h" />
 		<Unit filename="src/kml/CKmlFile.cpp" />
 		<Unit filename="src/kml/CKmlFile.h" />
+		<Unit filename="src/openair/COpenAirFile.cpp" />
+		<Unit filename="src/openair/COpenAirFile.h" />
 		<Unit filename="src/zone/CCompZoneErr.cpp" />
 		<Unit filename="src/zone/CCompZoneErr.h" />
 		<Unit filename="src/zone/CGroupeAligne.cpp" />
