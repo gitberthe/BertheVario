@@ -1,8 +1,0 @@
-num :  55
- nom : LF-R68A (AMC MANAGEABLE AERA) 
- alti. min: 0 m
- compression:  13/  11 pts
- delta max:    103.3 km
- resol delta: 3.3 metres
- err moyenne:  0.1 m
- err maxi:  1.4 m

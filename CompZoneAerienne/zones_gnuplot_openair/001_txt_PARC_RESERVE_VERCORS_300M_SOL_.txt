@@ -1,8 +1,0 @@
-num :   1
- nom : PARC/RESERVE VERCORS 300M/SOL 
- alti. min: 0 m
- compression:  8360/ 129 pts
- delta max:    3343.9 km
- resol delta: 107.2 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

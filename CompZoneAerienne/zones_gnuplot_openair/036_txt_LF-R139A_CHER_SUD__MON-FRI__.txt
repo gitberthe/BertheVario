@@ -1,8 +1,0 @@
-num :  36
- nom : LF-R139A CHER SUD (MON-FRI) 
- alti. min: 0 m
- compression:  61/  23 pts
- delta max:    29.9 km
- resol delta: 1.0 metres
- err moyenne:  7.7 m
- err maxi:  13.0 m

@@ -1,8 +1,0 @@
-num :  16
- nom : TMA SAINT-YAN 1.2 PARAY (VOL LIBRE) 
- alti. min: 0 m
- compression:  155/  39 pts
- delta max:    14.5 km
- resol delta: 0.5 metres
- err moyenne:  7.8 m
- err maxi:  12.9 m

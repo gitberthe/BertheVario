@@ -1,8 +1,0 @@
-num :  61
- nom : TMA SAINT-YAN 1.4 (MO-FR) 
- alti. min: 0 m
- compression:  11/  10 pts
- delta max:    74.1 km
- resol delta: 2.4 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

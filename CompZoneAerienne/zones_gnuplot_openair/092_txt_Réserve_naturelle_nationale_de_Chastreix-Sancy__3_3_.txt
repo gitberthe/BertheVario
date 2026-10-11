@@ -1,8 +1,0 @@
-num :  92
- nom : Réserve naturelle nationale de Chastreix-Sancy (3/3) 
- alti. min: 0 m
- compression:  6/   6 pts
- delta max:    0.5 km
- resol delta: 0.0 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

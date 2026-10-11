@@ -1,8 +1,0 @@
-num :  23
- nom : LF-R20B3W AVORD 
- alti. min: 0 m
- compression:  78/  31 pts
- delta max:    59.9 km
- resol delta: 1.9 metres
- err moyenne:  8.4 m
- err maxi:  14.7 m

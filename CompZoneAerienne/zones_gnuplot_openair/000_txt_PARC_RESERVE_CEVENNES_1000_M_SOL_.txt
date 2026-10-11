@@ -1,8 +1,0 @@
-num :   0
- nom : PARC/RESERVE CEVENNES 1000 M/SOL 
- alti. min: 0 m
- compression:  948/ 900 pts
- delta max:    34.5 km
- resol delta: 1.1 metres
- err moyenne:  0.4 m
- err maxi:  14.6 m

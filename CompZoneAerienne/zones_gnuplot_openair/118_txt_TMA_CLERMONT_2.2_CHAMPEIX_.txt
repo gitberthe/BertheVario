@@ -1,8 +1,0 @@
-num : 118
- nom : TMA CLERMONT 2.2 CHAMPEIX 
- alti. min: 0 m
- compression:  7/   5 pts
- delta max:    15.9 km
- resol delta: 0.5 metres
- err moyenne:  1.5 m
- err maxi:  10.2 m

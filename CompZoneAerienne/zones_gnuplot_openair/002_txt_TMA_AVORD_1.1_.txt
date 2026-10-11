@@ -1,8 +1,0 @@
-num :   2
- nom : TMA AVORD 1.1 
- alti. min: 0 m
- compression:  219/ 113 pts
- delta max:    69.1 km
- resol delta: 2.2 metres
- err moyenne:  3.8 m
- err maxi:  7.9 m

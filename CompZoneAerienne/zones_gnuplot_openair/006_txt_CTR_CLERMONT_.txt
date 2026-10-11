@@ -1,8 +1,0 @@
-num :   6
- nom : CTR CLERMONT 
- alti. min: 0 m
- compression:  315/  67 pts
- delta max:    24.0 km
- resol delta: 0.8 metres
- err moyenne:  8.0 m
- err maxi:  14.7 m

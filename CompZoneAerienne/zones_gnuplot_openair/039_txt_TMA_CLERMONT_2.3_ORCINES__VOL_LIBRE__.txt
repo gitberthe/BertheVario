@@ -1,8 +1,0 @@
-num :  39
- nom : TMA CLERMONT 2.3 ORCINES (VOL LIBRE) 
- alti. min: 0 m
- compression:  35/  19 pts
- delta max:    12.2 km
- resol delta: 0.4 metres
- err moyenne:  3.3 m
- err maxi:  9.9 m
