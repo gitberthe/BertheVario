@@ -1,2 +1,5 @@
 le 11/10/2026 :
+ . contour des zones openair ok. reste les altitudes.
+
+le 11/10/2026 :
  . progression dans l'implementation de openair
