@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-LF-R203ABC LA COURTINE </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.41333333,45.6575,100
+2.45555556,45.7127778,100
+2.17111111,45.8175,100
+2.11388889,45.7472222,100
+2.25,45.7166667,100
+2.41333333,45.6575,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

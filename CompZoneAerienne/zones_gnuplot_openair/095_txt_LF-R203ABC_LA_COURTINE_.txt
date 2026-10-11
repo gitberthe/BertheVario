@@ -1,0 +1,8 @@
+num :  95
+ nom : LF-R203ABC LA COURTINE 
+ alti. min: 0 m
+ compression:  7/   6 pts
+ delta max:    21.0 km
+ resol delta: 0.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

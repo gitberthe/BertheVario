@@ -86,24 +86,33 @@ if ( tokens.size() == 0 || tokens[0][0] == '*' )
 if ( tokens[0] == "AC" )
     {
     m_pZoneCur = new CZone ;
-    m_pZoneArr.push_back( m_pZoneCur ) ;
-    TraiteACClasseDeLaZone( tokens ) ;
+    m_DClockwise = true ;
+    // si zone non controlee
+    if ( ! TraiteACClasseDeLaZone( tokens ) )
+        m_pZoneArr.push_back( m_pZoneCur ) ;
+    else
+        {
+        delete m_pZoneCur ;
+        m_pZoneCur = NULL ;
+        }
     }
 // AN nom de zone
-else if ( tokens[0] == "AN" )
+else if ( tokens[0] == "AN" && m_pZoneCur != NULL )
     {
+    m_DClockwise = true ;
     TraiteANNomDeLaZone( tokens ) ;
     //cout << m_pZoneCur->m_Name << endl ;
     }
-else if ( tokens[0] == "AY" )
+else if ( tokens[0] == "AY" && m_pZoneCur != NULL )
     {}
-else if ( tokens[0] == "AH" )
+else if ( tokens[0] == "AH" && m_pZoneCur != NULL )
     TraiteAHAltitudeHaute( tokens ) ;
-else if ( tokens[0] == "AL" )
+else if ( tokens[0] == "AL" && m_pZoneCur != NULL )
     TraiteALAltitudeBasse( tokens ) ;
 // DP point de zone
-else if ( tokens[0] == "DP" )
+else if ( tokens[0] == "DP" && m_pZoneCur != NULL )
     {
+    m_DClockwise = true ;
     CVecZoneReduce::st_coord_poly * pStPts = new CVecZoneReduce::st_coord_poly ;
     m_pZoneCur->m_VecPtsBig.push_back( pStPts ) ;
 
@@ -114,16 +123,16 @@ else if ( tokens[0] == "DP" )
     //cout << m_pZoneArr.size() << endl ;
     }
 // variable
-else if ( tokens[0] == "V" )
+else if ( tokens[0] == "V" && m_pZoneCur != NULL )
     TraiteVVariableAssignement(tokens) ;
 // arc de cercle
-else if ( tokens[0] == "DB" )
+else if ( tokens[0] == "DB" && m_pZoneCur != NULL )
     TraiteDBArcBetweenPoints(tokens) ;
 // cercle
-else if ( tokens[0] == "DC" )
+else if ( tokens[0] == "DC" && m_pZoneCur != NULL )
     TraiteDCCercle(tokens) ;
 // champs inconnu
-else
+else if ( m_pZoneCur != NULL )
     {
     cerr << "champ non connu : " << tokens[0] << endl ;
     exit( 1 ) ;
@@ -134,8 +143,13 @@ return 0 ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief classe A B C D E F G ZSM
+/// Espaces interdit au parapentes: A B C D (B pas en france)
+/// Espaces autorise au parapentes: E F G (F pas en france)
 long COpenAirFile::TraiteACClasseDeLaZone(std::vector<std::string> & tokens)
 {
+// espaces aeriens non controle
+//if ( tokens[1][0] == 'G' )
+//    return 1 ;
 return 0 ;
 }
 
@@ -148,6 +162,9 @@ for ( long it = 1 ; it < (long)tokens.size() ; it++ )
     m_pZoneCur->m_Name += tokens[it] ;
     m_pZoneCur->m_Name += " " ;
     }
+
+std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '|', ' '); // replace all 'x' to 'y'
+
 return 0 ;
 }
 
@@ -248,6 +265,7 @@ else if ( strchr( TmpChar , ':' ) && strchr( TmpChar , '.' ) )
         pStPts->m_Lon *= -1 ;
         }
     }
+// erreur programme
 else
     {
     erreur :
@@ -258,23 +276,170 @@ else
 return 0 ;
 }
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Traite le champ V. Variable de centre de cercle ou arc de cercle.
 long COpenAirFile::TraiteVVariableAssignement(std::vector<std::string> & tokens)
 {
+// traite le champ sens de rotation D
+if ( tokens[1][0] == 'D' )
+    {
+    bool UnTrouve = false ;
+
+    // recherche +
+    std::size_t found = tokens[1].find('+');
+    if (found!=std::string::npos)
+        {
+        UnTrouve = true ;
+        m_DClockwise = true ;
+        }
+
+    // recherche -
+    found = tokens[1].find('-');
+    if (found!=std::string::npos)
+        {
+        UnTrouve = true ;
+        m_DClockwise = false ;
+        }
+
+    // si probleme + -
+    if ( ! UnTrouve )
+        {
+        char TmpChar[1000] = "" ;
+
+        // concatenation de la chaine
+        for ( long it = 0 ; it < (long)tokens.size() ; it++ )
+            strcat( TmpChar, tokens[it].c_str()) ;
+
+        cerr << "**** probleme champ V D=+/- : " << TmpChar << endl ;
+        exit( 1 ) ;
+        }
+    }
+// traite le champ centre de cercle X
+else if ( tokens[1][0] == 'X' )
+    {
+    std::replace( tokens[1].begin(), tokens[1].end(), 'X', ' ');
+    std::replace( tokens[1].begin(), tokens[1].end(), '=', ' ');
+
+    TraiteDPPointDePolygone( &m_XCenterDaDbDc, tokens ) ;
+    }
+// erreur programme
+else
+    {
+    char TmpChar[1000] = "" ;
+
+    // concatenation de la chaine
+    for ( long it = 0 ; it < (long)tokens.size() ; it++ )
+        strcat( TmpChar, tokens[it].c_str()) ;
+
+    cerr << "**** probleme champ V X=D:M:S N/S D:M:S E/W : " << TmpChar << endl ;
+    exit( 2 ) ;
+    }
+
+
 return 0 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Trace un arc de cercle
 long COpenAirFile::TraiteDBArcBetweenPoints(std::vector<std::string> & tokens)
 {
+char TmpChar[1000] = "" ;
+// concatenation de la chaine, les 2 points
+for ( long it = 1 ; it < (long)tokens.size() ; it++ )
+    strcat( TmpChar, tokens[it].c_str()) ;
+
+// decoupe des 2 points
+std::string stringPt1 = strtok(TmpChar,",") ;
+std::string stringPt2 = strtok(NULL,",") ;
+
+// conversion en numerique
+std::vector<std::string> tokensPt1 ;
+std::vector<std::string> tokensPt2 ;
+
+tokensPt1.push_back("DP") ;
+tokensPt1.push_back(stringPt1) ;
+
+tokensPt2.push_back("DP") ;
+tokensPt2.push_back(stringPt2) ;
+
+CVecZoneReduce::st_coord_poly * pPts1 = new CVecZoneReduce::st_coord_poly ;
+CVecZoneReduce::st_coord_poly * pPts2 = new CVecZoneReduce::st_coord_poly ;
+
+TraiteDPPointDePolygone( pPts1, tokensPt1 ) ;
+TraiteDPPointDePolygone( pPts2, tokensPt2 ) ;
+
+// calcul du rayon du cercle
+double RadiusDeg = sqrt( pow( pPts1->m_Lat - m_XCenterDaDbDc.m_Lat , 2. ) + pow( pPts1->m_Lon - m_XCenterDaDbDc.m_Lon , 2.) ) ;
+// angles de depart et d'arrivee
+double Angle1Rad = atan2( (pPts1->m_Lat - m_XCenterDaDbDc.m_Lat) , (pPts1->m_Lon - m_XCenterDaDbDc.m_Lon) ) ;
+double Angle2Rad = atan2( (pPts2->m_Lat - m_XCenterDaDbDc.m_Lat) , (pPts2->m_Lon - m_XCenterDaDbDc.m_Lon) ) ;
+// pas de calcul
+double PasRadian = PAS_CERCLE_DEG*T_PI/180. ;
+// angle couvert
+double DiffAngle = Angle2Rad - Angle1Rad ;
+
+// sens de rotation
+if (m_DClockwise)
+    {
+    if (DiffAngle > 0) DiffAngle -= 2 * T_PI;
+    }
+else
+    {
+    // Sens anti-horaire (trigonométrique)
+    if (DiffAngle < 0) DiffAngle += 2 * T_PI;
+    }
+
+/*if ( strstr(m_pZoneCur->m_Name.c_str(),"368B" ) != NULL )
+if ( strstr(m_pZoneCur->m_Name.c_str(),"TMA CLERMONT 1" ) != NULL )
+    {
+    const char * a = m_pZoneCur->m_Name.c_str() ;
+    } */
+
+long AngleCount = DiffAngle / PasRadian ;
+
+//m_pZoneCur->m_VecPtsBig.push_back( pPts1 ) ;
+for ( long is=0 ; is < labs(AngleCount) ; is++ )
+    {
+    double angleActuel = Angle1Rad + ((double)is) * DiffAngle / ((double)abs(AngleCount)) ;
+    CVecZoneReduce::st_coord_poly * pPts = new CVecZoneReduce::st_coord_poly ;
+    pPts->m_Lat = RadiusDeg * sin( angleActuel ) + m_XCenterDaDbDc.m_Lat ;
+    pPts->m_Lon = RadiusDeg * cos( angleActuel ) + m_XCenterDaDbDc.m_Lon ;
+    m_pZoneCur->m_VecPtsBig.push_back( pPts ) ;
+    }
+//m_pZoneCur->m_VecPtsBig.push_back( pPts2 ) ;
+
 return 0 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Trace un cercle. The radius is given in nautical miles.
+/// soit en secondes.
 long COpenAirFile::TraiteDCCercle(std::vector<std::string> & tokens)
 {
+double RadiusDeg=atof( tokens[1].c_str() ) ;
+RadiusDeg /= 60. ;
+
+if ( RadiusDeg == 0. )
+    {
+    char TmpChar[1000] = "" ;
+
+    // concatenation de la chaine
+    for ( long it = 0 ; it < (long)tokens.size() ; it++ )
+        strcat( TmpChar, tokens[it].c_str()) ;
+
+    cerr << "**** probleme champ DC Radius : " << TmpChar << endl ;
+    exit( 1 ) ;
+    }
+
+// dessin du cercle
+for ( double angle = 0 ; angle < 360. ; angle += PAS_CERCLE_DEG )
+    {
+    double AngleRadian = ((double)angle*T_PI/180.) ;
+    CVecZoneReduce::st_coord_poly * pPts = new CVecZoneReduce::st_coord_poly ;
+    pPts->m_Lat = RadiusDeg * sin( AngleRadian ) + m_XCenterDaDbDc.m_Lat ;
+    pPts->m_Lon = RadiusDeg * cos( AngleRadian ) + m_XCenterDaDbDc.m_Lon ;
+    m_pZoneCur->m_VecPtsBig.push_back( pPts ) ;
+    }
+
 return 0 ;
 }
 

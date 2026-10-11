@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-LF-R169 LARZAC </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.28138889,44.1,100
+3.29666667,44.0702778,100
+3.29055556,44.0166667,100
+3.16333333,44.0166667,100
+3.15388889,44.025,100
+3.13527778,44.0338889,100
+3.11666667,44.0666667,100
+3.11666667,44.1,100
+3.28138889,44.1,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

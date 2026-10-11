@@ -1,0 +1,8 @@
+num : 100
+ nom : TMA CLERMONT5.1 PUY DE DOME (VOL LIBRE) 
+ alti. min: 0 m
+ compression:  7/   6 pts
+ delta max:    27.7 km
+ resol delta: 0.9 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

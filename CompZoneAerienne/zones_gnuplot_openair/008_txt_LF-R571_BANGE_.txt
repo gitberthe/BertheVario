@@ -1,0 +1,8 @@
+num :   8
+ nom : LF-R571 BANGE 
+ alti. min: 0 m
+ compression:  361/  46 pts
+ delta max:    0.9 km
+ resol delta: 0.0 metres
+ err moyenne:  1.5 m
+ err maxi:  2.3 m

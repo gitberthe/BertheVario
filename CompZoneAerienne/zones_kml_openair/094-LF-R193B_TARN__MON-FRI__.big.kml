@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-LF-R193B TARN (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.60555556,44.0583333,200
+3.32138889,43.8427778,200
+3.39166667,43.8833333,200
+3.525,43.6527778,200
+2.68333333,43.9,200
+2.60555556,44.0583333,200
+2.60555556,44.0583333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

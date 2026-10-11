@@ -1,0 +1,8 @@
+num :  96
+ nom : LF-R144A LOIRE SUD (MON-FRI) 
+ alti. min: 0 m
+ compression:  7/   6 pts
+ delta max:    46.0 km
+ resol delta: 1.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

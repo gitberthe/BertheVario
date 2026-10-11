@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-LF-R224 SAINT GALMIER </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+4.30916667,45.6233333,200
+4.31722222,45.5972222,200
+4.28944444,45.5955556,200
+4.26916667,45.6202778,200
+4.30916667,45.6233333,200
+4.30916667,45.6233333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

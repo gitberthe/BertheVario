@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-PROTECT Puy D'Anzelles / Plateau des Vaugondieres 4 (300m/sol) (FAUNA)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.170641,45.757595,100
+3.170561,45.758081,100
+3.169523,45.757366,100
+3.168863,45.756857,100
+3.170533,45.756805,100
+3.170641,45.757595,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

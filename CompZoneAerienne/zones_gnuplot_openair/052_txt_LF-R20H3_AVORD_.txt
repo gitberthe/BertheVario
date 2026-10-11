@@ -1,0 +1,8 @@
+num :  52
+ nom : LF-R20H3 AVORD 
+ alti. min: 0 m
+ compression:  12/  11 pts
+ delta max:    72.0 km
+ resol delta: 2.3 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

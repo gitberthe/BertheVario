@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--openair 45.503415 2.852121 5 " />
+				<Option parameters="--openair --point 45.503415 2.852121 5 " />
 				<Compiler>
 					<Add option="-ggdb" />
 					<Add option="-g" />

@@ -506,7 +506,7 @@
 1768048753 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CCompZoneErr.cpp
 	"CompZoneAerienne.h"
 
-1768243476 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
+1791659166 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -519,18 +519,22 @@
 	<unistd.h>
 	<filesystem>
 	<unistd.h>
+	<string.h>
+	<dirent.h>
 	"nlohmann/json.hpp"
-	"CVecteur2D.h"
-	"CDroite2D.h"
-	"CVecZoneReduce.h"
-	"Segments.h"
-	"CVecteur3D.h"
-	"CPolygone.h"
-	"CNuage2Droite.h"
-	"CGroupeAligne.h"
-	"CCompZoneErr.h"
-	"CZone.h"
-	"CKmlFile.h"
+	"geometrie/CVecteur2D.h"
+	"geometrie/CDroite2D.h"
+	"zone/CVecZoneReduce.h"
+	"geometrie/Segments.h"
+	"geometrie/CVecteur3D.h"
+	"geometrie/CPolygone.h"
+	"zone/CNuage2Droite.h"
+	"zone/CGroupeAligne.h"
+	"zone/CCompZoneErr.h"
+	"zone/CZone.h"
+	"kml/CKmlFile.h"
+	"openair/COpenAirFile.h"
+	"CGlobalVar.h"
 
 1739008757 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/nlohmann/json.hpp
 	<algorithm>
@@ -749,7 +753,7 @@
 1739008757 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CNuage2Droite.cpp
 	"CompZoneAerienne.h"
 
-1768210117 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
+1791683367 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
 	"CompZoneAerienne.h"
 
 1739008757 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CVecteur2D.cpp
@@ -1357,5 +1361,71 @@
 1791662124 /home/internet/tmp/openair/CompZoneAerienne/src/openair/COpenAirFile.h
 
 1791661683 source:/home/internet/tmp/openair/CompZoneAerienne/src/openair/COpenAirFile.cpp
+	"../CompZoneAerienne.h"
+
+1791683398 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CGlobalVar.cpp
+	"CompZoneAerienne.h"
+
+1739008757 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur2D.h
+
+1739008757 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.h
+
+1768287935 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CVecZoneReduce.h
+
+1768243381 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/Segments.h
+
+1739008757 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur3D.h
+
+1768299666 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CPolygone.h
+
+1739008757 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CNuage2Droite.h
+
+1739008757 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CGroupeAligne.h
+
+1791610926 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CCompZoneErr.h
+
+1791610727 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.h
+
+1791621043 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/kml/CKmlFile.h
+
+1791706209 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.h
+
+1791683307 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CGlobalVar.h
+
+1791589472 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.cpp
+	"../CompZoneAerienne.h"
+
+1791666816 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CPolygone.cpp
+	"../CompZoneAerienne.h"
+
+1791589488 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur2D.cpp
+	"../CompZoneAerienne.h"
+
+1791589493 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur3D.cpp
+	"../CompZoneAerienne.h"
+
+1791589483 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/Segments.cpp
+	"../CompZoneAerienne.h"
+	<iostream>
+
+1791621152 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/kml/CKmlFile.cpp
+	"../CompZoneAerienne.h"
+
+1791610879 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CCompZoneErr.cpp
+	"../CompZoneAerienne.h"
+
+1791589792 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CGroupeAligne.cpp
+	"../CompZoneAerienne.h"
+
+1791589797 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CNuage2Droite.cpp
+	"../CompZoneAerienne.h"
+
+1791589803 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CVecZoneReduce.cpp
+	"../CompZoneAerienne.h"
+
+1791663942 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.cpp
+	"../CompZoneAerienne.h"
+
+1791707195 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.cpp
 	"../CompZoneAerienne.h"
 

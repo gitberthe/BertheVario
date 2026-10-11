@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-RTBA 592 (MILOPS / SeeNotam)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.516667,45.083333,200
+3.744444,44.844444,200
+3.833333,44.658333,200
+3.286111,44.816667,200
+3.116667,44.783056,200
+2.916667,44.933333,200
+3.383333,45.083333,200
+3.516667,45.083333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

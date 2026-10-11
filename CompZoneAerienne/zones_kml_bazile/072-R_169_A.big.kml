@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 169 A</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.2815,44.1,200
+3.296653,44.070306,200
+3.290636,44.016667,200
+3.163333,44.016667,200
+3.153889,44.025,200
+3.135278,44.033889,200
+3.116667,44.066667,200
+3.116667,44.1,200
+3.2815,44.1,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

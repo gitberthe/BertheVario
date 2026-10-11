@@ -1,0 +1,8 @@
+num :  24
+ nom : TMA LYON 4 
+ alti. min: 0 m
+ compression:  50/  31 pts
+ delta max:    116.6 km
+ resol delta: 3.7 metres
+ err moyenne:  2.5 m
+ err maxi:  7.7 m

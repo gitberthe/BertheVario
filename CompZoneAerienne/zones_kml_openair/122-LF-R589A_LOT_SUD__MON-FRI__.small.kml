@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-LF-R589A LOT SUD (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.26277778,44.1366667,100
+3.42583333,44.1891667,100
+3.55666667,43.9355556,100
+3.39166667,43.8833333,100
+3.26277778,44.1366667,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

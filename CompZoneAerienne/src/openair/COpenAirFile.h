@@ -4,10 +4,12 @@
 /// \brief
 ///
 /// \date 10/10/2026 : creation
-/// \date 10/10/2026 : modification
+/// \date 11/10/2026 : modification
 ///
 
 #pragma once
+
+#define PAS_CERCLE_DEG  (1.)
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Classe qui lit un fichier openair et rempli sont tableau de CZone.

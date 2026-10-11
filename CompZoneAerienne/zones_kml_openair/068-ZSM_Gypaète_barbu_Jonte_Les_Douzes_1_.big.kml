@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-ZSM Gypaète barbu Jonte Les Douzes 1 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.31444444,44.2069444,200
+3.31194444,44.2025,200
+3.30583333,44.2008333,200
+3.29972222,44.2027778,200
+3.29694444,44.2072222,200
+3.29972222,44.2116667,200
+3.30583333,44.2133333,200
+3.31194444,44.2116667,200
+3.31444444,44.2069444,200
+3.31444444,44.2069444,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

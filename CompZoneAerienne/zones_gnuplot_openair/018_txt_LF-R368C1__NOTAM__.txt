@@ -1,0 +1,8 @@
+num :  18
+ nom : LF-R368C1 (NOTAM) 
+ alti. min: 0 m
+ compression:  196/  35 pts
+ delta max:    92.1 km
+ resol delta: 2.9 metres
+ err moyenne:  8.4 m
+ err maxi:  14.1 m

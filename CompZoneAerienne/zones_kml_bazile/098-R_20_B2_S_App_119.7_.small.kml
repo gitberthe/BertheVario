@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 20 B2 S App(119.7)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.313056,46.728056,100
+3.25,46.5,100
+2.75,46.5,100
+2.879444,46.542222,100
+2.852222,46.775833,100
+3.313056,46.728056,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

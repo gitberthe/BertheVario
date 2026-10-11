@@ -1,0 +1,8 @@
+num :   3
+ nom : CTR SAINT YAN 1 (MON-FRI) 
+ alti. min: 0 m
+ compression:  300/  82 pts
+ delta max:    26.1 km
+ resol delta: 0.8 metres
+ err moyenne:  8.7 m
+ err maxi:  14.4 m

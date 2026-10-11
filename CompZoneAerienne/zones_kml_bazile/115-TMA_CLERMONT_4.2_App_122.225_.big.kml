@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-TMA CLERMONT 4.2 App(122.225)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.253889,45.541389,200
+3.309167,45.319722,200
+3.021111,45.223333,200
+3.006389,45.515556,200
+3.253889,45.541389,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

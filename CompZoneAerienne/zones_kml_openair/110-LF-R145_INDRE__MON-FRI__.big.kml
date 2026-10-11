@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-LF-R145 INDRE (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+1.94,46.5113889,200
+2.24944444,46.7158333,200
+2.47166667,46.6055556,200
+2.26916667,46.4813889,200
+1.94,46.5113889,200
+1.94,46.5113889,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

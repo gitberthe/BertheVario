@@ -127,7 +127,7 @@ for ( size_t iptcentre = 0 ; iptcentre < m_VectPtCentreRayon.size() ; iptcentre+
 
         // si dans perimetre ou dessous ajout de la zone
         if ( VerificationZoneAdmissible( pZone, LatCentreDeg, LonCentreDeg, RayonDeg ) )
-            m_VecZone.push_back( pZone ) ;
+            m_VecZones.push_back( pZone ) ;
         //else
         //    delete pZone ;
         }
@@ -141,8 +141,8 @@ return 0 ;
 bool CGlobalVar::VerificationZoneAdmissible(const CZone* pZone, double LatCentreDeg, double LonCentreDeg, double RayonDeg)
 {
 // si zone deja faite
-for ( size_t izdf = 0 ; izdf < m_VecZone.size() ; izdf++ )
-    if ( *m_VecZone[izdf] == *pZone )
+for ( size_t izdf = 0 ; izdf < m_VecZones.size() ; izdf++ )
+    if ( *m_VecZones[izdf] == *pZone )
         return false ;
 
 // calcul dans le perimetre mais pas dessous
@@ -243,7 +243,7 @@ for ( long iff = 0 ; iff < (long)NomFchArr.size() ; iff++ )
 
             // si dans perimetre ou dessous ajout de la zone
             if ( VerificationZoneAdmissible( pZone, LatCentreDeg, LonCentreDeg, RayonDeg ) )
-                m_VecZone.push_back( pZone ) ;
+                m_VecZones.push_back( pZone ) ;
             // pas de delete car plusieur fichier avec meme zone
             //else
             //    delete pZone ;
@@ -261,9 +261,9 @@ long CGlobalVar::EcritureFichierZones()
 // entete fichier
 cout << "#Nom Zone;alti basse;lon0_deg,lat0_deg;lon1_deg,lat1_deg" << endl ;
 
-for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
+for ( unsigned long iz = 0 ; iz < m_VecZones.size() ; iz++ )
     {
-    CZone & Zone = *m_VecZone[iz] ;
+    CZone & Zone = *m_VecZones[iz] ;
 
     // ecriture pour fichier texte sur cout
     cout << Zone.m_Name << ";" << Zone.m_Bottom << ";" ;
@@ -295,8 +295,8 @@ for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
         }
     }
 
-m_ResolutionMoyenneMetre /= m_VecZone.size() ;
-m_ErreurMoyenneMetres /= m_VecZone.size() ;
+m_ResolutionMoyenneMetre /= m_VecZones.size() ;
+m_ErreurMoyenneMetres /= m_VecZones.size() ;
 
 return 0 ;
 }
@@ -315,9 +315,9 @@ if ( m_OpenAir )
     cerr << "creation fichier gnuplot dans " << CHEMIN_GNUPLOT_OPENAIR << endl ;
 else
     cerr << "creation fichier gnuplot dans " << CHEMIN_GNUPLOT_BAZILE << endl ;
-for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
+for ( unsigned long iz = 0 ; iz < m_VecZones.size() ; iz++ )
     {
-    CZone & Zone = *m_VecZone[iz] ;
+    CZone & Zone = *m_VecZones[iz] ;
     char NomFichierGnuplotAvecChemin[3000] ;
     char NomFichierGnuplotNomDeZoneSansBlanc[3000] ;
 
@@ -439,9 +439,9 @@ else
     }
 
 CKmlFile KmlFile ;
-for ( unsigned long iz = 0 ; iz < m_VecZone.size() ; iz++ )
+for ( unsigned long iz = 0 ; iz < m_VecZones.size() ; iz++ )
     {
-    CZone & Zone = *m_VecZone[iz] ;
+    CZone & Zone = *m_VecZones[iz] ;
     // fichier kml de la zone au sol
     KmlFile.WriteFile(Zone,iz) ;
     }

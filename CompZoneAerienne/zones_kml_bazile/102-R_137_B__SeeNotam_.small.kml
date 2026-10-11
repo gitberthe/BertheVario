@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 137 B (SeeNotam)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.616667,46.5,100
+3.749444,46.178056,100
+3.448056,46.218333,100
+3.5475,46.5,100
+3.616667,46.5,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

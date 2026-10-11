@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 68 C</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+1.533333,45.166667,200
+2.604722,45.166667,200
+3.021111,45.223333,200
+3.024167,45.144167,200
+2.571944,44.8475,200
+2.486111,44.790556,200
+2.416667,44.742778,200
+2.224167,44.75,200
+1.9625,44.761111,200
+1.739444,44.813889,200
+1.533333,45.166667,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

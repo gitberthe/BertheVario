@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-TMA LIMOGES 3 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+0.919444444,46.4388889,200
+2.19833333,46.3333333,200
+2.19833333,46.1244444,200
+1.69166667,45.8694444,200
+1.54666667,46.2388889,200
+0.916666667,46.1533333,200
+0.919444444,46.4388889,200
+0.919444444,46.4388889,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

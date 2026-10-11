@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-TMA TOULOUSE 4.6 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+1.02194444,44.3022222,100
+1.56666667,44.2083333,100
+1.85833333,44.1666667,100
+2.60555556,44.0583333,100
+2.475,43.9611111,100
+2.375,44.0111111,100
+1.62166667,44.0838889,100
+1.53888889,44.0916667,100
+1.35083333,44.1255556,100
+1.00222222,44.0386111,100
+1.01333333,44.1844444,100
+1.02194444,44.3022222,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

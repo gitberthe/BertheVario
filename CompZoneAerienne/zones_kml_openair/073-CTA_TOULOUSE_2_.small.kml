@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-CTA TOULOUSE 2 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+0.579722222,44.5,100
+1.71666667,44.5,100
+2.60555556,44.0583333,100
+1.85833333,44.1666667,100
+1.80444444,44.2933333,100
+1.74888889,44.2952778,100
+1.02555556,44.3461111,100
+0.579722222,44.5,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

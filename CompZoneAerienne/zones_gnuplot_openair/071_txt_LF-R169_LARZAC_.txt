@@ -1,0 +1,8 @@
+num :  71
+ nom : LF-R169 LARZAC 
+ alti. min: 0 m
+ compression:  10/   9 pts
+ delta max:    10.3 km
+ resol delta: 0.3 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

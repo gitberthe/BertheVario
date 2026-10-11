@@ -41,7 +41,7 @@ public :
 
     std::string                 m_path  ;               ///< repertoire courant
     std::vector<CCmdLineParam>  m_VectPtCentreRayon ;   ///< vecteur des differents points centre/rayon de recherche de zone
-    std::vector< CZone* >       m_VecZone ;             ///< vecteur des zones
+    std::vector< CZone* >       m_VecZones ;             ///< vecteur des zones
 
 
 private :

@@ -1,0 +1,8 @@
+num :  90
+ nom : APPB de la Narse d'Espinasse 
+ alti. min: 0 m
+ compression:  6/   6 pts
+ delta max:    0.4 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

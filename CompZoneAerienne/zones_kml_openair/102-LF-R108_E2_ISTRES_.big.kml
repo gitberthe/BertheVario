@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-LF-R108 E2 ISTRES </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.54694444,43.9552778,200
+3.69027778,43.7716667,200
+3.9,43.4833333,200
+3.24583333,43.6147222,200
+3.27638889,43.8894444,200
+3.54694444,43.9552778,200
+3.54694444,43.9552778,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

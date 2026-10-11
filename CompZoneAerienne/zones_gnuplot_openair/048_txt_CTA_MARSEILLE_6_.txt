@@ -1,0 +1,8 @@
+num :  48
+ nom : CTA MARSEILLE 6 
+ alti. min: 0 m
+ compression:  14/  13 pts
+ delta max:    62.8 km
+ resol delta: 2.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

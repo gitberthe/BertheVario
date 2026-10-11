@@ -15,7 +15,7 @@
 
 using namespace std;
 
-char NumVer[]="20261010b" ;
+char NumVer[]="20261011a" ;
 
 CGlobalVar g_GlobalVar ;
 
@@ -117,14 +117,14 @@ else
 
 // compression des zones
 cerr << "compression des zones" << endl ;
-for ( long iz = g_GlobalVar.m_VecZone.size() -1 ; iz >= 0 ; iz-- )
+for ( long iz = g_GlobalVar.m_VecZones.size() -1 ; iz >= 0 ; iz-- )
     {
-    g_GlobalVar.m_VecZone[iz]->Compress() ;
+    g_GlobalVar.m_VecZones[iz]->Compress() ;
     cerr << setw(5) << iz << "\r" << flush ;
     }
 
 // tri de-croissant des zones compressees
-std::sort( g_GlobalVar.m_VecZone.begin() , g_GlobalVar.m_VecZone.end() , MySortFonction ) ;
+std::sort( g_GlobalVar.m_VecZones.begin() , g_GlobalVar.m_VecZones.end() , MySortFonction ) ;
 //std::reverse( VecZone.begin() , VecZone.end() ) ;
 
 // ecriture des zones sur cout, fichier gnuplot

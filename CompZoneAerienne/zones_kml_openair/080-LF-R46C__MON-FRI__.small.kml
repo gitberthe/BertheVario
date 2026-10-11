@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-LF-R46C (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+1.56666667,44.2083333,100
+2.41666667,44.1361111,100
+2.60555556,44.0583333,100
+2.475,43.9611111,100
+2.375,44.0111111,100
+1.53888889,44.0916667,100
+1.56666667,44.2083333,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

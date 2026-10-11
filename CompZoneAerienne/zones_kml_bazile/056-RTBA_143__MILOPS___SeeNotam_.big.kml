@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-RTBA 143 (MILOPS / SeeNotam)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.936389,46.177778,200
+2.968889,45.955833,200
+2.775,45.747222,200
+2.591667,45.727778,200
+2.455556,45.712778,200
+2.171111,45.8175,200
+1.966667,45.833333,200
+1.908333,45.979167,200
+2.15,46.1,200
+2.558333,46.1,200
+2.588889,46.259722,200
+2.936389,46.177778,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>
