@@ -1,0 +1,8 @@
+num :  49
+ nom : LF-R143 AUVERGNE (MON-FRI) 
+ alti. min: 0 m
+ compression:  13/  12 pts
+ delta max:    65.8 km
+ resol delta: 2.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

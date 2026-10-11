@@ -1,0 +1,8 @@
+num : 115
+ nom : LF-R590A MENDE SUD (MON-FRI) 
+ alti. min: 0 m
+ compression:  6/   5 pts
+ delta max:    22.4 km
+ resol delta: 0.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

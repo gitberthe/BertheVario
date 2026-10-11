@@ -1,0 +1,8 @@
+num :  22
+ nom : Réserve naturelle nationale de la Vallée de Chaudefour 
+ alti. min: 0 m
+ compression:  36/  36 pts
+ delta max:    4.1 km
+ resol delta: 0.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

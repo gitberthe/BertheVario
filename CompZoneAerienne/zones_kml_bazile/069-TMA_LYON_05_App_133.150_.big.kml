@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-TMA LYON 05 App(133.150)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+4.670833,46.218056,200
+4.661389,46.203611,200
+4.203611,46.086111,200
+4.290278,45.923889,200
+3.898056,45.969444,200
+3.853889,46.05,200
+4.05,46.175,200
+4.263889,46.374167,200
+4.670833,46.218056,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

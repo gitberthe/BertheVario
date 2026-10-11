@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-TMA SAINT-YAN 1 App(123.405)</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.498056,47.105556,200
+3.666667,47.077222,200
+4.283333,46.966667,200
+4.65,46.583333,200
+4.731111,46.307222,200
+4.661389,46.203611,200
+4.203611,46.086111,200
+3.683333,46.104444,200
+3.633333,46.2,200
+3.633333,46.308333,200
+3.566667,46.333333,200
+3.225,46.333333,200
+3.25,46.5,200
+3.383333,46.983333,200
+3.498056,47.105556,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

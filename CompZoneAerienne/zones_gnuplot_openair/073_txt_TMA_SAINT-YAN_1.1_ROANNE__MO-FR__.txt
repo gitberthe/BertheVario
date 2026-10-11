@@ -1,0 +1,8 @@
+num :  73
+ nom : TMA SAINT-YAN 1.1 ROANNE (MO-FR) 
+ alti. min: 0 m
+ compression:  9/   8 pts
+ delta max:    35.9 km
+ resol delta: 1.2 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-CTA MARSEILLE 5</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.701667,44.666667,200
+4.221944,44.668611,200
+4.336389,44.033333,200
+4.246389,44.033333,200
+3.883056,43.864167,200
+3.577778,44.25,200
+3.701667,44.666667,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

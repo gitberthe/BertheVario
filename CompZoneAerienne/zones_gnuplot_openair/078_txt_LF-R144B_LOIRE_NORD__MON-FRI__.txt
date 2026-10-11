@@ -1,0 +1,8 @@
+num :  78
+ nom : LF-R144B LOIRE NORD (MON-FRI) 
+ alti. min: 0 m
+ compression:  9/   8 pts
+ delta max:    32.8 km
+ resol delta: 1.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,0 +1,8 @@
+num :  10
+ nom : TMA CLERMONT 8 
+ alti. min: 0 m
+ compression:  311/  51 pts
+ delta max:    35.0 km
+ resol delta: 1.1 metres
+ err moyenne:  7.5 m
+ err maxi:  14.0 m

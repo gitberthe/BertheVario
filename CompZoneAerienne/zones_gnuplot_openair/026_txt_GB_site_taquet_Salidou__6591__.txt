@@ -1,0 +1,8 @@
+num :  26
+ nom : GB_site_taquet_Salidou (6591) 
+ alti. min: 0 m
+ compression:  36/  32 pts
+ delta max:    2.7 km
+ resol delta: 0.1 metres
+ err moyenne:  0.2 m
+ err maxi:  5.1 m

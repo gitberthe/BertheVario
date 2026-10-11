@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-LF-R143 AUVERGNE (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.93638889,46.1777778,200
+2.96888889,45.9558333,200
+2.775,45.7472222,200
+2.59166667,45.7277778,200
+2.45555556,45.7127778,200
+2.17111111,45.8175,200
+1.96666667,45.8333333,200
+1.90833333,45.9791667,200
+2.15,46.1,200
+2.55833333,46.1,200
+2.58888889,46.2597222,200
+2.93638889,46.1777778,200
+2.93638889,46.1777778,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

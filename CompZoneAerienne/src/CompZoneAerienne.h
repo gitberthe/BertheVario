@@ -53,6 +53,9 @@
 #define PiedsVersMetres         (0.3048)
 #define FlVersMetres            (100*0,3048)
 
+#define Deg2Rad     (T_PI/180.)
+#define Rad2Deg     (180./T_PI)
+
 // include du projet
 #include "nlohmann/json.hpp"
 #include "geometrie/CVecteur2D.h"

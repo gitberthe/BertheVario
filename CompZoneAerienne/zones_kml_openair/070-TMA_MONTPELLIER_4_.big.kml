@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-TMA MONTPELLIER 4 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.82611111,43.9375,200
+3.88305556,43.8641667,200
+3.69027778,43.7716667,200
+3.5,43.6802778,200
+3.5,43.6025,200
+3.47777778,43.5494444,200
+3.24,43.55,200
+3.25722222,43.7105556,200
+3.62361111,43.8572222,200
+3.82611111,43.9375,200
+3.82611111,43.9375,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

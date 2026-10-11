@@ -1,0 +1,8 @@
+num : 105
+ nom : TMA CLERMONT 4.1 JOB 
+ alti. min: 0 m
+ compression:  6/   5 pts
+ delta max:    29.1 km
+ resol delta: 0.9 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

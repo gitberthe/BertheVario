@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-LF-R592 CANTAL (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.51666667,45.0833333,100
+3.74444444,44.8444444,100
+3.83333333,44.6583333,100
+3.28611111,44.8166667,100
+3.11666667,44.7830556,100
+2.91666667,44.9333333,100
+3.38333333,45.0833333,100
+3.51666667,45.0833333,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

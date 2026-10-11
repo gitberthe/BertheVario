@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-CTA TOULOUSE 3</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.605556,44.058333,200
+2.269444,43.8,200
+2.572222,43.258333,200
+2.706944,43.2125,200
+2.708056,43.416667,200
+2.709444,43.714722,200
+2.822778,44.025833,200
+2.605556,44.058333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

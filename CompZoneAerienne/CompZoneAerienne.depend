@@ -506,7 +506,7 @@
 1768048753 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CCompZoneErr.cpp
 	"CompZoneAerienne.h"
 
-1791659166 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
+1791730809 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -753,7 +753,7 @@
 1739008757 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CNuage2Droite.cpp
 	"CompZoneAerienne.h"
 
-1791683367 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
+1791733048 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
 	"CompZoneAerienne.h"
 
 1739008757 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CVecteur2D.cpp
@@ -1426,6 +1426,16 @@
 1791663942 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.cpp
 	"../CompZoneAerienne.h"
 
-1791707195 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.cpp
+1791734674 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.cpp
 	"../CompZoneAerienne.h"
+	"computeOpenAirArc.h"
+
+1791734604 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/computeOpenAirArc.h
+
+1791734687 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/computeOpenAirArc.cpp
+	<iostream>
+	<cmath>
+	<vector>
+	<iomanip>
+	"computeOpenAirArc.h"
 

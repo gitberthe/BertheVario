@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-LF-R3203 BEAUJOLAIS </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+4.43416667,46.1455556,100
+4.54694444,45.8536111,100
+4.31888889,45.87,100
+4.20361111,46.0861111,100
+4.43416667,46.1455556,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

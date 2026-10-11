@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-LF-R593 LES PUYS (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.59166667,45.7277778,200
+2.775,45.7472222,200
+2.72305556,45.5833333,200
+2.71805556,45.1369444,200
+2.75,45.0583333,200
+2.91666667,44.9333333,200
+2.75472222,44.8816667,200
+2.5,45.0763889,200
+2.46666667,45.3333333,200
+2.59166667,45.7277778,200
+2.59166667,45.7277778,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

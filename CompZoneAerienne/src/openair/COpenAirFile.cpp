@@ -4,10 +4,12 @@
 /// \brief
 ///
 /// \date 10/10/2026 : creation
-/// \date 10/10/2026 : modification
+/// \date 11/10/2026 : calcul geodesique de l'arc debut/fin DB et V X=
 ///
 
 #include "../CompZoneAerienne.h"
+
+#include "computeOpenAirArc.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Lit un fichier openair
@@ -104,6 +106,12 @@ else if ( tokens[0] == "AN" && m_pZoneCur != NULL )
     //cout << m_pZoneCur->m_Name << endl ;
     }
 else if ( tokens[0] == "AY" && m_pZoneCur != NULL )
+    {}
+// AF frequence
+else if ( tokens[0] == "AF" && m_pZoneCur != NULL )
+    {}
+// AG Station Name
+else if ( tokens[0] == "AG" && m_pZoneCur != NULL )
     {}
 else if ( tokens[0] == "AH" && m_pZoneCur != NULL )
     TraiteAHAltitudeHaute( tokens ) ;
@@ -284,7 +292,7 @@ if ( tokens[1][0] == 'D' )
     {
     bool UnTrouve = false ;
 
-    // recherche +
+    // recherche + sens horaire
     std::size_t found = tokens[1].find('+');
     if (found!=std::string::npos)
         {
@@ -292,7 +300,7 @@ if ( tokens[1][0] == 'D' )
         m_DClockwise = true ;
         }
 
-    // recherche -
+    // recherche - sens trigonometrique
     found = tokens[1].find('-');
     if (found!=std::string::npos)
         {
@@ -351,7 +359,7 @@ for ( long it = 1 ; it < (long)tokens.size() ; it++ )
 std::string stringPt1 = strtok(TmpChar,",") ;
 std::string stringPt2 = strtok(NULL,",") ;
 
-// conversion en numerique
+// conversion en numerique des points debu/fin
 std::vector<std::string> tokensPt1 ;
 std::vector<std::string> tokensPt2 ;
 
@@ -367,13 +375,42 @@ CVecZoneReduce::st_coord_poly * pPts2 = new CVecZoneReduce::st_coord_poly ;
 TraiteDPPointDePolygone( pPts1, tokensPt1 ) ;
 TraiteDPPointDePolygone( pPts2, tokensPt2 ) ;
 
-// calcul du rayon du cercle
-double RadiusDeg = sqrt( pow( pPts1->m_Lat - m_XCenterDaDbDc.m_Lat , 2. ) + pow( pPts1->m_Lon - m_XCenterDaDbDc.m_Lon , 2.) ) ;
+// appel au module geodesique
+Point center = { m_XCenterDaDbDc.m_Lat, m_XCenterDaDbDc.m_Lon }; // Issu de V X=
+Point pStart = { pPts1->m_Lat, pPts1->m_Lon }; // Premier point du DB
+Point pEnd   = { pPts2->m_Lat, pPts2->m_Lon }; // Second point du DB
+
+// Précision de la discrétisation
+int segments = 100;
+// Par défaut dans OpenAir sauf si "V D=-"
+bool sensHoraire = m_DClockwise ;
+
+// calcul des points de l'arc
+std::vector<Point> arc = computeOpenAirArc(center, pStart, pEnd, segments, sensHoraire);
+
+// integartion des points de l'arc
+for ( long ip = 0 ; ip < (long)arc.size() ; ip++ )
+    {
+    CVecZoneReduce::st_coord_poly * pPts = new CVecZoneReduce::st_coord_poly ;
+    pPts->m_Lat = arc[ip].lat ;
+    pPts->m_Lon = arc[ip].lon ;
+    m_pZoneCur->m_VecPtsBig.push_back( pPts ) ;
+    }
+
+/*
+double RadiusDeg = sqrt( pow( pPts2->m_Lat - Latm , 2. ) + pow( pPts2->m_Lon - Lonm , 2.) ) ;
 // angles de depart et d'arrivee
-double Angle1Rad = atan2( (pPts1->m_Lat - m_XCenterDaDbDc.m_Lat) , (pPts1->m_Lon - m_XCenterDaDbDc.m_Lon) ) ;
-double Angle2Rad = atan2( (pPts2->m_Lat - m_XCenterDaDbDc.m_Lat) , (pPts2->m_Lon - m_XCenterDaDbDc.m_Lon) ) ;
+double Angle1Rad = atan2( (pPts1->m_Lat - Latm) , (pPts1->m_Lon - Lonm) ) ;
+double Angle2Rad = atan2( (pPts2->m_Lat - Latm) , (pPts2->m_Lon - Lonm) ) ;
+
+// calcul du rayon du cercle
+//double RadiusDeg = sqrt( pow( pPts2->m_Lat - m_XCenterDaDbDc.m_Lat , 2. ) + pow( pPts2->m_Lon - m_XCenterDaDbDc.m_Lon , 2.) ) ;
+//double RadiusDeg1 = sqrt( pow( pPts1->m_Lat - m_XCenterDaDbDc.m_Lat , 2. ) + pow( pPts1->m_Lon - m_XCenterDaDbDc.m_Lon , 2.) ) ;
+// angles de depart et d'arrivee
+//double Angle1Rad = atan2( (pPts1->m_Lat - m_XCenterDaDbDc.m_Lat) , (pPts1->m_Lon - m_XCenterDaDbDc.m_Lon) ) ;
+//double Angle2Rad = atan2( (pPts2->m_Lat - m_XCenterDaDbDc.m_Lat) , (pPts2->m_Lon - m_XCenterDaDbDc.m_Lon) ) ;
 // pas de calcul
-double PasRadian = PAS_CERCLE_DEG*T_PI/180. ;
+//double PasRadian = PAS_CERCLE_DEG*T_PI/180. ;
 // angle couvert
 double DiffAngle = Angle2Rad - Angle1Rad ;
 
@@ -388,24 +425,21 @@ else
     if (DiffAngle < 0) DiffAngle += 2 * T_PI;
     }
 
-/*if ( strstr(m_pZoneCur->m_Name.c_str(),"368B" ) != NULL )
-if ( strstr(m_pZoneCur->m_Name.c_str(),"TMA CLERMONT 1" ) != NULL )
-    {
-    const char * a = m_pZoneCur->m_Name.c_str() ;
-    } */
-
-long AngleCount = DiffAngle / PasRadian ;
+double PasRadian = DiffAngle / 500. ;
+//long AngleCount = DiffAngle / PasRadian ;
 
 //m_pZoneCur->m_VecPtsBig.push_back( pPts1 ) ;
-for ( long is=0 ; is < labs(AngleCount) ; is++ )
+//for ( long is=0 ; is < (long)abs(AngleCount) ; is++ )
+for ( long is=0 ; is < 500 ; is++ )
     {
-    double angleActuel = Angle1Rad + ((double)is) * DiffAngle / ((double)abs(AngleCount)) ;
+    //double angleActuel = Angle1Rad + ((double)is) * DiffAngle / ((double)abs(AngleCount)) ;
+    double angleActuel = Angle1Rad + ((double)is) * PasRadian ;
     CVecZoneReduce::st_coord_poly * pPts = new CVecZoneReduce::st_coord_poly ;
     pPts->m_Lat = RadiusDeg * sin( angleActuel ) + m_XCenterDaDbDc.m_Lat ;
     pPts->m_Lon = RadiusDeg * cos( angleActuel ) + m_XCenterDaDbDc.m_Lon ;
     m_pZoneCur->m_VecPtsBig.push_back( pPts ) ;
     }
-//m_pZoneCur->m_VecPtsBig.push_back( pPts2 ) ;
+//m_pZoneCur->m_VecPtsBig.push_back( pPts2 ) ;*/
 
 return 0 ;
 }

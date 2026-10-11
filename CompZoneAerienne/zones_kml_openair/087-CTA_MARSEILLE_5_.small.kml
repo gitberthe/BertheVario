@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-CTA MARSEILLE 5 </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.70166667,44.6666667,100
+4.22194444,44.6686111,100
+4.33638889,44.0333333,100
+4.24638889,44.0333333,100
+3.88305556,43.8641667,100
+3.57777778,44.25,100
+3.70166667,44.6666667,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

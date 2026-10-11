@@ -1,0 +1,8 @@
+num :  24
+ nom : TMA AVORD 2 
+ alti. min: 4631815625261656585 m
+ compression:  108/  33 pts
+ delta max:    36.1 km
+ resol delta: 1.2 metres
+ err moyenne:  6.3 m
+ err maxi:  14.0 m

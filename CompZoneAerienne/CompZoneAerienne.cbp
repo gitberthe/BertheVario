@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--openair --point 45.503415 2.852121 5 " />
+				<Option parameters="--openair --point 45.63440145501449    3.1270051002502446 1 &gt; ess.txt" />
 				<Compiler>
 					<Add option="-ggdb" />
 					<Add option="-g" />
@@ -52,6 +52,8 @@
 		<Unit filename="src/kml/CKmlFile.h" />
 		<Unit filename="src/openair/COpenAirFile.cpp" />
 		<Unit filename="src/openair/COpenAirFile.h" />
+		<Unit filename="src/openair/computeOpenAirArc.cpp" />
+		<Unit filename="src/openair/computeOpenAirArc.h" />
 		<Unit filename="src/zone/CCompZoneErr.cpp" />
 		<Unit filename="src/zone/CCompZoneErr.h" />
 		<Unit filename="src/zone/CGroupeAligne.cpp" />

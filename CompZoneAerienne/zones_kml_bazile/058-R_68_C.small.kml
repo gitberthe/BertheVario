@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 68 C</name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+1.533333,45.166667,100
+2.604722,45.166667,100
+3.021111,45.223333,100
+3.024167,45.144167,100
+2.571944,44.8475,100
+2.486111,44.790556,100
+2.416667,44.742778,100
+2.224167,44.75,100
+1.9625,44.761111,100
+1.739444,44.813889,100
+1.533333,45.166667,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

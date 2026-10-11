@@ -1,0 +1,8 @@
+num :  99
+ nom : TMA SAINT-YAN 2 
+ alti. min: 4631735695005786901 m
+ compression:  7/   6 pts
+ delta max:    37.6 km
+ resol delta: 1.2 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,0 +1,8 @@
+num :   7
+ nom : CTA LYON 
+ alti. min: 4631625047744770465 m
+ compression:  133/  63 pts
+ delta max:    161.3 km
+ resol delta: 5.2 metres
+ err moyenne:  1.2 m
+ err maxi:  4.0 m

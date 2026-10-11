@@ -1,0 +1,8 @@
+num :  72
+ nom : TMA MONTPELLIER 6 
+ alti. min: 0 m
+ compression:  9/   8 pts
+ delta max:    32.5 km
+ resol delta: 1.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m
