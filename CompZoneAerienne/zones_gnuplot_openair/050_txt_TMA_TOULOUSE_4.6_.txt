@@ -1,8 +1,0 @@
-num :  50
- nom : TMA TOULOUSE 4.6 
- alti. min: 0 m
- compression:  13/  12 pts
- delta max:    109.4 km
- resol delta: 3.5 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

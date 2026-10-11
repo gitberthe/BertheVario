@@ -1,0 +1,8 @@
+num :  64
+ nom : ZSM Gypaète barbu Jonte Les Douzes 1 
+ alti. min: 0 m
+ compression:  10/   9 pts
+ delta max:    1.1 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,8 +1,0 @@
-num :  12
- nom : LF-R242 ARCOMPS 
- alti. min: 0 m
- compression:  361/  46 pts
- delta max:    0.5 km
- resol delta: 0.0 metres
- err moyenne:  0.8 m
- err maxi:  1.2 m

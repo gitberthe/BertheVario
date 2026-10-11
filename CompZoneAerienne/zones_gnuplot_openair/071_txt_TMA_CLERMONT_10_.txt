@@ -1,8 +1,0 @@
-num :  71
- nom : TMA CLERMONT 10 
- alti. min: 4631458843266769698 m
- compression:  10/   9 pts
- delta max:    71.2 km
- resol delta: 2.3 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

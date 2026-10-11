@@ -1,8 +1,0 @@
-num :  40
- nom : LF-R368E2 (NOTAM) 
- alti. min: 4631700518389697468 m
- compression:  115/  20 pts
- delta max:    41.0 km
- resol delta: 1.3 metres
- err moyenne:  7.5 m
- err maxi:  13.3 m

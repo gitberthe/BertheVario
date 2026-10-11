@@ -1,0 +1,8 @@
+num :  80
+ nom : LF-R46C (MON-FRI) 
+ alti. min: 0 m
+ compression:  8/   7 pts
+ delta max:    59.9 km
+ resol delta: 1.9 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

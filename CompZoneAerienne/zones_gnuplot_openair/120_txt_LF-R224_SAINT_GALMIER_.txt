@@ -1,0 +1,8 @@
+num : 120
+ nom : LF-R224 SAINT GALMIER 
+ alti. min: 107342027791152 m
+ compression:  6/   5 pts
+ delta max:    3.3 km
+ resol delta: 0.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

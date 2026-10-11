@@ -1,0 +1,8 @@
+num : 118
+ nom : TMA MONTPELLIER 6.1 GANGES 2 
+ alti. min: 0 m
+ compression:  6/   5 pts
+ delta max:    22.0 km
+ resol delta: 0.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

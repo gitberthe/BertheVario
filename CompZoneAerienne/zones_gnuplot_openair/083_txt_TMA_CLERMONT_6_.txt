@@ -1,0 +1,8 @@
+num :  83
+ nom : TMA CLERMONT 6 
+ alti. min: 0 m
+ compression:  8/   7 pts
+ delta max:    43.9 km
+ resol delta: 1.4 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

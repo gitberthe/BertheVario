@@ -1,0 +1,8 @@
+num :  58
+ nom : LF-R593 LES PUYS (MON-FRI) 
+ alti. min: 0 m
+ compression:  11/  10 pts
+ delta max:    48.8 km
+ resol delta: 1.6 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

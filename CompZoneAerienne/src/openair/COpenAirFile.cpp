@@ -201,6 +201,19 @@ char TmpChar[1000] = "" ;
 for ( long it = 1 ; it < (long)tokens.size() ; it++ )
     strcat( TmpChar, tokens[it].c_str()) ;
 
+// compage des : et .
+long Nb2Pts = 0 ;
+long Nb1Pts = 0 ;
+char * pChar = TmpChar ;
+while ( *pChar != 0 )
+    {
+    if ( *pChar == ':' )
+        Nb2Pts++ ;
+    if ( *pChar == '.' )
+        Nb1Pts++ ;
+    pChar++ ;
+    }
+
 // nord et est
 bool Nord = strchr( TmpChar , 'N' ) != NULL ;
 bool Sud = strchr( TmpChar , 'S' ) != NULL ;
@@ -208,7 +221,7 @@ bool Est = strchr( TmpChar , 'E' ) != NULL ;
 bool Ouest = strchr( TmpChar , 'W' ) != NULL ;
 
 // pour une separation d:m:s
-if ( ! strchr( TmpChar , '.' ) )
+if ( Nb1Pts == 0 )
     {
     char Delimiter[] = ":NSEW " ;
     double Deg,Min,Sec ;
@@ -242,16 +255,31 @@ if ( ! strchr( TmpChar , '.' ) )
         }
     }
 // pour une separation d:m.s
-else if ( strchr( TmpChar , ':' ) && strchr( TmpChar , '.' ) )
+else if ( Nb1Pts )
     {
     char Delimiter[] = ":NSEW " ;
-    double Deg,Min ;
+    double Deg,Min,Sec ;
 
     // latitude
-    Deg = atoi( strtok(TmpChar,Delimiter) ) ;
-    Min = atof( strtok(NULL,Delimiter) ) ;
+    if ( Nb2Pts == 2 )
+        {
+        Deg = atoi( strtok(TmpChar,Delimiter) ) ;
+        Min = atof( strtok(NULL,Delimiter) ) ;
+        Sec = 0. ;
+        }
+    else if ( Nb2Pts == 4 )
+        {
+        Deg = atoi( strtok(TmpChar,Delimiter) ) ;
+        Min = atoi( strtok(NULL,Delimiter) ) ;
+        Sec = atof( strtok(NULL,Delimiter) ) ;
+        }
+    else
+        {
+        cerr << "**** erreur lat DP." << endl ;
+        exit(1) ;
+        }
 
-    pStPts->m_Lat = Deg + Min/60. ;
+    pStPts->m_Lat = Deg + Min/60. + Sec/3600. ;
 
     if ( !Nord )
         {
@@ -261,10 +289,25 @@ else if ( strchr( TmpChar , ':' ) && strchr( TmpChar , '.' ) )
         }
 
     // longitude
-    Deg = atoi( strtok(NULL,Delimiter) ) ;
-    Min = atof( strtok(NULL,Delimiter) ) ;
+    if ( Nb2Pts == 2 )
+        {
+        Deg = atoi( strtok(NULL,Delimiter) ) ;
+        Min = atof( strtok(NULL,Delimiter) ) ;
+        Sec = 0. ;
+        }
+    else if ( Nb2Pts == 4 )
+        {
+        Deg = atoi( strtok(NULL,Delimiter) ) ;
+        Min = atoi( strtok(NULL,Delimiter) ) ;
+        Sec = atof( strtok(NULL,Delimiter) ) ;
+        }
+    else
+        {
+        cerr << "**** erreur lon DP." << endl ;
+        exit(1) ;
+        }
 
-    pStPts->m_Lon = Deg + Min/60. ;
+    pStPts->m_Lon = Deg + Min/60. + Sec/3600. ;
 
     if ( !Est )
         {

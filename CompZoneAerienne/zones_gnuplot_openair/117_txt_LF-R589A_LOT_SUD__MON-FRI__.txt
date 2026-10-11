@@ -1,8 +1,0 @@
-num : 117
- nom : LF-R589A LOT SUD (MON-FRI) 
- alti. min: 0 m
- compression:  6/   5 pts
- delta max:    19.6 km
- resol delta: 0.6 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

@@ -1,8 +1,0 @@
-num :  33
- nom : CTR SAINT ETIENNE 1 
- alti. min: 4632032524137627998 m
- compression:  107/  25 pts
- delta max:    20.7 km
- resol delta: 0.7 metres
- err moyenne:  7.4 m
- err maxi:  14.0 m

@@ -1,0 +1,8 @@
+num :   7
+ nom : CTR RODEZ 
+ alti. min: 0 m
+ compression:  208/  54 pts
+ delta max:    23.0 km
+ resol delta: 0.7 metres
+ err moyenne:  4.0 m
+ err maxi:  8.3 m

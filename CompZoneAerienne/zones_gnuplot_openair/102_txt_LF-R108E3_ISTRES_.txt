@@ -1,0 +1,8 @@
+num : 102
+ nom : LF-R108E3 ISTRES 
+ alti. min: 0 m
+ compression:  6/   5 pts
+ delta max:    16.6 km
+ resol delta: 0.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m
