@@ -51,7 +51,7 @@ public :
     static bool IsEnoughMemory() ;
 
 protected :
-    File            m_FileNomZoneOut ;///< fichier des noms de zones courts pour veriofiocation transformation
+    CFile           m_FileNomZoneOut ;///< fichier des noms de zones courts pour verification transformation
     int             m_Plafond4Valid ; ///< pour validation
     bool            m_IsWeekEnd ;     ///< pour savoir si l'on est en week end
 

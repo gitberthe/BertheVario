@@ -1,3 +1,6 @@
+le 20261012a :
+ - ajout CFile pour evolution CompZoneAerienne.
+
 le 12/10/2026 :
  . contour des zones openair ok (bug rotation arc cercle corrige). reste les altitudes.
 

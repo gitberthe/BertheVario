@@ -115,16 +115,15 @@ Serial.println( "CZonesAerAll::SetDatePeriode()" ) ;*/
 void CZonesAerAll::LectureFichiers()
 {
 // ouverture fichier out nom zone
-m_FileNomZoneOut = SD.open(NOM_FCH_OUT_NOM_ZONE, FILE_WRITE , true );
-if (!m_FileNomZoneOut)
-    Serial.print( "erreur creation fichier NOM_FCH_OUT_NOM_ZONE" ) ;
-m_FileNomZoneOut.seek(0) ;
+m_FileNomZoneOut.OuvrirFichier(NOM_FCH_OUT_NOM_ZONE, false );
 
 // traitement des zones
 LectureFichierZonesAer() ;
 
 // fermeture fichier nom zone
-m_FileNomZoneOut.close() ;
+m_FileNomZoneOut.FermerFichier() ;
+m_FileNomZoneOut.clear() ;
+m_FileNomZoneOut.shrink_to_fit() ;
 
 LectureFichierZonesActive() ;
 LectureFichierZonesPeriode() ;
@@ -190,10 +189,8 @@ delete [] TmpChar ;
 /// \brief Cette fonction traite une ligne texte de zone et la met sous forme binaire
 /// dans le tableau (*this).
 /// Reduction de zone par CVecReduce.
-/// Calcul aussi le barycentre et le rayon max de la zone pour une recheche rapide.
 CZoneAer * CZonesAerAll::TraiteBufferZoneAer( char * buff )
 {
-
 // test fin de ligne ou commentaire
 char * pChar = strtok( buff , ";" ) ;
 if ( pChar == NULL || *pChar == 0 || *pChar == '#' )
@@ -202,28 +199,8 @@ if ( pChar == NULL || *pChar == 0 || *pChar == '#' )
     return NULL ;
     }
 
-// on ne prend pas en compte les zone 1.20, 5.20, 4.20...
-//if ( strstr( pChar , ".20" ) )
-//    return ;
-
 // nouvelle zone
 CZoneAer * pZone = new CZoneAer ;
-
-// allocation nouveau tableau de zones plus grand et recopie de l'ancien contenu
-/*if ( (*this) == NULL )
-    {
-    (*this) = new CZoneAer * [1] ;
-    m_NbZones = 1 ;
-    }
-else
-    {
-    CZoneAer ** pOldArr = (*this) ;
-    (*this) = new CZoneAer * [++m_NbZones] ;
-    memcpy( (*this) , pOldArr , (m_NbZones-1) * sizeof(CZoneAer *) ) ;
-    delete [] pOldArr ;
-    }
-// ajout de la nouvelle zone au tableau
-(*this)[m_NbZones-1] = pZone ; */
 Add( pZone ) ;
 
 // zone protege PROTECT ou FFVL-Prot dans chaine
@@ -310,9 +287,10 @@ pZone->m_pNomAff = new char [ NomAff.GetLength() + 1 ] ;
 strcpy( pZone->m_pNomAff , NomAff ) ;
 
 // affichage nom zone pour controle
-m_FileNomZoneOut.print( NomAff ) ;
-m_FileNomZoneOut.print( " <= " ) ;
-m_FileNomZoneOut.println( NomOri ) ;
+m_FileNomZoneOut.Ecrire( NomAff ) ;
+m_FileNomZoneOut.Ecrire( " <= " ) ;
+m_FileNomZoneOut.Ecrire( NomOri ) ;
+m_FileNomZoneOut.Ecrire( "\n" ) ;
 
 // altitude de basse zone
 pChar = strtok( NULL , ";" ) ;
@@ -354,22 +332,6 @@ pZone->SetPolygoneArr( PolygoneArr , VecPoly.GetSize() ) ;
 // destruction  des points
 VecPoly.DeleteAll() ;
 
-// calcul de la surface et du barycentre
-//pZone->m_Area = CPolygone::GetAreaSize( pZone->m_PolygoneArr , pZone->m_NbPts , pZone->m_Barycentre ) ;
-//CPolygone::CalcBarycentre( pZone->m_PolygoneArr , pZone->m_NbPts , pZone->m_Barycentre ) ;
-
-/*
-// calcul du rayon max
-pZone->m_RayonMetre = 0. ;
-for ( int is = 0 ; is < pZone->m_NbPts ; is++ )
-    {
-    const CZoneAer::st_coord_poly & PtsCour = pZone->m_PolygoneArr[is] ;
-    float dist = sqrtf( powf(pZone->m_Barycentre.m_Lat-PtsCour.m_Lat,2) + powf(pZone->m_Barycentre.m_Lon-PtsCour.m_Lon,2) ) * 60. * UnMileEnMetres  ;
-    if ( dist > pZone->m_RayonMetre )
-        pZone->m_RayonMetre = dist ;
-    }
-*/
-
 // pour prochain appel, buffer vide
 *buff = 0 ;
 
@@ -380,44 +342,17 @@ return pZone ;
 /// \brief Lecture fichier periode de zone
 void CZonesAerAll::LectureFichierZonesPeriode()
 {
-const int TaillMaxChar = 1000 ;
-char * TmpChar = new char [TaillMaxChar+1] ;
-int ic = 0 ;
-
 // ouverture fichier
-File FilePeriode = SD.open(NOM_FCH_ZONE_PER);
-if ( !FilePeriode )
-    {
-    Serial.println("Failed to open file for reading");
-    delete [] TmpChar ;
-    return;
-    }
+CFile FilePeriode ;
+FilePeriode.OuvrirFichier(NOM_FCH_ZONE_PER);
+
+FilePeriode.LireFichier() ;
 
 // lecture fichier
-while(FilePeriode.available())
-    {
-    char c = FilePeriode.read() ;
-    if ( c != '\n' )
-        {
-        // si taille chaine maximum on empile plus dans le buffer
-        if ( ic < TaillMaxChar )
-            TmpChar[ic++] = c ;
-        }
-    else
-        {
-        // si fin de ligne on traite le buffer
-        TmpChar[ic++] = 0 ;
-        TraiteBufferZonePeriode( TmpChar ) ;
-        ic = 0 ;
-        }
-    }
+for ( int nl = 0 ; nl < (int)FilePeriode.size() ; nl++ )
+    TraiteBufferZonePeriode( (char*)FilePeriode[nl].c_str() ) ;
 
-// pour la derniere zone
-TraiteBufferZonePeriode( TmpChar ) ;
-
-FilePeriode.close();
-
-delete [] TmpChar ;
+FilePeriode.FermerFichier();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -532,19 +467,10 @@ for ( int iz = 0 ; iz < GetSize() ; iz++ )
 /// \brief Ecriture fichier activation de zone. nom de zone 2 champs.
 void CZonesAerAll::EcritureFichierZonesActive()
 {
-
-File Fch ;
+CFile Fch ;
 
 // ouverture fichier
-Fch = SD.open(NOM_FCH_ZONE_ACT, FILE_WRITE , true );
-if (!Fch)
-    {
-    Serial.print( "erreur creation fichier zone actice" ) ;
-    return ;
-    }
-
-// debut de fichier
-Fch.seek(0) ;
+Fch.OuvrirFichier(NOM_FCH_ZONE_ACT, false );
 
 CLGArray<CLGString> VecNomDejaEcrit ;
 
@@ -577,16 +503,17 @@ for ( int iz = 0 ; iz < GetSize() ; iz++ )
     VecNomDejaEcrit.Add( pZone->GetNom4Activation() ) ;
 
     // ecriture fichier nom et activation
-    Fch.print( pZone->GetNom4Activation() ) ;
-    Fch.print( ";" ) ;
+    Fch.Ecrire( pZone->GetNom4Activation() ) ;
+    Fch.Ecrire( ";" ) ;
     if ( pZone->m_Activee )
-        Fch.print( "1" ) ;
+        Fch.Ecrire( "1" ) ;
     else
-        Fch.print( "0" ) ;
-    Fch.println( ";" ) ;
+        Fch.Ecrire( "0" ) ;
+    Fch.Ecrire( ";" ) ;
+    Fch.Ecrire( "\n" ) ;
     }
 
-Fch.close() ;
+Fch.FermerFichier() ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -611,45 +538,19 @@ for ( int iz = 0 ; iz < GetSize() ; iz++ )
 /// \brief Lecture fichier activation de zone
 void CZonesAerAll::LectureFichierZonesActive()
 {
-const int TaillMaxChar = 1000 ;
-char * TmpChar = new char [TaillMaxChar+1] ;
-int ic = 0 ;
-
 // ouverture fichier
-File FileAct = SD.open(NOM_FCH_ZONE_ACT);
-if ( !FileAct )
-    {
-    Serial.println("Failed to open file for reading");
-    delete [] TmpChar ;
-    return;
-    }
+CFile FileAct ;
+FileAct.OuvrirFichier(NOM_FCH_ZONE_ACT);
 
 // lecture fichier
-while(FileAct.available())
-    {
-    char c = FileAct.read() ;
-    if ( c != '\n' )
-        {
-        // si taille chaine maximum on empile plus dans le buffer
-        if ( ic < TaillMaxChar )
-            TmpChar[ic++] = c ;
-        }
-    else
-        {
-        // si fin de ligne on traite le buffer
-        TmpChar[ic++] = 0 ;
-        TraiteBufferZoneActive( TmpChar ) ;
-        ic = 0 ;
-        }
-    }
+FileAct.LireFichier() ;
 
 // pour la derniere zone
-TraiteBufferZoneActive( TmpChar ) ;
+for ( int nl = 0 ; nl < (int) FileAct.size() ; nl++ )
+    TraiteBufferZoneActive( (char *)FileAct[nl].c_str() ) ;
 
 // fermeture fichier
-FileAct.close();
-
-delete [] TmpChar ;
+FileAct.FermerFichier();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,3 +1,6 @@
+le 20261012a :
+ - ajout CFile pour evolution CompZoneAerienne.
+
 le 202601010a :
  - correction bug mineur dans CPolygone::IsIn()
 

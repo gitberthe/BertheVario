@@ -171,6 +171,7 @@ extern "C" {
 #include "Geometrie/Segments.h"
 #include "ZonesAeriennes/CDistFront.h"
 #include "ZonesAeriennes/CPolygone.h"
+#include "ZonesAeriennes/CFile.h"
 #include "ZonesAeriennes/CZonesAerAll.h"
 #include "ZonesAeriennes/CZonesFchValid.h"
 #include "Perfmon/esp32_perfmon.h"

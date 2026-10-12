@@ -131,6 +131,8 @@
 		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDate.h" />
 		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDistFront.cpp" />
 		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CDistFront.h" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CFile.cpp" />
+		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CFile.h" />
 		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CPolygone.cpp" />
 		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CPolygone.h" />
 		<Unit filename="../BertheVarioTacPlatformIO/src/ZonesAeriennes/CRectIn.cpp" />

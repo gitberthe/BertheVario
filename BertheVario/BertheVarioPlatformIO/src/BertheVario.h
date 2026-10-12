@@ -173,6 +173,7 @@
 #include "Geometrie/Segments.h"
 #include "ZonesAeriennes/CDate.h"
 #include "ZonesAeriennes/CDistFront.h"
+#include "ZonesAeriennes/CFile.h"
 #include "ZonesAeriennes/CZonesAerAll.h"
 #include "ZonesAeriennes/CZonesFchValid.h"
 #include "Perfmon/esp32_perfmon.h"
