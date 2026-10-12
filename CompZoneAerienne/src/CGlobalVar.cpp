@@ -255,7 +255,7 @@ return 0 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief Ecriture du fichier de zones
+/// \brief Ecriture du fichier de zones pour BertheVario
 long CGlobalVar::EcritureFichierZones()
 {
 // entete fichier
@@ -272,13 +272,13 @@ for ( unsigned long iz = 0 ; iz < m_VecZones.size() ; iz++ )
     cout << endl ;
 
     // resolution zone
-    double DelatLatLonZoneKm = Zone.m_DeltaLatLonMax ;
+    double DelatLatLonZoneKm   = Zone.m_DeltaLatLonMax ;
     double ResolutionZoneMetre = Zone.m_ResolVario ;
-    m_ResolutionMoyenneMetre += ResolutionZoneMetre ;
-    m_ResolutionMaxAllMetres = MAX ( m_ResolutionMaxAllMetres , ResolutionZoneMetre ) ;
-    m_DelatLatLonMaxZoneKm = MAX( m_DelatLatLonMaxZoneKm , DelatLatLonZoneKm ) ;
-    m_ErreurMaxiMetres = MAX( Zone.m_ErreurMaxEnMetre , m_ErreurMaxiMetres ) ;
-    m_ErreurMoyenneMetres += Zone.m_ErreurMoyenneEnMetre ;
+    m_ResolutionMoyenneMetre  += ResolutionZoneMetre ;
+    m_ResolutionMaxAllMetres   = MAX ( m_ResolutionMaxAllMetres , ResolutionZoneMetre ) ;
+    m_DelatLatLonMaxZoneKm     = MAX( m_DelatLatLonMaxZoneKm , DelatLatLonZoneKm ) ;
+    m_ErreurMaxiMetres         = MAX( Zone.m_ErreurMaxEnMetre , m_ErreurMaxiMetres ) ;
+    m_ErreurMoyenneMetres     += Zone.m_ErreurMoyenneEnMetre ;
 
     // cerr
     cerr << setw(3) << fixed << setfill(' ') << iz << ", comp: " << setw(4) << Zone.m_NbPtsAvantCompression << "/" << setw(4) << Zone.m_NbPtsApresCompression << " pts"

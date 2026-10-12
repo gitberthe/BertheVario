@@ -4,12 +4,41 @@
 /// \brief
 ///
 /// \date 10/10/2026 : creation
-/// \date 11/10/2026 : calcul geodesique de l'arc debut/fin DB et V X=
+/// \date 12/10/2026 : calcul geodesique de l'arc debut/fin DB et V X=
 ///
 
 #include "../CompZoneAerienne.h"
 
 #include "computeOpenAirArc.h"
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Init
+COpenAirFile::COpenAirFile()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Recherche la chaine dans les champs indifferement de la casse. Ex FT ou AGL
+long COpenAirFile::RechercheChamp( const std::string & ToFind, const std::vector<std::string> & tokens )
+{
+// casse
+std::string ToFindCasse = ToFind ;
+for (char &c : ToFindCasse)
+    c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+
+// recharche dans les chaines
+for ( long ic = 0 ; ic < (long)tokens.size() ; ic++ )
+    {
+    std::string MotCasse = tokens[ic] ;
+    // casse
+    for (char &c : MotCasse)
+        c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+    if ( strstr( MotCasse.c_str() , ToFindCasse.c_str() ) != NULL )
+        return ic ;
+    }
+
+return 0 ;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Lit un fichier openair
@@ -101,10 +130,10 @@ if ( tokens[0] == "AC" )
 // AN nom de zone
 else if ( tokens[0] == "AN" && m_pZoneCur != NULL )
     {
-    m_DClockwise = true ;
     TraiteANNomDeLaZone( tokens ) ;
     //cout << m_pZoneCur->m_Name << endl ;
     }
+// type de la zone
 else if ( tokens[0] == "AY" && m_pZoneCur != NULL )
     {}
 // AF frequence
@@ -120,7 +149,6 @@ else if ( tokens[0] == "AL" && m_pZoneCur != NULL )
 // DP point de zone
 else if ( tokens[0] == "DP" && m_pZoneCur != NULL )
     {
-    m_DClockwise = true ;
     CVecZoneReduce::st_coord_poly * pStPts = new CVecZoneReduce::st_coord_poly ;
     m_pZoneCur->m_VecPtsBig.push_back( pStPts ) ;
 
@@ -158,11 +186,14 @@ long COpenAirFile::TraiteACClasseDeLaZone(std::vector<std::string> & tokens)
 // espaces aeriens non controle
 //if ( tokens[1][0] == 'G' )
 //    return 1 ;
+if ( tokens[1] == "ZSM" )
+    m_pZoneCur->m_TypeEspaceOpenAir = ZSM_PROTECT_BulleQuietude ;
+
 return 0 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Cree et format le nom de la zone
 long COpenAirFile::TraiteANNomDeLaZone(std::vector<std::string> & tokens)
 {
 for ( long it = 1 ; it < (long)tokens.size() ; it++ )
@@ -172,6 +203,9 @@ for ( long it = 1 ; it < (long)tokens.size() ; it++ )
     }
 
 std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '|', ' '); // replace all 'x' to 'y'
+std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '>', ' '); // replace all 'x' to 'y'
+std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '<', ' '); // replace all 'x' to 'y'
+std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '&', ' '); // replace all 'x' to 'y'
 
 return 0 ;
 }

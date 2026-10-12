@@ -15,7 +15,7 @@
 
 using namespace std;
 
-char NumVer[]="20261011a" ;
+char NumVer[]="20261012a" ;
 
 CGlobalVar g_GlobalVar ;
 
@@ -120,10 +120,10 @@ cerr << "compression des zones" << endl ;
 for ( long iz = g_GlobalVar.m_VecZones.size() -1 ; iz >= 0 ; iz-- )
     {
     g_GlobalVar.m_VecZones[iz]->Compress() ;
-    cerr << setw(5) << iz << "\r" << flush ;
+    cerr << setw(5) << "compresse : " << iz << "\r" << flush ;
     }
 
-// tri de-croissant des zones compressees
+// tri de-croissant des zones compressees fonction du nombre de points
 std::sort( g_GlobalVar.m_VecZones.begin() , g_GlobalVar.m_VecZones.end() , MySortFonction ) ;
 //std::reverse( VecZone.begin() , VecZone.end() ) ;
 
@@ -138,12 +138,12 @@ g_GlobalVar.EcritureFichiersKml() ;
 
 // affichage erreur de calcul
 cerr << endl ;
-cerr << "DeltaLatLon max toutes zones en km        : " << g_GlobalVar.m_DelatLatLonMaxZoneKm << endl ;
-cerr << "Resolution vario max short delta en metre : " << g_GlobalVar.m_ResolutionMaxAllMetres << endl ;
-cerr << "Resolution vario moyenne en metre         : " << setprecision(2) << g_GlobalVar.m_ResolutionMoyenneMetre << endl ;
-cerr << "Erreur moyenne toutes zone en metre       : " << setprecision(2) << g_GlobalVar.m_ErreurMoyenneMetres << endl ;
-cerr << "Erreur maximum toutes zone en metre       : " << setprecision(2) << g_GlobalVar.m_ErreurMaxiMetres << endl ;
-cerr << endl << "err maxi admise verif " << CZone::ms_ErreurMaxiAdmiseVerif << " m" << endl ;
+cerr << "DeltaLatLon max toutes zones en km            : " << g_GlobalVar.m_DelatLatLonMaxZoneKm << endl ;
+cerr << "Resolution variable max short delta en metres : " << g_GlobalVar.m_ResolutionMaxAllMetres << endl ;
+cerr << "Resolution variable moyenne en metres         : " << setprecision(2) << g_GlobalVar.m_ResolutionMoyenneMetre << endl ;
+cerr << "Erreur moyenne toutes zones en metres         : " << setprecision(2) << g_GlobalVar.m_ErreurMoyenneMetres << endl ;
+cerr << "Erreur maximum toutes zones en metres         : " << setprecision(2) << g_GlobalVar.m_ErreurMaxiMetres << endl ;
+cerr << endl << "err maxi admise verifiee : " << CZone::ms_ErreurMaxiAdmiseVerif << " m" << endl ;
 
 // fin du programme
 cerr << endl << "Fin du programme." << endl ;

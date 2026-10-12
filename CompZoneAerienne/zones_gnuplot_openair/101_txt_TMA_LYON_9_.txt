@@ -1,6 +1,6 @@
 num : 101
  nom : TMA LYON 9 
- alti. min: 4631663545536037853 m
+ alti. min: 4631663479033667803 m
  compression:  7/   6 pts
  delta max:    44.7 km
  resol delta: 1.4 metres

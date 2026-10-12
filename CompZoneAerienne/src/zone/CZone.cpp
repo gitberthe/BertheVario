@@ -123,7 +123,7 @@ return DistMaxLL * 60. * UnMilesEnMetres ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-/// \brief
+/// \brief Resolution en metre codee sur un short.
 double CZone::GetResolVarioMetres() const
 {
 // short maximum en float

@@ -1,6 +1,6 @@
 num :  90
  nom : LF-R217/6 RHONE 
- alti. min: 107342024297536 m
+ alti. min: 95979828103616 m
  compression:  7/   6 pts
  delta max:    31.1 km
  resol delta: 1.0 metres

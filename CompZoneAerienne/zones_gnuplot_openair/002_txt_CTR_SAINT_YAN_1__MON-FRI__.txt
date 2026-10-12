@@ -1,6 +1,6 @@
 num :   2
  nom : CTR SAINT YAN 1 (MON-FRI) 
- alti. min: 4631656871410756520 m
+ alti. min: 4631656827037969292 m
  compression:  111/ 108 pts
  delta max:    26.7 km
  resol delta: 0.9 metres

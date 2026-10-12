@@ -67,9 +67,9 @@
 #include "zone/CNuage2Droite.h"
 #include "zone/CGroupeAligne.h"
 #include "zone/CCompZoneErr.h"
+#include "openair/COpenAirFile.h"
 #include "zone/CZone.h"
 #include "kml/CKmlFile.h"
-#include "openair/COpenAirFile.h"
 #include "CGlobalVar.h"
 
 // noms / repertoires de fichier
