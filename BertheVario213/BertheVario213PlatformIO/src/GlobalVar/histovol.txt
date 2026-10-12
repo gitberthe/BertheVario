@@ -1,1 +1,0 @@
-../../../../BertheVario/BertheVarioPlatformIO/src/GlobalVar/histovol.txt

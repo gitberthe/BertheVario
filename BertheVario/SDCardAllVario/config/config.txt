@@ -1,0 +1,12 @@
+[coef_filtre_alti_baro] 0.85 #
+[vitesse_igc_kmh] 12 #
+[vz_igc_ms] 0.70 #
+[vz_seuil_haut] 0.20 #
+[vz_seuil_bas] -2.60 #
+[vz_seuil_max] 7.00 #
+[alarme_reculade] 0 #
+[dtu] 2 #
+[ssid_ru] Galaxy_XCover6_Pro_B80B #
+[passwd_ru]  #
+[pilote_ru] Berthe #
+[voile_ru] Hiko #
