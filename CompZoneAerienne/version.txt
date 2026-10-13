@@ -1,11 +1,11 @@
-le 13/10/2026 :
+20261013c :
  . inclusion procedure de validation de zone de BertheVario (zonvalin.txt et zonvalou.txt/zonvalou.ref.txt).
 
-le 12/10/2026 :
+20261012a :
  . contour des zones openair ok (bug rotation arc cercle corrige). reste les altitudes.
 
 le 11/10/2026 :
  . contour des zones openair ok. reste les altitudes.
 
-le 11/10/2026 :
+20261011a :
  . progression dans l'implementation de openair

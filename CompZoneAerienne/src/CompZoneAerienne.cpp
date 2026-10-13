@@ -15,7 +15,7 @@
 
 using namespace std;
 
-char NumVer[]="20261013b" ;
+char NumVer[]="20261013c" ;
 
 CGlobalVar g_GlobalVar ;
 
@@ -64,7 +64,7 @@ for ( ilc = 1 ; ilc < argc ; ilc++ )
         if ( argc < ilc + 2 )
             goto erreur ;
         g_GlobalVar.ValidCompZoneAeriennes( argv[ilc+1] , argv[ilc+2] ) ;
-        return 0 ;
+        exit( 0 ) ;
         }
     else
         {
@@ -73,13 +73,14 @@ for ( ilc = 1 ; ilc < argc ; ilc++ )
         cerr << " " << argv[0] << " --batch terconnu.txt rayon_km       : pour generer vers cout les zones par rapport aux points de terconnu.txt" << endl ;
         cerr << " " << argv[0] << " --point latitude longitude rayon_km : pour generer vers cout les zones par rapport a un point" << endl ;
         cerr << " " << argv[0] << " --openair                           : pour donnees openair" << endl ;
-        cerr << " " << argv[0] << " --valid zonesaer.txt valid.txt      : pour valider avec des tests internes avec zonvalou.txt" << endl ;
+        cerr << " " << argv[0] << " --valid zonesaer.txt valid.txt      : pour valider les zones avec des tests internes avec zonvalou.txt/SDCardAllVario/valid/zonvalou.ref.txt" << endl ;
         cerr << endl ;
         cerr << "    ex pour clermont : ./CompZoneAerienne --point 45.783329 3.08333 120 > zonesaer.txt" << endl ;
         cerr << "    ex pour paillaret: ./CompZoneAerienne --point 45.503415 2.852121 5" << endl ;
-        cerr << "    ex mode batch    : ./CompZoneAerienne --batch terconnu.txt 60 > zonesaer.txt" << endl ;
-        cerr << "    ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt fchvalid.txt" << endl ;
-        return 1 ;
+        cerr << "    ex mode batch    : ./CompZoneAerienne --batch SDCardAllVario/config/terconnu.txt 60 > zonesaer.txt" << endl ;
+        cerr << "    ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt" << endl ;
+        cerr << "      pour le mode valid, mettre les fichier *.hgt dans : " << REP_CHK_FILE << endl ;
+        exit( 1 ) ;
         }
     }
 

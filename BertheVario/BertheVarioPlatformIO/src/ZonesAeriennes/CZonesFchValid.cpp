@@ -102,7 +102,7 @@ m_FileOutValid.clear() ;
 m_FileOutValid.shrink_to_fit() ;
 
 #ifdef _COMP_ZONES_AERIENNES_
- cerr << "generation de " << ZONE_VALID_OUT_FCH << endl ;
+ cerr << "generation de ./" << ZONE_VALID_OUT_FCH << endl ;
 #endif
 //m_FileOutFront.close();
 }

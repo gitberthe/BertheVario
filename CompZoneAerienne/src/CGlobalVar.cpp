@@ -38,6 +38,7 @@ CZonesFchValid ValidZone ;
 
 ValidZone.Valid( zonesaer_txt , valid_txt ) ;
 
+cerr << "pour comparaison faire : 'diff zonvalou.txt SDCardAllVario/valid/zonvalou.ref.txt'" << endl ;
 return 0 ;
 }
 #endif
@@ -49,6 +50,11 @@ long CGlobalVar::TraiteLocaliteAutour(std::vector<std::string> &LigneDeCommande)
 if ( LigneDeCommande[0] == "--batch" )
     {
     ifstream ifs_zprc( LigneDeCommande[1] ) ;
+    if ( ! ifs_zprc.is_open() )
+        {
+        cerr << "**** impossible d'ouvrir : " << LigneDeCommande[1] << endl ;
+        exit( 3 ) ;
+        }
     double RayonKm = atof( LigneDeCommande[2].c_str() ) ;
     for( std::string line; getline( ifs_zprc, line ); )
         {
