@@ -9,8 +9,10 @@
 
 #pragma once
 
-#include "../../BertheVario/BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h"
-#include "../../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h"
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../BertheVario/BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h"
+ #include "../../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h"
+#endif // _COMP_ZONES_AERIENNES_
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Pour validation zone
@@ -43,6 +45,10 @@ public :
     long EcritureFichierZones() ;
     long EcritureFichiersGnuPlot() ;
     long EcritureFichiersKml() ;
+
+    #ifdef _COMP_ZONES_AERIENNES_
+     long ValidCompZoneAeriennes( const char * zoneaer_txt , const char * valin_txt ) ;
+    #endif
 
     double m_DelatLatLonMaxZoneKm = 0 ;
     double m_ResolutionMoyenneMetre = 0 ;

@@ -1,5 +1,5 @@
 le 13/10/2026 :
- . inclusion procedure de validation de zone de BertheVario.
+ . inclusion procedure de validation de zone de BertheVario (zonvalin.txt et zonvalou.txt/zonvalou.ref.txt).
 
 le 12/10/2026 :
  . contour des zones openair ok (bug rotation arc cercle corrige). reste les altitudes.

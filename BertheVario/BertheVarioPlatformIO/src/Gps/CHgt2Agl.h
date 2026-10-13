@@ -14,8 +14,13 @@
 #include <math.h>
 #include <iostream>
 
-#define REP_HGT_FILE "/config/hgtdata"
-#define REP_CHK_FILE "/config/hgtdata/chks"
+#ifdef _COMP_ZONES_AERIENNES_
+ #define REP_HGT_FILE "../../hgtdata4compzoneaer"
+ #define REP_CHK_FILE "../../hgtdata4compzoneaer/chks"
+#else
+ #define REP_HGT_FILE "/config/hgtdata"
+ #define REP_CHK_FILE "/config/hgtdata/chks"
+#endif // _COMP_ZONES_AERIENNES_
 
 #define NB_PT_PER_ROW   1201
 #define NB_SEC_PER_DEG  3600
@@ -92,7 +97,7 @@ public :
 
 private :
     #ifdef _COMP_ZONES_AERIENNES_
-     FILE *          m_File ;
+     FILE *          m_file ;
     #else
      File            m_file ;        ///< fichier *.hgt
     #endif

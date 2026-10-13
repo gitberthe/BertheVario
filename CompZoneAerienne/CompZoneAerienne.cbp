@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--openair --point 45.63440145501449    3.1270051002502446 1 &gt; ess.txt" />
+				<Option parameters="--valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt" />
 				<Compiler>
 					<Add option="-ggdb" />
 					<Add option="-g" />

@@ -3,16 +3,22 @@
 ///
 /// \brief
 ///
-/// \date creation     : 30/03/2024
-/// \date modification : 09/02/2025
+/// \date 30/03/2024 : creation
+/// \date 13/10/2026 : modification pour _COMP_ZONES_AERIENNES_
 ///
 
 #ifndef _ZONESFCH_
 #define _ZONESFCH_
 
 #define ZONE_VALID_IN_FCH  "/valid/zonvalin.txt"
-#define ZONE_VALID_OUT_FCH "/valid/zonvalou.txt"
-#define ZONE_FRONT_OUT_FCH "/valid/zonfront.txt"
+
+#ifdef _COMP_ZONES_AERIENNES_
+ #define ZONE_VALID_OUT_FCH "zonvalou.txt"
+#else
+ #define ZONE_VALID_OUT_FCH "/valid/zonvalou.txt"
+#endif
+
+//#define ZONE_FRONT_OUT_FCH "/valid/zonfront.txt"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \file Classe qui test et valide les zones aeriennes. fichier in =>
@@ -20,7 +26,7 @@
 class CZonesFchValid : public CZonesAerAll
 {
 public :
-    void Valid() ;
+    void Valid( const char * NomZoneAer_txt = NULL , const char * NomZoneValIn_txt = NULL ) ;
 
 private :
     int   m_Ligne ;         ///< ligne fichier in

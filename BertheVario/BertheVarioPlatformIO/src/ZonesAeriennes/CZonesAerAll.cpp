@@ -138,9 +138,45 @@ LectureFichierZonesPeriode() ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Lecture du fichier zonesaer.txt
-void CZonesAerAll::LectureFichierZonesAer()
+void CZonesAerAll::LectureFichierZonesAer( const char * NomFchZoneAer_txt )
 {
 #ifdef _COMP_ZONES_AERIENNES_
+// lecture des zone aerienne pour validation CompZonesAeriennes
+if ( NomFchZoneAer_txt != NULL )
+    {
+    int NbZones = 0 ;
+    FILE * FileZoneAer = fopen( NomFchZoneAer_txt , "r" ) ;
+    char * line ;   // Pointer for getline to allocate
+    size_t len = 0;      // Buffer length (getline will manage)
+    ssize_t read;        // Number of characters read
+
+    if ( FileZoneAer == NULL )
+        {
+        cerr << "**** impossible d'ouvrir " << NomFchZoneAer_txt << endl ;
+        exit( 1 ) ;
+        }
+
+    // lecture des zones
+    while ((read = getline(&line, &len, FileZoneAer)) != -1)
+        {
+        NbZones++ ;
+        TraiteBufferZoneAer( line ) ;
+        }
+
+    free(line) ;
+    fclose( FileZoneAer ) ;
+
+    cerr << "lecture de " << NbZones << " zones aeriennes." << endl ;
+
+    // compression pour init du rectangle +-Lat/Lon
+    for ( int iz = 0 ; iz < GetSize() ; iz++ )
+        {
+        CZoneAer & Zone = *(*this)[iz] ;
+        Zone.CompressZone() ;
+        }
+
+    return ;
+    }
 #else
 const int TaillMaxChar = 20000 ; // taille buffer en concurence memoire avec g_Termic
 char * TmpChar = new char [TaillMaxChar+1] ;
@@ -191,6 +227,13 @@ if ( pZone != NULL )
 
 FileZone.close();
 
+// compression pour init du rectangle +-Lat/Lon
+for ( int iz = 0 ; iz < GetSize() ; iz++ )
+    {
+    CZoneAer & Zone = *(*this)[iz] ;
+    Zone.CompressZone() ;
+    }
+
 delete [] TmpChar ;
 #endif
 }
@@ -223,7 +266,7 @@ if ( IsProtect )
     if ( pCharFin != NULL )
         {
         char TmpBuff[500] ;
-        strcpy( TmpBuff , pChar ) ;
+        strncpy( TmpBuff , pChar , 495 ) ;
         *pCharFin = 0 ;
         // on recule jusqu'a l'espace
         while( *pCharFin != ' ' && *pCharFin != '(' && pCharFin != pChar )
@@ -319,11 +362,11 @@ while ( pChar != NULL )
 
     // longitude
     ppts->m_Lon = atof( pChar ) ;
-    pChar = strtok( NULL , ";," ) ;
+    pChar = strtok( NULL , ";,\n" ) ;
 
     // latitude
     ppts->m_Lat = atof( pChar ) ;
-    pChar = strtok( NULL , ";," ) ;
+    pChar = strtok( NULL , ";,\n" ) ;
 
     // ajout au vecteur
     VecPoly.Add( ppts ) ;
@@ -379,7 +422,7 @@ for ( int ic = 0 ; buff != NULL && ic < len ; ic++ )
     }
 
 // test fin de ligne ou commentaire
-char * pChar = strtok( buff , ";" ) ;
+char * pChar = strtok( buff , ";\n" ) ;
 if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' || countpv < 5 )
     {
     *buff = 0 ;
@@ -388,11 +431,11 @@ if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' || countpv 
 
 CLGString NomOri = pChar ;
 //NomOri += ' ' ;     // caractere de fin de champ pour recherche sans bug
-CLGString NomAff = strtok( NULL ,";");
-CLGString PeriodeDeb = strtok( NULL ,";");
-CLGString PeriodeFin = strtok( NULL ,";");
-CLGString AltiSemaine = strtok( NULL ,";");
-CLGString AltiWeekEnd = strtok( NULL ,";");
+CLGString NomAff = strtok( NULL ,";\n");
+CLGString PeriodeDeb = strtok( NULL ,";\n");
+CLGString PeriodeFin = strtok( NULL ,";\n");
+CLGString AltiSemaine = strtok( NULL ,";\n");
+CLGString AltiWeekEnd = strtok( NULL ,";\n");
 
 CLGString JourDeb = "" ;
 CLGString MoisDeb = "" ;

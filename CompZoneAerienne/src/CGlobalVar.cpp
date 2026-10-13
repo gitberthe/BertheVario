@@ -9,6 +9,8 @@
 
 #include "CompZoneAerienne.h"
 
+#include "BertheVarioIncludes.h"
+
 using namespace std ;
 using namespace nlohmann ;
 
@@ -26,6 +28,19 @@ while ( pChar != NULL )
     pChar = strtok( NULL , " \n\t" ) ;
     }
 }
+
+#ifdef _COMP_ZONES_AERIENNES_
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Procedure de validation CompZoneAeriennes.
+long CGlobalVar::ValidCompZoneAeriennes( const char * zonesaer_txt , const char * valid_txt )
+{
+CZonesFchValid ValidZone ;
+
+ValidZone.Valid( zonesaer_txt , valid_txt ) ;
+
+return 0 ;
+}
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief traite les points autour desquelle sont les zones

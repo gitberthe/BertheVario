@@ -12,11 +12,16 @@
 #ifndef _ZONE_AR_ALL_
 #define _ZONE_AR_ALL_
 
-#define NOM_FCH_ZONE_AER "/config/zonesaer.txt"
-#define NOM_FCH_ZONE_PER "/config/zonesper.txt"
-#define NOM_FCH_ZONE_ACT "/config/zonesact.txt"
-
-#define NOM_FCH_OUT_NOM_ZONE "/valid/zonomout.txt"
+#ifdef _COMP_ZONES_AERIENNES_
+ #define NOM_FCH_ZONE_ACT       "SDCardAllVario/config/zonesact.txt"
+ #define NOM_FCH_ZONE_PER       "SDCardAllVario/config/zonesper.txt"
+ #define NOM_FCH_OUT_NOM_ZONE   "zonomout.txt"
+#else
+ #define NOM_FCH_ZONE_AER       "/config/zonesaer.txt"
+ #define NOM_FCH_ZONE_PER       "/config/zonesper.txt"
+ #define NOM_FCH_ZONE_ACT       "/config/zonesact.txt"
+ #define NOM_FCH_OUT_NOM_ZONE   "/valid/zonomout.txt"
+#endif
 
 #define ZONE_EN_DEHORS          0
 #define ZONE_DEDANS             1
@@ -57,18 +62,20 @@ protected :
     int             m_Plafond4Valid ; ///< pour validation
     bool            m_IsWeekEnd ;     ///< pour savoir si l'on est en week end
 
-    CZoneAer * Find( const char * NomOri ) ;
+    CZoneAer *  Find( const char * NomOri ) ;
+
+    void        LectureFichierZonesAer( const char * NomFchZoneAer_txt = NULL ) ;
+    void        LectureFichierZonesPeriode() ;
+    void        LectureFichierZonesActive() ;
 
 private :
 
     CLGArrayPtr<const CZoneAer> m_VecZoneInArea ;   ///< zones comme TMA et RTBA
     CLGArrayPtr<const CZoneAer> m_VecZonesRet ;     ///< pour un tri plaus rapide
 
-    void        LectureFichierZonesAer() ;
     CZoneAer *  TraiteBufferZoneAer( char * buff ) ;
-    void        LectureFichierZonesPeriode() ;
+
     void        TraiteBufferZonePeriode( char * buff ) ;
-    void        LectureFichierZonesActive() ;
     void        TraiteBufferZoneActive( char * buff ) ;
 
     void        TriZonesParAltitude( CLGArrayPtr< const CZoneAer > &VecZones) ;

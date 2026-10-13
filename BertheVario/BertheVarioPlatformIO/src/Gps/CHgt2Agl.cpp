@@ -203,7 +203,8 @@ char EO = (LonDeg>=0) ? 'E' : 'W' ;
 // coin sud ouest du fichier
 // le fichier couvre 1° x 1°
 char FileName[50] ;
-sprintf( FileName , "%s/%c%02d%c%03d.HGT" , REP_HGT_FILE , NS , LatRound , EO , LonRound ) ;
+//sprintf( FileName , "%s/%c%02d%c%03d.HGT" , REP_HGT_FILE , NS , LatRound , EO , LonRound ) ;
+sprintf( FileName , "%s/%c%02d%c%03d.hgt" , REP_HGT_FILE , NS , LatRound , EO , LonRound ) ;
 
 float secondsLat = (LatDeg - m_LatDegShort) * NB_SEC_PER_DEG;
 float secondsLon = (LonDeg - m_LonDegShort) * NB_SEC_PER_DEG;
@@ -221,6 +222,12 @@ int y = secondsLat / NB_SEC_PAR_TILE;
 int x = secondsLon / NB_SEC_PAR_TILE;
 
 #ifdef _COMP_ZONES_AERIENNES_
+m_file = fopen( FileName , "r" ) ;
+if ( m_file == NULL )
+    {
+    cerr << "**** impossible d'ouvrir " << FileName << endl ;
+    return 1 ;
+    }
 
 // case d'a cote
 short height[4];
@@ -228,6 +235,8 @@ height[2] = getTileHeight(x, y);
 height[0] = getTileHeight(x, y + 1);
 height[3] = getTileHeight(x + 1, y);
 height[1] = getTileHeight(x + 1, y + 1);
+
+fclose( m_file ) ;
 
 #else
 // ouverture fichier
@@ -339,8 +348,8 @@ int offsetX = 2 * (x + (NB_PT_PER_ROW - y - 1) * NB_PT_PER_ROW) ;
 short Alti ;
 
 #ifdef _COMP_ZONES_AERIENNES_
-fseek( m_File , offsetX , SEEK_SET ) ;
-Alti = 0 ;
+ fseek( m_file , offsetX , SEEK_SET ) ;
+ fread( &Alti , 1 , sizeof(Alti) , m_file ) ;
 #else
 m_file.seek( offsetX ) ;
 

@@ -5,7 +5,7 @@
 ///
 /// \date creation     : 30/03/2024
 /// \date modification : 08/07/2025 suppression xc_track et limite zone xy alti
-/// \date modification : 17/09/2025
+/// \date modification : 13/10/2026 ajout validation CompZoneAeriennes
 ///
 
 #ifdef _BERTHE_VARIO_
@@ -23,11 +23,42 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Procedure de validation de zone fichier txt in/front/out.
-void CZonesFchValid::Valid()
+/// NomFchZone_txt  [in] : pour validation CompZoneAeriennes
+/// NomFchValIn_txt [in] : pour validation CompZoneAeriennes
+void CZonesFchValid::Valid(const char * NomFchZone_txt , const char * NomFchValIn_txt )
 {
 /*const int TaillMaxChar = 3000 ; // taille buffer en concurence memoire avec g_Termic
 char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ; */
+
+#ifdef _COMP_ZONES_AERIENNES_
+// procedure de test CompZoneAeriennes
+if ( NomFchZone_txt != NULL && NomFchValIn_txt != NULL )
+    {
+    m_FileNomZoneOut.OuvrirFichier(NOM_FCH_OUT_NOM_ZONE, false );
+
+    // traitement des zones
+    LectureFichierZonesAer( NomFchZone_txt ) ;
+
+    // fermeture fichier nom zone
+    m_FileNomZoneOut.FermerFichier() ;
+    m_FileNomZoneOut.clear() ;
+    m_FileNomZoneOut.shrink_to_fit() ;
+
+    LectureFichierZonesActive() ;
+    LectureFichierZonesPeriode() ;
+
+    cerr << "lecture de " << NomFchValIn_txt << endl ;
+    }
+else
+    {
+    if ( NomFchZone_txt == NULL )
+        cerr << "**** pas de nom de fichier zone aeriennes" << endl ;
+    if ( NomFchValIn_txt == NULL )
+        cerr << "**** pas de nom de fichier de validation" << endl ;
+    exit( 1 ) ;
+    }
+#endif
 
 // ouverture fichier out valid
 m_FileOutValid.OuvrirFichier(ZONE_VALID_OUT_FCH, false );
@@ -45,7 +76,15 @@ m_FileOutFront.seek(0) ; */
 
 // ouverture fichier in
 CFile FileIn ;
-FileIn.OuvrirFichier(ZONE_VALID_IN_FCH);
+#ifdef _COMP_ZONES_AERIENNES_
+ if ( FileIn.OuvrirFichier(NomFchValIn_txt) )
+    {
+    cerr << "**** impossible d'ouvrir " << NomFchValIn_txt << " en lecture" ;
+    exit( 2 ) ;
+    }
+#else
+ FileIn.OuvrirFichier(ZONE_VALID_IN_FCH);
+#endif
 FileIn.LireFichier() ;
 
 // lecture fichier in
@@ -61,6 +100,10 @@ FileIn.FermerFichier();
 m_FileOutValid.FermerFichier();
 m_FileOutValid.clear() ;
 m_FileOutValid.shrink_to_fit() ;
+
+#ifdef _COMP_ZONES_AERIENNES_
+ cerr << "generation de " << ZONE_VALID_OUT_FCH << endl ;
+#endif
 //m_FileOutFront.close();
 }
 
@@ -87,7 +130,7 @@ CLGString Nom = strtok( buff , ";" ) ;
 CLGString LonLat = strtok( NULL , ";" ) ;
 CLGString AnneMoisJour = strtok( NULL , ";" ) ;
 CLGString AltiMargexyMargealti = strtok( NULL , ";" ) ;
-pChar = strtok( NULL , ";" ) ;
+pChar = strtok( NULL , ";\n" ) ;
 CLGString ZonesActive ;
 if ( pChar != NULL )
     ZonesActive = pChar ;
@@ -122,7 +165,7 @@ if ( pChar != NULL )
     g_GlobalVar.m_Config.m_AltiMargin = atoi( pChar ) ;*/
 
 // positionnement zones actives
-pChar = strtok( ZonesActive.GetBuffer() , "-,;\n" ) ;
+pChar = strtok( ZonesActive.GetBuffer() , "-,;" ) ;
 while ( pChar != NULL )
     {
     // pour toutes les zones
@@ -137,7 +180,7 @@ while ( pChar != NULL )
             }
         }
     // prochaine zone active
-    pChar = strtok( NULL , "-,;\n" ) ;
+    pChar = strtok( NULL , "-,;" ) ;
     }
 
 CalcZone() ;

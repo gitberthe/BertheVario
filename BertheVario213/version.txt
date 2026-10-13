@@ -1,3 +1,8 @@
+le 20261013b :
+ - inclusion procedure de validation de zone de BertheVario 
+   dans CompZoneAerienne (zonvalin.txt et zonvalou.txt/zonvalou.ref.txt).
+ - correction bug mineur dans la gestion des zones aeriennes.
+
 le 20261013a :
  - pour evolution CompZoneAerienne.
 
