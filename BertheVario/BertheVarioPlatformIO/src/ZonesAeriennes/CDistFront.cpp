@@ -17,6 +17,8 @@
  #include "../BertheVarioTac.h"
 #endif
 
+
+#ifndef _COMP_ZONES_AERIENNES_
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Renvoie true si on est proche de la frontiere.
 float CDistFront::IsNearFront( CZoneAer::st_coord_poly ** PolygoneArr , int NbPts , CZoneAer::st_coord_poly PtEnCours ,
@@ -88,3 +90,4 @@ CapFrontProche %= 360 ;
 
 return DistanceMin ;
 }
+#endif

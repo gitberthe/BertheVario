@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CGlobalVar.cpp
+1791864225 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CGlobalVar.cpp
 	"CompZoneAerienne.h"
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
+1791863481 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -32,7 +32,7 @@
 	"kml/CKmlFile.h"
 	"CGlobalVar.h"
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/nlohmann/json.hpp
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/nlohmann/json.hpp
 	<algorithm>
 	<cstddef>
 	<functional>
@@ -226,79 +226,422 @@
 	<any>
 	<string_view>
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur2D.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur2D.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CVecZoneReduce.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CVecZoneReduce.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/Segments.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/Segments.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur3D.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur3D.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CPolygone.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CPolygone.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CNuage2Droite.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CNuage2Droite.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CGroupeAligne.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CGroupeAligne.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CCompZoneErr.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CCompZoneErr.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/kml/CKmlFile.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/kml/CKmlFile.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.h
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CGlobalVar.h
+1791864225 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CGlobalVar.h
+	"../../BertheVario/BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h"
+	"../../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
+1791863911 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
 	"CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CPolygone.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CPolygone.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur2D.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur2D.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur3D.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CVecteur3D.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/Segments.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/Segments.cpp
 	"../CompZoneAerienne.h"
 	<iostream>
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/kml/CKmlFile.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/kml/CKmlFile.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/computeOpenAirArc.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/computeOpenAirArc.cpp
 	<iostream>
 	<cmath>
 	<vector>
 	<iomanip>
 	"computeOpenAirArc.h"
 
-1791798512 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/computeOpenAirArc.h
+1791842646 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/computeOpenAirArc.h
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CCompZoneErr.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CCompZoneErr.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CGroupeAligne.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CGroupeAligne.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CNuage2Droite.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CNuage2Droite.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CVecZoneReduce.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CVecZoneReduce.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/zone/CZone.cpp
 	"../CompZoneAerienne.h"
 
-1791798512 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.cpp
+1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/openair/COpenAirFile.cpp
 	"../CompZoneAerienne.h"
 	"computeOpenAirArc.h"
+
+1791842644 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGCoGeneral.cpp
+	"LibGeneral.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h
+	"CLGCoGeneral.h"
+	"CLGString.h"
+	"CLGString.h"
+	"CLGTObjets.h"
+	"CLGQuickSort.h"
+	"CLGArray.h"
+	<pthread.h>
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGCoGeneral.h
+	<stdarg.h>
+	<math.h>
+	<string.h>
+	<sys/stat.h>
+	<signal.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<sstream>
+	<iostream>
+	<fstream>
+	<iomanip>
+	<chrono>
+	<climits>
+	<float.h>
+	"pthread.h"
+	"sched.h"
+	"semaphore.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGString.h
+	"CLGString_inl.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGString_inl.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGTObjets.h
+	"CLGTObjets_inl.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGTObjets_inl.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGQuickSort.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGArray.h
+	"CLGArray_inl.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGArray_inl.h
+
+1791842644 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGString.cpp
+	"LibGeneral.h"
+
+1791842644 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGStringEx.cpp
+	"LibGeneral.h"
+
+1791861883 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CDate.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/BertheVario.h
+	<esp32-hal-i2c.h>
+	<esp32-hal-dac.h>
+	<Wire.h>
+	<Arduino.h>
+	<SPI.h>
+	<SD.h>
+	<WiFi.h>
+	<WiFiClientSecure.h>
+	<FS.h>
+	<MS5611.h>
+	<MPU9250.h>
+	<ESPFMfGK.h>
+	<Update.h>
+	<math.h>
+	<map>
+	<vector>
+	<algorithm>
+	<AsyncTCP.h>
+	<ESPAsyncWebServer.h>
+	<EspFileManager.h>
+	"LibGeneral/LibGeneral.h"
+	"GlobalVar/CMutex.h"
+	"Gps/CTrame.h"
+	"Gps/CIgc.h"
+	"Gps/CFinDeVol.h"
+	"Gps/CGps.h"
+	"Gps/CHgt2Agl.h"
+	"Screen/CBoutons.h"
+	"Screen/CGestEcrans.h"
+	"Screen/CScreen154.h"
+	"VarioBeep/CSoundSvr.h"
+	"VarioBeep/CVarioBeep.h"
+	"SDCard/CSDCard.h"
+	"GlobalVar/CConfigFile.h"
+	"Gps/CPileVit.h"
+	"MS5611/CMS5611Pression.h"
+	"MPU9250/CMpu9250.h"
+	"Neural/SNNS_NET.h"
+	"Neural/CNeuralTermic.h"
+	"Calculateur/CTerrainsConnu.h"
+	"GlobalVar/CFileHistoVol.h"
+	"Geometrie/CVecteur2D.h"
+	"Geometrie/CDroite2D.h"
+	"Geometrie/CVecteur3D.h"
+	"Geometrie/CDroite3D.h"
+	"Geometrie/CMatrice3D.h"
+	"ZonesAeriennes/CRectIn.h"
+	"ZonesAeriennes/CZoneAer.h"
+	"ZonesAeriennes/CPolygone.h"
+	"Geometrie/Segments.h"
+	"ZonesAeriennes/CDate.h"
+	"ZonesAeriennes/CDistFront.h"
+	"ZonesAeriennes/CFile.h"
+	"ZonesAeriennes/CZonesAerAll.h"
+	"ZonesAeriennes/CZonesFchValid.h"
+	"Perfmon/esp32_perfmon.h"
+	"Gps/CSimuVol.h"
+	"FileMgr/FileMgr.h"
+	"RandoVol/CFileGpx.h"
+	"RandoVol/CRandoVol.h"
+	"GlobalVar/CNumTaskArr.h"
+	"GlobalVar/CGlobalVar.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/GlobalVar/CMutex.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CTrame.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CIgc.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CFinDeVol.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CGps.h
+
+1791862838 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h
+	<stdio.h>
+	<math.h>
+	<iostream>
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Screen/CBoutons.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Screen/CGestEcrans.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Screen/CScreen154.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/VarioBeep/CSoundSvr.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/VarioBeep/CVarioBeep.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/SDCard/CSDCard.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/GlobalVar/CConfigFile.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CPileVit.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/MS5611/CMS5611Pression.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/MPU9250/CMpu9250.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Calculateur/CTerrainsConnu.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/GlobalVar/CFileHistoVol.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/CVecteur2D.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/CDroite2D.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/CVecteur3D.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/CDroite3D.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/CMatrice3D.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CRectIn.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZoneAer.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CPolygone.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/Segments.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CDate.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CDistFront.h
+
+1791862159 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CFile.h
+
+1791862174 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZonesAerAll.h
+
+1791856673 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZonesFchValid.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Perfmon/esp32_perfmon.h
+	"esp_err.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CSimuVol.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/FileMgr/FileMgr.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/RandoVol/CFileGpx.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/RandoVol/CRandoVol.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/GlobalVar/CNumTaskArr.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/GlobalVar/CGlobalVar.h
+
+1791863911 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/BertheVarioIncludes.h
+	<vector>
+	<string>
+	"./LibGeneral/LibGeneral.h"
+	"./ZonesAeriennes/CRectIn.h"
+	"./ZonesAeriennes/CZoneAer.h"
+	"./Geometrie/Segments.h"
+	"./ZonesAeriennes/CPolygone.h"
+	"./ZonesAeriennes/CDate.h"
+	"./ZonesAeriennes/CDistFront.h"
+	"./ZonesAeriennes/CFile.h"
+	"./ZonesAeriennes/CZonesAerAll.h"
+	"./ZonesAeriennes/CZonesFchValid.h"
+	"CompZoneAerienne.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/LibGeneral.h
+	"CLGCoGeneral.h"
+	"CLGString.h"
+	"CLGString.h"
+	"CLGTObjets.h"
+	"CLGQuickSort.h"
+	"CLGArray.h"
+	<pthread.h>
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGCoGeneral.h
+	<stdarg.h>
+	<math.h>
+	<string.h>
+	<sys/stat.h>
+	<signal.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<sstream>
+	<iostream>
+	<fstream>
+	<iomanip>
+	<chrono>
+	<climits>
+	<float.h>
+	"pthread.h"
+	"sched.h"
+	"semaphore.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGString.h
+	"CLGString_inl.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGString_inl.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGTObjets.h
+	"CLGTObjets_inl.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGTObjets_inl.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGQuickSort.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGArray.h
+	"CLGArray_inl.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/LibGeneral/CLGArray_inl.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CRectIn.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CZoneAer.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CPolygone.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CDate.h
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CDistFront.h
+
+1791862159 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CFile.h
+
+1791862174 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CZonesAerAll.h
+
+1791856673 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/ZonesAeriennes/CZonesFchValid.h
+
+1791862477 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Geometrie/Segments.cpp
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+	"../BertheVario.h"
+	<iostream>
+
+1791861871 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CRectIn.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791864346 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZoneAer.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791862627 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CDistFront.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+
+1791862838 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/Gps/CHgt2Agl.h
+	<stdio.h>
+	<math.h>
+	<iostream>
+
+1791862927 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CFile.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/Geometrie/Segments.h
+
+1791861867 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CPolygone.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791864346 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZonesFchValid.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791864533 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791864288 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CZonesAerAll.cpp
+	"../BertheVario.h"
+	"../BertheVario213.h"
+	"../BertheVarioTac.h"
+	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
 

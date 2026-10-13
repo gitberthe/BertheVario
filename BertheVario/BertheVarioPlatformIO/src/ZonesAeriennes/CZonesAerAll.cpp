@@ -20,6 +20,9 @@
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
 #endif
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
@@ -56,10 +59,14 @@ m_VecZonesRet.FreeExtra() ;
 /// \brief Renvoi si l'on compresse les zone par rapport a la memoire
 bool CZonesAerAll::IsEnoughMemory()
 {
+#ifdef _COMP_ZONES_AERIENNES_
+ return true ;
+#else
 int FreeMem = esp_get_free_heap_size() ;
 if ( FreeMem > NB_KILO_FREE_MEM * 1024 )
     return true ;
 return false ;
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -133,6 +140,8 @@ LectureFichierZonesPeriode() ;
 /// \brief Lecture du fichier zonesaer.txt
 void CZonesAerAll::LectureFichierZonesAer()
 {
+#ifdef _COMP_ZONES_AERIENNES_
+#else
 const int TaillMaxChar = 20000 ; // taille buffer en concurence memoire avec g_Termic
 char * TmpChar = new char [TaillMaxChar+1] ;
 int ic = 0 ;
@@ -183,6 +192,7 @@ if ( pZone != NULL )
 FileZone.close();
 
 delete [] TmpChar ;
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -350,7 +360,7 @@ FilePeriode.LireFichier() ;
 
 // lecture fichier
 for ( int nl = 0 ; nl < (int)FilePeriode.size() ; nl++ )
-    TraiteBufferZonePeriode( (char*)FilePeriode[nl].c_str() ) ;
+    TraiteBufferZonePeriode( (char*)FilePeriode[nl].data() ) ;
 
 FilePeriode.FermerFichier();
 }
@@ -547,7 +557,7 @@ FileAct.LireFichier() ;
 
 // pour la derniere zone
 for ( int nl = 0 ; nl < (int) FileAct.size() ; nl++ )
-    TraiteBufferZoneActive( (char *)FileAct[nl].c_str() ) ;
+    TraiteBufferZoneActive( (char *)FileAct[nl].data() ) ;
 
 // fermeture fichier
 FileAct.FermerFichier();
@@ -558,7 +568,7 @@ FileAct.FermerFichier();
 void CZonesAerAll::TraiteBufferZoneActive( char * buff )
 {
 // test fin de ligne ou commentaire
-char * pChar = strtok( buff , ";" ) ;
+char * pChar = strtok( buff , ";\n" ) ;
 if ( pChar == NULL || *pChar == 0 || *pChar == '#' || *pChar == '\n' )
     return ;
 
@@ -569,7 +579,7 @@ CLGString NomOriCourt = ZoneNomCourt.GetNom4Activation() ;
 ZoneNomCourt.m_pNomAff = NULL ;
 
 // champ activation de zone
-char * pActivation = strtok( NULL ,";") ;
+char * pActivation = strtok( NULL ,";\n") ;
 if ( pActivation == NULL )
     return ;
 CLGString Activation = pActivation ;
@@ -653,7 +663,7 @@ m_VecZonesRet.SetSize(0) ;
 TriZonesParAltitude( VecZonesIn ) ;
 
 // tri suivant la derogation
-for ( size_t iz = 0 ; iz < VecZonesIn.GetSize()  ; iz++ )
+for ( size_t iz = 0 ; iz < (size_t)VecZonesIn.GetSize()  ; iz++ )
     {
     // zone activable pris en compte apres
     if ( VecZonesIn[iz]->m_DansFchActivation )
@@ -666,7 +676,7 @@ for ( size_t iz = 0 ; iz < VecZonesIn.GetSize()  ; iz++ )
     }
 
 // rajout des zones activables
-for ( size_t iz = 0 ; iz < VecZonesIn.GetSize() ; iz++ )
+for ( size_t iz = 0 ; iz < (size_t)VecZonesIn.GetSize() ; iz++ )
     if ( VecZonesIn[iz]->m_DansFchActivation )
         m_VecZonesRet.Add( VecZonesIn[iz] ) ;
 
@@ -717,7 +727,9 @@ PtsEnCours.m_Lon = 3.041811;   // anzat-le-luguet
 #endif
 
 // si test wifi positionnement altitude sol
+#ifndef _COMP_ZONES_AERIENNES_
 if ( g_GlobalVar.m_ModeHttp )
+#endif
     g_GlobalVar.m_AltitudeSolHgt = g_GlobalVar.m_Hgt2Agl.GetGroundZ( g_GlobalVar.m_TerrainPosCur.m_Lon , g_GlobalVar.m_TerrainPosCur.m_Lat ) ;
 
 #ifdef TIME_ZONE
@@ -925,10 +937,14 @@ if ( pZoneProtegee != NULL && RetNbrIn != ZONE_DEDANS )
     }
 
 // variables de sortie zone en cours
+#ifndef _COMP_ZONES_AERIENNES_
 m_Mutex.PrendreMutex() ;
+#endif
  m_DansDessousUneZone = RetNbrIn ;
  m_NomZoneDansDessous = RetStrIn ;
-m_Mutex.RelacherMutex() ;
+#ifndef _COMP_ZONES_AERIENNES_
+ m_Mutex.RelacherMutex() ;
+#endif
 
 #ifdef TIME_ZONE
 unsigned long ecart = millis() - time_zone ;

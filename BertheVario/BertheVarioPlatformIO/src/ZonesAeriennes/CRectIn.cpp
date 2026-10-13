@@ -15,6 +15,9 @@
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
 #endif
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Donne la

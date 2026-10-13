@@ -91,7 +91,11 @@ public :
     #endif
 
 private :
-    File            m_file ;        ///< fichier *.hgt
+    #ifdef _COMP_ZONES_AERIENNES_
+     FILE *          m_File ;
+    #else
+     File            m_file ;        ///< fichier *.hgt
+    #endif
     CCacheAltiArrp  m_CacheArrp ;   ///< cache des fichier *.hgt
 
     short           m_LonDegShort ;  ///< longitude en degres pour CCacheAltiArrp

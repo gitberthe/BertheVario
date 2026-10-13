@@ -24,8 +24,8 @@ public :
 
 private :
     int   m_Ligne ;         ///< ligne fichier in
-    File  m_FileOutValid ;  ///< fichier se sortie validation detection zone in
-    File  m_FileOutFront ;  ///< fichier se sortie validation detection zone frontiere
+    CFile m_FileOutValid ;  ///< fichier se sortie validation detection zone in
+    //File  m_FileOutFront ;  ///< fichier se sortie validation detection zone frontiere
 
     void TraiteBufferValidZoneIn( char * buff ) ;
 } ;

@@ -9,6 +9,19 @@
 
 #pragma once
 
+#include "../../BertheVario/BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h"
+#include "../../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h"
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Pour validation zone
+class CTerrain
+{
+public :
+    float m_Lat = 0. ;          ///< longitude E+, O- en degres
+    float m_Lon = 0. ;          ///< longitude N+, S- en degres
+    float m_AltiBaroRec = 0. ;  ///< altitude barometrique en metres recalee par fichier hgt
+} ;
+
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief parametre de la ligne de commande (clermont)
 class CCmdLineParam
@@ -43,6 +56,13 @@ public :
     std::vector<CCmdLineParam>  m_VectPtCentreRayon ;   ///< vecteur des differents points centre/rayon de recherche de zone
     std::vector< CZone* >       m_VecZones ;             ///< vecteur des zones
 
+    // pour validation zone
+    int      m_Annee ;
+    int      m_Mois ;
+    int      m_Jour ;
+    CTerrain m_TerrainPosCur ;
+    float    m_AltitudeSolHgt = 0 ;///< altitude du sol hgt
+    CHgt2Agl m_Hgt2Agl ; ///< pour determiner la hauteur sol
 
 private :
     bool VerificationZoneAdmissible( const CZone * pZone, double LatCentreDeg, double LonCentreDeg, double RayonDeg ) ;

@@ -502,7 +502,7 @@ void AssertFailed( const char * NomFichier , const int LigneFichier )
 {
 static int NumAssert= 0 ;
 //char TmpChar[5000] ;
-printf("%ld Une assertion n'est pas verifiee a : %s ligne %ld\n", NumAssert++, NomFichier, LigneFichier);
+printf("%d Une assertion n'est pas verifiee a : %s ligne %d\n", NumAssert++, NomFichier, LigneFichier);
 
 // beep system
 //system( (const char *) "beep" , false ) ;

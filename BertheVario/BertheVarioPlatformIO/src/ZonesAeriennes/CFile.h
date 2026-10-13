@@ -19,9 +19,15 @@ public :
     void FermerFichier() ;
     int  LireFichier() ;
     int  Ecrire( const char * Ligne ) ;
+    int  EcrireNl( const char * Ligne ) ;
+    int  Ecrire( int Ligne ) ;
 
 private :
-    File m_File ;
+    #ifdef _COMP_ZONES_AERIENNES_
+     FILE * m_File ;
+    #else
+     File m_File ;
+    #endif
 } ;
 
 #endif

@@ -17,27 +17,22 @@
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
 #endif
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Procedure de validation de zone fichier txt in/front/out.
 void CZonesFchValid::Valid()
 {
-const int TaillMaxChar = 3000 ; // taille buffer en concurence memoire avec g_Termic
+/*const int TaillMaxChar = 3000 ; // taille buffer en concurence memoire avec g_Termic
 char * TmpChar = new char [TaillMaxChar+1] ;
-int ic = 0 ;
+int ic = 0 ; */
 
 // ouverture fichier out valid
-m_FileOutValid = SD.open(ZONE_VALID_OUT_FCH, FILE_WRITE , true );
-if (!m_FileOutValid)
-    {
-    Serial.print( "erreur creation fichier ZONE_VALID_OUT_FCH" ) ;
-    delete [] TmpChar ;
-    return ;
-    }
-// debut de fichier
-m_FileOutValid.seek(0) ;
+m_FileOutValid.OuvrirFichier(ZONE_VALID_OUT_FCH, false );
 
-// ouverture fichier out front
+/*// ouverture fichier out front
 m_FileOutFront = SD.open(ZONE_FRONT_OUT_FCH, FILE_WRITE , true );
 if (!m_FileOutFront)
     {
@@ -46,47 +41,27 @@ if (!m_FileOutFront)
     return ;
     }
 // debut de fichier
-m_FileOutFront.seek(0) ;
+m_FileOutFront.seek(0) ; */
 
 // ouverture fichier in
-File FileIn = SD.open(ZONE_VALID_IN_FCH);
-if ( !FileIn )
-    {
-    Serial.println("Failed to open file for reading ZONE_VALID_IN_FCH");
-    delete [] TmpChar ;
-    return;
-    }
+CFile FileIn ;
+FileIn.OuvrirFichier(ZONE_VALID_IN_FCH);
+FileIn.LireFichier() ;
 
 // lecture fichier in
 m_Ligne = 1 ;
-while(FileIn.available())
+for ( int nl = 0 ; nl < (int)FileIn.size() ; nl++ )
     {
-    char c = FileIn.read() ;
-    if ( c != '\n' )
-        {
-        // si taille chaine maximum on empile plus dans le buffer
-        if ( ic < TaillMaxChar )
-            TmpChar[ic++] = c ;
-        }
-    else
-        {
-        // si fin de ligne on traite le buffer
-        TmpChar[ic++] = 0 ;
-        TraiteBufferValidZoneIn( TmpChar ) ;
-        m_Ligne++ ;
-        ic = 0 ;
-        }
+    TraiteBufferValidZoneIn( (char*)FileIn[nl].data() ) ;
+    m_Ligne++ ;
     }
 
-// pour la derniere zone
-TraiteBufferValidZoneIn( TmpChar ) ;
-
 // fermeture des fichiers
-FileIn.close();
-m_FileOutValid.close();
-m_FileOutFront.close();
-
-delete [] TmpChar ;
+FileIn.FermerFichier();
+m_FileOutValid.FermerFichier();
+m_FileOutValid.clear() ;
+m_FileOutValid.shrink_to_fit() ;
+//m_FileOutFront.close();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +122,7 @@ if ( pChar != NULL )
     g_GlobalVar.m_Config.m_AltiMargin = atoi( pChar ) ;*/
 
 // positionnement zones actives
-pChar = strtok( ZonesActive.GetBuffer() , "-,;" ) ;
+pChar = strtok( ZonesActive.GetBuffer() , "-,;\n" ) ;
 while ( pChar != NULL )
     {
     // pour toutes les zones
@@ -162,7 +137,7 @@ while ( pChar != NULL )
             }
         }
     // prochaine zone active
-    pChar = strtok( NULL , "-,;" ) ;
+    pChar = strtok( NULL , "-,;\n" ) ;
     }
 
 CalcZone() ;
@@ -170,79 +145,79 @@ CalcZone() ;
 //////////////////
 // fichier zone in
 // ecriture numero de ligne
-m_FileOutValid.print(m_Ligne) ;
-m_FileOutValid.print(";") ;
+m_FileOutValid.Ecrire(m_Ligne) ;
+m_FileOutValid.Ecrire(";") ;
 
 // ecriture nom lieux
-m_FileOutValid.print(Nom) ;
-m_FileOutValid.print(";") ;
+m_FileOutValid.Ecrire(Nom) ;
+m_FileOutValid.Ecrire(";") ;
 
 // ecriture date
-m_FileOutValid.print(annee) ;
-m_FileOutValid.print(",") ;
-m_FileOutValid.print(mois) ;
-m_FileOutValid.print(",") ;
-m_FileOutValid.print(jour) ;
-m_FileOutValid.print(";") ;
+m_FileOutValid.Ecrire(annee) ;
+m_FileOutValid.Ecrire(",") ;
+m_FileOutValid.Ecrire(mois) ;
+m_FileOutValid.Ecrire(",") ;
+m_FileOutValid.Ecrire(jour) ;
+m_FileOutValid.Ecrire(";") ;
 
 // ecriture plafond
-m_FileOutValid.print(m_Plafond4Valid) ;
-m_FileOutValid.print(";") ;
+m_FileOutValid.Ecrire(m_Plafond4Valid) ;
+m_FileOutValid.Ecrire(";") ;
 
 // ecriture alarm
 if ( m_DansDessousUneZone == ZONE_DEDANS )
     {
-    m_FileOutValid.print((const char*)m_NomZoneDansDessous) ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("DedansUneZone") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire((const char*)m_NomZoneDansDessous) ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("DedansUneZone") ;
+    m_FileOutValid.Ecrire(";") ;
     }
 /*else if ( m_LimiteZone == ZONE_LIMITE_ALTI )
     {
-    m_FileOutValid.print(m_NomZoneEnLimite) ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("LimiteAltitude") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire(m_NomZoneEnLimite) ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("LimiteAltitude") ;
+    m_FileOutValid.Ecrire(";") ;
     }
 else if ( m_LimiteZone == ZONE_LIMITE_FRONTIERE )
     {
-    m_FileOutValid.print(m_NomZoneEnLimite) ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("LimiteFrontiere") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire(m_NomZoneEnLimite) ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("LimiteFrontiere") ;
+    m_FileOutValid.Ecrire(";") ;
     } */
 else if ( m_DansDessousUneZone == ZONE_DESSOUS )
     {
-    m_FileOutValid.print((const char*)m_NomZoneDansDessous) ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("DessousUneZone") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire((const char*)m_NomZoneDansDessous) ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("DessousUneZone") ;
+    m_FileOutValid.Ecrire(";") ;
     }
 else if ( m_DansDessousUneZone == ZONE_DESSUS )
     {
-    m_FileOutValid.print((const char*)m_NomZoneDansDessous) ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("DessusUneZone") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire((const char*)m_NomZoneDansDessous) ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("DessusUneZone") ;
+    m_FileOutValid.Ecrire(";") ;
     }
 else if ( m_DansDessousUneZone == ZONE_EN_DEHORS /*&& m_LimiteZone == ZONE_EN_DEHORS */ )
     {
-    m_FileOutValid.print("-") ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("AucuneAlarm") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire("-") ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("AucuneAlarm") ;
+    m_FileOutValid.Ecrire(";") ;
     }
 else
     {
-    m_FileOutValid.print("-") ;
-    m_FileOutValid.print(";") ;
-    m_FileOutValid.print("ErreurProgramme") ;
-    m_FileOutValid.print(";") ;
+    m_FileOutValid.Ecrire("-") ;
+    m_FileOutValid.Ecrire(";") ;
+    m_FileOutValid.Ecrire("ErreurProgramme") ;
+    m_FileOutValid.Ecrire(";") ;
     }
 
-m_FileOutValid.println("") ;
+m_FileOutValid.EcrireNl("") ;
 
-/////////////////////
+/*/////////////////////
 // fichier zone front
 // ecritude numero de ligne
 m_FileOutFront.print(m_Ligne) ;
@@ -260,7 +235,7 @@ m_FileOutFront.print(jour) ;
 m_FileOutFront.print(";") ;
 // ecriture plafond
 m_FileOutFront.print((int)g_GlobalVar.m_TerrainPosCur.m_AltiBaroRec) ;
-m_FileOutFront.print("\t") ;
+m_FileOutFront.print("\t") ;*/
 
 /*
 // si pas d'alarmes
@@ -282,7 +257,7 @@ if ( (m_DansDessousUneZone == ZONE_EN_DEHORS || m_DansDessousUneZone == ZONE_DES
 else
     m_FileOutFront.print( "Alarme zone penetration/limite" ) ; */
 
-m_FileOutFront.println("") ;
+//m_FileOutFront.println("") ;
 
 *buff = 0 ;
 }

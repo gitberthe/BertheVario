@@ -8,7 +8,11 @@
 /// \date 27/10/2025 : passage des parametres &
 ///
 
-#include "../BertheVario.h"
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#else
+ #include "../BertheVario.h"
+#endif
 
 #include <iostream>
 using namespace std;

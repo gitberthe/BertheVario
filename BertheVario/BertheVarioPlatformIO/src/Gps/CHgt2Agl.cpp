@@ -17,6 +17,9 @@
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
 #endif
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief regarde si les lon/lat sont egaux a 3 sec pres.
@@ -217,6 +220,16 @@ float secondsLon = (LonDeg - m_LonDegShort) * NB_SEC_PER_DEG;
 int y = secondsLat / NB_SEC_PAR_TILE;
 int x = secondsLon / NB_SEC_PAR_TILE;
 
+#ifdef _COMP_ZONES_AERIENNES_
+
+// case d'a cote
+short height[4];
+height[2] = getTileHeight(x, y);
+height[0] = getTileHeight(x, y + 1);
+height[3] = getTileHeight(x + 1, y);
+height[1] = getTileHeight(x + 1, y + 1);
+
+#else
 // ouverture fichier
 #ifdef _BERTHE_VARIO_TAC_
  g_GlobalVar.m_Screen.m_MutexTft.PrendreMutex() ;
@@ -246,6 +259,7 @@ height[1] = getTileHeight(x + 1, y + 1);
 m_file.close();
 #ifdef _BERTHE_VARIO_TAC_
  g_GlobalVar.m_Screen.m_MutexTft.RelacherMutex() ;
+#endif
 #endif
 
 // ratio where X lays
@@ -321,22 +335,19 @@ else
 
 // 2 octets pour un short
 int offsetX = 2 * (x + (NB_PT_PER_ROW - y - 1) * NB_PT_PER_ROW) ;
-
-m_file.seek( offsetX ) ;
-
 // lecture 16bits
 short Alti ;
-/*char * pChar = (char*)&Alti ;
-*(pChar+1) = m_file.read() ;
-*pChar     = m_file.read() ;*/
 
-/* *pChar++ = m_file.read() ;
-*pChar++ = m_file.read() ;
-
-Alti = swap(Alti) ;*/
+#ifdef _COMP_ZONES_AERIENNES_
+fseek( m_File , offsetX , SEEK_SET ) ;
+Alti = 0 ;
+#else
+m_file.seek( offsetX ) ;
 
 // lecture fichier en 1 seul passage
 m_file.read( (uint8_t *) &Alti , sizeof(Alti) ) ;
+#endif
+
 Alti = swap(Alti) ;
 
 // stocke l'altitude dans le cache

@@ -16,11 +16,16 @@
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
 #endif
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
 int CFile::OuvrirFichier( const char * FileName , bool lecture )
 {
+#ifdef _COMP_ZONES_AERIENNES_
+#else
 // ouverture fichier
 if ( lecture )
     m_File = SD.open(FileName);
@@ -29,12 +34,13 @@ else
     m_File = SD.open(FileName, FILE_WRITE , true ) ;
     m_File.seek(0) ;
     }
+
 if ( !m_File )
     {
     Serial.println("Failed to open file");
     return 1;
     }
-
+#endif
 return 0 ;
 }
 
@@ -42,14 +48,46 @@ return 0 ;
 /// \brief
 void CFile::FermerFichier()
 {
-m_File.close() ;
+#ifdef _COMP_ZONES_AERIENNES_
+#else
+ m_File.close() ;
+#endif
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief
+int CFile::Ecrire( int Ligne )
+{
+#ifdef _COMP_ZONES_AERIENNES_
+#else
+ m_File.print( Ligne ) ;
+#endif
+return 0 ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief
 int CFile::Ecrire( const char * Ligne )
 {
+#ifdef _COMP_ZONES_AERIENNES_
+#else
+ m_File.print( Ligne ) ;
+#endif
+return 0 ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief
+int CFile::EcrireNl( const char * Ligne )
+{
+#ifdef _COMP_ZONES_AERIENNES_
+#else
+char c1 = 0x0d ;
+char c2 = 0x0a ;
 m_File.print( Ligne ) ;
+m_File.print( c1 ) ;
+m_File.print( c2 ) ;
+#endif
 return 0 ;
 }
 
@@ -57,6 +95,8 @@ return 0 ;
 /// \brief Lecture de petit fichier
 int CFile::LireFichier()
 {
+#ifdef _COMP_ZONES_AERIENNES_
+#else
 char TmpChar[1000] = "" ;
 
 // raz precedent
@@ -72,13 +112,12 @@ while(m_File.available())
         {
         TmpChar[ic++] = 0 ;
         ic = 0 ;
-        std::string Ligne = TmpChar ;
-        push_back( Ligne ) ;
+        push_back( TmpChar ) ;
         }
     }
 TmpChar[ic++] = 0 ;
-std::string Ligne = TmpChar ;
-push_back( Ligne ) ;
-
+//std::string Ligne = TmpChar ;
+push_back( TmpChar ) ;
+#endif
 return 0 ;
 }

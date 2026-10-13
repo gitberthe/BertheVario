@@ -45,7 +45,9 @@ public :
 
     void DeleteAll() ;
 
-    CMutex      m_Mutex ;    ///< mutex pour nom zone CalcZone() et Ecran()
+    #ifndef _COMP_ZONES_AERIENNES_
+     CMutex      m_Mutex ;    ///< mutex pour nom zone CalcZone() et Ecran()
+    #endif
     CLGString   m_NomZoneDansDessous ;  ///< nom de zone dans ou sous laquelle on est
     int         m_DansDessousUneZone ;  ///< si dans ou dessous une zone
     static bool IsEnoughMemory() ;

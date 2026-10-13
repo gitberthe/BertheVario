@@ -19,6 +19,9 @@
 #ifdef _BERTHE_VARIO_TAC_
  #include "../BertheVarioTac.h"
 #endif
+#ifdef _COMP_ZONES_AERIENNES_
+ #include "../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+#endif
 
 CZoneAer::TriPar CZoneAer::ms_TriPar = CZoneAer::TriParAltitude ;
 
@@ -205,7 +208,7 @@ CLGString CZoneAer::GetNom4AffichageActivation() const
 CLGString NomRet ;
 
 // parcour de la chaine
-for ( int is = 0 ; is < strlen(m_pNomAff) ; is++ )
+for ( int is = 0 ; is < (int)strlen(m_pNomAff) ; is++ )
     {
     // si blanc
     if ( m_pNomAff[is] == ' ' )
