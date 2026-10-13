@@ -198,14 +198,15 @@ long COpenAirFile::TraiteANNomDeLaZone(std::vector<std::string> & tokens)
 {
 for ( long it = 1 ; it < (long)tokens.size() ; it++ )
     {
-    m_pZoneCur->m_Name += tokens[it] ;
+    std::string & token = tokens[it] ;
+    std::replace( token.begin(), token.end(), '|', '_'); // replace all 'x' to 'y'
+    std::replace( token.begin(), token.end(), '>', '_'); // replace all 'x' to 'y'
+    std::replace( token.begin(), token.end(), '<', '_'); // replace all 'x' to 'y'
+    std::replace( token.begin(), token.end(), '&', '_'); // replace all 'x' to 'y'
+
+    m_pZoneCur->m_Name += token ;
     m_pZoneCur->m_Name += " " ;
     }
-
-std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '|', ' '); // replace all 'x' to 'y'
-std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '>', ' '); // replace all 'x' to 'y'
-std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '<', ' '); // replace all 'x' to 'y'
-std::replace( m_pZoneCur->m_Name.begin(), m_pZoneCur->m_Name.end(), '&', ' '); // replace all 'x' to 'y'
 
 return 0 ;
 }
