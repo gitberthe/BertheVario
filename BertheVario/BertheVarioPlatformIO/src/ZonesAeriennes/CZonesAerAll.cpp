@@ -227,13 +227,6 @@ if ( pZone != NULL )
 
 FileZone.close();
 
-// compression pour init du rectangle +-Lat/Lon
-for ( int iz = 0 ; iz < GetSize() ; iz++ )
-    {
-    CZoneAer & Zone = *(*this)[iz] ;
-    Zone.CompressZone() ;
-    }
-
 delete [] TmpChar ;
 #endif
 }
@@ -788,17 +781,11 @@ for ( int iz = 0 ; iz < GetSize() ; iz++ )
 
     // si la zone n'est pas active
     if ( ! Zone.m_Activee )
-        {
-        Zone.CompressZone() ;
         continue ;
-        }
 
     // si pas dans les bornes lat/lon
     if ( ! Zone.IsInRect(PtsEnCours) )
-        {
-        Zone.CompressZone() ;
         continue ;
-        }
 
     // decompression de la zone
     Zone.UnCompressZone() ;

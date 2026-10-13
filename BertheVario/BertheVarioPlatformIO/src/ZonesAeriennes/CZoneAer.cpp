@@ -38,6 +38,7 @@ if ( m_PolygoneArr != NULL )
     m_PolygoneArr = NULL ;
     m_NbPts = 0 ;
     }
+
 // point compressés
 if ( m_LowResShortArr != NULL )
     {
@@ -123,13 +124,12 @@ return -1 ;
 /// (de 1 a 7 metres, 2 metres en moyenne)
 void CZoneAer::CompressZone()
 {
-// si pas de points a compresser
-if ( m_PolygoneArr == NULL )
-    return ;
-
 // si deja compresse en int
 if ( m_LowResShortArr != NULL )
+    {
+    FreeFloat() ;
     return ;
+    }
 
 // allocation du tableau de short
 m_LowResShortArr = new short [m_NbPts*2] ;
@@ -143,8 +143,6 @@ const float ShortMax = 32767. ;
 // calcul de la resolution minimum
 float DistMaxLatLonZone = CRectIn::GetDistanceMaxDegres( m_PolygoneArr , m_NbPts , m_Barycentre ) ;
 m_ResolutionDegres = 1.05 * DistMaxLatLonZone / ShortMax ;
-//Serial.print( ResXYMetres ) ;
-//Serial.print( " " ) ;
 
 // positionnement des bornes du cadre de zone
 CRectIn::SetLatLonMinMax( m_PolygoneArr , m_NbPts ) ;
@@ -173,6 +171,28 @@ for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
 
 // supression des float
 FreeFloat() ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief De-compresse une zone en float
+void CZoneAer::UnCompressZone()
+{
+// si deja decompressee en float/short
+if ( m_PolygoneArr != NULL )
+    return ;
+
+// allocation du tableau st *
+m_PolygoneArr = new st_coord_poly [m_NbPts] ;
+
+// passage en float
+int ipshort = 0 ;
+for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
+    {
+    // ajout du points
+    st_coord_poly * pStPts = & m_PolygoneArr[ipstruct] ;
+    pStPts->m_Lat = ((float)m_LowResShortArr[ipshort++]) * m_ResolutionDegres + m_Barycentre.m_Lat ;
+    pStPts->m_Lon = ((float)m_LowResShortArr[ipshort++]) * m_ResolutionDegres + m_Barycentre.m_Lon ;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -241,34 +261,5 @@ if ( m_LowResShortArr != NULL )
     delete [] m_LowResShortArr ;
     m_LowResShortArr = NULL ;
     }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-/// \brief De-compresse une zone en float
-void CZoneAer::UnCompressZone()
-{
-// si deja decompressee en float/short
-if ( m_PolygoneArr != NULL )
-    return ;
-
-// si pas compresse de int
-if ( m_LowResShortArr == NULL )
-    return ;
-
-// allocation du tableau st *
-m_PolygoneArr = new st_coord_poly [m_NbPts] ;
-
-// passage en float
-int ipshort = 0 ;
-for ( int ipstruct = 0 ; ipstruct < m_NbPts ; ipstruct++ )
-    {
-    // ajout du points
-    st_coord_poly * pStPts = & m_PolygoneArr[ipstruct] ;
-    pStPts->m_Lat = ((float)m_LowResShortArr[ipshort++]) * m_ResolutionDegres + m_Barycentre.m_Lat ;
-    pStPts->m_Lon = ((float)m_LowResShortArr[ipshort++]) * m_ResolutionDegres + m_Barycentre.m_Lon ;
-    }
-
-// liberation des shorts
-FreeShort() ;
 }
 

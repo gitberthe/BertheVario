@@ -349,7 +349,8 @@ short Alti ;
 
 #ifdef _COMP_ZONES_AERIENNES_
  fseek( m_file , offsetX , SEEK_SET ) ;
- fread( &Alti , 1 , sizeof(Alti) , m_file ) ;
+ if ( fread( &Alti , 1 , sizeof(Alti) , m_file ) == 0 )
+    {}
 #else
 m_file.seek( offsetX ) ;
 
