@@ -66,10 +66,13 @@ for ( ilc = 1 ; ilc < argc ; ilc++ )
         g_GlobalVar.ValidCompZoneAeriennes( argv[ilc+1] , argv[ilc+2] ) ;
         exit( 0 ) ;
         }
+    else if ( strcmp(argv[ilc],"--help") == 0 )
+        goto erreur ;
     else
         {
         erreur :
         cerr << "version du " << NumVer << endl ;
+        cerr << " " << argv[0] << " --help                              : aide" << endl ;
         cerr << " " << argv[0] << " --batch terconnu.txt rayon_km       : pour generer vers cout les zones par rapport aux points de terconnu.txt" << endl ;
         cerr << " " << argv[0] << " --point latitude longitude rayon_km : pour generer vers cout les zones par rapport a un point" << endl ;
         cerr << " " << argv[0] << " --openair                           : pour donnees openair" << endl ;
@@ -79,7 +82,7 @@ for ( ilc = 1 ; ilc < argc ; ilc++ )
         cerr << "    ex pour paillaret: ./CompZoneAerienne --point 45.503415 2.852121 5" << endl ;
         cerr << "    ex mode batch    : ./CompZoneAerienne --batch SDCardAllVario/config/terconnu.txt 60 > zonesaer.txt" << endl ;
         cerr << "    ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt" << endl ;
-        cerr << "      pour le mode valid, mettre les fichier *.hgt dans : " << REP_CHK_FILE << endl ;
+        cerr << "                       pour le mode valid, mettre les fichier *.hgt dans : " << REP_HGT_FILE << endl ;
         exit( 1 ) ;
         }
     }
