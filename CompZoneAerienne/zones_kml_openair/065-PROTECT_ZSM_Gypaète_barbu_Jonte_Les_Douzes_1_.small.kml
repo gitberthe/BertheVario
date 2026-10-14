@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-PROTECT ZSM Gypaète barbu Jonte Les Douzes 1  (1204m/sol) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.31444444,44.2069444,100
+3.31194444,44.2025,100
+3.30583333,44.2008333,100
+3.29972222,44.2027778,100
+3.29694444,44.2072222,100
+3.29972222,44.2116667,100
+3.30583333,44.2133333,100
+3.31194444,44.2116667,100
+3.31444444,44.2069444,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

@@ -67,11 +67,12 @@ public :
 
 private :
 
+    void replace_accent(std::string& str) ;
     long TraiteLigne( std::vector<std::string> & tokens ) ;
 
     long TraiteACClasseDeLaZone(std::vector<std::string> & tokens) ;    ///< classe A B C D E F G ZSM
-    long TraiteANNomDeLaZone(std::vector<std::string> & tokens) ;
     long TraiteAYAirspaceType(std::vector<std::string> & tokens) ;      ///< CTR,TMA
+    long TraiteANNomDeLaZone(std::vector<std::string> & tokens) ;
     long TraiteAHAltitudeHaute(std::vector<std::string> & tokens) ;
     long TraiteALAltitudeBasse(std::vector<std::string> & tokens) ;
     long TraiteDPPointDePolygone( CVecZoneReduce::st_coord_poly * pStPts, std::vector<std::string> & tokens ) ;

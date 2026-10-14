@@ -1,6 +1,6 @@
 num :   3
  nom : CTA MARSEILLE 7 
- alti. min: 0 m
+ alti. min: 4419 m
  compression:  157/  85 pts
  delta max:    463.4 km
  resol delta: 14.8 metres

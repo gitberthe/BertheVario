@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 233 A BOURG LASTIC </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.58305556,45.7,100
+2.57777778,45.6833333,100
+2.52638889,45.6669444,100
+2.52638889,45.6883333,100
+2.58305556,45.7,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

@@ -1,8 +1,0 @@
-num :  19
- nom : TMA CLERMONT 9 
- alti. min: 4631458843266769698 m
- compression:  210/  38 pts
- delta max:    40.6 km
- resol delta: 1.3 metres
- err moyenne:  7.6 m
- err maxi:  14.0 m

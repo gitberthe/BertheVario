@@ -1,0 +1,8 @@
+num :  32
+ nom : LF-D192S RUN CEVENNES 
+ alti. min: 0 m
+ compression:  216/  21 pts
+ delta max:    60.9 km
+ resol delta: 2.0 metres
+ err moyenne:  8.1 m
+ err maxi:  13.8 m

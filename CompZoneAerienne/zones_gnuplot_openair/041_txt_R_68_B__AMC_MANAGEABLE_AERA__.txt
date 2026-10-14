@@ -1,0 +1,8 @@
+num :  41
+ nom : R 68 B (AMC MANAGEABLE AERA) 
+ alti. min: 2590 m
+ compression:  22/  15 pts
+ delta max:    112.5 km
+ resol delta: 3.6 metres
+ err moyenne:  1.0 m
+ err maxi:  9.9 m

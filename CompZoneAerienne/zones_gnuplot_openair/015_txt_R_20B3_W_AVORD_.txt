@@ -1,0 +1,8 @@
+num :  15
+ nom : R 20B3 W AVORD 
+ alti. min: 914 m
+ compression:  110/  42 pts
+ delta max:    59.8 km
+ resol delta: 1.9 metres
+ err moyenne:  7.0 m
+ err maxi:  12.8 m

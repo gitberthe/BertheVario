@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 108E3 ISTRES </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.43166667,44.1016667,100
+3.54694444,43.9552778,100
+3.27638889,43.8894444,100
+3.3,44.1,100
+3.43166667,44.1016667,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

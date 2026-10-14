@@ -1,0 +1,8 @@
+num :  87
+ nom : R 20B2 S AVORD 
+ alti. min: 914 m
+ compression:  7/   6 pts
+ delta max:    34.4 km
+ resol delta: 1.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

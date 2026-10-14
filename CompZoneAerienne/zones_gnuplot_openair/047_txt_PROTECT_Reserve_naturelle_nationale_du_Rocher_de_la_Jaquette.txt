@@ -1,0 +1,8 @@
+num :  47
+ nom : PROTECT Reserve naturelle nationale du Rocher de la Jaquette  (100m/sol) 
+ alti. min: 0 m
+ compression:  11/  11 pts
+ delta max:    0.9 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

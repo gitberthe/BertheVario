@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 590 B MENDE NORD (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.91666667,44.9333333,100
+3.11666667,44.7830556,100
+2.96444444,44.7216667,100
+2.75388889,44.8808333,100
+2.91666667,44.9333333,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 137 A LAPALISSE (NOTAM) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.56666667,46.3333333,200
+3.63333333,46.3083333,200
+3.63333333,46.2,200
+3.59444444,46.1988889,200
+3.44805556,46.2183333,200
+3.48861111,46.3333333,200
+3.56666667,46.3333333,200
+3.56666667,46.3333333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

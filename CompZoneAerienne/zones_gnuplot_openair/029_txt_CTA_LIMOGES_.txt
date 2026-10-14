@@ -1,8 +1,0 @@
-num :  29
- nom : CTA LIMOGES 
- alti. min: 0 m
- compression:  126/  27 pts
- delta max:    182.4 km
- resol delta: 5.8 metres
- err moyenne:  7.0 m
- err maxi:  13.7 m

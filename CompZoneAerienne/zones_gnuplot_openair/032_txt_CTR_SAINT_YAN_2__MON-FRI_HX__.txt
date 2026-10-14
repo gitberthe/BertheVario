@@ -1,8 +1,0 @@
-num :  32
- nom : CTR SAINT YAN 2 (MON-FRI HX) 
- alti. min: 4631723082544523515 m
- compression:  111/  25 pts
- delta max:    11.3 km
- resol delta: 0.4 metres
- err moyenne:  6.9 m
- err maxi:  14.0 m

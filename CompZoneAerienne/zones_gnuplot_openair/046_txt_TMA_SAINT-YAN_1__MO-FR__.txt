@@ -1,8 +1,0 @@
-num :  46
- nom : TMA SAINT-YAN 1 (MO-FR) 
- alti. min: 4632036214423788248 m
- compression:  16/  15 pts
- delta max:    99.3 km
- resol delta: 3.2 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

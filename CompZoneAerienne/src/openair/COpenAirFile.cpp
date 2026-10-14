@@ -119,13 +119,25 @@ if ( tokens[0] == "AC" )
     m_pZoneCur = new CZone ;
     m_DClockwise = true ;
     // si zone non controlee
-    if ( ! TraiteACClasseDeLaZone( tokens ) )
-        m_pZoneArr.push_back( m_pZoneCur ) ;
-    else
+    if ( TraiteACClasseDeLaZone( tokens ) )
         {
         delete m_pZoneCur ;
         m_pZoneCur = NULL ;
         }
+    else
+        m_pZoneArr.push_back( m_pZoneCur ) ;
+    }
+// type de la zone
+else if ( tokens[0] == "AY" && m_pZoneCur != NULL )
+    {
+    TraiteAYAirspaceType( tokens ) ;
+    /*if ( TraiteAYAirspaceType( tokens ) )
+        {
+        delete m_pZoneCur ;
+        m_pZoneCur = NULL ;
+        }
+    else
+        m_pZoneArr.push_back( m_pZoneCur ) ;*/
     }
 // AN nom de zone
 else if ( tokens[0] == "AN" && m_pZoneCur != NULL )
@@ -133,9 +145,6 @@ else if ( tokens[0] == "AN" && m_pZoneCur != NULL )
     TraiteANNomDeLaZone( tokens ) ;
     //cout << m_pZoneCur->m_Name << endl ;
     }
-// type de la zone
-else if ( tokens[0] == "AY" && m_pZoneCur != NULL )
-    {}
 // AF frequence
 else if ( tokens[0] == "AF" && m_pZoneCur != NULL )
     {}
@@ -183,11 +192,52 @@ return 0 ;
 /// Espaces autorise au parapentes: E F G (F pas en france)
 long COpenAirFile::TraiteACClasseDeLaZone(std::vector<std::string> & tokens)
 {
-// espaces aeriens non controle
-//if ( tokens[1][0] == 'G' )
+// zone EFG authorize
+//if ( tokens[1] == "E" || tokens[1] == "F" || tokens[1] == "G" )
 //    return 1 ;
+
+if ( tokens[1] == "E" )
+    {
+    m_pZoneCur->m_TypeEspaceOpenAir = EFG_authorize ; //ABCD_interdit ;
+    return 1 ;
+    }
+
+// bulle de quietude
 if ( tokens[1] == "ZSM" )
     m_pZoneCur->m_TypeEspaceOpenAir = ZSM_PROTECT_BulleQuietude ;
+
+return 0 ;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief Remplace les caracteres speciaux
+void COpenAirFile::replace_accent(std::string& str)
+{
+std::string from = "é";
+std::string to = "e";
+size_t start_pos = 0;
+
+std::replace( str.begin(), str.end(), '|', '_'); // replace all 'x' to 'y'
+std::replace( str.begin(), str.end(), '>', '_'); // replace all 'x' to 'y'
+std::replace( str.begin(), str.end(), '<', '_'); // replace all 'x' to 'y'
+std::replace( str.begin(), str.end(), '&', '_'); // replace all 'x' to 'y'
+
+// Find each occurrence of the multibyte "é"
+while ((start_pos = str.find(from, start_pos)) != std::string::npos)
+    {
+    // Replace 2 bytes of "é" with 1 byte of "e"
+    str.replace(start_pos, from.length(), to);
+    // Move forward by the length of the replacement
+    start_pos += to.length();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/// \brief type de zone CTR,TMA
+long COpenAirFile::TraiteAYAirspaceType(std::vector<std::string> & tokens)
+{
+//if ( tokens[1] == "TMA" && m_pZoneCur->m_TypeEspaceOpenAir == ABCD_interdit )
+//    return 1 ;
 
 return 0 ;
 }
@@ -198,12 +248,44 @@ long COpenAirFile::TraiteANNomDeLaZone(std::vector<std::string> & tokens)
 {
 for ( long it = 1 ; it < (long)tokens.size() ; it++ )
     {
+    // remplacement des caracteres speciaux
     std::string & token = tokens[it] ;
-    std::replace( token.begin(), token.end(), '|', '_'); // replace all 'x' to 'y'
-    std::replace( token.begin(), token.end(), '>', '_'); // replace all 'x' to 'y'
-    std::replace( token.begin(), token.end(), '<', '_'); // replace all 'x' to 'y'
-    std::replace( token.begin(), token.end(), '&', '_'); // replace all 'x' to 'y'
 
+    replace_accent( token ) ;
+
+    //if ( strstr( (char*)token.data() , "astr" ) )
+    //    int a = 1 ;
+
+    char * pChar ;
+    // passage de LF-R368B a R 368 B
+    if ( (pChar=strstr( (char*)token.data() , "LF-R")) != NULL )
+        {
+        *pChar++ = ' ' ;
+        *pChar++ = ' ' ;
+        *pChar++ = 'R' ;
+        *pChar-- = ' ' ;
+        if ( isalpha( token[token.size()-1] ) )
+            {
+            std::string zone = pChar ;
+            zone += zone[zone.size()-1] ;
+            zone[zone.size()-2] = ' ' ;
+            token = zone ;
+            }
+        else
+            {
+            std::string zone = pChar ;
+            token = zone ;
+            }
+        }
+    // ajout PROTECT
+    if ( it == 1 && m_pZoneCur->m_TypeEspaceOpenAir == ZSM_PROTECT_BulleQuietude )
+        m_pZoneCur->m_Name += "PROTECT " ;
+
+    // probleme avec le nom (ou modifier SDCardAllVario/config/zonesper.txt)
+    if ( token == "CLERMONT5.1" )
+        token = "CLERMONT 5.1" ;
+
+    // ajout nom de zone
     m_pZoneCur->m_Name += token ;
     m_pZoneCur->m_Name += " " ;
     }
@@ -215,6 +297,15 @@ return 0 ;
 /// \brief
 long COpenAirFile::TraiteAHAltitudeHaute(std::vector<std::string> & tokens)
 {
+// si bulle de quietude, ajour dans le nom de l'altitude sol
+if ( m_pZoneCur->m_TypeEspaceOpenAir == ZSM_PROTECT_BulleQuietude )
+    {
+    char TmpChar[20] ;
+    int altitude_sol = ExtraireAltitudeEnMetres( tokens ) ;
+    sprintf( TmpChar , " (%dm/sol) " , altitude_sol ) ;
+    m_pZoneCur->m_Name += TmpChar ;
+    }
+
 return 0 ;
 }
 
@@ -222,9 +313,82 @@ return 0 ;
 /// \brief
 long COpenAirFile::TraiteALAltitudeBasse(std::vector<std::string> & tokens)
 {
+m_pZoneCur->m_Bottom = ExtraireAltitudeEnMetres( tokens ) ;
 return 0 ;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+/// \brief
+double COpenAirFile::ExtraireAltitudeEnMetres(std::vector<std::string> & tokens)
+{
+char TmpChar[1000] = "" ;
+
+// concatenation de la chaine
+for ( long it = 1 ; it < (long)tokens.size() ; it++ )
+    {
+    strcat( TmpChar, tokens[it].c_str()) ;
+    strcat( TmpChar , " " ) ;
+    }
+
+// minuscules
+strlwr(TmpChar) ;
+
+char * pChar ;
+// above mean sea level
+if ( (pChar=strstr( TmpChar , "amsl" )) != NULL )
+    {
+    *pChar = 0 ;
+    // pieds
+    pChar=strstr( TmpChar , "ft" ) ;
+    if ( pChar != NULL )
+        {
+        *pChar = 0 ;
+        double AltitudeFt = atoi( TmpChar ) ;
+        double AltitudeMetres = AltitudeFt * PiedsVersMetres ;
+        return AltitudeMetres ;
+        }
+    // metres
+    pChar=strstr( TmpChar , "m" ) ;
+    if ( pChar != NULL )
+        {
+        double AltitudeMetres = atoi( TmpChar ) ;
+        return AltitudeMetres ;
+        }
+    cerr << "*** probleme d'altitude AMSL" << endl ;
+    }
+// above ground level
+if ( (pChar=strstr( TmpChar , "agl" )) != NULL )
+    {
+    *pChar = 0 ;
+    // pieds
+    pChar=strstr( TmpChar , "ft" ) ;
+    if ( pChar != NULL )
+        {
+        *pChar = 0 ;
+        double AltitudeFt = atoi( TmpChar ) ;
+        double AltitudeMetres = AltitudeFt * PiedsVersMetres ;
+        return AltitudeMetres ;
+        }
+    // metres
+    pChar=strstr( TmpChar , "m" ) ;
+    if ( pChar != NULL )
+        {
+        double AltitudeMetres = atoi( TmpChar ) ;
+        return AltitudeMetres ;
+        }
+    cerr << "*** probleme d'altitude AGL" << endl ;
+    }
+// niveau de vol
+else if ( (pChar=strstr( TmpChar , "fl" )) != NULL )
+    {
+    pChar = strtok( pChar+2, " \n") ;
+    double AltitudeFt = atoi( pChar ) ;
+    double AltitudeMetres = AltitudeFt * FlVersMetres ;
+    return AltitudeMetres ;
+    }
+
+return 0. ;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Traite un point de polygone sous ses 2 formats

@@ -1,8 +1,0 @@
-num : 105
- nom : TMA CLERMONT 3 
- alti. min: 4631637088161613262 m
- compression:  6/   5 pts
- delta max:    14.1 km
- resol delta: 0.5 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

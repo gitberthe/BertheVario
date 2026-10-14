@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-PROTECT Reserve naturelle nationale de Chastreix-Sancy (3/3)  (300m/sol) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.82694444,45.5344444,200
+2.82416667,45.535,200
+2.8225,45.5380556,200
+2.83083333,45.5386111,200
+2.83027778,45.5366667,200
+2.82694444,45.5344444,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

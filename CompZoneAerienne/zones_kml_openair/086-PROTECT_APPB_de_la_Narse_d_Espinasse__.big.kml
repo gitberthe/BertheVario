@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-PROTECT APPB de la Narse d'Espinasse  (100m/sol) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.92333333,45.6527778,200
+2.92333333,45.6544444,200
+2.92611111,45.6555556,200
+2.92888889,45.6533333,200
+2.92861111,45.6513889,200
+2.92333333,45.6527778,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

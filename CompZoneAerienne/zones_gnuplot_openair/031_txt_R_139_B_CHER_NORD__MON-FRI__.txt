@@ -1,0 +1,8 @@
+num :  31
+ nom : R 139 B CHER NORD (MON-FRI) 
+ alti. min: 243 m
+ compression:  111/  23 pts
+ delta max:    39.8 km
+ resol delta: 1.3 metres
+ err moyenne:  6.9 m
+ err maxi:  12.3 m

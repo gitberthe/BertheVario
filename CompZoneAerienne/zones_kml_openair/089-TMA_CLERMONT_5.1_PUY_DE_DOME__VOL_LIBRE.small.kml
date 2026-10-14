@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-TMA CLERMONT 5.1 PUY DE DOME (VOL LIBRE) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.5,45.8705556,100
+2.99,45.8122222,100
+2.99333333,45.7891667,100
+2.99583333,45.7372222,100
+2.5,45.6086111,100
+2.5,45.8705556,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

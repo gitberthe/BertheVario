@@ -1,8 +1,0 @@
-num :  14
- nom : TMA SAINT-YAN 1.3 MOULINS (VOL LIBRE) 
- alti. min: 4631751420781304286 m
- compression:  108/  44 pts
- delta max:    28.0 km
- resol delta: 0.9 metres
- err moyenne:  6.1 m
- err maxi:  13.9 m

@@ -1,0 +1,8 @@
+num : 109
+ nom : PROTECT Reserve naturelle regionale des tourbières du Jolan et de la Gazelle (2/3)  (100m/sol) 
+ alti. min: 0 m
+ compression:  5/   4 pts
+ delta max:    0.2 km
+ resol delta: 0.0 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,0 +1,8 @@
+num :  88
+ nom : R 144 A LOIRE SUD (MON-FRI) 
+ alti. min: 243 m
+ compression:  7/   6 pts
+ delta max:    46.0 km
+ resol delta: 1.5 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

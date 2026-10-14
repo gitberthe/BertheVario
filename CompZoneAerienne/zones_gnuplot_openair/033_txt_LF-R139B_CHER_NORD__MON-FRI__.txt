@@ -1,8 +1,0 @@
-num :  33
- nom : LF-R139B CHER NORD (MON-FRI) 
- alti. min: 4631780724137329571 m
- compression:  111/  23 pts
- delta max:    39.8 km
- resol delta: 1.3 metres
- err moyenne:  6.9 m
- err maxi:  12.3 m

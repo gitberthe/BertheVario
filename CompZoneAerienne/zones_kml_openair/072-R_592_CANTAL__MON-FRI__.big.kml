@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 592 CANTAL (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.51666667,45.0833333,200
+3.74444444,44.8444444,200
+3.83333333,44.6583333,200
+3.28611111,44.8166667,200
+3.11666667,44.7830556,200
+2.91666667,44.9333333,200
+3.38333333,45.0833333,200
+3.51666667,45.0833333,200
+3.51666667,45.0833333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

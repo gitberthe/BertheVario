@@ -1,3 +1,9 @@
+20261014a :
+ . fichier openair ok. la TMA de saint yan a changée et passe de 918m a 600m (la semaine).
+   openair est mieux a jour. 
+   nota : prevoir de rajouter le nom dans SDCardAllVario/config/zonesper.txt pour TMA CLERMONT 5.1 / TMA CLERMONT5.1
+          pour l'instant codé dans le CompZoneAerienne (bug de openair france.txt).
+
 20261013c :
  . inclusion procedure de validation de zone de BertheVario (zonvalin.txt et zonvalou.txt/zonvalou.ref.txt).
 

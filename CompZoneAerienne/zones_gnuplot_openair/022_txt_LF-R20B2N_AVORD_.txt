@@ -1,8 +1,0 @@
-num :  22
- nom : LF-R20B2N AVORD 
- alti. min: 4632002856945068984 m
- compression:  108/  33 pts
- delta max:    36.1 km
- resol delta: 1.2 metres
- err moyenne:  6.3 m
- err maxi:  14.0 m

@@ -1,0 +1,8 @@
+num : 102
+ nom : R 233 A BOURG LASTIC 
+ alti. min: 0 m
+ compression:  6/   5 pts
+ delta max:    3.7 km
+ resol delta: 0.1 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

@@ -1,8 +1,0 @@
-num :  30
- nom : LF-R167B MONTLUCON GUERET 
- alti. min: 4631708383132356498 m
- compression:  111/  25 pts
- delta max:    27.2 km
- resol delta: 0.9 metres
- err moyenne:  7.1 m
- err maxi:  13.8 m

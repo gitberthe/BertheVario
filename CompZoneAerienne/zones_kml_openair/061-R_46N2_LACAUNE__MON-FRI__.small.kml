@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 46N2 LACAUNE (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.41666667,44.1361111,100
+2.60555556,44.0583333,100
+2.68333333,43.9,100
+2.83888889,43.55,100
+2.67888889,43.5155556,100
+2.475,43.9611111,100
+2.375,44.0111111,100
+2.16666667,44.0305556,100
+2.41666667,44.1361111,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

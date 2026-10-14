@@ -1,8 +1,0 @@
-num :  43
- nom : TMA TOULOUSE 3 
- alti. min: 0 m
- compression:  19/  18 pts
- delta max:    133.1 km
- resol delta: 4.3 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

@@ -7,6 +7,7 @@
 /// \date modification : 08/07/2025 suppression xc_track et limite zone xy alti
 /// \date 06/01/2026 : modification pour free zone periodique
 /// \date 07/01/2026 : modification pour zone active non compresse
+/// \date 14/10/2026 : prise en compte openair dans CompZoneAerienne
 ///
 
 #ifndef _ZONE_AR_ALL_
@@ -15,7 +16,7 @@
 #ifdef _COMP_ZONES_AERIENNES_
  #define NOM_FCH_ZONE_ACT       "SDCardAllVario/config/zonesact.txt"
  #define NOM_FCH_ZONE_PER       "SDCardAllVario/config/zonesper.txt"
- #define NOM_FCH_OUT_NOM_ZONE   "zonomout.txt"
+ #define NOM_FCH_OUT_NOM_ZONE   "valid/zonomout.txt"
 #else
  #define NOM_FCH_ZONE_AER       "/config/zonesaer.txt"
  #define NOM_FCH_ZONE_PER       "/config/zonesper.txt"

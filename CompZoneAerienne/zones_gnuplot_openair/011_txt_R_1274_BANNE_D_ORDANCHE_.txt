@@ -1,0 +1,8 @@
+num :  11
+ nom : R 1274 BANNE D ORDANCHE 
+ alti. min: 0 m
+ compression:  361/  46 pts
+ delta max:    1.9 km
+ resol delta: 0.1 metres
+ err moyenne:  3.0 m
+ err maxi:  4.5 m

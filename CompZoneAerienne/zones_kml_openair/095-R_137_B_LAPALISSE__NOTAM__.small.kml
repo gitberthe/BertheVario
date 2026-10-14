@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 137 B LAPALISSE (NOTAM) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.61666667,46.5,100
+3.74944444,46.1780556,100
+3.44805556,46.2183333,100
+3.5475,46.5,100
+3.61666667,46.5,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

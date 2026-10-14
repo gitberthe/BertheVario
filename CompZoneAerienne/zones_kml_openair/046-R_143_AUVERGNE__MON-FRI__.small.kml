@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 143 AUVERGNE (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+2.93638889,46.1777778,100
+2.96888889,45.9558333,100
+2.775,45.7472222,100
+2.59166667,45.7277778,100
+2.45555556,45.7127778,100
+2.17111111,45.8175,100
+1.96666667,45.8333333,100
+1.90833333,45.9791667,100
+2.15,46.1,100
+2.55833333,46.1,100
+2.58888889,46.2597222,100
+2.93638889,46.1777778,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

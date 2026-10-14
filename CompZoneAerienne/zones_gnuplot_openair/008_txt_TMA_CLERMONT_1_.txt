@@ -1,6 +1,6 @@
 num :   8
  nom : TMA CLERMONT 1 
- alti. min: 0 m
+ alti. min: 822 m
  compression:  208/  54 pts
  delta max:    34.6 km
  resol delta: 1.1 metres

@@ -1,0 +1,8 @@
+num :  83
+ nom : R 193 B TARN (MON-FRI) 
+ alti. min: 243 m
+ compression:  7/   6 pts
+ delta max:    55.9 km
+ resol delta: 1.8 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

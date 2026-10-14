@@ -55,7 +55,7 @@
 #define MilesParDegres          (60.)
 #define UnMilesEnMetres         (1852.)
 #define PiedsVersMetres         (0.3048)
-#define FlVersMetres            (100*0,3048)
+#define FlVersMetres            (100.*0.3048)
 
 #define Deg2Rad     (T_PI/180.)
 #define Rad2Deg     (180./T_PI)

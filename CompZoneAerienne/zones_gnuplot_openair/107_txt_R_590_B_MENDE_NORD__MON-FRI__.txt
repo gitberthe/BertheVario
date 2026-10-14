@@ -1,0 +1,8 @@
+num : 107
+ nom : R 590 B MENDE NORD (MON-FRI) 
+ alti. min: 243 m
+ compression:  6/   5 pts
+ delta max:    20.3 km
+ resol delta: 0.7 metres
+ err moyenne:  0.0 m
+ err maxi:  0.0 m

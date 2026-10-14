@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Big-R 144 B LOIRE NORD (MON-FRI) </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.38333333,46.9833333,200
+3.22722222,46.8377778,200
+3.08333333,46.7513889,200
+3.28972222,46.6463889,200
+3.66666667,46.9577778,200
+3.66666667,47.0772222,200
+3.325,47.1347222,200
+3.38333333,46.9833333,200
+3.38333333,46.9833333,200
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

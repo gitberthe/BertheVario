@@ -1,8 +1,0 @@
-num : 119
- nom : LF-R3203 BEAUJOLAIS 
- alti. min: 4631685065568939629 m
- compression:  6/   5 pts
- delta max:    20.4 km
- resol delta: 0.7 metres
- err moyenne:  0.0 m
- err maxi:  0.0 m

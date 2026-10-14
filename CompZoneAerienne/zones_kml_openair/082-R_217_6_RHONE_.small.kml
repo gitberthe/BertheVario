@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ 
+<Placemark>
+  <name>Small-R 217/6 RHONE </name>
+  <LineString>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <coordinates>
+3.52222222,44.6555556,100
+3.77666667,44.4669444,100
+3.45333333,44.4072222,100
+3.34888889,44.5391667,100
+3.35833333,44.5875,100
+3.52222222,44.6555556,100
+</coordinates>
+  </LineString>
+</Placemark>
+ 
+</kml>

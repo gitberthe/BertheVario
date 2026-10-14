@@ -5,6 +5,7 @@
 ///
 /// \date 30/03/2024 : creation
 /// \date 13/10/2026 : modification pour _COMP_ZONES_AERIENNES_
+/// \date 14/10/2026 : prise en compte openair dans CompZoneAerienne
 ///
 
 #ifndef _ZONESFCH_
@@ -13,7 +14,7 @@
 #define ZONE_VALID_IN_FCH  "/valid/zonvalin.txt"
 
 #ifdef _COMP_ZONES_AERIENNES_
- #define ZONE_VALID_OUT_FCH "zonvalou.txt"
+ #define ZONE_VALID_OUT_FCH "valid/zonvalou.txt"
 #else
  #define ZONE_VALID_OUT_FCH "/valid/zonvalou.txt"
 #endif
