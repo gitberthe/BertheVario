@@ -5,6 +5,7 @@
 ///
 /// \date creation   : 01/04/2024
 /// \date 15/01/2026 : correction bug lat ouest et cache map
+/// \date 14/10/2026 : prise en compte openair dans CompZoneAerienne
 ///
 
 #ifndef _HGT2AGL_

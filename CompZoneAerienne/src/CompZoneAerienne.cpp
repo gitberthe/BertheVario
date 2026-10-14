@@ -2,8 +2,16 @@
 /// \file CompZoneAerienne.cpp
 ///
 /// \brief Ce programme se propose de creer un fichier texte des zones aeriennes,
-/// autour d'un point centrale et dans un rayon, pour le BertheVarioTac.
-///  Fichiers gnuplots avant/apres compression pour chaque zone dans zones_gnuplot.
+/// autour d'un point centrale et dans un rayon, pour le BertheVario/BertheVarioTac/BertheVario213.
+/// Fichiers gnuplots avant/apres compression pour chaque zone dans zones_gnuplot.
+/// fichier kml des zones pour visualisation GoogleEarth.
+/// Importation des fichier de zone depuis :
+/// pour Pascal Bazille : http://pascal.bazile.free.fr/paraglidingFolder/divers/GPS/OpenAir-Format/
+/// pour openair        : https://planeur-net.github.io/airspace/
+///                       https://biodiv-sports.fr/login/?next=/
+///                       https://www.chvd.org/2024/04/26/vol-libre-et-rapace-zsm-et-bulles-de-quietude/
+///                       https://biodiv-sports.fr/api/fr/sensitiveareas/openair?period=ignore
+///                       https://data.spotair.mobi/airspaces/spotair-ffvl-zsm.txt
 ///
 /// \date creation     : 23/03/2024
 /// \date 25/11/2024 : ajout de compression de zone par distance entre points et par
@@ -83,6 +91,13 @@ for ( ilc = 1 ; ilc < argc ; ilc++ )
         cerr << "    ex mode batch    : ./CompZoneAerienne --batch SDCardAllVario/config/terconnu.txt 60 > zonesaer.txt" << endl ;
         cerr << "    ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt" << endl ;
         cerr << "                       pour le mode valid, mettre les fichier *.hgt dans : " << REP_HGT_FILE << endl ;
+        cerr << endl << "liens de telechargement : " << endl ;
+        cerr << "pour Pascal Bazille : http://pascal.bazile.free.fr/paraglidingFolder/divers/GPS/OpenAir-Format/" << endl ;
+        cerr << "pour openair        : https://planeur-net.github.io/airspace/ " << endl ;
+        cerr << "                      https://biodiv-sports.fr/login/?next=/" << endl ;
+        cerr << "                      https://www.chvd.org/2024/04/26/vol-libre-et-rapace-zsm-et-bulles-de-quietude/" << endl ;
+        cerr << "                      https://biodiv-sports.fr/api/fr/sensitiveareas/openair?period=ignore" << endl ;
+        cerr << "                      https://data.spotair.mobi/airspaces/spotair-ffvl-zsm.txt" << endl ;
         exit( 1 ) ;
         }
     }
