@@ -2,7 +2,7 @@ Projet pour creer le fichier des zones aeriennes : zonesaer.txt. A placer dans S
 
 Permet aussi de visionner les zones originales/compressees dans ./zones_gnuplot* et ./zones_kml*
 
-liens de telechargement des zones inintiales a enregistrer ./dans data et ./data/openair/ : 
+liens de telechargement des zones initiales a enregistrer ./dans data et ./data/openair/ : 
  - pour Pascal Bazille, ./data/20250417_ffvl-cfd.geojson : 
    http://pascal.bazile.free.fr/paraglidingFolder/divers/GPS/OpenAir-Format/
  
