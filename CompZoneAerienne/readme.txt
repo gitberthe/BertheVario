@@ -21,6 +21,8 @@ liens de telechargement des zones initiales a enregistrer ./dans data et ./data/
     ex mode batch    : ./CompZoneAerienne --batch SDCardAllVario/config/terconnu.txt 60 > zonesaer.txt
     ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt
                        pour le mode valid, mettre les fichier *.hgt dans : ../../hgtdata4compzoneaer
+                       puis diff valid/zonvalou.txt SDCardAllVario/valid/zonvalou.ref.txt
+                       ou ./valid/diff-valid.sh sous linux
 
  - pour windows, compiler avec code::blocks : 
     https://www.codeblocks.org/downloads/binaries/
