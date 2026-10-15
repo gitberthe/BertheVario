@@ -3,10 +3,12 @@ Projet pour creer le fichier des zones aeriennes : zonesaer.txt. A placer dans S
 Permet aussi de visionner les zones originales/compressees dans ./zones_gnuplot* et ./zones_kml*
 
 liens de telechargement des zones inintiales a enregistrer ./dans data et ./data/openair/ : 
- - pour Pascal Bazille, 20250417_ffvl-cfd.geojson : 
+ - pour Pascal Bazille, ./data/20250417_ffvl-cfd.geojson : 
    http://pascal.bazile.free.fr/paraglidingFolder/divers/GPS/OpenAir-Format/
  
- - pour openair, france.txt, sensitivearea_openair.txt, spotair-ffvl-zsm.txt : 
+ - pour openair, ./data/openair/france.txt, 
+                 ./data/openair/sensitivearea_openair.txt, 
+                 ./data/openair/spotair-ffvl-zsm.txt : 
    https://planeur-net.github.io/airspace/ 
    https://biodiv-sports.fr/login/?next=/
    https://www.chvd.org/2024/04/26/vol-libre-et-rapace-zsm-et-bulles-de-quietude/
