@@ -92,12 +92,12 @@ for ( ilc = 1 ; ilc < argc ; ilc++ )
         cerr << "    ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt" << endl ;
         cerr << "                       pour le mode valid, mettre les fichier *.hgt dans : " << REP_HGT_FILE << endl ;
         cerr << endl << "liens de telechargement : " << endl ;
-        cerr << "pour Pascal Bazille : http://pascal.bazile.free.fr/paraglidingFolder/divers/GPS/OpenAir-Format/" << endl ;
-        cerr << "pour openair        : https://planeur-net.github.io/airspace/ " << endl ;
-        cerr << "                      https://biodiv-sports.fr/login/?next=/" << endl ;
-        cerr << "                      https://www.chvd.org/2024/04/26/vol-libre-et-rapace-zsm-et-bulles-de-quietude/" << endl ;
-        cerr << "                      https://biodiv-sports.fr/api/fr/sensitiveareas/openair?period=ignore" << endl ;
-        cerr << "                      https://data.spotair.mobi/airspaces/spotair-ffvl-zsm.txt" << endl ;
+        cerr << "pour Pascal Bazile : http://pascal.bazile.free.fr/paraglidingFolder/divers/GPS/OpenAir-Format/" << endl ;
+        cerr << "pour openair       : https://planeur-net.github.io/airspace/ " << endl ;
+        cerr << "                     https://biodiv-sports.fr/login/?next=/" << endl ;
+        cerr << "                     https://www.chvd.org/2024/04/26/vol-libre-et-rapace-zsm-et-bulles-de-quietude/" << endl ;
+        cerr << "                     https://biodiv-sports.fr/api/fr/sensitiveareas/openair?period=ignore" << endl ;
+        cerr << "                     https://data.spotair.mobi/airspaces/spotair-ffvl-zsm.txt" << endl ;
         exit( 1 ) ;
         }
     }
