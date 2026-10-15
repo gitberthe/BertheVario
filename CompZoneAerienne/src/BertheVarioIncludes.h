@@ -4,6 +4,7 @@
 /// \brief
 ///
 /// \date 13/10/2026 : creation
+/// \date 15/10/2026 : modification
 ///
 
 #pragma once
@@ -13,7 +14,7 @@
 #include "./LibGeneral/LibGeneral.h"
 #include "./ZonesAeriennes/CRectIn.h"
 #include "./ZonesAeriennes/CZoneAer.h"
-#include "./Geometrie/Segments.h"
+#include "./GeometrieBertheVario/Segments.h"
 #include "./ZonesAeriennes/CPolygone.h"
 #include "./ZonesAeriennes/CDate.h"
 #include "./ZonesAeriennes/CDistFront.h"

@@ -35,8 +35,6 @@
 			<Add option="-fexceptions" />
 			<Add option="-D_COMP_ZONES_AERIENNES_" />
 		</Compiler>
-		<Unit filename="../BertheVario/BertheVarioPlatformIO/src/Geometrie/Segments.cpp" />
-		<Unit filename="../BertheVario/BertheVarioPlatformIO/src/Geometrie/Segments.h" />
 		<Unit filename="../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.cpp" />
 		<Unit filename="../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h" />
 		<Unit filename="../BertheVario/BertheVarioPlatformIO/src/LibGeneral/CLGArray.h" />
@@ -72,6 +70,8 @@
 		<Unit filename="src/CGlobalVar.h" />
 		<Unit filename="src/CompZoneAerienne.cpp" />
 		<Unit filename="src/CompZoneAerienne.h" />
+		<Unit filename="src/GeometrieBertheVario/Segments.cpp" />
+		<Unit filename="src/GeometrieBertheVario/Segments.h" />
 		<Unit filename="src/geometrie/CDroite2D.cpp" />
 		<Unit filename="src/geometrie/CDroite2D.h" />
 		<Unit filename="src/geometrie/CPolygone.cpp" />

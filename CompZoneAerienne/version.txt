@@ -1,3 +1,7 @@
+20261015a :
+ . changement de nom de dossier Geometrie vers GeometrieBertheVario
+ . changement readme.txt
+
 20261014a :
  . fichier openair ok. la TMA de saint yan a changée et passe de 918m a 600m (la semaine).
    openair est mieux a jour. 

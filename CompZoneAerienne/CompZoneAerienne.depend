@@ -3,7 +3,7 @@
 	"CompZoneAerienne.h"
 	"BertheVarioIncludes.h"
 
-1791931050 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
+1792041259 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -255,7 +255,7 @@
 	"../../BertheVario/BertheVarioPlatformIO/src/LibGeneral/LibGeneral.h"
 	"../../BertheVario/BertheVarioPlatformIO/src/Gps/CHgt2Agl.h"
 
-1791967552 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
+1791970188 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/CompZoneAerienne.cpp
 	"CompZoneAerienne.h"
 
 1791842646 source:/home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/geometrie/CDroite2D.cpp
@@ -511,13 +511,13 @@
 
 1791842644 /home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/GlobalVar/CGlobalVar.h
 
-1791863911 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/BertheVarioIncludes.h
+1792041300 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/BertheVarioIncludes.h
 	<vector>
 	<string>
 	"./LibGeneral/LibGeneral.h"
 	"./ZonesAeriennes/CRectIn.h"
 	"./ZonesAeriennes/CZoneAer.h"
-	"./Geometrie/Segments.h"
+	"./GeometrieBertheVario/Segments.h"
 	"./ZonesAeriennes/CPolygone.h"
 	"./ZonesAeriennes/CDate.h"
 	"./ZonesAeriennes/CDistFront.h"
@@ -622,7 +622,7 @@
 
 1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/Geometrie/Segments.h
 
-1791861867 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CPolygone.cpp
+1792041230 source:/home/internet/Documents/PlatformIO/Projects/BertheVario/BertheVarioPlatformIO/src/ZonesAeriennes/CPolygone.cpp
 	"../BertheVario.h"
 	"../BertheVario213.h"
 	"../BertheVarioTac.h"
@@ -645,4 +645,6 @@
 	"../BertheVario213.h"
 	"../BertheVarioTac.h"
 	"../../../../CompZoneAerienne/src/BertheVarioIncludes.h"
+
+1791842644 /home/internet/Documents/PlatformIO/Projects/CompZoneAerienne/src/GeometrieBertheVario/Segments.h
 

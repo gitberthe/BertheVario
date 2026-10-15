@@ -23,7 +23,7 @@
 
 using namespace std;
 
-char NumVer[]="20261014a" ;
+char NumVer[]="20261015a" ;
 
 CGlobalVar g_GlobalVar ;
 
