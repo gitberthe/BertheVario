@@ -21,3 +21,7 @@ liens de telechargement des zones initiales a enregistrer ./dans data et ./data/
     ex mode batch    : ./CompZoneAerienne --batch SDCardAllVario/config/terconnu.txt 60 > zonesaer.txt
     ex mode valid    : ./CompZoneAerienne --valid zonesaer.txt SDCardAllVario/valid/zonvalin.txt
                        pour le mode valid, mettre les fichier *.hgt dans : ../../hgtdata4compzoneaer
+
+ - pour windows, compiler avec code::blocks : 
+    https://www.codeblocks.org/downloads/binaries/
+    mais CompZoneAerienne n'a ete validé que autour de clermont-ferrand.
